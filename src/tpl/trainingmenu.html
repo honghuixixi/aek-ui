@@ -1,0 +1,8 @@
+<div class="training">
+    <div class="training-menu">
+        <div class="training-menu-item" ng-class="{'active': data.menu == item.cls}" ng-repeat="item in data.menus" ng-if="item.right">
+            <a class="{{item.cls}}" ui-sref="training.menu.{{item.cls}}">{{item.name}}</a>
+        </div>
+    </div>
+	<div class="training-content" ui-view></div>
+</div>

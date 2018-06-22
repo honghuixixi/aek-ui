@@ -1,0 +1,150 @@
+<div style="margin-left: 180px;">
+    <style type="text/css">
+    @font-face {
+      font-family: 'iconfont';  /* project id 633323 */
+      src: url('//at.alicdn.com/t/font_633323_p1p506qvv15g66r.eot');
+      src: url('//at.alicdn.com/t/font_633323_p1p506qvv15g66r.eot?#iefix') format('embedded-opentype'),
+      url('//at.alicdn.com/t/font_633323_p1p506qvv15g66r.woff') format('woff'),
+      url('//at.alicdn.com/t/font_633323_p1p506qvv15g66r.ttf') format('truetype'),
+      url('//at.alicdn.com/t/font_633323_p1p506qvv15g66r.svg#iconfont') format('svg');
+    }
+    .iconfont{font-family:"iconfont" !important;font-size:16px;font-style:normal;-webkit-font-smoothing: antialiased;-webkit-text-stroke-width: 0.2px;-moz-osx-font-smoothing: grayscale;}
+    .fullPage {position:fixed;top:0;right:0;bottom:0;left:0;z-index:198910131;background-color:#1A1C32;padding:10px;background-image:url('../../../res/img/full_bg.png');}
+    .con-time {position:relative;height: 50px;font-size:16px;line-height:50px;color:#333;}
+    .con-time .title2 {position:absolute;top:0;right:0;left:0;z-index:0;text-align:center;}
+    .con-time .iconfont{position:absolute;top:0;right:0;z-index:5;cursor:pointer;}
+    .con-group {overflow: hidden;}
+    .con-group-item {float:left;width:calc(25% - 8px);padding: 5px 0;border:1px solid #ccc;border-radius:5px;text-align:center;background-color:#fff;}
+    .con-group-item + .con-group-item {margin-left:10px;}
+    .con-group-item .num {font-size: 46px;}
+    .con-num {border: 1px solid #ccc;border-radius:5px;overflow:hidden;}
+    .con-num-item {float:left;width:25%;text-align:center;background-color:#fff;}
+    .con-num-item .txt {line-height:24px;}
+    .con-num-item .num {font-size:30px;}
+    .con-page {font-size:14px;line-height:30px;text-align:right;}
+    .con-table {margin-top:10px;padding:0 10px;border: 1px solid #ccc;border-radius:5px;background-color:#fff;}
+    .con-table table {width:100%;}
+    .con-table td {position:relative;height:42px;}
+    .con-table div {position:absolute;top:0;right:0;bottom:0;left:0;margin-bottom: 8px;padding-left:10px;font-size:16px;line-height:34px;color:#333;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;}
+    .con-table tbody div {background-color:rgba(100,100,100,.1);}
+    .con-table td .c1 {color:#7971F1;}
+    .con-table td .c2 {color:#f00;}
+    .con-table td .c3 {color:rgb(241,197,99);}
+    .fullPage .con-time {color: #fff;}
+    .fullPage .con-group-item {border-color:rgb(0,235,234);color:rgb(0,235,234);background-color:rgba(0,235,234,.3);}
+    .fullPage .con-num {border-color:rgb(0,235,234);color:rgb(0,235,234);}
+    .fullPage .con-num-item {background-color: transparent;}
+    .fullPage .con-page {color:rgb(247,109,60);}
+    .fullPage .con-table{border-color:rgb(0,235,234);background-color:transparent;}
+    .fullPage .con-table td div {color:rgb(255,255,255);}
+    .fullPage .con-table tbody div {background-color:rgba(255,255,255,.1);}
+    .fullPage .con-table tbody .c1 {color:#7971F1;}
+    .fullPage .con-table tbody .c2 {color:#f00;}
+    .fullPage .con-table tbody .c3 {color:rgb(241,197,99);}
+    </style>
+    <div class="fy_generalWrap" style="margin-left: -20px;overflow: auto">
+        <div class="fy_general">
+             <div ng-class="{'fullpage': data.isFull}">
+                <div class="con-time">
+                    <span>{{data.local.time}}</span>
+                    <div class="title2">维修大屏</div>
+                    <i class="iconfont" ng-if="!data.isFull" ng-click="data.isFull=true">&#xe613;</i>
+                    <i class="iconfont"  ng-if="data.isFull" ng-click="data.isFull=false" >&#xe616;</i>                   
+                </div>     
+                <div class="con-group">
+                    <div class="con-group-item">
+                        <div class="txt">待接单</div>
+                        <div class="num">{{data.server.waitTakeNum || 0}}</div>
+                    </div>
+                    <div class="con-group-item">
+                        <div class="txt">维修中</div>
+                        <div class="num">{{data.server.repairingNum || 0}}</div>
+                    </div>
+                    <div class="con-group-item">
+                        <div class="txt">待验收</div>
+                        <div class="num">{{data.server.waitCheckNum || 0}}</div>
+                    </div>
+                    <div class="con-group-item">
+                        <div class="txt">工程师</div>
+                        <div class="num">{{data.server.engineerNum || 0}}</div>
+                    </div>
+                </div>
+                <div class="con-num" style="margin-top:10px;">
+                    <div class="con-num-item">
+                        <div class="txt">本周报修数</div>
+                        <div class="num">{{data.server.currentWeekApplyNum || 0}}</div>
+                    </div>
+                    <div class="con-num-item">
+                        <div class="txt">本周完修数</div>
+                        <div class="num">{{data.server.currentWeekCompleteNum || 0}}</div>
+                    </div>
+                    <div class="con-num-item">
+                        <div class="txt">本月报修数</div>
+                        <div class="num">{{data.server.currentMonthApplyNum || 0}}</div>
+                    </div>
+                    <div class="con-num-item">
+                        <div class="txt">本月完修数</div>
+                        <div class="num">{{data.server.currentMonthCompleteNum || 0}}</div>
+                    </div>
+                </div>                  
+                <div class="con-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <td style="width: 10%;"><div style="padding-left: 15px;">申请时间</div></td>
+                                <td style="width: 20%;"><div>申请科室</div></td>
+                                <td style="width: 15%;"><div>设备编号</div></td>
+                                <td style="width: 30%;"><div>设备名称</div></td>
+                                <td style="width: 5%;"><div>维修状态</div></td>
+                                <td style="width: 10%;"><div>工程师</div></td>
+                                <td style="width: 10%;"><div style="padding-right: 15px;">已耗时</div></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="v in data.local.page.list">
+                                <td><div style="padding-left:15px;border-radius:15px 0 0 15px;">{{v.reportRepairDate | date:'yyyy-MM-dd HH:mm'}}</div></td>
+                                <td><div>{{v.assetsDeptName || '&nbsp;'}}</div></td>
+                                <td><div>{{v.assetsNum || '&nbsp;'}}</div></td>
+                                <td><div>{{v.assetsName || '&nbsp;'}}</div></td>
+                                <td><div ng-class="{'c1': v.statusText=='待接单', 'c2': v.statusText=='维修中', 'c3': v.statusText=='待验收'}">{{v.statusText}}</div></td>
+                                <td><div>{{v.takeOrderName || '&nbsp;'}}</div></td>
+                                <td><div style="padding-right: 15px;border-radius:0 15px 15px 0;">{{v.reportRepairDate | hs}}</div></td>
+                            </tr>                                    
+                        </tbody>
+                    </table>
+                </div>
+                <div class="con-page">第{{data.local.page.startIndex}}-{{data.local.page.endIndex}}条，共计{{data.server.repairApplyList.length}}条</div>
+       <!--          <table class="main-table">
+           <tr>
+               <td style="vertical-align: top;">
+                  <div style="height: {{data.local.height - 230}}px;margin-left: 10px;margin-top: 15px;background-color: #fff;border-radius: 4px;">
+                       <div style="border-bottom: 1px solid #bebebe;overflow: hidden;">
+                           <div class="sub-item">
+                               <div class="sub-item-txt">本周报修数</div>
+                               <div class="sub-item-num">{{data.server.currentWeekApplyNum}}</div>
+                           </div>
+                           <div class="sub-item">
+                               <div class="sub-item-txt">本周完修数</div>
+                               <div class="sub-item-num">{{data.server.currentWeekCompleteNum}}</div>
+                           </div>
+                           <div class="sub-item">
+                               <div class="sub-item-txt">本月报修数</div>
+                               <div class="sub-item-num">{{data.server.currentMonthApplyNum}}</div>
+                           </div>
+                           <div class="sub-item">
+                               <div class="sub-item-txt">本月完修数</div>
+                               <div class="sub-item-num">{{data.server.currentMonthCompleteNum}}</div>
+                           </div>
+                           <div class="sub-item" style="border-left: 0;">
+                               <div style="margin-top: 40px;text-align: right;">第{{data.local.page.startIndex}}-{{data.local.page.endIndex}}条，共计{{data.server.repairApplyList.length}}条</div>
+                           </div>
+                       </div>
+                       
+                   </div>
+               </td>
+       </table>
+                   </div>
+                   <div class="generalFixWrap" ng-show='fixWrapShow' ng-click='menuHide()'></div> -->
+        </div>
+    </div>
+</div>

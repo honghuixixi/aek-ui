@@ -1,0 +1,39 @@
+<footer ng-show="pageInfo.total" class="panel-footer">
+	<div class="row">
+
+                    <div class="col-sm-6">
+                        <small class="text-muted inline m-t-sm m-b-sm">共{{pageInfo.total}}条{{pageInfo.pages}}页 当前第{{pageInfo.current}}页</small>
+                    </div>
+
+                    <paging ng-show="pageInfo.total" class="col-sm-6 text-right text-center-xs"
+                         hide-if-empty=true
+                         ul-class="pagination pagination-sm m-t-none m-b-none"
+                         page="pageInfo.current"
+                         page-size="pageInfo.size"
+                         total="pageInfo.total"
+                         show-prev-next="true"
+                         scroll-top="false"
+                         paging-action="pagination(page)">
+                    </paging>
+                </div>
+</footer>
+<!--<div class="pages-foot">-->
+	<!--<div class="pages-content">-->
+		<!--<div class="pages-ctrl">-->
+			<!--<a href="javascript:;"><i style="background: url(../../res/img/first.png) no-repeat center;"></i></a>-->
+			<!--<a href="javascript:;"><i style="background: url(../../res/img/pre.png) no-repeat center;"></i></a>-->
+			<!--<span><em>第</em><input type="text" value="4"/><em>/5页</em></span>-->
+			<!--<a href="javascript:;"><i style="background: url(../../res/img/next.png) no-repeat center;"></i></a>-->
+			<!--<a href="javascript:;"><i style="background: url(../../res/img/last.png) no-repeat center;"></i></a>-->
+			<!--<a href="javascript:;"><i style="background: url(../../res/img/go.png) no-repeat center;"></i></a>-->
+			<!--<a href="javascript:;"><i style="background: url(../../res/img/f5.png) no-repeat center;"></i></a>-->
+		<!--</div>-->
+		<!--<div class="page-total">-->
+			<!--<span ng-if='userOr'>共43条，每页显示</span><strong>8</strong><span>条</span>-->
+			<!--<span ng-if='!userOr'>共43条，</span>-->
+		<!--</div>-->
+	<!--</div>-->
+<!--</div>-->
+<!-- 无数据提醒 -->
+<!--<div ng-hide="pageInfo.total" class="m-md alert alert-warning text-center text-lg">暂无数据</div>-->
+

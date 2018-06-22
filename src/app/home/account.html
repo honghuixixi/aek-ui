@@ -1,0 +1,156 @@
+<!-- section-sort -->
+<div class="bg-white" >
+    <ul class="breadcrumb lter b-b wrapper-md" style="width: 100%;margin-bottom: 0" >
+        <li >
+            <a><span>账号信息</span><span class="wrong  modify ay-modify" ng-click="repassword()">修改密码</span></a>
+        </li>
+    </ul>
+</div>
+<div ng-hide="loading" class="wrapper-md  usecomment bottomNone">
+    <div class="wrapper-data">
+        <!--<div class="panel panel-default">-->
+            <div class="wrap-head" style="min-height:300px;margin-top: -90px" >
+                <div class="accountName"><span>{{detailInfo.realName}}</span><span class="orgState" ng-if="!detailInfo.enable">已停用</span><span class="orgState" ng-if="detailInfo.enable">启用中</span></div>
+               <!--  <ul class="accountList">
+                    <li><span>ID</span><span>{{detailInfo.id}}</span></li>
+                    <li><span>创建人</span><span>{{detailInfo.creatorName}}</span></li>
+                    <li><span>手机号</span><span>{{detailInfo.mobile}}</span><span ng-click="remobile()">修改</span></li>
+                    <li><span>创建时间</span><span>{{detailInfo.createTime | date : 'yyyy-MM-dd'}}</span></li>
+                    <li class="email"><span>邮箱</span><span class="save" ng-show="emailbind">{{detailinput}}</span><span ng-if="emailbind" ng-click="unbind()" style="margin-left: 10px">解绑</span><span ng-if="isAdd" ng-click="addemail()" style="margin-left: calc(25% + 30px)">添加</span><input type="text" ng-if="Add" class="addinput"  name="addemail" ng-model="bindemail" ng-change="changeEmail()"><span ng-show="Add" class="button"><input type="button" value="提交" ng-click="sumbit()" ng-class="{hd_setHui:!isemit,hd_setLight:isemit}" ng-disabled="!isemit"><input type="button" value="取消" ng-click="canael()" class="hd_setHui"></span><span ng-show="movebind" style="color: #a9a9a9;width: 25%;">{{detailinput}}</span><span ng-show="movebind"   class="move" style="margin-left: 2px"><span ng-click="move()">修改</span>|<span ng-click="bind()">绑定</span></span>
+                    </li>
+                    <li><span>最后登录时间</span><span>{{detailInfo.lastLoginTime | date : 'yyyy-MM-dd'}}</span></li>
+                    <li><span>所属机构</span><span>{{detailInfo.tenantName}}</span></li>
+                    <li><span>最后登录平台</span><span>{{detailInfo.lastClientType}}</span></li>
+
+                    <li><span>所属部门</span><span >{{detailInfo.deptName}}</span>
+                    </li>
+                    <li><span>最后登录IP</span><span >{{detailInfo.lastLoginIp}}</span></li>
+                    <li><span>职务</span><span>{{detailInfo.jobName}}</span></li>
+                </ul> -->
+                <div style="height: 10px;width:100%;margin:0;"></div>
+                <table  class="accountList">
+                    <tr>
+                        <td class="td1" style="width:10%;">ID</td>
+                        <td class="td2">{{detailInfo.id}}</td>
+                        <td class="td1" style="width:10%;">创建人</td>
+                        <td class="td2" style="width:30%;">{{detailInfo.creatorName}}</td>
+                    </tr>
+                    <tr>
+                        <td class="td1">手机号</td>
+                        <td class="td2"><span class="span">{{detailInfo.mobile}}</span><span class="move" style="margin-left: 15px; cursor: pointer;" ng-click="remobile()">修改</span></td>
+                        <td class="td1">创建时间</td>
+                        <td class="td2">{{detailInfo.createTime | date : 'yyyy-MM-dd'}}</td>
+                    </tr>
+                    <tr>
+                        <td class="td1">邮箱</td>
+                        <td class="td2">
+                            <span class="save span" ng-show="emailbind">{{detailinput}}</span>
+                            <span ng-if="emailbind" ng-click="unbind()" style="margin-left: 10px">解绑</span>
+                            <span ng-if="isAdd" ng-click="addemail()" style="margin-left: calc(40% + 15px); color:#4baaf6; cursor: pointer;">添加</span>
+                            <input type="text" ng-if="Add" class="addinput"  name="addemail" ng-model="bindemail" ng-change="changeEmail()">
+                            <span ng-show="Add" class="button">
+                                <input type="button" value="提交" ng-click="sumbit()" ng-class="{hd_setHui:!isemit,hd_setLight:isemit}" ng-disabled="!isemit">
+                                <input type="button" value="取消" ng-click="canael()" class="hd_setHui">
+                            </span>
+                            <span ng-show="movebind" style="color: #a9a9a9;width: 40%;">{{detailinput}}</span>
+                            <span ng-show="movebind"   class="move" style="margin-left: 2px">
+                                <span ng-click="move()">修改</span>|
+                                <span ng-click="bind()">绑定</span>
+                            </span>
+                        </td>
+                        <td class="td1">最后登录时间</td>
+                        <td class="td2">{{detailInfo.lastLoginTime | date : 'yyyy-MM-dd'}}</td>
+                    </tr>
+                    <tr>
+                        <td class="td1">所属机构</td>
+                        <td class="td2">{{detailInfo.tenantName}}</td>
+                        <td class="td1">最后登录平台</td>
+                        <td class="td2">{{detailInfo.lastClientType}}</td>
+                    </tr>
+                    <tr>
+                        <td class="td1">所属部门</td>
+                        <td class="td2">{{detailInfo.deptName}}</td>
+                        <td class="td1">最后登录IP</td>
+                        <td class="td2">{{detailInfo.lastLoginIp}}</td>
+                    </tr>
+                    <tr>
+                        <td class="td1">职务</td>
+                        <td class="td2">{{detailInfo.jobName}}</td>
+                        <td class="td1">&nbsp;</td>
+                        <td class="td2">&nbsp;</td>
+                    </tr>
+                </table>    
+            </div>
+        </div>
+    <!--</div>-->
+</div>
+<div ng-hide="loading" class="wrapper-md  usecomment bottomNone accountRole" >
+    <div class="wrapper-data">
+        <!--<div class="panel panel-default">-->
+            <div class="wrap-head" style="height: 51%;margin-top: -30px" >
+                <div class="roleback accountName" style="margin-bottom: 15px"><i>角色权限</i></div>
+                <table border="1px solid #dcdcdc" class="roleTable">
+                    <tr class="title">
+                        <th>ID</th>
+                        <th style="padding-left:0;">所属机构</th>
+                        <th>角色</th>
+                    </tr>
+                    <tr ng-repeat="l in roleInfo" >
+                        <th>{{l.tenantId}}</th>
+                        <th>{{l.tenantName}}</th>
+                        <th style="line-height: 25px;padding: 10px;"><span ng-repeat="m in l.roles">{{m.name}} ; </span></th>
+                    </tr>
+                </table>
+            </div>
+    </div>
+</div>
+<div ng-show="rewrite" class="alertPass">
+    <form name="reset" novalidate>
+    <span class="newpassword" >新密码</span><input name="newpassword" type="password" placeholder="8~16位字符" class="newinput"  ng-model="password" ng-maxlength="16" ng-minlength="8" style="margin-bottom: 25px" ng-change="changenull()"></br>
+    <div class="errpass" ng-show="reset.newpassword.$error.minlength" style="margin-top: -25px">密码至少8位</div>
+    <div class="errpass" ng-show="reset.newpassword.$error.maxlength" style="margin-top: -25px">密码至多16位</div>
+        <span class="newpassword">确认密码</span><input type="password" name="newpass" placeholder="8~16位字符" class="newinput reinput"  ng-model="rewpassword"  ng-pattern="password" ng-change="changeRe()">
+    <div class="errpass" ng-show="reset.newpass.$error.pattern" >两次密码不一样</div>
+        <div class="errpass" ng-show="passwordnull" >确认密码不能为空</div>
+    </form>
+
+    <div style="margin-top:35px;" class="alertBtn">
+        <a href="javascript:;" ng-click="resetPwd()" class="btnyes">确定</a><a href="javascript:;" ng-click="closeIndexPwd()" class="btncancel">取消</a>
+    </div>
+
+</div>
+<div  class="surepass" ng-show="mmqr">
+    <img src="../../../res/img/mmqr.png" alt=""><br>
+    <span class="newpassword" >当前密码</span>
+    <input type="password" style="display: none;" />
+    <input type="text" ng-model="surepassword"  onfocus="this.type='password'"  autocomplete="off" ng-change="change()">
+    <div style="padding-left:114px;" class="newwarn" ng-show="error">密码不正确</div>
+    <div style="padding-left:114px;" class="newwarn" ng-show="errornull">密码不能为空</div>
+
+    <!--<div style="margin-top:35px;" class="alertBtn">
+        <a href="javascript:;" ng-click="verifyPwd()" class="btnyes">确定</a><a href="javascript:;" ng-click="closeIndexVerify()" class="btncancel">取消</a>
+    </div>-->
+
+</div>
+<form  name="new" novalidate  class="bindphone" ng-show="newnumber">
+        <span>手机号</span>
+        <input type="text" name="phone" placeholder="新的手机号" autocomplete="off" ng-model="newInfo.mobile" class="userName longInput" required ng-pattern="/^1(3|4|5|7|8)[0-9]\d{8}$/" ng-change="change4()"><br><br>
+        <div ng-show="new.phone.$error.pattern" class="rightnum">请输入正确的手机号</div>
+        <!--<div ng-show="new.phone.$error.required" class="rightnum">请输入手机号</div>-->
+        <div ng-show="nophone" class="rightnum">请输入手机号</div>
+        <span>验证码</span>
+        <input type="password" placeholder="短信验证码" ng-model="newInfo.message" autocomplete="off" name="message"  required   ng-change="change5() ">
+        <input type="button"  ng-click="send($event)" ng-disabled="new.phone.$error.pattern||(!newInfo.mobile)"   value="{{miaoshu(countdown)}}" ng-class="{'daojishi':isdaojishi}">
+        <!--<div class="newwarn maxtime" ng-show="msg2" style="padding-left: 61px">{{msg2}}</div>-->
+        <div class="newwarn maxtime" ng-show="noyanzhengma" style="padding-left: 61px">请输入验证码</div>
+</form>
+<div class="unemail" ng-show="unbindem">
+    <img src="../../../res/img/jgyyc.png" alt="">
+    <p>确定解除绑定邮箱{{detailInfo.email}}吗？</p>
+    <p>解绑后，将无法使用该邮箱登录，请谨慎操作！</p>
+    <div class="alertBtn">
+        <a href="javascript:;" ng-click="unbindEmail()" class="btnyes">确定</a><a href="javascript:;" ng-click="closeIndex()" class="btncancel">取消</a>
+    </div>
+</div>
+<div data-ng-include=" 'src/tpl/alert.html' "></div>
+

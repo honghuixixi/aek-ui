@@ -1,0 +1,70 @@
+.training-content .training-edit-btn {
+    float: right;
+    width: 80px;
+    margin-left: 10px;
+    text-align: center;
+}
+.training-add {
+    margin: 0;
+    font-size: 13px;
+    overflow: hidden;
+}
+.training-add dt {
+    float: left;
+    width: 80px;
+    font-weight: 300;    
+    line-height: 32px;
+    color: #333;
+    text-align: right;
+}
+.training-add dt i {
+    color: #f00;
+}
+.training-add dd {
+    position: relative;
+    margin-left: 90px;
+}
+.training-add dd input[type="text"] {
+    width: 400px;
+    height: 32px;
+    padding: 0 10px;
+    line-height: 32px;
+    border: 1px solid #dcdcdc;
+    outline: 0;
+}
+.training-add dd textarea {
+    width: 800px;
+    height: 182px;
+    padding: 10px;
+    margin-bottom: 20px;
+    font-size: 13px;
+    line-height: 26px;
+    border: 1px solid #dcdcdc;
+    outline: 0;
+    resize: none;
+}
+.training-add a {
+    display: inline-block;
+}
+.training-add dd .err {
+    height: 20px;
+    line-height: 20px;
+    color: #f00;
+}
+.training-add dd .count {
+    position: absolute;
+    left: 735px;
+    bottom: 22px;
+    z-index: 1;
+    width: 60px;
+    text-align: right;
+    color: #999;
+}
+.training-add-date {
+    background-image: url(../../../../res/img/date-icon.png);
+    background-position: 376px 6px;
+    background-repeat: no-repeat;
+}
+.daterangepicker td.active, .daterangepicker td.active:hover {
+    width: auto;
+}

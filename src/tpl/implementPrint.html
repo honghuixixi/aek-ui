@@ -1,0 +1,28 @@
+<div class="implement-print" id="template_ques" style="display: none;">
+    <h2>{{data.print.hospital}}--医疗设备巡检记录单</h2>
+    <div class="info">
+    	<dl style="margin-right: 200px;">
+	   		<dt>计划编号：</dt>
+	   		<dd>{{data.print.planNo}}&nbsp;</dd>
+	   		<dt>巡检科室：</dt>
+	   		<dd>{{data.print.scope}}&nbsp;</dd>
+	   		<dt>负责人：</dt>
+	   		<dd>{{data.print.director}}&nbsp;</dd>
+	   	</dl>
+	   	<dl class="dt">
+	   		<dt>开始日期：</dt>
+	   		<dd>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;年&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;日</dd>
+	   		<dt>结束日期：</dt>
+	   		<dd>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;年&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;日</dd>
+	   	</dl>
+    </div>
+    <div style="width: 900px;margin:0 auto;overflow-x: auto;">
+    	<implement-template-q 
+    		type1="1" 
+    		type2="4"
+    		page="1"
+			page-size="data.print.records.length"
+    		equipments="data.print.records" 
+    		templates="data.templates"></implement-template-q>
+    </div>
+</div>

@@ -1,0 +1,107 @@
+<div>
+    <div class="maintain-top">
+        <a ui-sref="maintain.menu.template" style="color: #999;">保养模板</a>&gt;<span>查看详情</span>
+        <span ng-show="data.template.type === 2 && data.limit.delete" class="maintain-top-btn maintain-top-del" ng-click="delTemplate()">删除模板</span>
+        <span ng-show="data.template.type === 2 && data.limit.disable && data.template.status === 2" class="maintain-top-btn maintain-top-enable" ng-click="enableTemplate()">启用模板</span>
+        <span ng-show="data.template.type === 2 && data.limit.disable && data.template.status === 1" class="maintain-top-btn maintain-top-disable" ng-click="disableTemplate()">停用模板</span>
+    </div>
+    <div class="maintain-main" style="min-height: {{data.height}}px;">
+        <div class="maintain-main-search">
+            <div class="maintain-main-search-name">{{data.template.name}}<span class="tag {{data.template.status > 1 ? 'disenable' : ''}}">{{data.template.status > 1 ? '停用' : '启用'}}</span></div>
+            <div style="margin-bottom:10px;font-size:14px;color: #999;">备注：{{data.template.remarks || ''}}</div>
+            <!-- <div ng-show="data.template.type > 1 && data.limit.edit" style="overflow: hidden;"><span class="maintain-btn add-item" ng-click="addTemplateItem()">新建项目</span></div> -->
+        </div>
+        <table class="maintain-main-list">
+            <thead>
+                <tr>
+                    <td style="width: 50px;">序号</td>
+                    <td style="text-align: left;">项目内容及说明</td>
+                    <td style="width: 130px;" ng-show="data.template.type > 1 && data.limit.edit">操作</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat=" v in data.template.items">
+                    <td>{{$index + 1}}</td>
+                    <td style="text-align: left;">
+                        <div ng-show="!v.isEdit">{{v.itemName}}</div>
+                        <div ng-show="v.isEdit">
+                            <input class="add-item-input" type="text" placeholder="请输入" maxlength="40" ng-model="data.editName" ng-change="removeErr(v)">
+                            <span class="add-item-btn" ng-click="editItem(v)">保存</span>
+                            <span class="add-item-btn" ng-click="closeEditItem(v)">取消</span>
+                            <span class="add-item-err">{{v.err}}</span>
+                        </div>
+                    </td>
+                    <td ng-show="data.template.type > 1 && data.limit.edit">
+                        <a ng-click="showEditItem(v)">编辑</a>
+                        <a ng-click="deleteTemplateItem(v.id)">删除</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>        
+        <!-- empty -->
+        <div class="empty" ng-show="data.empty && !data.loading"><img src="../../../res/img/nocontent.png">暂无数据</div>
+        <!-- loading -->
+        <div class="loading" ng-show="data.loading"><img src="../../../res/img/loading2.gif"></div>
+        <!-- add item  -->
+        <div class="add-swrap" ng-show="data.template.type > 1 && data.limit.edit && data.template.items.length < 10">
+            <div class="add-item">
+                <input class="add-item-input" type="text" placeholder="请输入" maxlength="40" ng-model="data.selfName" ng-change="removeErr(data)">
+                <span class="add-item-btn" ng-click="addSelfItem()">保存</span>
+                <span class="add-item-btn" ng-click="clearInput()">重置</span>
+                <span class="add-item-err">{{data.err}}</span>
+            </div>
+            <div class="sys-item">
+                <div class="div" ng-repeat="v in data.sysItems" ng-click="chooseSysItem(v)" ng-show="v.show">{{v.itemName}}</div>
+            </div>
+        </div>
+	</div>
+</div>
+
+<!-- 新建对话框 -->
+<div id="template_add_template_item" style="display: none;">
+    <div class="modal-add-input">
+        <input type="text">
+        <span class="maintain-btn add-item">添加</span>
+    </div>
+    <div class="modal-add-items">
+        <div ng-repeat="v in tempItems">
+            <span></span>
+            <label>{{v.name}}</label>
+        </div>
+    </div>
+    <div class="modal-add-err">{{data.err}}</div>
+    
+</div>
+<!-- 删除模板 -->
+<div id="template_delete" class="inspectionLayer" style="display: none;">
+    <div style="text-align: center; color: #666;">
+        <div>
+            <div class="inspectionLayerImg m-t-lg m-b-md"><img src='../../res/img/icon20.png'></div>
+            <div>
+                <span>删除模板后不可恢复，确定要删除吗？</span>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 停用模板 -->
+<div id="template_disable" class="inspectionLayer" style="display: none;">
+    <div style="text-align: center; color: #666;">
+        <div>
+            <div class="inspectionLayerImg m-t-lg m-b-md"><img src='../../res/img/wh.png'></div>
+            <div>
+                <span>停用后，该模板将无法使用，确定要停用吗？</span>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 启用模板 -->
+<div id="template_enable" class="inspectionLayer" style="display: none;">
+    <div style="text-align: center; color: #666;">
+        <div>
+            <div class="inspectionLayerImg m-t-lg m-b-md"><img src='../../res/img/wh.png'></div>
+            <div>
+                <span>确定启用该模板？</span>
+            </div>
+        </div>
+    </div>
+</div>

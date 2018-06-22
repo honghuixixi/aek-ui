@@ -1,0 +1,540 @@
+<!-- 新增用户弹框  begin -->
+<div style="display: none;">
+	<div id="memberform">
+		<div class="overlayer-alert" ng-show="searchListShow" ng-click="hideSearchlist()" ></div>
+		<form class="form-horizontal" id="addmember" name="addmember" novalidate>
+			<div class="form-group">
+				<label class="col-lg-2 col-sm-2 control-label" for="membername">所属机构</label>
+				<div class="col-sm-9">
+					<span class="deptMsg">{{currentOrgName}}</span>
+					<span class="deptMsg">{{tenantName}}</span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-lg-2 col-sm-2 control-label" for="realName"><i>*</i>用户姓名</label>
+				<div class="col-sm-9">
+					<input type="text" ng-maxlength="40" class="form-control" ng-model="memberuser.realName" name="realName" id="realName" required/>
+				</div>
+				<div ng-show="!addmember.realName.$error.required && addmember.realName.$dirty && addmember.realName.$error.maxlength" class="errWrap"><span class="error">最多输入40个字符</span></div>
+				<div ng-show="addmember.realName.$dirty && addmember.realName.$error.required" class="errWrap"><span class="error">用户姓名必填</span> </div>
+
+			</div>
+
+			<div class="form-group">
+				<label class="col-lg-2 col-sm-2 control-label" for="mobile"><i>*</i>手机号</label>
+				<div class="col-sm-9">
+					<input class="form-control" ng-pattern="/^(1[3-8][0-9])\d{8}$/" ng-blur="checkRepeat(1)" ng-change="checkChange(1)" ng-model="memberuser.mobile" name="mobile" id="mobile" required/>
+				</div>
+				<div ng-show="!(!addmember.mobile.$error.required && addmember.mobile.$dirty && addmember.mobile.$invalid) && phoneRepeat" class="errWrap"><span class="error">手机号已存在</span> </div>
+				<div ng-show="!addmember.mobile.$error.required && addmember.mobile.$dirty && addmember.mobile.$invalid" class="errWrap"><span class="error">手机格式错误</span></div>
+				<div ng-show="addmember.mobile.$dirty && addmember.mobile.$error.required" class="errWrap"><span class="error">手机号必填</span> </div>
+			</div>
+			<div class="form-group">
+				<label class="col-lg-2 col-sm-2 control-label" for="password"><i>*</i>密码</label>
+				<div class="col-sm-9">
+					<input class="form-control"  ng-pattern="/^[0-9a-zA-Z]{8,16}$/" autocomplete="off" ng-model="memberuser.password" name="password" id="password" required />
+				</div>
+				<div ng-show="!addmember.password.$error.required && addmember.password.$dirty && !addmember.password.$error.minlength && addmember.password.$invalid" class="errWrap"><span class="error">密码只支持8-16位字母和数字</span></div>
+				<div ng-show="addmember.password.$dirty && addmember.password.$error.required" class="errWrap"><span class="error">密码必填</span> </div>
+			</div>
+			<div class="form-group">
+				<label class="col-lg-2 col-sm-2 control-label" for="memberemail">邮箱</label>
+				<div class="col-sm-9">
+					<input class="form-control" type="email" ng-model="memberuser.email" ng-change="checkChange(2)" ng-blur="checkRepeat(2)" name="email" id="email" />
+				</div>
+				<div ng-show="!(addmember.email.$dirty && addmember.email.$error.email) && emailRepeat" class="errWrap"><span class="error">邮箱地址已存在</span></div>
+				<div ng-show="addmember.email.$dirty && addmember.email.$error.email" class="errWrap"><span class="error">邮箱格式错误</span></div>
+			</div>
+			<div class="form-group">
+				<label class="col-lg-2 col-sm-2 control-label" for="deptId"><i>*</i>部门</label>
+				<div class="col-sm-9 alert-select">
+					<div class="member-searchdept">
+						<input type="hidden" name="deptId" ng-model="memberuser.deptId"  required/>
+						<input type="text" class="depetName" ng-model="depetName" ng-click="showdeptList()" readonly="readonly" placeholder="请输入科室名称" />
+						<div class="depetList" ng-show="depetshow">
+							<div class="inputdetName">
+								<input class="detNameSearch member-deptnameSearch" ng-trim="false" ng-model="keyword.nameSearch" type="text" ng-change="searchList()" />
+							</div>
+							<div class="member-deptWrap"></div>
+						</div>
+					</div>
+				</div>
+				<div ng-show="addmember.deptId.$dirty && addmember.deptId.$error.required" class="errWrap"><span class="error">部门必选</span> </div>
+			</div>
+			<div class="form-group">
+				<label class="col-lg-2 col-sm-2 control-label" for="memberjob">职务</label>
+				<div class="col-sm-9">
+					<input class="form-control" ng-model="memberuser.jobName" name="jobName" id="jobName" />
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+<!--新增用户  end-->
+<!--新建部门弹出框 begin-->
+<div class="alert2" style="display: none;">
+	<div id="addmemberdept">
+		<form class="form-horizontal" class="dept_form" id="dept_form">
+			<!--遮罩层-->
+			<div style="top:42px;" class="assets-overlay" ng-click='hideAll()' ng-show='depetshow'></div>
+			<div class="form-group m-t-10" ng-if='preset == "false"'>
+				<label class="col-lg-2 col-sm-1 control-label" for="parentDept">上级部门</label>
+				<div class="col-sm-10">
+					<!--<input type="text" ng-maxlength="40" class="form-control" ng-model="parentDept" name="parentDept" id="parentDept" required/>-->
+					<div class="member-searchdept">
+						<input type="text" class="depetName form-control parentDeptName" ng-model="parentDept" ng-click="showdeptList()" readonly="readonly" placeholder="请输入科室名称" />
+						<div class="depetList" ng-show="depetshow">
+							<div class="inputdetName">
+								<input class="detNameSearch member-deptnameSearch" ng-model="keyword.nameSearch" type="text" ng-change="searchList()" />
+							</div>
+							<div class="member-deptWrap"></div>
+							<!--<label ng-repeat="item in deptarr track by $index" ng-click="setDeptValue(item.id,item.name)" id="item.id">{{item.name}}</label>-->
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-lg-2 col-sm-1 control-label" for="deptname">名称</label>
+				<div class="col-sm-10">
+					<input type="text" ng-change="deptLength()" class="form-control" ng-model="dept_form.name" name="deptname" id="deptname" required/>
+				</div>
+				<div ng-show="dept_form.err" class="errWrap"><span class="error">*部门不能为空</span> </div>
+			</div>
+		</form>
+		<div ng-if="userInfo.authoritiesStr.indexOf('SYS_DEPT_VIEW_EDIT_DELETE') != -1 && preset == 'false'" ng-show="iseditDept" ng-click="delDeptDialog()" class="deldeptbtn btn btn-default"><span>删除部门</span></div>
+	</div>
+
+</div>
+<!--新建部门弹出框end-->
+<!--提示信息 begin-->
+<div class="alertmsg" style="display: none;">
+	<div id="msgTip" class="m-t-10">
+		<div class="msgIcon"><span></span></div>
+		<div class="msgTxt">{{tipMsg}}</div>
+	</div>
+</div>
+
+<!--提示信息end-->
+<!-- 角色管理操作 -->
+<!-- 停用 -->
+<div id="alertRoleStop" style="display: none;">
+	<div class="alertContent">
+		<div ng-hide='alertRoleEdit'>
+			<div class="alertImg"><img src='{{alertRoleImg}}'></div>
+			<p class="font14px acolor666">{{alertRoleInfo}}</p>
+			<div class="alertTip font13px acolorred">
+				<span class='textCenter'>{{alertRoleTip}}</span>
+			</div>
+		</div>
+		<div class="alertBtn">
+			<a href="javascript:;" ng-click='alertRoleClose(alertRoleBtn.yes.id,alertRoleBtn.type)' class="btnyes ahoverBTN">{{alertRoleBtn.yes.name}}</a>
+			<a href="javascript:;" ng-click='alertRoleClose(alertRoleBtn.no.id,alertRoleBtn.type)' class="btncancel">{{alertRoleBtn.no.name}}</a>
+		</div>
+	</div>
+</div>
+<!-- 删除 -->
+<div id="alertRoleDel" style="display: none;">
+	<div class="alertContent">
+		<div ng-hide='alertRoleEdit'>
+			<div class="alertImg"><img src='{{alertRoleImg}}'></div>
+			<p class="font14px acolor666 m-b-57">{{alertRoleInfo}}</p>
+		</div>
+		<!-- <div ng-show='alertRoleEdit' class="alertEditCon"><span>编辑名称：</span><input type="text"></div> -->
+		<div class="alertBtn">
+			<a href="javascript:;" ng-click='alertRoleClose(alertRoleBtn.yes.id,alertRoleBtn.type)' class="btnyes ahoverBTN">{{alertRoleBtn.yes.name}}</a>
+			<a href="javascript:;" ng-click='alertRoleClose(alertRoleBtn.no.id,alertRoleBtn.type)' class="btncancel">{{alertRoleBtn.no.name}}</a>
+		</div>
+	</div>
+</div>
+<!-- 不能删除 -->
+<div id="alertRoleDelNot" style="display: none;">
+	<div class="alertContent">
+		<div ng-hide='alertRoleEdit'>
+			<div class="alertImg"><img src='{{alertRoleImg}}'></div>
+			<p class="font14px acolor666 m-b-57">{{alertRoleInfo}}</p>
+		</div>
+		<!-- <div ng-show='alertRoleEdit' class="alertEditCon"><span>编辑名称：</span><input type="text"></div> -->
+		<div class="alertBtn">
+			<a href="javascript:;" ng-click='alertRoleClose(alertRoleBtn.no.id,alertRoleBtn.type)' class="btnyes ahoverBTN">{{alertRoleBtn.no.name}}</a>
+		</div>
+	</div>
+</div>
+<!-- 编辑 -->
+<div id="alertRoleEdit" style="display: none;">
+	<div class="alertEditCon"><span>编辑名称</span><input type="text" class='roleName' ng-model='role.newname'></div>
+	<div class="alertBtn">
+		<a href="javascript:;" ng-click='editRoleClose(alertRoleBtn.yes.id)' class="btnyes ahoverBTN">{{alertRoleBtn.yes.name}}</a>
+		<a href="javascript:;" ng-click='editRoleClose(alertRoleBtn.no.id)' class="btncancel">{{alertRoleBtn.no.name}}</a>
+	</div>
+</div>
+</div>
+<!-- /角色管理操作  -->
+
+<!--新增角色 bengin-->
+<div style="display: none;">
+	<div id="addrole">
+		<form name="form_role" class="form-horizontal">
+			<div class="form-group">
+				<label class="col-lg-2 col-sm-2 control-label" for="fromdept">所属机构</label>
+				<div class="col-sm-9">
+					<span ng-if="editRole">{{orgName}}</span>
+					<input ng-if="!editRole" type="text" class="form-control fromdept" id="fromdept" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-lg-2 col-sm-2 control-label" for="rolelist">角色</label>
+				<div class="col-sm-9 rolelist">
+					<div class="role-item fl" ng-repeat="role in roleList">
+						<div class="checkboxFive" ng-mouseover="ishover6=true" ng-mouseleave="ishover6=false">
+							<input type="checkbox" ng-check="role.check" value="1" class="child-checkbox" id="checkboxFiveInput" />
+							<label ng-class="{'labelhover':ishover6}" for="checkboxFiveInput" class="checked" ng-click="checked($event)"></label>
+						</div>
+						<span class="mem-roleName">{{role.name}}</span>
+
+					</div>
+				</div>
+
+			</div>
+
+		</form>
+
+	</div>
+</div>
+<!--新增角色 end-->
+<!--修改密码 begin-->
+<div style="display: none;">
+	<div id="updataPassword">
+		<form class="form-horizontal inputHeight updataPwd_form" name="updataPwd_form" id="updataPwd_form" novalidate>
+			<div class="form-group">
+				<label class="col-lg-2 col-sm-2 control-label" for="password">新密码</label>
+				<div class="col-sm-10">
+					<input type="text"  ng-pattern="/^[0-9a-zA-Z]{8,16}$/" class="form-control" autocomplete="off" placeholder="8-16位字符" ng-model="userPwd.password" name="password" id="password" required/>
+				</div>
+			     <div ng-show="!updataPwd_form.password.$error.required && updataPwd_form.password.$dirty && !updataPwd_form.password.$error.minlength && updataPwd_form.password.$invalid" class="errWrap"><span class="error">密码只支持8-16位字母和数字</span></div>
+				<div ng-show="updataPwd_form.password.$dirty && updataPwd_form.password.$error.required" class="errWrap"><span class="error">密码必填</span> </div>
+			</div>
+			<div class="form-group">
+				<label class="col-lg-2 col-sm-2 control-label" for="password2">确认密码</label>
+				<div class="col-sm-10">
+					<input type="text" ng-minlength="8" ng-maxlength="16" class="form-control" placeholder="8-16位字符" ng-model="userPwd.password2" name="password2" id="password2" required/>
+				</div>
+				<div ng-show="updataPwd_form.password2.$dirty && userPwd.password!==userPwd.password2" class="errWrap"><span class="error">两次密码输入不一样</span></div>
+			</div>
+		</form>
+
+	</div>
+
+</div>
+<!--修改密码 end-->
+
+<!--角色管理index操作-->
+<div id="alertOrgChild" style="display: none;">
+	<div ng-show="true">
+		<div class="alertContent">
+			<div class="alertImg"><img src='{{layerImg}}'></div>
+			<p class="font14px acolor666">确定{{orgOperate}}角色 ({{orgId}}){{orgName}}吗？</p>
+			<div class="alertTip font13px acolorred">
+				<span>{{orgTip}}</span>
+			</div>
+			<div class="alertBtn">
+				<a ng-click='operateRole()' class="btnyes ahoverBTN">确定</a>
+				<a ng-click='closeIndex()' class="btncancel">取消</a>
+			</div>
+		</div>
+	</div>
+</div>
+<!--角色管理index操作-->
+
+<!--角色管理index操作-->
+<div id="orgModule" style="display: none;">
+	<div ng-show="true">
+		<div class="alertContent">
+			<div class="alertImg"><img src='{{layerImg}}'></div>
+			<p class="font14px acolor666">是否移除"{{orgMouleName}}"模块？</p>
+			<div class="alertTip font13px acolorred">
+				<span style="text-align: center;">移除模块后，所有下级机构模块将同时移除。请谨慎操作！</span>
+			</div>
+			<div class="alertBtn">
+				<a ng-click='removeOk()' class="btnyes ahoverBTN">确定</a>
+				<a ng-click='closeIndex()' class="btncancel">取消</a>
+			</div>
+		</div>
+	</div>
+</div>
+<!--角色管理index操作-->
+
+<!-- 机构管理--模块 -->
+<div id="alertModel2" style="display: none;">
+	<div ng-show="alertCon2">
+		<div class="alertContent">
+			<div class="alertImg"><img src='{{layerImg}}'></div>
+			<p class="font14px acolor666 mb-58">{{layerMsg}}</p>
+			<div class="alertBtn">
+				<a href="javascript:;" ng-click='closeIndex()' class="btnyes">确定</a>
+				<a href="javascript:;" ng-click='closeIndex()' class="btncancel">取消</a>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 机构管理--模块end -->
+
+<!-- 维修 提交 -->
+<div id="alertRepairSubmit" ng-show='repairSubmitShow' class="alertRepair">
+	<div class="alertRepairSubmitContent">
+		<div class="alertRepairSubmitImg"><img src='../../res/img/wh.png'></div>
+		<p class="font14px color666">提交后，将不能修改，确定提交么?</p>
+		<div class="alertRepairSubmitBtn alertRepairBtn">
+			<a href="javascript:;" class="btnyes">确定</a>
+			<a href="javascript:;" class="btncancel">取消</a>
+		</div>
+	</div>
+</div>
+<!-- 维修 添加设备 -->
+<div class="repairAddDev alertRepair" ng-show='repairAddDevShow'>
+	<div class="repairAddDevHead">
+		<div class="repairAddDevInput">
+			<input type="text" value="输入科室" />
+		</div>
+		<div class="repairAddDevInput m-l m-r-sm">
+			<input type="text" value="设备名称/编号" />
+		</div>
+		<div class="repairAddDevSearch">
+			<a href="javascript:;" class="repairBTN">搜索</a>
+		</div><i class="verticalAdjust"></i>
+	</div>
+	<div class="repairAddDevCon">
+		<table border="0" cellspacing="0" cellpadding="0" class="repairAddDevTable">
+			<tbody>
+				<tr>
+					<th class="b-l-dcdcdc"></th>
+					<th>设备编号</th>
+					<th>设备名称</th>
+					<th>规格型号</th>
+					<th>出厂编号</th>
+					<th>生产商</th>
+					<th>使用科室</th>
+					<th>启用日期</th>
+					<th class="b-r-dcdcdc">报修期止</th>
+				</tr>
+				<tr ng-repeat="tr in addData" class="repairAddDevTableTr">
+					<td class="b-l-fff">
+						<input id="{{tr.ckid}}" type="checkbox">
+						<label class="check check-label opcity" for="{{tr.ckid}}">
+                        <i class="fa fa-check"></i>
+               	 	</label></td>
+					<td>
+						<div>{{tr.one}}</div>
+					</td>
+					<td>
+						<div>{{tr.two}}</div>
+					</td>
+					<td>
+						<div>{{tr.three}}</div>
+					</td>
+					<td>
+						<div>{{tr.four}}</div>
+					</td>
+					<td>
+						<div>{{tr.five}}</div>
+					</td>
+					<td>
+						<div>{{tr.six}}</div>
+					</td>
+					<td>
+						<div>{{tr.six}}</div>
+					</td>
+					<td class="b-r-fff">
+						<div>{{tr.seven}}</div>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="9"></td>
+				</tr>
+			</tbody>
+		</table>
+		<span data-ng-include=" 'src/tpl/newPageInfo.html' "></span>
+		<div class="alertRepairAddDevBtn alertRepairBtn">
+			<a href="javascript:;" class="btnyes">确定</a>
+			<a href="javascript:;" class="btncancel">取消</a>
+		</div>
+	</div>
+</div>
+
+
+
+<!-- 机构导入 -->
+<div class="import-alert org-export" id="exportShow" ng-show="exportShow">
+	<div><img src="../res/img/icon21.png" /><span style="margin-left: 10px">下载模板</span></div>
+	<div><span style="margin-left: 28px;color: #999">为提高导入的成功率，请下载并使用系统提供的模板</span>
+		<a id="downExcel" ng-click="getExcel()" style="margin-left: 40px;color: #6db7f7;cursor: pointer">下载模板</a>
+	</div>
+	<div><img src="../res/img/icon22.png" /><span style="margin-left: 10px">上传文件</span></div>
+	<div style="margin-left: 28px;color: #999">仅支持xlsx，xls，csv，文件大小≤4M</div>
+	<div class="formDiv">
+		<form><input type="text" placeholder="上传文件" readonly="true" class="inputName"><span id="orgChooseBtn" ng-class="{'orgDisable':startState}" class="choose">选择文件<input type="file" class="filebtn"></span></form>
+	</div>
+	<div class="height57">
+		<div class="warn" ng-show='canntImport' style="color:#ff2a2a;font-size:12px;">文件格式必须是xlsx，xls，csv，文件大小必须≤4M</div>
+	</div>
+	<div>
+		<div class="progressDiv" ng-show='progressing'>
+			<div class="progressModel">
+				<div class="progressWrap"></div>
+				<div class="progress"></div>
+			</div>
+			<div>正在导入：<span class='progressNum'>0</span>/<span class="progressTotalNum"></span></div>
+		</div>
+		<div class="begin" ng-class="{'orgDisable':startState}" id="orgStartBtn" ng-click='startInput()'>{{orgStartMsg}}</div>
+		<!--<div class="begin"  ng-click="UploadFile()">开始导入</div>-->
+	</div>
+</div>
+
+<!--导入后提示框-->
+<div id="exportAlertInput" ng-show='inputState'>
+	<div class="alertContent">
+		<div class="alertImg"><img src='{{layerImg}}'></div>
+		<p class="font14px acolor666">{{inputRes}}</p>
+		<div class="alertDes" ng-class="{'mb-80':!downloadState}">{{inputDes}}</div>
+		<div ng-show="downloadState" class="failDownload">
+			<a id="errorExcelA">{{inputFailTip}}</a>
+		</div>
+		<div class="alertBtn">
+			<a href="javascript:;" ng-click='closeIndex(btnyes.key)' style="width: 118px;" class="btnyes">{{btnyes.value}}</a>
+			<a href="javascript:;" ng-click='closeIndex(btnno.key)' class="btncancel">{{btnno.value}}</a>
+		</div>
+	</div>
+</div>
+
+<!-- 新增预台账弹框  begin -->
+<div style="display: none;">
+	<div id="addYtz">
+		<div class="overlayer-alert" ng-show="searchListShow" ng-click="hideSearchlist()" ></div>
+		<div class="overlayer-alert" ng-show="searchListShow2" ng-click="hideSearchlist2()" ></div>
+		<form class="form-horizontal" id="addytzForm" name="addytzForm" novalidate>
+			<div class="form-group firstGroup">
+				<label class="col-lg-2 col-sm-2 control-label"><i>*</i>所在部门:</label>
+				<div class="col-sm-10 alert-select">
+					<div class="member-searchdept">
+						<input type="hidden" name="addDeptId" ng-model="addDeptId"  required/>
+						<input type="text" class="depetName" ng-model="addDepetName" ng-click="showAddDeptList()" readonly="readonly" placeholder="请输入科室名称" />
+						<div class="depetList" ng-show="adddepetshow">
+							<div class="inputdetName">
+								<input class="detNameSearch member-deptnameSearch" ng-trim="false" ng-model="keyword.nameSearch" type="text" ng-change="searchList(1)" />
+							</div>
+							<div class="member-deptWrap"></div>
+						</div>
+					</div>
+				</div>
+				<div ng-show="addytzForm.addDeptId.$dirty && addytzForm.addDeptId.$error.required" class="errWrap"><span class="error">部门必选</span> </div>
+			</div>
+			<div class="form-group">
+				<label class="col-lg-2 col-sm-2 control-label" for="addAssetsName"><i>*</i>设备名称:</label>
+				<div class="col-sm-10">
+					<input type="text" ng-maxlength="40" class="form-control" ng-model="addAssetsName" name="addAssetsName" id="addAssetsName" required/>
+				</div>
+				<div ng-show="!addytzForm.addAssetsName.$error.required && addytzForm.addAssetsName.$dirty && addytzForm.addAssetsName.$error.maxlength" class="errWrap"><span class="error">最多输入40个字符</span></div>
+				<div ng-show="addytzForm.addAssetsName.$dirty && addytzForm.addAssetsName.$error.required" class="errWrap"><span class="error">设备名称必填</span> </div>
+			</div>
+			<div class="form-group">
+				<label class="col-lg-2 col-sm-2 control-label" for="addManufacturer"><i>*</i>生产商:</label>
+				<div class="col-sm-10">
+					<input type="text" ng-maxlength="40" class="form-control" ng-model="addManufacturer" name="addManufacturer" id="addManufacturer" required/>
+				</div>
+				<div ng-show="!addytzForm.addManufacturer.$error.required && addytzForm.addManufacturer.$dirty && addytzForm.addManufacturer.$error.maxlength" class="errWrap"><span class="error">最多输入40个字符</span></div>
+				<div ng-show="addytzForm.addManufacturer.$dirty && addytzForm.addManufacturer.$error.required" class="errWrap"><span class="error">生产商必填</span> </div>
+			</div>
+			<div class="form-group">
+				<label class="col-lg-2 col-sm-2 control-label" for="addSpc"><i>*</i>规格型号:</label>
+				<div class="col-sm-10">
+					<input type="text" ng-maxlength="40" class="form-control" ng-model="addSpc" name="addSpc" id="addSpc" required/>
+				</div>
+				<div ng-show="!addytzForm.addSpc.$error.required && addytzForm.addSpc.$dirty && addytzForm.addSpc.$error.maxlength" class="errWrap"><span class="error">最多输入40个字符</span></div>
+				<div ng-show="addytzForm.addSpc.$dirty && addytzForm.addSpc.$error.required" class="errWrap"><span class="error">规格型号必填</span> </div>
+			</div>
+			<div class="form-group">
+				<label class="col-lg-2 col-sm-2 control-label" for="addRegist"><i>*</i>注册证号:</label>
+				<div class="col-sm-10">
+					<input type="text" ng-maxlength="40" class="form-control" ng-model="addRegist" name="addRegist" id="addRegist" required/>
+				</div>
+				<div ng-show="!addytzForm.addRegist.$error.required && addytzForm.addRegist.$dirty && addytzForm.addRegist.$error.maxlength" class="errWrap"><span class="error">最多输入40个字符</span></div>
+				<div ng-show="addytzForm.addRegist.$dirty && addytzForm.addRegist.$error.required" class="errWrap"><span class="error">注册证号必填</span> </div>
+			</div>
+			<div class="form-group">
+				<label class="col-lg-2 col-sm-2 control-label" for="addRegist"><i>*</i>出厂编号:</label>
+				<div class="col-sm-10">
+					<input type="text" ng-maxlength="40" class="form-control" ng-model="addFacNum" name="addFacNum" id="addFacNum" required/>
+				</div>
+				<div ng-show="!addytzForm.addFacNum.$error.required && addytzForm.addFacNum.$dirty && addytzForm.addFacNum.$error.maxlength" class="errWrap"><span class="error">最多输入40个字符</span></div>
+				<div ng-show="addytzForm.addFacNum.$dirty && addytzForm.addFacNum.$error.required" class="errWrap"><span class="error">出厂编号必填</span> </div>
+			</div>
+			<div class="form-group">
+				<label class="col-lg-2 col-sm-2 control-label" for="addRegist"><i>*</i>三级分类代码:</label>
+				<div class="col-sm-10">
+					<input type="text" ng-maxlength="40" class="form-control" ng-model="addClassCode" name="addClassCode" id="addClassCode" required/>
+				</div>
+				<div ng-show="!addytzForm.addClassCode.$error.required && addytzForm.addClassCode.$dirty && addytzForm.addClassCode.$error.maxlength" class="errWrap"><span class="error">最多输入40个字符</span></div>
+				<div ng-show="addytzForm.addClassCode.$dirty && addytzForm.addClassCode.$error.required" class="errWrap"><span class="error">三级分类代码必填</span> </div>
+			</div>
+			<div class="form-group">
+				<label class="col-lg-2 col-sm-2 control-label" for="addAccount"><i>*</i>核算类别:</label>
+				<div class="col-sm-10">
+					<div class="select-box" ng-click="showAccountList()">
+						<input type="hidden" ng-model="addAccountId" name="addAccountId"/>
+						<input class="currEnable acolor999" ng-model="addAccountName" id="addAccount" readonly="readonly" />
+					</div>
+					<div class="select-options" ng-show="addAccountList">
+						<ul>
+							<ul class="accountWrap"></ul>
+						</ul>
+					</div>
+				</div>
+				<div ng-show="addytzForm.addDeptId.$dirty && addytzForm.addDeptId.$error.required" class="errWrap"><span class="error">部门必选</span> </div>
+			</div>
+			<div class="form-group">
+				<label class="col-lg-2 col-sm-2 control-label" for="addAccount"><i>*</i>管理级别:</label>
+				<div class="col-sm-10">
+					<div class="select-box" ng-click="showAccountList()">
+						<input type="hidden" ng-model="addAccountId" name="addAccountId"/>
+						<input class="currEnable acolor999" ng-model="addManageLevel" id="manageLevel" readonly="readonly" />
+					</div>
+					<div class="select-options" ng-show="addAccountList">
+						<ul>
+							<li class="acolor999" ng-repeat="account in accountArr track by $index" ng-model="addAccountName" ng-click="changeAccount(account.name,account.id)">{{account.name || '全部' }}</li>
+						</ul>
+					</div>
+				</div>
+				<div ng-show="addytzForm.addDeptId.$dirty && addytzForm.addDeptId.$error.required" class="errWrap"><span class="error">部门必选</span> </div>
+			</div>
+			<div class="form-group">
+				<label class="col-lg-2 col-sm-2 control-label" for="addAccount"><i>*</i>启用日期:</label>
+				<div class="col-sm-10">
+					<input type="text" id="expireDate" ng-click="initialDate(expireStr)" readonly="readonly" ng-model="expireStr" ng-disabled="expireDate" name="expireDate" class="md-input input-datepicker">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-lg-2 col-sm-2 control-label" for="addManufacturer"><i>*</i>供应商:</label>
+				<div class="col-sm-10">
+					<input type="text" ng-maxlength="40" class="form-control" ng-model="addSplName" name="addSplName" id="addSplName" required/>
+				</div>
+				<div ng-show="!addytzForm.addSplName.$error.required && addytzForm.addSplName.$dirty && addytzForm.addSplName.$error.maxlength" class="errWrap"><span class="error">最多输入40个字符</span></div>
+				<div ng-show="addytzForm.addSplName.$dirty && addytzForm.addSplName.$error.required" class="errWrap"><span class="error">供应商必填</span> </div>
+			</div>
+			<div class="form-group">
+				<label class="col-lg-2 col-sm-2 control-label" for="addAccount"><i>*</i>资金来源:</label>
+				<div class="col-sm-10">
+					<div class="select-box" ng-click="showAccountList()">
+						<input type="hidden" ng-model="addAccountId" name="addAccountId"/>
+						<input class="currEnable acolor999" ng-model="addManageLevel" id="manageLevel" readonly="readonly" />
+					</div>
+					<div class="select-options" ng-show="addAccountList">
+						<ul>
+							<li class="acolor999" ng-repeat="account in accountArr track by $index" ng-model="addAccountName" ng-click="changeAccount(account.name,account.id)">{{account.name || '全部' }}</li>
+						</ul>
+					</div>
+				</div>
+				<div ng-show="addytzForm.addDeptId.$dirty && addytzForm.addDeptId.$error.required" class="errWrap"><span class="error">部门必选</span> </div>
+			</div>
+		</form>
+	</div>
+</div>
+<!--新增预台账  end-->

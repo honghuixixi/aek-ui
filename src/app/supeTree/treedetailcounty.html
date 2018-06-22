@@ -1,0 +1,129 @@
+<!-- navbar -->
+<div data-ng-include=" 'src/tpl/header.html' " class="app-header navbar b-b-3x-orange">
+</div>
+<div class="hd_tdetailcont">
+    <div class="hd_treetitle">医疗机构详情</div>
+    <div class="hd_tdetailtxt">
+        <div class="hd_tdetailnav">
+            <span ng-class="{'hd_active':index==0}" ng-click="navChange(0)">医疗机构详情</span>
+            <span ng-class="{'hd_active':index==1}" ng-click="navChange(1)">设备信息</span>
+        </div>
+        <div class="hd_tdetailtit" ng-if="index==0">浙江省第一人民医院</div>
+        <div class="hd_tdetailul" ng-if="index==0">
+            <ul>
+                <li><span>ID</span><span>123</span></li>
+                <li><span>原始管理员</span><span>yyy</span></li>
+                <li><span>来源</span><span>123</span></li>
+                <li><span>手机号</span><span>123</span></li>
+                <li><span>审核状态</span><span>123</span></li>
+                <li><span>邮箱</span><span>123</span></li>
+                <li><span>创建人</span><span>123</span></li>
+                <li ><span></span> </li>
+                <li><span>创建时间</span><span>123</span></li>
+            </ul>
+        </div>
+        <div class="hd_tdetailul" style="height: 120px" ng-if="index==0">
+            <ul>
+                <li><span>租户类型</span><span>123</span></li>
+                <li><span>账户类型</span><span>yyy</span></li>
+                <li><span>是否测试机构</span><span>123</span></li>
+                <li><span>子机构</span><span>123</span></li>
+                <li><span>到期时间</span><span>123</span></li>
+            </ul>
+        </div>
+        <div class="hd_tdetailul" style="height: 148px" ng-if="index==0">
+            <ul>
+                <li><span>组织机构代码</span><span>123</span></li>
+                <li></li>
+                <li><span>机构类别</span><span>yyy</span></li>
+                <li></li>
+                <li><span>机构分类管理类型</span><span>123</span></li>
+                <li></li>
+                <li><span>医院类型</span><span>123</span></li>
+
+            </ul>
+        </div>
+
+
+        <!--机构详情2-->
+        <div ng-if="index==1">
+            <div class="assets-overlay" ng-click='hideAll()' ng-show='devshow'></div>
+            <div class="hd_tdetailtit org-panel" style="height: 70px;padding-top: 20px">
+                <div class="org-header">
+                    <div class="org-sel hd_org-sel">
+                        <div class="i-info"  style="width: 120px !important;margin-right: 20px">
+                            <div class="input-wrap ">
+                                <input class="depetName " type="text" readonly="true" placeholder="全部状态" ng-model="orgType" ng-focus="focus()" style="width: 120px"/>
+                                <div class="depetList" ng-show="devshow1" >
+                                    <label data-id="" ng-click="click($event)">全部状态</label>
+                                    <label ng-repeat="l in hospitalArr track by $index" data-id="{{l.id}}" ng-click="click($event)">{{l.name}}</label>
+                                </div>
+                            </div>
+                        </div>
+                        <input id="keywords" class="hd_keywords"  type="text"  placeholder="请输入机构名称/ID">
+                        <div class="t-search">
+                            <b ng-click="search('search')" id="search" style="height: 30px">搜索</b>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="org-content " style="width: 100%;padding: 0;margin-top: 20px;min-width: 1075px">
+                <table style="border:none;border-collapse:collapse;" class="table  b-t b-light text-center ">
+                    <thead>
+                    <tr class="tr-th hd_tr-th">
+                        <th style="width: 15%;white-space:nowrap;">设备编号</th>
+                        <th style="width: 32%;white-space:nowrap;">设备名称</th>
+                        <th style="width: 18%;white-space:nowrap;">规格型号</th>
+                        <th style="width: 32%;white-space:nowrap;">生产商</th>
+                        <th style="width: 15%;white-space:nowrap;">状态</th>
+                    </tr>
+                    </thead>
+                    <tbody class="hd_treetbpdy">
+                    <tr ng-if="loading2">
+                        <td colspan="12" class="noContent">
+                            <img src="../../../res/img/loading2.gif" alt="">
+                        </td>
+                    </tr>
+                    <tr ng-if="noData">
+                        <td colspan="12" class="noContent">
+                            <img src="../../../res/img/nocontent.png" alt="">
+                            <span class="m-l-lg">暂无数据</span>
+                        </td>
+                    </tr>
+                    <!--<tr ng-if="res.length" ng-repeat='item in res'>-->
+                    <tr class="hd_treetr">
+                        <td>嘻嘻</td>
+                        <td>嘻嘻</td>
+                        <td>嘻嘻</td>
+                        <td>嘻嘻</td>
+                        <td>嘻嘻</td>
+                    </tr>
+
+
+                    <tr class="hd_treetr">
+                        <td>嘻嘻</td>
+                        <td>嘻嘻</td>
+                        <td>嘻嘻</td>
+                        <td>嘻嘻</td>
+                        <td>嘻嘻</td>
+                    </tr>
+                    <tr class="hd_treetr">
+                        <td>嘻嘻</td>
+                        <td>嘻嘻</td>
+                        <td>嘻嘻</td>
+                        <td>嘻嘻</td>
+                        <td>嘻嘻</td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.table-responsive -->
+            <div class="pages-de"></div>
+            <!-- 底部分页 -->
+            <span data-ng-include=" 'src/tpl/newPageInfo.html' "></span>
+        </div>
+    </div>
+</div>
+<!-- / navbar -->

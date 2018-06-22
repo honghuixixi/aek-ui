@@ -1,0 +1,11 @@
+<div class="treFileUploadDiv">
+	<div ng-repeat='file in fileList' class="uploadFileList">
+		<a href="javascript:;" ng-if='state==0'>{{file.fileName}}</a>
+		<a ng-if='state==1' href="{{'api/download?path='+file.imgUrlEn}}">{{file.fileName}}</a>
+		<a href="javascript:;" ng-click='fileListDel($index)' ng-if='state==0' class="uploadFileDel m-l-lg">删除</a>
+	</div>
+	<div class="fileUploadBtn" ng-if='state==0' ng-show='(fileList.length<5)'><input type="file" id='{{inputId}}' class="ng-hide">
+		<a href="javascript:;" ng-click='uploadFile()'>上传附件</a>
+		<span class='m-l'>*单个文件5M以内，最多上传5个</span>
+	</div>
+</div>

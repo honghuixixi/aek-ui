@@ -1,0 +1,229 @@
+<div class="fy_repairReportBill" id='PreRepairReportBill'>
+	<div id="fy_repairReportBillCon">
+	<div class="fy_repairReportHead">{{userInfo.nowOrgName||userInfo.tenantName}}医疗器械维修报告单<span ng-if='radio.radioV==2'>（外修）</span></div>
+	<div class="fy_repairReportBillHead">
+		<div class="fy_repairReportBillHeadLeft">维修工作单号：{{repairObj.repairInfo.num || assetsInfo.applyNo}}</div>
+		<div class="fy_repairReportBillHeadRight">日期：{{(repairObj.repairInfo.currentTime||repairObj.repairDate) | date:'yyyy-MM-dd HH:mm'}}</div>
+	</div>
+	<div class="fy_repairReportBillHead" ng-if='radio.radioV==2'>
+		<div class="fy_repairReportBillHeadLeft">外修单位：{{repairObj.outsideCompany}}</div>
+		<div class="fy_repairReportBillHeadRight">工程师：{{repairObj.engineerName}}</div>
+	</div>
+	<div class="fy_repairReportBillHead" ng-if='radio.radioV==2'>
+		<div class="fy_repairReportBillHeadLeft">联系电话：{{repairObj.outsidePhone}}</div>
+		<div class="fy_repairReportBillHeadRight">工号：{{repairObj.engineerNum}}</div>
+	</div>
+	<div class="fy_repairReportPortHead">一、设备基本信息</div>
+	<table border="0" cellspacing="0" cellpadding="0" class="fy_repairReportPortTable" ng-if='assetsInfo.assetsDesc==2'>
+		<tr>
+			<td class="fy_repairReportPortTableHead fy_repairReportPortTableBL">设备名称</td>
+			<td>{{assetsInfo.assetsName}}</td>
+			<td class="fy_repairReportPortTableHead">设备编号</td>
+			<td class="fy_repairReportPortTableBR">{{assetsInfo.assetsNum}}</td>
+		</tr>
+		<tr>
+			<td class="fy_repairReportPortTableHead fy_repairReportPortTableBL">规格型号</td>
+			<td>{{assetsInfo.assetsSpec}}</td>
+			<td class="fy_repairReportPortTableHead">所在部门</td>
+			<td class="fy_repairReportPortTableBR">{{assetsInfo.assetsDeptName}}</td>
+		</tr>
+		<tr>
+			<td class="fy_repairReportPortTableHead fy_repairReportPortTableBL">所在位置</td>
+			<td class="fy_repairReportPortTableBR" colspan="3">{{assetsInfo.assetsLocal}}</td>
+		</tr>
+	</table>
+	<table border="0" cellspacing="0" cellpadding="0" class="fy_repairReportPortTable" ng-if='assetsInfo.assetsDesc==1'>
+		<tr>
+			<td class="fy_repairReportPortTableHead fy_repairReportPortTableBL">设备名称</td>
+			<td>{{assetsInfo.assetsName}}</td>
+			<td class="fy_repairReportPortTableHead">设备编号</td>
+			<td class="fy_repairReportPortTableBR">{{assetsInfo.assetsNum}}</td>
+		</tr>
+		<tr>
+			<td class="fy_repairReportPortTableHead fy_repairReportPortTableBL">规格型号</td>
+			<td>{{assetsInfo.assetsSpec}}</td>
+			<td class="fy_repairReportPortTableHead">院内编码</td>
+			<td class="fy_repairReportPortTableBR">{{assetsInfo.serialNum}}</td>
+		</tr>
+		<tr>
+			<td class="fy_repairReportPortTableHead fy_repairReportPortTableBL">品牌</td>
+			<td>{{assetsInfo.assetsBrand}}</td>
+			<td class="fy_repairReportPortTableHead">生产商</td>
+			<td class="fy_repairReportPortTableBR">{{assetsInfo.factoryName}}</td>
+		</tr>
+		<tr>
+			<td class="fy_repairReportPortTableHead fy_repairReportPortTableBL">使用科室</td>
+			<td>{{assetsInfo.assetsDeptName}}</td>
+			<td class="fy_repairReportPortTableHead fy_repairReportPortTableBL">启用日期</td>
+			<td class="fy_repairReportPortTableBR">{{assetsInfo.startUseDate | date:'yyyy-MM-dd'}}</td>
+		</tr>
+		<tr>
+			<td class="fy_repairReportPortTableHead fy_repairReportPortTableBL">保修期至</td>
+			<td>{{assetsInfo.warrantyDate | date:'yyyy-MM-dd'}}</td>
+			<td class="fy_repairReportPortTableHead fy_repairReportPortTableBL">报修时间</td>
+			<td class="fy_repairReportPortTableBR">{{repairObj.repairList.reportRepairDate | date:'yyyy-MM-dd HH:mm'}}</td>
+		</tr>
+	</table>
+	<div class="fy_repairReportRadioV3" ng-if='radio.radioV==3'>
+		<div class="fy_repairReportPortHead">二、维修内容</div>
+		<table border="0" cellspacing="0" cellpadding="0" class="fy_repairReportPortTable">
+			<tr>
+				<td class="fy_repairReportPortTableHead fy_repairReportPortTableBL" style='width: 200px;'>接单类型</td>
+				<td ng-if='repairObj.reportStatus==2' colspan="3" class="fy_repairReportPortTableBR">现场维修</td>
+				<td ng-if='repairObj.reportStatus==1'>送修</td>
+				<td ng-if='repairObj.reportStatus==1' class="fy_repairReportPortTableHead fy_repairReportPortTableBL" style='width: 200px;'>送修人</td>
+				<td ng-if='repairObj.reportStatus==1' class="fy_repairReportPortTableBR"><span>{{repairObj.sendPerson}}</span><span class='m-l'>{{repairObj.sendPhone}}</span></td>
+			</tr>
+			<tr>
+				<td class="fy_repairReportPortTableHead fy_repairReportPortTableBL" style='width: 200px;'>工作性质</td>
+				<td colspan="3" class="fy_repairReportPortTableBR">现场解决</td>
+			</tr>
+			<tr>
+				<td class="fy_repairReportPortTableHead fy_repairReportPortTableBL" style='width: 200px;'>备注</td>
+				<td colspan="3" class="fy_repairReportPortTableBR">{{repairObj.remark}}</td>
+			</tr>
+			<tr>
+				<td class="fy_repairReportPortTableHead fy_repairReportPortTableDb fy_repairReportPortTableBL">附件</td>
+				<td colspan="6" class="fy_repairReportPortTableBR fy_repairReportPortTableDb">
+					<a href="{{file?('api/download?path='+file.imgUrlEn):''}}" ng-repeat='file in repairObj.attachment' class='m-r'>{{file.fileName}}</a>
+				</td>
+			</tr>
+			<tr>
+				<td class="fy_repairReportPortTableHead fy_repairReportPortTableBL">维修人签字</td>
+				<td></td>
+				<td class="fy_repairReportPortTableHead">验收人签字</td>
+				<td class="fy_repairReportPortTableBR"></td>
+			</tr>
+		</table>
+	</div>
+	<div class="fy_repairReportRadioVN3" ng-if='radio.radioV!=3'>
+		<div class="fy_repairReportPortHead">二、维修内容</div>
+		<table border="0" cellspacing="0" cellpadding="0" class="fy_repairReportPortTable">
+			<tr>
+				<td class="fy_repairReportPortTableHead fy_repairReportPortTableBL" style='width: 200px;'>接单类型</td>
+				<td ng-if='repairObj.reportStatus==2' colspan="3" class="fy_repairReportPortTableBR">现场维修</td>
+				<td ng-if='repairObj.reportStatus==1'>送修</td>
+				<td ng-if='repairObj.reportStatus==1' class="fy_repairReportPortTableHead fy_repairReportPortTableBL" style='width: 200px;'>送修人</td>
+				<td ng-if='repairObj.reportStatus==1' class="fy_repairReportPortTableBR"><span>{{repairObj.sendPerson}}</span><span class='m-l'>{{repairObj.sendPhone}}</span></td>
+			</tr>
+			<tr ng-if='radio.radioV==2'>
+				<td rowspan="3" class="fy_repairReportPortTableHead fy_repairReportPortTableBL" style='width: 200px;'>工作性质</td>
+				<td colspan="3" class="fy_repairReportPortTableBR">外修：{{radio.radioS==4?'质保期内维修':(radio.radioS==5?'厂家合同维修':(radio.radioS==6?'第三方合同维修':'临时叫修'))}}</td>
+			</tr>
+			<tr ng-if='radio.radioV==1'>
+				<td class="fy_repairReportPortTableHead fy_repairReportPortTableBL" style='width: 200px;'>工作性质</td>
+				<td colspan="3" class="fy_repairReportPortTableBR">自主维修：{{radio.radioS==1?'故障维修':(radio.radioS==2?'预防性维修':'计量、检测后维修')}}</td>
+			</tr>
+			<tr ng-if='radio.radioV==2'>
+				<td class="fy_repairReportPortTableBR">外修单位：{{repairObj.outsideCompany}}</td>
+				<td colspan="2" class="fy_repairReportPortTableBR">联系电话：{{repairObj.outsidePhone}}</td>
+			</tr>
+			<tr ng-if='radio.radioV==2'>
+				<td class="fy_repairReportPortTableBR">工程师：{{repairObj.engineerName}}</td>
+				<td colspan="2" class="fy_repairReportPortTableBR">工号：{{repairObj.engineerNum}}</td>
+			</tr>
+			<tr>
+				<td class="fy_repairReportPortTableHead fy_repairReportPortTableBL" style='width: 200px;'>故障现象</td>
+				<td colspan="3" class="fy_repairReportPortTableBR">{{repairObj.addphenom}}</td>
+			</tr>
+			<tr>
+				<td class="fy_repairReportPortTableHead fy_repairReportPortTableBL" style='width: 200px;'>故障代码</td>
+				<td colspan="3" class="fy_repairReportPortTableBR">{{repairObj.troubleCode}}</td>
+			</tr>
+			<tr>
+				<td class="fy_repairReportPortTableHead fy_repairReportPortTableBL" style='width: 200px;'>故障原因</td>
+				<td colspan="3" class="fy_repairReportPortTableBR">{{repairObj.addReason}}</td>
+			</tr>
+			<tr>
+				<td class="fy_repairReportPortTableHead fy_repairReportPortTableBL" style='width: 200px;'>维修工作内容</td>
+				<td colspan="3" class="fy_repairReportPortTableBR">{{repairObj.addWork}}</td>
+			</tr>
+		</table>
+		<div class="fy_repairReportPortHead">三、维修配件信息</div>
+		<table border="0" cellspacing="0" cellpadding="0" class="fy_repairReportPortTable" ng-show="repairObj.partListHad">
+			<tr>
+				<td class="fy_repairReportPortTableHead fy_repairReportPortTableBL">维修配件名称</td>
+				<td class="fy_repairReportPortTableHead">型号规格(备件号)</td>
+				<td class="fy_repairReportPortTableHead">生产商</td>
+				<td class="fy_repairReportPortTableHead">来源</td>
+				<td class="fy_repairReportPortTableHead">单价</td>
+				<td class="fy_repairReportPortTableHead">数量</td>
+				<td class="fy_repairReportPortTableHead">单位</td>
+				<td class="fy_repairReportPortTableHead fy_repairReportPortTableBR">合计</td>
+			</tr>
+			<tr ng-repeat="l in repairObj.partList track by $index" ng-if='!l.delFlag'>
+				<td class="fy_repairReportPortTableBL">{{l.partName}}</td>
+				<td>{{l.partSpec}}</td>
+				<td>{{l.partProduce}}</td>
+				<td>{{l.status==1?'领用':'购买'}}</td>
+				<td>￥{{l.partPrice?(l.partPrice*1).toFixed(2):'0.00'}}</td>
+				<td>{{l.num}}</td>
+				<td>{{l.unitName}}</td>
+				<td class="fy_repairReportPortTableBR">￥{{(l.num*l.partPrice).toFixed(2)}}</td>
+			</tr>
+		</table>
+		<div class="fy_repairReportPortHead">四、维修结果</div>
+		<table border="0" cellspacing="0" cellpadding="0" class="fy_repairReportPortTable">
+			<tr>
+				<td class="fy_repairReportPortTableHead fy_repairReportPortTableBL">维修后状态</td>
+				<td colspan="6" class="fy_repairReportPortTableBR fy_repairReportPortTableHead">{{repairObj.repairResultSwitch}}</td>
+			</tr>
+			<tr ng-if='radio.radioV==1'>
+				<td rowspan="2" class="fy_repairReportPortTableHead fy_repairReportPortTableBL">维修周期</td>
+				<td class="fy_repairReportPortTableHead">申请时间</td>
+				<td>{{repairObj.repairDate1 | date:'yyyy-MM-dd HH:mm'}}</td>
+				<td class="fy_repairReportPortTableHead" rowspan="2" >维修时间</td>
+				<td rowspan="2" >{{repairObj.repairTrue2 | date:'yyyy-MM-dd HH:mm'}}</td>
+				<td class="fy_repairReportPortTableHead" rowspan="2" >完修时间</td>
+				<td rowspan="2" class="fy_repairReportPortTableBR">{{repairObj.repairDate2 | date:'yyyy-MM-dd HH:mm'}}</td>
+			</tr>
+			<tr ng-if='radio.radioV==2'>
+				<td rowspan="2" class="fy_repairReportPortTableHead fy_repairReportPortTableBL">维修时间周期</td>
+				<td rowspan="2" class="fy_repairReportPortTableHead">叫修时间</td>
+				<td rowspan="2">{{repairObj.callRepairDate | date:'yyyy-MM-dd HH:mm'}}</td>
+				<td class="fy_repairReportPortTableHead">到达时间</td>
+				<td>{{repairObj.arrivalDate | date:'yyyy-MM-dd HH:mm'}}</td>
+				<td class="fy_repairReportPortTableHead" rowspan="2" >维修工时</td>
+				<td rowspan="2" class="fy_repairReportPortTableBR">{{repairObj.repairHours?(repairObj.repairHours+'小时'):''}}</td>
+			</tr>
+			<tr ng-if='radio.radioV==1'>
+				<td class="fy_repairReportPortTableHead">接单时间</td>
+				<td class="fy_repairReportPortTableBR">{{repairObj.repairTrue1 | date:'yyyy-MM-dd HH:mm'}}</td>
+			</tr>
+			<tr ng-if='radio.radioV==2'>
+				<td class="fy_repairReportPortTableHead">离开时间</td>
+				<td>{{repairObj.leaveDate | date:'yyyy-MM-dd HH:mm'}}</td>
+			</tr>
+			<tr>
+				<td class="fy_repairReportPortTableHead fy_repairReportPortTableBL">费用总计</td>
+				<td class="fy_repairReportPortTableHead">维修费</td>
+				<td>￥{{repairObj.repairCost?(repairObj.repairCost*1).toFixed(2):'0.00'}}</td>
+				<td class="fy_repairReportPortTableHead">材料费</td>
+				<td>￥{{repairObj.materiaCost?(repairObj.materiaCost*1).toFixed(2):'0.00'}}</td>
+				<td class="fy_repairReportPortTableHead">合计</td>
+				<td class="fy_repairReportPortTableBR">￥{{repairObj.totalCost?(repairObj.totalCost*1).toFixed(2):'0.00'}}</td>
+			</tr>
+			<tr>
+				<td class="fy_repairReportPortTableHead fy_repairReportPortTableDb fy_repairReportPortTableBL">备注</td>
+				<td colspan="6" class="fy_repairReportPortTableBR fy_repairReportPortTableDb">{{repairObj.remark}}</td>
+			</tr>
+			<tr>
+				<td class="fy_repairReportPortTableHead fy_repairReportPortTableDb fy_repairReportPortTableBL">附件</td>
+				<td colspan="6" class="fy_repairReportPortTableBR fy_repairReportPortTableDb">
+					<a ng-if='!repairObj.reportPrint' href="{{file?('api/download?path='+file.imgUrlEn):''}}" ng-repeat='file in repairObj.attachment' class='m-r'>{{file.fileName}}</a>
+					<span ng-if='repairObj.reportPrint' ng-repeat='file in repairObj.attachment' class='m-r'>{{file.fileName}}</span>
+				</td>
+			</tr>
+			<tr>
+				<td class="fy_repairReportPortTableHead fy_repairReportPortTableBL">维修人签字</td>
+				<td colspan="3"></td>
+				<td class="fy_repairReportPortTableHead">验收人签字</td>
+				<td colspan="2" class="fy_repairReportPortTableBR"></td>
+			</tr>
+		</table>
+		</div>
+	</div>
+	<div class="fy_repairReportBillBtn">
+		<a href="javascript:;" class="m-r" ng-click='usualRepairPrint()' ng-if="repairObj.printPower">打印</a><a href="javascript:;" ng-click='usualLayerClose()'>关闭</a>
+	</div>
+</div>

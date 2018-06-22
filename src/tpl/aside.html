@@ -1,0 +1,9 @@
+<div class="aside-wrap">
+  <div class="navi-wrap">
+    <!-- nav -->
+    <nav ui-nav class="navi clearfix" ng-include="'src/tpl/nav.html'" ng-if='userOr'></nav>
+    <nav ui-nav class="navi clearfix" ng-include="'src/tpl/userNav.html'" ng-if='!userOr && !membernav'></nav>
+    <nav ui-nav class="navi clearfix" ng-include="'src/tpl/membernav.html'" ng-if='membernav'></nav>
+    <!-- nav -->
+</div>
+</div>

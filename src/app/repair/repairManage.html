@@ -1,0 +1,148 @@
+<toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container>
+<!-- 导航条 -->
+<div class="assets-overlay" ng-click='hideAll()' ng-show='devshow'></div>
+<div class="bg-white bread-crumb hd_search">
+    <ul class="breadcrumb lter b-b wrapper-md hd_title" >
+        <li style="width: calc(100% - 175px);">
+            <span class="hd_left">维修管理</span>
+            <span ng-click='repairIndexFullSrc()' class="hd_fullscreen hd_left"></span>
+            <a ng-if="userInfo.authoritiesStr.indexOf('REP_APPLY_NEW') != -1" class="pos-fix-r-md-t-60 pos-fix-btn hd_btn" ui-sref="repair.newmanage({tenantId:($stateParams.tenantId||$localStorage.userInfo.tenantId)})" ui-sref-opts="{reload:true}">新建维修申请</a>
+        </li>
+    </ul>
+</div>
+<!-- 加载提醒 -->
+<!--<div ng-show="loading" class="text-center m-t-md text-lg"><i class="fa fa-spin fa-spinner"></i> 数据加载中...</div>-->
+<!-- 内容区域 -->
+<div ng-hide="loading" class="wrapper-md  content-m" style="padding-right: 15px;padding-bottom: 15px">
+    <div class="minHeightAuto">
+        <!-- 数据显示 -->
+        <div class="wrapper-data hd_search">
+            <div ng-if="userInfo.authoritiesStr.indexOf('REP_APPLY_VIEW') == -1" class="no-limits">
+                <img src="../../res/img/myqx.png" alt="没有权限">您没有该页面的权限
+            </div>
+            <div  class="panel panel-default hd_panel" style="margin-bottom: 0" ng-if="userInfo.authoritiesStr.indexOf('REP_APPLY_VIEW') != -1">
+                <!-- 头部 -->
+                <div class="wrap-head hd_wrap-head" style="min-width: 1164px">
+                    <div  style="width: 150px">
+                        <div class="input-wrap hd_input">
+                            <input type="text" class="depetName" readonly="true" ng-model="searchOne.msg" ng-click="focus1()" />
+                            <div class="depetList hd_list" ng-show="devshow1">
+                                <label ng-repeat="l in searchOne1 | orderBy:'status' "  ng-click="click1($event,l)" class="hd_label">{{change(l)}}</label>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="i-info">
+                        <div class="input-wrap hd_input">
+                            <input type="text" class="depetName" readonly="true" ng-model="searchTwo" ng-click="focus2()" />
+                            <div class="depetList hd_list" ng-show="devshow2">
+                                <label ng-repeat="l in searchTwo1 track by $index"  ng-click="click2($event)" class="hd_label">{{l}}</label>
+                            </div>
+                        </div>
+                    </div> -->
+                    <div>
+                        <input type="text" ng-model='searchKey.searchFour' style="width: 200px" placeholder="输入部门" class="hd_holder"/>
+                    </div>
+                    <div>
+                        <input type="text" ng-model='searchKey.searchCon' style="width: 200px" placeholder="设备名称/编码/院内编码/出厂编码" class="hd_holder"/>
+                    </div>
+                    <div class="t-search">
+                        <a href="javascript:;" ng-click="search()">搜索</a>
+                    </div>
+                    <!-- <div class="i-info hd_order">
+                        <div class="input-wrap hd_input">
+                            <input type="text" class="depetName" readonly="true"  ng-model="searchThree"  ng-click="focus3()" />
+                            <div class="depetList hd_list" ng-show="devshow3">
+                                <label ng-repeat="l in searchThree1  track by $index"  ng-click="click3($event)" class="hd_label">{{l}}</label>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+                <!-- 数据表格 -->
+                <div class="table-responsive hd_table overflowInitial">
+                    <div class="hd_theader">
+                        <ul>
+                            <li style="width: 29%;">设备信息</li>
+                            <li style="width: 13%;">规格型号</li>
+                            <li style="width: 10%;">所在部门</li>
+                            <li style="width: 14%">预计到达科室</li>
+                            <li style="width: 16%;">故障现象</li>
+                            <li style="width: 12%;">状态</li>
+                            <li style="width: 6%;">操作</li>
+                        </ul>
+                    </div>
+                    <table class="table table-striped b-t b-light text-center min-width" >
+                        <tbody  ng-repeat="l in msgList">
+                        <tr style="height: 8px"></tr>
+                        <tr class="hd_mainmsg"><td class="nd_number" colspan="4">维修单号：{{l.applyNo}}<span></span>申请人：{{l.reportRepairName}}<span ></span>申请时间：{{l.reportRepairDate | date : 'yyyy-MM-dd HH:mm'}}</td><td></td><td></td><td></td></tr>
+                        <tr>
+                            <td class="b-l-dcdcdc" style="width: 29%;">
+                                <dl>
+                                    <dt>
+                                    <a ng-click='hrefTo(l)' ><img src="{{image(l.assetsImg)}}"/></a></dt>
+                                    <div class="mydd">
+                                        <span ng-click='hrefTo(l)' class="mydd" style="width: 130px;float: left;">设备名称：{{l.assetsName}}</span><span class='reportStatus' style="float: left;margin-top: 5px">{{l.reportStatus==2?'现场维修':'送修'}}</span>
+                                    </div>
+                                    <div class="mydd">设备编号：{{l.assetsNum}}</div>
+                                    <div class="mydd">生产商：{{l.factoryName}}</div>
+                                </dl>
+                            </td>
+                            <td style="width: 13%;">
+                                <div>{{l.assetsSpec}}</div>
+                            </td>
+                            <td  style="line-height: 20px;width: 10%;">
+                                <div>{{l.assetsDeptName}}</div>
+                            </td>
+                            <td ng-class="{'urgency':isUrgency,'urgencyer':isUrgencyer}">{{l.predictReachDate | date : 'yyyy-MM-dd HH:mm'}}</td>
+                            <td style="width: 16%;">
+                                <div style="position: relative; height: 20px;">
+                                    <div style="position: absolute; top: 0; left: 0; width: 100%;overflow : hidden;z-index: 1;text-overflow: ellipsis;white-space:nowrap;padding: 0 10px">{{l.faultDesc}}</div>
+                                </div>
+                            </td>
+                            <td class="hd_status" style="width: 12%;">
+                                <div ng-if="l.status==1">待接单</div>
+                                <div ng-if="l.status==2">维修中</div>
+                                <div ng-if="l.status==3">待验收</div>
+                                <div ng-if="l.status==4">已完成</div>
+                            </td>
+                            <td class="b-r-dcdcdc" style="width: 6%;padding: 0;text-align: center">
+                                <button class="hd_button" href="javascript:;" ng-click='hrefTo(l)' ng-disabled="userInfo.authoritiesStr.indexOf('REP_APPLY_DETAILED_VIEW') == -1">查看</button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <span  data-ng-include=" 'src/tpl/newPageInfo.html' "></span>
+                </div>
+            </div>
+        </div>
+        <!--<span ng-if="userInfo.authoritiesStr.indexOf('ASS_ASSETS_LIST_VIEW') != -1" data-ng-include=" 'src/tpl/newPageInfo.html' "></span>-->
+    </div>
+    </div>
+</div>
+<div data-ng-include='src/app/tre/ytz/iframe.html' ng-hide=true id="addDev"></div>
+<!-- 日历全屏 -->
+<div class="fy_repaircalendarFullSrc" ng-show='calendarFullShow'>
+    <div class="fy_repairCalendarFullHead">
+        <div class="fy_repairCalendarFullHeadTime">{{fullTime | date:'yyyy-MM-dd HH:mm:ss'}}{{fullTimeWeek}}</div>
+        <div class="fy_repairCalendarFullHeadTitle">{{$localStorage.userInfo.nowOrgName}}设备科维修信息</div>
+    </div>
+    <table border="0" cellspacing="0" cellpadding="0" class="fy_fullTable">
+        <tr><th style="max-width:205px;min-width:205px;width:205px;">申请时间</th><th style="max-width:430px;min-width:305px;width:11.6%;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;">申请科室</th><th style="width:240px;max-width:240px;min-width:240px;">维修单号</th><th style="min-width:305px;width:11.6%;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;max-width:430px;">设备名称</th><th style="width:205px;min-width:205px;max-width:205px;">预计到达科室</th><th style="width:100px;max-width:100px;min-width:100px;">当前状态</th></tr>
+        <tr ng-repeat='td in fullData track by $index'>
+            <td style="width:15%;max-width:205px;">{{td.reportRepairDate | date:'yyyy-MM-dd HH:mm'}}</td>
+            <td style="max-width:305px;width:11.6%;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;">{{td.assetsDeptName}}</td>
+            <td style="width:17.5%;max-width:240px;"><div ng-class='{"visibility":td.visibility}'>{{td.applyNo}}</div></td>
+            <td style="max-width:305px;width:11.6%;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;">{{td.assetsName}}</td>
+            <td style="width:15%;max-width:205px;">{{td.predictReachDate | date:'yyyy-MM-dd HH:mm'}}</td>
+            <td style="width:7.3%;max-width:100px;">{{repairCalendarStatus(td.status)}}</td>
+        </tr>
+    </table>
+    <div class="fy_repairCalendarFullInfo">
+        <div class="fy_repairCalendarFullInfoRight">
+            <span class='m-r-lg'>第{{fullInfo.current<2?1:(fullInfo.current*10-9)}}-{{(fullInfo.current*10>fullInfo.total?fullInfo.total:fullInfo.current*10)}}条</span><span class='m-r-xxl'>共{{fullInfo.total}}条</span><a ng-click='repairIndexFullOut()'>退出大屏<em></em></a>
+        </div>
+        <div class="fy_repairCalendarFullInfoLeft">
+            <span>合计：{{fullInfo.status[0].total+fullInfo.status[1].total+fullInfo.status[2].total}}</span><span>待接单：{{fullInfo.status[0].total}}</span><span>维修中：{{fullInfo.status[1].total}}</span><span>待验收：{{fullInfo.status[2].total}}</span>
+        </div>
+    </div>
+</div>
+<!-- 日历全屏 END -->

@@ -1,0 +1,109 @@
+<div style="background:#eff3f6">
+<div class="hd_tilnav">
+    <span class="hd_titleLeft"><span ui-sref="repair.manage" class="hd_manage">维修管理</span>><span>维修单详情</span></span>
+    <span class="hd_titleRight"><button ng-click="subApply()" ng-disabled="applyBtn">提交维修申请</button><button ng-click="calcel()">取消</button></span>
+</div>
+<div class="hd_blank">
+    <div class="hd_applyMsg"><span></span>申请信息</div>
+    <div class="hd_msgList">
+        <div class="hd_addMsg"><span><i>*</i>设备信息：</span>
+            <button ng-click="addMachine()" ng-disabled="statusAdd" ng-class="{'disabled':isDisabled}">添加设备</button>
+            <div class="hd_worn" ng-show="wornfirst"><i>*</i>请添加设备</div>
+            <span ng-show="add">
+                <table>
+                <tr><th style="width: 12%"> 设备编号</th><th style="width: 15%">设备名称</th><th style="width: 15%">规格型号</th><th style="width: 10%">出厂型号</th><th>生产商</th><th style="width: 10%">使用科室</th><th style="width: 10%">启用日期</th><th style="width: 6%">操作</th></tr>
+                <tr><td>{{addList.assetsNum}}</td><td>{{addList.assetsName}}</td><td>{{addList.assetsSpec}}</td><td>{{addList.factoryNum}}</td><td>{{addList.factoryName}}</td><td>{{addList.deptName}}</td><td>{{addList.startUseDate}}</td><td class="hd_delect" ng-click="delectMachine($index)">删除</td></tr>
+                </table>
+            </span>
+        </div>
+        <div class="hd_trouble"><span><i>*</i>故障描述：</span><textarea placeholder="请输入故障描述(必填)" ng-model="describe" ng-paste="sum()" ng-keyup="sum()" ng-change="sum()" ng-disabled="overnum"></textarea><span class="hd_numwords"><span >{{currentNum}}</span>/300</span><div class="hd_worn" ng-show="worntwo"><i>*</i>请填写故障描述</div>
+        </div>
+        <div class="hd_msgImg"><span>设备图片：</span>
+            <input  type="file" multiple class="muchinput" ng-disabled="!delactInput">
+            <input  type="file" multiple class="muchinput" ng-disabled="delactInput">
+            <input  type="file" onchange="angular.element(this).scope().replaceImg()"  class="oneinput">
+            <span ng-repeat="l in url" class="hd_images" ng-mouseenter="change=!change" ng-mouseleave="change=!change"><img src="{{l}}" alt=""><div  ng-show="change" class="hd_imgDelet"><i ng-click="replace($index)">更换</i><i ng-click="delect($index)">删除</i></div></span>
+            <span class="hd_upload" ng-click="upload()" ng-show="clickAdd" ></span><span class="hd_alert">图片仅支持png、jpg、jpeg格式，<br>单张大小不超过2M，最多可添加5张图片。</span>
+        </div>
+        <div class="hd_hurrey"><span><i>*</i>紧急程度：</span><span><img src="../../../res/img/huohs.png" alt="" ng-repeat="l in torch" ng-click="level($event,$index)" class="levelimg" ng-mouseenter="enter($event,$index)" ng-mouseleave="leave($event,$index)"></span><span>{{number}}</span>
+        </div>
+        <div class="hd_worn" ng-show="wornthree"><i>*</i>请填写紧急程度</div>
+    </div>
+</div>
+<!-- 维修 添加设备 -->
+<div class="repairAddDev alertRepair" ng-show='repairAddDevShow'>
+    <div class="repairAddDevHead">
+        <div class="repairAddDevInput">
+            <input type="text" placeholder="输入科室名称" ng-model='searchOfficeCon' ng-change='officeSearchIds()'/>
+            <div class="fy_searchOfficeCon" ng-show='officeCoSearch'>
+                <div class="fy_searchOfficeConWrap">
+                    <ul>
+                        <li ng-repeat='li in officeResult track by $index' ng-click='searchOfficeLi(li)'>{{li.name}}</li>
+                    </ul>
+                </div>
+            </div>
+        </div><div class="repairAddDevInput m-l m-r-sm">
+        <input type="text" placeholder="设备名称/编号" ng-model='searchDeptCon' />
+    </div><div class="repairAddDevSearch">
+        <a href="javascript:;" class="repairBTN" ng-click='searchDeptAndOffice()'>搜索</a>
+    </div><i class="verticalAdjust"></i>
+    </div>
+    <div class="repairAddDevCon">
+        <table border="0" cellspacing="0" cellpadding="0" class="repairAddDevTable">
+            <tbody>
+            <tr>
+                <th class="b-l-dcdcdc"></th>
+                <th>设备编号</th>
+                <th>设备名称</th>
+                <th>规格型号</th>
+                <th>出厂编号</th>
+                <th>生产商</th>
+                <th>所在部门</th>
+                <th>启用日期</th>
+                <th class="b-r-dcdcdc">保修期至</th>
+            </tr>
+            <tr ng-repeat="tr in addData" class="repairAddDevTableTr" ng-click="checkClick($event,tr)">
+                <td class="b-l-fff">
+                    <input id="{{tr.assetsNum}}" type="checkbox">
+                    <label class="check check-label opcity" for="{{tr.assetsNum}}">
+                        <i class="fa fa-check"></i>
+                    </label></td>
+                <td><div>{{tr.assetsNum}}</div></td>
+                <td><div>{{tr.assetsName}}</div></td>
+                <td><div>{{tr.assetsSpec}}</div></td>
+                <td><div>{{tr.factoryNum}}</div></td>
+                <td><div>{{tr.factoryName}}</div></td>
+                <td><div>{{tr.deptName}}</div></td>
+                <td><div>{{tr.startUseDate}}</div></td>
+                <td class="b-r-fff"><div>{{tr.warrantyDate}}</div></td>
+            </tr>
+            <tr ng-hide='onloading||nocontent'><td colspan="9"></td></tr>
+            <tr class="repairAddDevNoTr" ng-show="nocontent">
+                <td colspan="9" class="">
+                    <img src="../../res/img/nocontent.png" alt=""><span class="m-l-lg">暂无数据</span>
+                </td>
+            </tr>
+            <tr class="repairAddDevNoTr" ng-show="onloading">
+                <td colspan="9" class="">
+                    <img src="../../res/img/loading2.gif" alt=""><span class="verticalAlignMiddle"></span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <span ng-hide='onloading||nocontent' data-ng-include=" 'src/tpl/newPageInfo.html' "></span>
+        <div class="alertRepairAddDevBtn alertRepairBtn">
+            <a href="javascript:;" class="btnyes" ng-click="addyes()">确定</a><a href="javascript:;" class="btncancel" ng-click="calceladd()">取消</a>
+        </div>
+    </div>
+</div>
+<!-- 维修 提交 -->
+<div id="alertRepairSubmit" ng-show='repairSubmitShow' class="alertRepair">
+    <div class="alertRepairSubmitContent">
+        <div class="alertRepairSubmitImg"><img src='../../res/img/wh.png'></div>
+        <p class="font14px color666">提交后，将不能修改，确定提交么?</p>
+        <div class="alertRepairSubmitBtn alertRepairBtn">
+            <a href="javascript:;" class="btnyes" ng-click="btnyes()">确定</a><a href="javascript:;" class="btncancel" ng-click="btncancel()">取消</a>
+        </div>
+    </div>
+</div>
+    </div>

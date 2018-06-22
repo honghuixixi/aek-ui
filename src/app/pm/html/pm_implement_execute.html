@@ -1,0 +1,229 @@
+<div class="pm-implement-execute">
+	<div class="pm-top">
+		<a ui-sref="pm.menu.implement" style="color: #999;">PM实施</a>&gt;
+		<span>实施详情</span>
+		<span class="pm-btn" ng-click="submit()">提交实施报告</span>
+		<span class="pm-btn temp-btn" ng-click="saveTemp()">暂存</span>
+	</div>
+	<div class="pm-info">
+		<div class="pm-info-name" style="color: #666;">设备名称：{{data.implement.name}}</div>
+		<table class="pm-info-table">
+			<tbody>
+				<tr>
+					<td style="width: 100px; color: #666;">设备编号</td>
+					<td style="color: #999;">{{data.implement.no}}</td>
+					<td style="width: 120px; color: #666;">PM等级</td>
+					<td style="color: #999;">{{data.implement.level | pmlevel}}</td>
+				</tr>
+				<tr>
+					<td style="width: 100px; color: #666;">规格型号</td>
+					<td style="color: #999;">{{data.implement.model}}</td>
+					<td style="width: 120px; color: #666;">上次实施日期</td>
+					<td style="color: #999;">{{data.implement.prevDate ? (data.implement.prevDate | date:'yyyy-MM-dd') : '无'}}</td>
+				</tr>
+				<tr>
+					<td style="width: 100px; color: #666;">所在部门</td>
+					<td style="color: #999;">{{data.implement.departmentName}}</td>
+					<td style="width: 120px; color: #666;">下次实施日期</td>
+					<td style="color: #999;">{{data.implement.nextDate | date:'yyyy-MM-dd'}}
+						<span class="{{data.implement.attention.length > 0 && data.implement.attention === '已过期' ? 'tag tag-err' : 'tag'}}" ng-if="data.implement.attention.length > 0">{{data.implement.attention}}</span>
+					</td>
+				</tr>
+				<tr>
+					<td style="width: 100px; color: #666;">设备状态</td>
+					<td style="color: #999;">{{data.implement.equipmentStatus}}</td>
+					<td style="width: 120px; color: #666;">负责人</td>
+					<td style="color: #999;">{{data.implement.directorName}}</td>
+				</tr>
+				<tr>
+					<td style="width: 100px; color: #666;">PM周期</td>
+					<td style="color: #999;">{{data.implement.cycle}}个月</td>
+					<td style="width: 120px; color: #666;">创建时间</td>
+					<td style="color: #999;">{{data.implement.createTime | date:'yyyy-MM-dd HH:mm'}}</td>
+				</tr>
+				<tr>
+					<td style="width: 100px; color: #666;">报告验收人</td>
+					<td style="color: #999;">{{data.implement.checkName}}</td>
+					<td style="width: 120px; color: #666;">&nbsp;</td>
+					<td style="color: #999;">&nbsp;</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="pm-info-main">
+		<div class="pm-info-main-tab">
+			<span class="pm-btn">实施内容</span>
+			<span class="pm-btn" ng-click="print()">打印</span>
+		</div>
+		<div class="pm-info-main-dt">
+			<span>实际开始日期：</span>
+			<input id="startDt" type="text" placeholder="选择开始日期" ng-value="data.implement.actualStartDate | date:'yyyy-MM-dd'" readonly="readonly">
+			<span style="margin-left: 50px;">实际结束日期：</span>
+			<input id="endDt" type="text" placeholder="选择结束日期" ng-value="data.implement.actualEndDate | date:'yyyy-MM-dd'" readonly="readonly">
+		</div>
+		<table class="pm-info-main-table">
+			<thead>
+				<tr>
+					<td rowspan="2" style="width: 80px;background-color: #f5f5f5;text-align: center;">序号</td>
+					<td rowspan="2" style="background-color: #f5f5f5;">项目名称</td>
+					<td rowspan="2" style="background-color: #f5f5f5;">项目内容及说明</td>
+					<td colspan="7" style="background-color: #f5f5f5;text-align: center;">检查维护结果</td>
+				</tr>
+				<tr>
+					<td style="width: 80px; text-align: center;">合格</td>
+					<td style="width: 80px; text-align: center;">修复</td>
+					<td style="width: 80px; text-align: center;">可用</td>
+					<td style="width: 80px; text-align: center;">待修</td>
+					<td style="width:320px; text-align: center;">设定值</td>
+					<td style="width:320px; text-align: center;">实测值</td>
+					<td style="width:320px; text-align: center;">备注</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="v in data.implement.table">
+					<td ng-if="v.hasRowSpan" rowspan="{{v.rowSpan}}" style="width: 80px;text-align: center;">{{v.index}}</td>
+					<td ng-if="v.hasRowSpan" rowspan="{{v.rowSpan}}">{{v.itemName}}</td>
+					<td>{{v.name}}</td>
+					<td style="width: 80px; text-align: center;">
+						<span class="{{+v.answer === 1 ? 'radio2 check2': 'radio2'}}" ng-click="chooseAnswer(v, 1)"></span>
+					</td>
+					<td style="width: 80px; text-align: center;">
+						<span class="{{+v.answer === 2 ? 'radio2 check2': 'radio2'}}" ng-click="chooseAnswer(v, 2)"></span>
+					</td>
+					<td style="width: 80px; text-align: center;">
+						<span class="{{+v.answer === 3 ? 'radio2 check2': 'radio2'}}" ng-click="chooseAnswer(v, 3)"></span>
+					</td>
+					<td style="width: 80px; text-align: center;">
+						<span class="{{+v.answer === 4 ? 'radio2 check2': 'radio2'}}" ng-click="chooseAnswer(v, 4)"></span>
+					</td>
+					<td style="width:320px;">
+						<input type="text" maxlength="40" ng-model="v.setnum" placeholder="请输入，40个字符以内">
+					</td>
+					<td style="width:320px;">
+						<input type="text" maxlength="40" ng-model="v.measure" placeholder="请输入，40个字符以内">
+					</td>
+					<td style="width:320px;">
+						<input type="text" maxlength="40" ng-model="v.remarks" placeholder="请输入，40个字符以内">
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<dl class="dl">
+			<dt>
+				<span class="require">*</span>设备现状：</dt>
+			<dd style="margin-bottom: 15px;">
+				<pm-select list="data.lives" item="data.selectLive" change="changeLive"></pm-select>
+			</dd>
+			<dt>
+				<span class="require">*</span>工时：</dt>
+			<dd style="margin-bottom: 10px;">
+				<input class="num" type="text" placeholder="0.0" ng-model="data.implement.workTime" oninput="this.value=/^(([0-9]|[1-9][0-9]|[1-9][0-9][0-9]|[1-9][0-9][0-9][0-9]|[1-9][0-9][0-9][0-9][0-9])(?:\.\d{0,1})?)$/.test(this.value) ? this.value : ''"> 小时
+			</dd>
+			<dt>附件：</dt>
+			<dd>
+				<div ng-repeat="v in data.implement.files" style="margin-bottom: 5px;">
+					<a style="cursor: auto;">{{v.name}}</a>
+					<span style="margin-left: 15px;color: #f3756f; cursor: pointer;" ng-click="removeFile($index)">删除</span>
+				</div>
+				<div>
+					<span class="pm-btn" ng-if="data.implement.files.length < 5" ng-click="uploadFile()">上传附件</span>
+					<label style="color: #999;">单个文件5M以内，最多上传5个</label>
+					<input id="uploadId" type="file" style="display: none;">
+				</div>
+			</dd>
+			<dt>备注：</dt>
+			<dd>
+				<textarea placeholder="请输入，300个字符以内" maxlength="300" ng-model="data.implement.remarks"></textarea>
+			</dd>
+		</dl>
+	</div>
+</div>
+
+<!-- 提交实施报告 -->
+<div class="implement-submit" id="template_submit" style="display: none;">
+	<img src='../../../res/img/wh.png'>
+	<div style="margin-bottom: 15px;">提交后，PM实施报告将不能修改，确定提交吗？</div>
+	<div>下次实施日期：
+		<input class="implement-submit-dt" id="nextDt" type="text" placeholder="请选择下次实施日期" ng-value="data.nextDt | date:'yyyy-MM-dd'"
+		 readonly="readonly"> </div>
+	<div style="margin-top: 10px;">
+		<span style="display: inline-block;width: 93px;text-align: right;">报告验收人：</span>
+		<aek-select list="data.acceptUsers" change="changeUser" item="data.currentUser" style="width: 310px;"></aek-select>
+	</div>
+</div>
+
+<!-- 打印实施内容 -->
+<div class="pm-report-dialog" id="template_report" style="display: none;">
+	<div style="margin: 15px;font-size: 14px;">
+		<div style="text-align: center;margin: 10px 0;">{{data.print.hospital}}-PM实施报告单</div>
+		<table style="width: 100%;">
+			<tr>
+				<td>
+					<dl class="dl-left">
+						<dt>设备编号：</dt>
+						<dd>{{data.print.no}}</dd>
+						<dt>设备名称：</dt>
+						<dd>{{data.print.name}}</dd>
+						<dt>所在部门：</dt>
+						<dd>{{data.print.departmentName || "&nbsp;"}}</dd>
+					</dl>
+				</td>
+				<td>
+					<dl class="dl-middle">
+						<dt>&nbsp;</dt>
+						<dd>&nbsp;</dd>
+						<dt>规格型号：</dt>
+						<dd>{{data.print.model || "&nbsp;"}}</dd>
+						<dt>负责人：</dt>
+						<dd>{{data.print.directorName}}</dd>
+					</dl>
+				</td>
+				<td style="width: 300px;vertical-align: bottom;">
+					<dl class="dl-right" style="float: right;">
+						<dt>&nbsp;</dt>
+						<dd>&nbsp;</dd>
+						<dt>开始日期：</dt>
+						<dd>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日</dd>
+						<dt>结束日期：</dt>
+						<dd>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日</dd>
+					</dl>
+				</td>
+			</tr>
+		</table>
+		<table class="table">
+			<thead>
+				<tr>
+					<td rowspan="2" style="vertical-align: middle;background-color: #f5f5f5;text-align: center;">序号</td>
+					<td rowspan="2" style="vertical-align: middle;background-color: #f5f5f5;">项目名称</td>
+					<td rowspan="2" style="vertical-align: middle;background-color: #f5f5f5;">项目内容以及说明</td>
+					<td colspan="7" style="vertical-align: middle;background-color: #f5f5f5;text-align: center;">检查维护结果</td>
+				</tr>
+				<tr>
+					<td style="width: 80px; text-align: center;">合格</td>
+					<td style="width: 80px; text-align: center;">修复</td>
+					<td style="width: 80px; text-align: center;">可用</td>
+					<td style="width: 80px; text-align: center;">待修</td>
+					<td style="width: 120px; text-align: center;">设定值</td>
+					<td style="width: 120px; text-align: center;">实测值</td>
+					<td style="width: 120px; text-align: center;">备注</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="v in data.print.table">
+					<td ng-if="v.hasRowSpan" rowspan="{{v.rowSpan}}" style="width: 80px;text-align: center;vertical-align: middle;">{{v.index}}</td>
+					<td ng-if="v.hasRowSpan" rowspan="{{v.rowSpan}}" style="vertical-align: middle;">{{v.itemName}}</td>
+					<td>{{v.name}}</td>
+					<td style="width: 80px; text-align: center;">&nbsp;</td>
+					<td style="width: 80px; text-align: center;">&nbsp;</td>
+					<td style="width: 80px; text-align: center;">&nbsp;</td>
+					<td style="width: 80px; text-align: center;">&nbsp;</td>
+					<td style="width:120px;">&nbsp;</td>
+					<td style="width:120px;">&nbsp;</td>
+					<td style="width:120px;">&nbsp;</td>
+				</tr>
+			</tbody>
+		</table>
+		<div style="margin-top: 10px;margin-bottom:5px;">备注</div>
+		<textarea style="width: 957px;height:100px;border: 1px solid #dcdcdc; resize: none;" readonly="readonly"></textarea>
+	</div>
+</div>

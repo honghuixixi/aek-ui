@@ -1,0 +1,71 @@
+<div class="fy_accessoryClassify">
+    <div class="fy_accessoryClassifyTitle">巡检实施</div>
+    <div class="fy_accessoryWrap inspectionTableWrap">        
+        <div class="fy_accessoryHead">
+            <div class="fy_accessorySearch">
+                <div class="selectWrap">
+                    <div class="selector" ng-click='listShow("typeList")'><input type="text" ng-model='typeModel.name' readonly="true"><a href='javascript:;'></a></div>
+                    <div class="options" ng-show='typeList'>
+                        <ul>
+                            <li ng-repeat='item in optionType' ng-click='option("typeList","typeModel",item,1)'>{{item.name}}</li>
+                         </ul>
+                    </div>
+                </div>
+                <input type="text" class="searchInput" placeholder='巡检名称/计划编号' ng-model='kindName'><a class="search" ng-click='getAccessoryList(1)'>搜索</a><i class="verticalAdjust"></i>
+            </div>
+        </div>
+        <div class="fy_accessoryContent implement-list">
+        	<table>
+        		<tr>
+        			<th class="inspectionPlanInfoHeadL inspectionTableBorder_l">巡检计划信息</th>
+        			<th class="inspectionPlanHeader110">巡检类型</th>
+                    <th class="inspectionPlanHeader110">巡检周期</th>
+                    <th class="inspectionPlanHeader110">上次巡检日期</th>
+        			<th class="inspectionPlanHeader110">下次巡检日期</th>
+                    <th class="inspectionPlanHeaderBreak">负责人</th>
+                    <th class="inspectionPlanHeader40" style="padding-left:10px; text-align: left;">状态</th>
+        			<th class="b-r-dcdcdc inspectionPlanHeader40">操作</th>
+        		</tr>
+        		<tr ng-repeat="td in accessoryContent  track by $index" ng-class='{fy_inspectionStoped:td.num==2}'>
+        			<td class="inspectionPlanInfoHeadL inspectionTableBorder_l">
+                        <div class="inspectionPlanInfoThree">计划编号：{{td.planNo}}</div>
+                        <div class="inspectionPlanInfoThree inspectionPlanName"><i>巡检名称：</i><span>{{td.name}}</span></div>
+                        <div class="inspectionPlanInfoThree">创建时间：{{td.createTime | date:'yyyy-MM-dd HH:mm'}}</div>
+                    </td>
+        			<td>{{td.type}}</td>
+                    <td>{{td.cycle}}</td>
+                    <td>{{td.preDate ? (td.preDate | date:'yyyy-MM-dd') : '无'}}</td>
+        			<td>{{(td.nextDate ? td.nextDate : td.firstDate) | date:'yyyy-MM-dd'}}</td>
+        			<td>{{td.director}}</td>
+                    <td style="padding-left:10px; text-align: left;">{{td.status > 1 ? '巡检中' : '待巡检'}}<span class="attention {{ td.attention.length && td.attention.indexOf('已过期') >= 0 ? 'execute' : 'wait'}}" ng-if="td.attention.length">{{td.attention}}</span></td>
+                    <td class="b-r-dcdcdc"><a ui-sref="inspection.implement.{{td.status > 1 ? 'execute' : 'browse'}}({id: td.id})">{{td.status > 1 ? '登记' : '查看'}}</a></td>
+        		</tr>
+                <tr ng-hide='nocontent||onloading'>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr ng-show='nocontent'>
+                    <td colspan="8" class="repairTextCenter b-r-dcdcdc b-b-dcdcdc inspectionTableBorder_l" style="padding-top: 10px; padding-bottom: 10px;">
+                        <img src="../../res/img/nocontent.png" alt=""><span class='m-l-lg'>暂无数据</span>
+                    </td>
+                </tr>
+                <tr ng-show='onloading'>
+                    <td colspan="8" class="repairTextCenter b-r-dcdcdc b-b-dcdcdc inspectionTableBorder_l">
+                        <img src="../../res/img/loading2.gif" alt=""><span class='verticalAlignMiddle'></span>
+                    </td>
+                </tr>
+        	</table>
+        </div>
+        <div class="fy_accessoryFoot">
+            <span ng-hide='onloading||nocontent' data-ng-include=" 'src/tpl/newPageInfo.html' "></span>
+        </div>
+        <!-- fix wrap -->
+        <div class="fixWrap" ng-show='fixWrapShow' ng-click='menuHide()'></div>
+    </div>
+</div>

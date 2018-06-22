@@ -1,0 +1,353 @@
+<toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container>
+<!--遮蔽层-->
+<div class="assets-overlay" ng-show="needOverlay" ng-click="closeAll()"></div>
+<div class="bg-white ytz-con bread-crumb2 zctzDetailTop">
+	<ul class="breadcrumb b-1 b-a m-b-n-xs lter b-b wrapper-md">
+		<li><a class="acolor999" ui-sref="main.tre.ytz.list({id:$stateParams.id})">预台账</a></li>
+		<li><a ui-sref="main.tre.ytz.assets({state: 1,assetId:$stateParams.assetId})">预台账详情</a></li>
+	</ul>
+	<div class="treAssestBtn">
+		<a ng-if="(state==0)&&(currentState!=3)&&(userInfo.authoritiesStr.indexOf('ASS_PREASSETS_EDIT') != -1)" ng-click='saveAssets("submitAssets")' class="submit m-r">提交</a>
+		<a ng-if='state==0&&currentState!=3' ng-click='saveAssets("save")' class="treAssestBtnCancle m-r">暂存</a>
+		<a ng-if='state==0&&currentState!=3' ng-click="delAssets()" class="treAssestBtnCancle">撤销</a>
+		<a ng-if="(state == 3)&&(currentState !=3)&&(userInfo.authoritiesStr.indexOf('ASS_PREASSETS_EDIT') != -1)" class="submit m-r" ng-click="againAssets()">重新编辑</a>
+		<a ng-if='state == 3 && currentState !=3' ng-click="delAssets(1)" class="treAssestBtnCancle">撤销</a>
+
+		<a ng-if="(currentState==3)&&(userInfo.authoritiesStr.indexOf('ASS_PREASSETS_EDIT') != -1)" ng-click='saveAssets("again")' class="submit m-r">提交验收</a>
+		<a ng-if='currentState==3' ng-click="cancelAgain()" class="treAssestBtnCancle">取消</a>
+
+		<a ng-if='state == 2' class="submit toAssets" ng-click="toAssets()">转为资产台账</a>
+		<a ng-if='state == 2' class="submit" ng-click="toPrint()">打印标签</a>
+		<a ng-if="(state==1)&&(userInfo.authoritiesStr.indexOf('ASS_PREASSETS_VERIFY') != -1)" ng-click='verifyFn()' class="submit m-r">验收</a>
+	</div>
+
+	<div class="pro-status" >
+		<div class="pro-tit">
+			<span>验收单号：<i>{{res.verfyNum}}</i></span><span>状态：<em>{{statusText}}</em></span>
+			<div ng-click="proUl($event)" ng-show="ulStatus">
+				<a href="javascript:;" ng-show='isClick' name="down" class="ul-operate" style="right:-165px"><i><img src="" alt=""></i></a>
+				<a href="javascript:;" ng-hide='isClick' name="up" class="ul-operate ul-operate-up" style="right:-165px"><i><img src="" alt=""></i></a>
+			</div>
+		</div>
+		<ul class="pro-ul">
+			<li class="row" ng-repeat='operate in operateList'><span class="p-r-40">{{operate.operateName }}</span><span class="p-r-80">{{operate.operateStatus==1?'创建预台帐':(operate.operateStatus==2?'提交申请':(operate.operateStatus==3?'验收不通过':'验收通过'))}}</span><span class="p-r-80">{{operate.operateTime  | date:'yyyy-MM-dd HH:mm'}}</span><span class="p-r-80"><a ng-if='operate.operateStatus==3||operate.operateStatus==4' href="javascript:;" ng-click="getCheckInfo(operate)">查看验收详情</a></span></li>
+		</ul>
+		<!-- <ul class="pro-ul" id="pro4" ng-show="pro4">
+			<li class="row"><span class="p-r-40">{{assetsDetailInfo.createByName}}</span><span class="p-r-80">创建预台账</span><span class="p-r-80">{{assetsDetailInfo.createTime | date:'yyyy-MM-dd HH:mm'}}</span><span class=""></span></li>
+		</ul>
+		<ul class="pro-ul" id="pro1" ng-show="pro1">
+			<li class="row"><span class="p-r-40">{{assetsDetailInfo.createByName}}</span><span class="p-r-80">创建预台账</span><span class="p-r-80">{{assetsDetailInfo.createTime | date:'yyyy-MM-dd HH:mm'}}</span><span class=""></span></li>
+			<li class="row" ng-show="pro1"><span class="p-r-40">{{assetsDetailInfo.updateByName }}</span><span class="p-r-80">提交申请</span><span class="p-r-80">{{assetsDetailInfo.updateTime | date:'yyyy-MM-dd HH:mm'}}</span></li>
+        </ul>
+        <ul class="pro-ul" id="pro2" ng-show="pro2">
+        	<li class="row"><span class="p-r-40">{{assetsDetailInfo.createByName}}</span><span class="p-r-80">创建预台账</span><span class="p-r-80">{{assetsDetailInfo.createTime | date:'yyyy-MM-dd HH:mm'}}</span><span class="p-r-80"></span></li>
+			<li class="row"><span class="p-r-40">{{assetsDetailInfo.updateByName}}</span><span class="p-r-80">提交申请</span><span class="p-r-80">{{assetsDetailInfo.updateTime | date:'yyyy-MM-dd HH:mm'}}</span><span class="p-r-80"></span></li>
+			<li class="row"><span class="p-r-40">{{assetsDetailInfo.verfyByName }}</span><span class="p-r-80">验收通过</span><span class="p-r-80">{{assetsDetailInfo.verifyOperateTime | date:'yyyy-MM-dd HH:mm'}}</span><span class="p-r-80"><a href="javascript:;" ng-click="getCheckInfo()">查看验收详情</a></span></li>
+		</ul>
+		<ul class="pro-ul" id="pro3" ng-show="pro3">
+			<li class="row"><span class="p-r-40">{{assetsDetailInfo.createByName}}</span><span class="p-r-80">创建预台账</span><span class="p-r-80">{{assetsDetailInfo.createTime | date:'yyyy-MM-dd HH:mm'}}</span><span class="p-r-80"></span></li>
+			<li class="row"><span class="p-r-40">{{assetsDetailInfo.updateByName}}</span><span class="p-r-80">提交申请</span><span class="p-r-80">{{assetsDetailInfo.updateTime | date:'yyyy-MM-dd HH:mm'}}</span><span class="p-r-80"></span></li>
+			<li class="row nopass"><span class="p-r-40">{{assetsDetailInfo.verfyByName }}</span><span class="p-r-80">验收未通过</span><span class="p-r-80">{{assetsDetailInfo.verifyOperateTime | date:'yyyy-MM-dd HH:mm'}}</span><span class="p-r-80"><a href="javascript:;" ng-click="getCheckInfo()">查看验收详情</a></span></li>
+		</ul> -->
+	</div>
+
+	<!--<div class="detail-top" >-->
+		<!--<span><img src="../res/img/11.png"/></span>-->
+		<!--&lt;!&ndash;<div class="deviceImg ay-uploadImg">&ndash;&gt;-->
+			<!--&lt;!&ndash;<input type="hidden" ng-model="assetsDetailInfo.assetsImg" />&ndash;&gt;-->
+			<!--&lt;!&ndash;<img ng-if="assetsDetailInfo.assetsImg" width="100" height="100" ng-src="{{fileUrlBase}}{{assetsDetailInfo.assetsImg}}" />&ndash;&gt;-->
+			<!--&lt;!&ndash;<img ng-if="!assetsDetailInfo.assetsImg" width="100" height="100" ng-src="{{assetsDetailInfo.assetsImg}}" />&ndash;&gt;-->
+			<!--&lt;!&ndash;<input ng-if='state==0' id="deviceImgFile" nv-file-select="" name="files" uploader="uploader" ng-click="clearItems()" type="file" />&ndash;&gt;-->
+		<!--&lt;!&ndash;</div>&ndash;&gt;-->
+		<!--<span>-->
+                <!--<div ><span >设备名称：{{res.assetsName}}</span><span style="margin-left: 30px;color:#f7931e ">状态：{{res.verfyStatusName}}</span></div>-->
+                <!--<div><span>设备编号：{{res.assetsNum}}</span></div>-->
+                <!--<div><span>生产商：{{res.factoryName}}</span></div>-->
+            <!--</span>-->
+	<!--</div>-->
+
+	<div class="bg-white paneltop">
+		<div class="deviceImg ay-uploadImg">
+			<input type="hidden" ng-model="res.assetsImg" />
+			<img ng-if="res.assetsImg" width="100" height="100" ng-src="{{fileUrlBase}}{{res.assetsImg}}" />
+			<img ng-if="!res.assetsImg" width="100" height="100" ng-src="../res/img/11.png" />
+			<input ng-if='state==0 || currentState==3' id="deviceImgFile" nv-file-select="" name="files" uploader="uploader" ng-click="clearItems()" type="file" />
+		</div>
+		<!--<div class="deviceInfo hd_deviceInfo">-->
+			<!--<p class="deviceName"><i class="hd_mustWrite">*</i><span>设备名称:</span><input ng-if='state==0' ng-model="res.assetsName" /><span ng-if='state!=0'>{{res.assetsName}}</span></p>-->
+			<!--<p class="deviceNo"><span style="margin-left: 10px">设备编号:</span><span>{{res.assetsNum}}</span></p>-->
+			<!--<p class="producerName"><i class="hd_mustWrite">*</i><span>生产商:</span><input ng-if='state==0'  ng-model="res.factoryName" /><span ng-if='state!=0'>{{res.factoryName}}</span></p>-->
+		<!--</div>-->
+		<div class="deviceInfo hd_deviceInfo detail-top">
+			<!--<p class="deviceName"><i class="hd_mustWrite">*</i><span>设备名称：</span><input ng-if='state==0' ng-model="assetsDetailInfo.assetsName" /><span ng-if='state!=0'>{{assetsDetailInfo.assetsName}}</span></p>-->
+			<!--<p class="deviceNo"><span style="margin-left: 10px">设备编号：</span><span>{{assetsDetailInfo.assetsNum}}</span></p>-->
+			<!--<p class="producerName"><i class="hd_mustWrite">*</i><span>生产商：</span><input ng-if='state==0'  ng-model="assetsDetailInfo.factoryName" /><span ng-if='state!=0'>{{assetsDetailInfo.factoryName}}</span></p>-->
+
+			<span>
+            <div>
+                <span><i ng-if="state==0 || currentState==3" class="hd_mustWrite">*</i>设备名称：
+                    <span ng-mouseenter='assetsTilteHover("assetsNameTipShow","assetsNameEdit")' class='layerTipTopClass' ng-mouseleave='assetsTilteLeave("assetsNameTipShow",0)' ng-click='editAssetsTitle(0)'>
+                        <span ng-hide='assetsNameEdit&&(state==0  || currentState==3)'>{{res.assetsName}}<span ng-if="res.repairStatus==2" class="assetsStatusStoped">维修中</span></span>
+                        <div ng-if="(userInfo.authoritiesStr.indexOf('ASS_PREASSETS_EDIT') != -1)&&(state==0 || currentState==3)" ng-show='assetsNameTipShow&&!assetsNameFocus' class="layerTipTop">点击即可编辑<em></em>
+                        </div>
+                        <input maxlength="40" ng-if="(userInfo.authoritiesStr.indexOf('ASS_PREASSETS_EDIT') != -1)&&(state==0 || currentState==3)" ng-trim='false' ng-change='limitLength("assetsName",40)' ng-focus='setInputFocus("assetsNameFocus")' ng-show='assetsNameEdit' type="text" ng-blur='saveAssetsTitleLocal(0)' ng-model='$parent.assetsName' class="assetsTitleInput" id="assetsNameInput">
+                    </span>
+                </span>
+            </div>
+            <div><span>设备编号：{{res.assetsNum}}</span></div>
+            <div>
+                <span><i ng-if="state==0 || currentState==3" class="hd_mustWrite">*</i>生产商：
+                    <span ng-mouseenter='assetsTilteHover("factoryNameTipShow","factoryNameEdit")' class='layerTipTopClass' ng-mouseleave='assetsTilteLeave("factoryNameTipShow",1)' ng-click='editAssetsTitle(1)'>
+                        <span ng-hide='factoryNameEdit&&(state==0  || currentState==3)'>{{res.factoryName}}</span>
+                        <div ng-if="(userInfo.authoritiesStr.indexOf('ASS_PREASSETS_EDIT') != -1)&&(state==0 || currentState==3)" ng-show='factoryNameTipShow&&!factoryNameFocus' class="layerTipTop">点击即可编辑<em></em>
+                        </div>
+                        <input maxlength="40" ng-if="(userInfo.authoritiesStr.indexOf('ASS_PREASSETS_EDIT') != -1)&&(state==0 || currentState==3)" ng-focus='setInputFocus("factoryNameFocus")' ng-trim='false' ng-change='limitLength("factoryName",40)' ng-show='factoryNameEdit' type="text" ng-blur='saveAssetsTitleLocal(1)' ng-model='$parent.factoryName' class="assetsTitleInput" id="factoryNameInput">
+                    </span>
+                </span>
+            </div>
+        </span>
+
+		</div>
+	</div>
+
+	<div class="treSection">
+		<ul class="b-2">
+			<li><a ui-sref="main.tre.ytz.assets({id:$stateParams.id,state:$stateParams.state,assetId:$stateParams.assetId})">设备信息</a></li>
+			<li class="active"><a ui-sref="main.tre.ytz.purchase({id:$stateParams.id,state:$stateParams.state,assetId:$stateParams.assetId})">采购信息</a></li>
+			<!-- <li ng-if='state == 2'><a ui-sref="main.tre.ytz.repair({id:$stateParams.id,state: $stateParams.state,assetId:$stateParams.assetId})">维修记录</a></li> -->
+			<hr class="bottomline topbig" />
+		</ul>
+	</div>
+</div>
+<!-- 加载提醒 -->
+<div ng-show="loading" class="text-center m-t-md text-lg"><i class="fa fa-spin fa-spinner"></i> 数据加载中...</div>
+<!-- 内容区域 -->
+<div class="wrapper-md ytz-tab2 ytz-detail m-t-none content">
+	<div class="panel panel-default ay-minpanel">
+		<!-- 头部 -->
+		<!-- <div class="add-title">采购基本信息</div> -->
+		<!--表单-->
+		<div class="panel-body treFormInputColor">
+			<form class="form-horizontal" id="form1"  name="assets_form">
+				<div class="form-group" style="margin-top:0;">
+					<label class="col-lg-2 col-sm-2 control-label hd_textleft" for="assetNum">设备来源：</label>
+					<div class="col-sm-4">
+						<span class="data" ng-if="state != 0 && currentState!=3">{{res.purchaseTypeName}}</span>
+						<div class="batchSelecters assetsSelecters" ng-if="state==0 || currentState ==3">
+							<input type="text" class="batchSelectInput" placeholder='请选择' readonly="true" ng-model="purchaseType.codeText" ng-click="assetsSelecters('purchaseTypeListShow')" />
+							<div class="batchSelectResWrap" ng-show='purchaseTypeListShow'>
+								<div class="batchSelectRes">
+									<ul class="batchSelectList">
+										<li ng-repeat="l in PURCHASE_TYPE track by $index" ng-click="assetsSelectersLiClick('purchaseType','purchaseTypeListShow',l)"><a>{{l.codeText}}</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+					<label class="col-lg-2 col-sm-2 control-label hd_textleft" for="assetName">购入日期：</label>
+					<div class="form-group col-sm-4">
+						<span class="data" ng-if="state != 0 && currentState!=3">{{res.purchaseDate1}}</span>
+						<input ng-if="state==0 || currentState ==3" type="text" readonly="readonly" ng-model="res.purchaseDate1" name="purchaseDate1" class="form-control input-datepicker el-purchaseDate">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-lg-2 col-sm-2 control-label hd_textleft" for="splName">供应商：</label>
+					<div class="col-sm-4">
+						<span class="data" ng-if="state != 0 && currentState!=3">{{res.splName }}</span>
+						<input type="text" ng-if="state==0 || currentState ==3" class="form-control"  maxlength="40" ng-model="res.splName" name="splName" id="splName">
+					</div>
+					<label class="col-lg-2 col-sm-2 control-label hd_textleft">设备单价：</label>
+					<div class="col-sm-4">
+						<span class="data" ng-if="state != 0 && currentState!=3">{{res.priceStr}}</span>
+						<input type="text" ng-if="state==0 || currentState ==3" class="form-control" ng-model="res.price1" name="price1" id="price1" oninput="this.value=this.value.match(/^[1-9]\d*(?:\.\d{0,2})?/)">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-lg-2 col-sm-2 control-label hd_textleft">资金来源：</label>
+					<div class="col-sm-4">
+						<span class="data" ng-if="state != 0 && currentState!=3">{{fundSources.codeText}}</span>
+						<div class="batchSelecters assetsSelecters" ng-if="state==0 || currentState ==3">
+							<input type="text" class="batchSelectInput" placeholder='请选择' readonly="true" ng-model="fundSources.codeText" ng-click="assetsSelecters('fundSourcesListShow')" />
+							<div class="batchSelectResWrap" ng-show='fundSourcesListShow'>
+								<div class="batchSelectRes">
+									<ul class="batchSelectList">
+										<li ng-repeat="l in FUND_SOURCES track by $index" ng-click="assetsSelectersLiClick('fundSources','fundSourcesListShow',l,1)"><a>{{l.codeText}}</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+					<label class="col-lg-2 col-sm-2 control-label hd_textleft">到货日期：</label>
+					<div class="col-sm-4">
+						<span class="data" ng-if="state != 0 && currentState!=3">{{res.arrivalDate1}}</span>
+						<input ng-if="state==0 || currentState ==3" type="text" readonly="readonly" ng-model="res.arrivalDate1" name="arrivalDate1" class="form-control input-datepicker el-arrivalDate">
+					</div>
+				</div>
+				<!-- 资金类型 -->
+				<div class="form-group" ng-if='res.listFundSources.length&&res.listFundSources.length!=2'>
+					<label class="col-lg-2 col-sm-2 control-label hd_textleft">{{fundSources.codeText}}额度：</label>
+					<div class="col-sm-4">
+						<span class="data" ng-if="state != 0 && currentState!=3">{{res.listFundSources.length?(res.listFundSources[0].fundSourceMoney):''}}</span>
+						<input type="text" ng-if="state==0 || currentState ==3" class="form-control" ng-model="moneys[0]" name="fundSourceMoneys" id="fundSourceMoneys" oninput="this.value=this.value.match(/^[1-9]\d*(?:\.\d{0,2})?/)">
+					</div>
+				</div>
+				<div class="form-group" ng-if='res.listFundSources.length==2'>
+					<label class="col-lg-2 col-sm-2 control-label hd_textleft">{{res.listFundSources[0].fundSourcesText}}额度：</label>
+					<div class="col-sm-4">
+						<span class="data" ng-if="state != 0 && currentState!=3">{{res.listFundSources[0].fundSourceMoney}}</span>
+						<input type="text" maxlength="40" ng-if="state==0 || currentState ==3" class="form-control" ng-model="moneys[0]" name="fundSourceMoneys" id="fundSourceMoneys" oninput="this.value=this.value.match(/^[1-9]\d*(?:\.\d{0,2})?/)">
+					</div>
+					<label class="col-lg-2 col-sm-2 control-label hd_textleft">{{res.listFundSources[1].fundSourcesText}}额度：</label>
+					<div class="col-sm-4">
+						<span class="data" ng-if="state != 0 && currentState!=3">{{res.listFundSources[1].fundSourceMoney}}</span>
+						<input type="text" maxlength="40" ng-if="state==0 || currentState ==3" class="form-control" ng-model="moneys[1]" name="fundSourceMoneys" id="fundSourceMoneys" oninput="this.value=this.value.match(/^[1-9]\d*(?:\.\d{0,2})?/)">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-lg-2 col-sm-2 control-label hd_textleft" for="assetNum">合同编号：</label>
+					<div class="col-sm-4">
+						<span class="data" ng-if="state != 0 && currentState!=3">{{res.contractNo }}</span>
+						<input type="text" maxlength="40" ng-if="state==0 || currentState ==3" class="form-control" ng-model="res.contractNo" name="contractNo" id="contractNo">
+					</div>
+					<label class="col-lg-2 col-sm-2 control-label hd_textleft" for="assetName">合同名称：</label>
+					<div class="form-group col-sm-4">
+						<span class="data" ng-if="state != 0 && currentState!=3">{{res.contractName }}</span>
+						<input type="text" maxlength="40" ng-if="state==0 || currentState ==3" class="form-control" ng-model="res.contractName" name="contractName" id="contractName">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-lg-2 col-sm-2 control-label hd_textleft" for="splName">乙方单位：</label>
+					<div class="col-sm-4">
+						<span class="data" ng-if="state != 0 && currentState!=3">{{res.supplierName}}</span>
+						<input type="text" maxlength="40" ng-if="state==0 || currentState ==3" class="form-control" ng-model="res.supplierName" name="supplierName" id="supplierName">
+					</div>
+					<label class="col-lg-2 col-sm-2 control-label hd_textleft">签订日期：</label>
+					<div class="col-sm-4">
+						<span class="data" ng-if="state != 0 && currentState!=3">{{res.startDate1}}</span>
+						<input ng-if="state==0 || currentState ==3" type="text" readonly="readonly" ng-model="res.startDate1" name="startDate1" class="form-control input-datepicker el-startDate">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-lg-2 col-sm-2 control-label hd_textleft">合同金额：</label>
+					<div class="col-sm-4">
+						<span class="data" ng-if="state != 0 && currentState!=3">{{res.contractPriceStr}}</span>
+						<input type="text" maxlength="40" ng-if="state==0 || currentState ==3" class="form-control" ng-model="res.contractPrice1" name="contractPrice1" id="contractPrice1" oninput="this.value=this.value.match(/^[1-9]\d*(?:\.\d{0,2})?/)">
+					</div>
+					<label class="col-lg-2 col-sm-2 control-label hd_textleft">档案编号：</label>
+					<div class="col-sm-4">
+						<span class="data" ng-if="state != 0 && currentState!=3">{{res.archivesCode }}</span>
+						<input type="text" maxlength="40" ng-if="state==0 || currentState ==3" class="form-control" ng-model="res.archivesCode" name="archivesCode" id="archivesCode">
+					</div>
+				</div>
+				<!-- <div class="form-group" ng-repeat='ele in res.listInvoice'>
+                    <label class="col-lg-2 col-sm-2 control-label" for="assetNum">发票号：</label>
+                    <div class="col-sm-4">
+                        <span class="data" data-val='ele' ng-if="state==1">{{ele.invoiceNo}}</span>
+                        <input type="text" ng-if="state==0" class="form-control" ng-model="ele.invoiceNo" name="invoiceNo" id="">
+                    </div>
+                    <a ng-click='listPush()' ng-if="state==0" ng-show='$index==res.listInvoice.length-1'>+</a>
+                </div> -->
+				<div class="form-group">
+					<label class="col-lg-2 col-sm-2 control-label hd_textleft" for="assetNum">发票号：</label>
+					<div class="col-sm-4">
+						<span style="display: inline-block;width: 100%;word-wrap: break-word;" class="data" data-val='ele' ng-if="state != 0 && currentState!=3">{{res.invoiceNos}}</span>
+						<!-- <div ng-keyup='divKeyUp($event)' type="text" ng-if="state==0" class="form-control invoiceNosDiv" name="invoiceNo" id="" contenteditable='true'>{{res.invoiceNos}}</div> -->
+						<div id="invoiceNosTxt" ng-if="state==0 || currentState ==3">
+							<span>{{res.invoiceNos}}</span>
+							<textarea name="" maxlength="300" id="textareaFree" ng-model='res.invoiceNos' onkeyup="this.value=this.value.replace(/[;]+/g,';')" onblur="this.value=this.value.replace(/[\D]+/g,';')" onkeydown="this.value=this.value.match(/^[0-9;]+/)" placeholder='多个发票号用分号隔开'></textarea></div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<!-- 打印 -->
+<!-- 打印 -->
+<div class="printthis" ng-show='printIt'>
+    <div  id="printIt">
+		<div class="table-b-show">
+			<table style="width:100%;height:100%;">
+				<tr><td colspan="3" style="text-align:center;"><font style="width:1px;height:1px">{{userInfo.tenantName}}-固定资产标签</font></td></tr>
+				<tr>
+	                <td width="55px" style="border-top: 1px hidden black;border-bottom: 1px hidden black;border-right: 1px hidden black;">设备编号</td>
+	                <td colspan="2" style="border-top: 1px hidden black;border-bottom: 1px hidden black;padding:2px;">{{res.assetsNum}}</td>
+	            </tr>
+	            <tr ng-if="res.serialNum">
+	                <td width="55px" style="border-top: 1px hidden black;border-bottom: 1px hidden black;border-right: 1px hidden black;">院内编码</td>
+	                <td colspan="2" style="border-top: 1px hidden black;border-bottom: 1px hidden black;padding:2px;">{{res.serialNum}}</td>
+	            </tr>
+	            <tr>
+	                <td style="border-right: 1px hidden black;border-bottom: 1px hidden black;">设备名称</td>
+	                <td colspan="2" style="border-bottom: 1px hidden black;padding:2px;">{{res.assetsName}}</td>  
+	            </tr>
+	            <tr>
+	                <td style="border-right: 1px hidden black;border-bottom: 1px hidden black;">规格/品牌</td>
+	                <td colspan="2" style="border-bottom: 1px hidden black;border-right: 1px hidden black;padding:2px;">{{res.assetsSpec}}{{res.assetsBrand?'（'+res.assetsBrand+'）':''}}</td>
+	            </tr>
+	            <tr>
+	                <td style="border-right: 1px hidden black;border-bottom: 1px hidden black;">出厂编号</td>
+	                <td style="border-bottom: 1px hidden black;border-right: 1px hidden black;padding:2px;word-break: break-all;">{{res.factoryNum}}</td>
+	                <td rowspan="3" align=center style="width:75px;">
+	                    <img style="margin-top:0px;" width="75px" height="75px" ng-src="/api/assets/assetsInfo/getQRCode/{{res.assetsId}}" alt=""/>
+	                </td>
+	            </tr>
+	            <tr>
+	                <td style="border-right: 1px hidden black;">所在部门</td>
+	                <td style="border-right: 1px hidden black;padding:2px;">{{res.deptName}}</td>
+	            </tr>
+	            <tr>
+	                <td style="border-right: 1px hidden black;">启用日期</td>
+	                <td style="border-right: 1px hidden black;padding:2px;">{{dateToTime(res.startUseDate)}}</td>
+	            </tr>
+			</table>
+		</div>
+	 </div>
+    <div class="printBtn"><span class="print">打印</span></div>
+ </div>
+<!--转为资产台账-->
+<!--转为资产台账-->
+<!--验收弹窗-->
+<div class="pad-fifty pass-wrap" id="checkWinCon" ng-show="checkWin">
+	<div class="text-left"><label>验收结果:</label><div style="display: inline-block;"><div class="box1"><input ng-click="radioFn(2)" type="radio" id="check-1" name="evaluation" class="input ng-valid ng-not-empty ng-dirty ng-touched" ng-model="radioV"  ng-value="2"><span></span></div><label for="check-1" class="ng-binding">通过</label></div><div style="display: inline-block;"><div class="box1"><input type="radio"  ng-click="radioFn(3)" id="check-2" name="evaluation" class="input ng-valid ng-not-empty ng-dirty ng-touched" ng-model="radioV" ng-value="3"><span></span></div><label for="check-2" class="ng-binding">不通过</label></div></div><div class="text-left"><label>验收日期:</label><input readonly ng-model="checkDate" class="verifydata" name="verifydata" id="verifydata"/></div><div class="text-left verifyDiv"><label>验收说明:</label><textarea placeholder="请输入验证通过说明（非必填）" id="verifycontent" ng-model="verifycontent" ng-change="verifyConChange()" ng-trim="false" name="verifycontent" class="verifycontent" maxlength="300"></textarea><div style="right:30px;" class="verifyConNum">{{verifyConNum}}/300</div></div>
+</div>
+<!--验收弹窗end-->
+<div id="print-table" style="position: fixed;display:none;">	
+<!--startprint-->
+<div class="table-b-print">
+		<table style="width:100%;height:100%;">
+			<tr><td colspan="3" style="text-align:center;"><font style="width:1px;height:1px">{{userInfo.tenantName}}-固定资产标签2</font></td></tr>
+			<tr>
+                <td width="55px" style="border-top: 1px hidden black;border-bottom: 1px hidden black;border-right: 1px hidden black;">设备编号</td>
+                <td colspan="2" style="border-top: 1px hidden black;border-bottom: 1px hidden black;padding:2px;">{{res.assetsNum}}</td>
+            </tr>
+            <tr ng-if="res.serialNum">
+	            <td width="55px" style="border-top: 1px hidden black;border-bottom: 1px hidden black;border-right: 1px hidden black;">院内编码</td>
+	            <td colspan="2" style="border-top: 1px hidden black;border-bottom: 1px hidden black;padding:2px;">{{res.serialNum}}</td>
+	        </tr>
+            <tr>
+                <td style="border-right: 1px hidden black;border-bottom: 1px hidden black;">设备名称</td>
+                <td colspan="2" style="border-bottom: 1px hidden black;padding:2px;">{{res.assetsName}}</td>  
+            </tr>
+            <tr>
+                <td style="border-right: 1px hidden black;border-bottom: 1px hidden black;">规格/品牌</td>
+                <td colspan="2" style="border-bottom: 1px hidden black;border-right: 1px hidden black;padding:2px;">{{res.assetsSpec}}{{res.assetsBrand?'（'+res.assetsBrand+'）':''}}</td>
+            </tr>
+            <tr>
+                <td style="border-right: 1px hidden black;border-bottom: 1px hidden black;">出厂编号</td>
+                <td style="border-bottom: 1px hidden black;border-right: 1px hidden black;padding:2px;word-break: break-all;">{{res.factoryNum}}</td>
+                <td rowspan="3" align=center style="width:75px;">
+                    <img style="margin-top:0px;" width="75px" height="75px" ng-src="/api/assets/assetsInfo/getQRCode/{{res.assetsId}}" alt=""/>
+                </td>
+            </tr>
+            <tr>
+                <td style="border-right: 1px hidden black;">所在部门</td>
+                <td style="border-right: 1px hidden black;padding:2px;word-break: break-all;">{{res.deptName}}</td>
+            </tr>
+            <tr>
+                <td style="border-right: 1px hidden black;">启用日期</td>
+                <td style="border-right: 1px hidden black;padding:2px;word-break: break-all;">{{dateToTime(res.startUseDate)}}</td>
+            </tr>
+		</table>
+ </div>
+<!--endprint-->
+</div>

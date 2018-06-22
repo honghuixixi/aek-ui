@@ -1,0 +1,11 @@
+<div class="selectWrap">
+    <div class="selector" ng-click='displayOption()'>
+        <input type="text" ng-model='item.name' readonly="true">
+        <a href='javascript:;'></a>
+    </div>
+    <div class="options" ng-show='showOptions'>
+        <ul>
+            <li ng-repeat='op in options' ng-click="search(op)">{{op.name}}</li>
+        </ul>
+    </div>
+</div>

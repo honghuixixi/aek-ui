@@ -1,0 +1,87 @@
+<div class="assets-overlay" ng-click='hideAll()' ng-show='devshow'></div>
+<div class="audit-list">
+	<div class="hd_applytop">
+		<span>单据审批</span>
+	</div>
+	<div class="content">
+		<div class="tabParent">
+			<div class="tab">
+				<span ng-class="{tabActive:tabIndex==1}" ng-click="tabClick(1)">待我审批的</span>
+				<span ng-class="{tabActive:tabIndex==2}" ng-click="tabClick(2)">我已审批的</span>
+			</div>
+		</div>
+		<div class="">
+			<div class="org-sel ">
+
+                <div class="input-wrap " style="float: left;margin-top: 20px" ng-show="tabIndex==2">
+                    <input class="depetName hd_depetName" type="text" readonly="true" placeholder="全部" ng-model="statusType" ng-focus="focus2()" style="padding-left:10px"/>
+                    <div class="depetList" ng-show="devshow2" style="width: 165px">
+                        <label ng-repeat="l in statusListType track by $index" data-id="{{l.id}}" ng-click="click2($event)">{{l.name}}</label>
+                    </div>
+                </div>
+
+				<div class="i-info" style="margin-top: 20px;float: left" id="hdi-info">
+					<div class="input-wrap " style="float: left">
+						<input class="depetName hd_depetName" type="text" readonly="true" placeholder="全部类型" ng-model="orgType" ng-focus="focus()" style="padding-left:10px"/>
+						<div class="depetList" ng-show="devshow1" >
+							<label ng-repeat="l in tenantType track by $index" data-id="{{l.id}}" ng-click="click($event)">{{l.name}}</label>
+						</div>
+					</div>
+				</div>
+				<input id="keywords" class="hd_keywords"  type="text"  placeholder="请输入设备名称/申请单号" ng-model="keywords" style="border: 1px solid #dedede;padding-left:10px;margin-top: 20px">
+				<div class="t-search">
+					<a ng-click="search()" id="search" style="height: 30px;float: left;margin-top: 20px;margin-left: 20px;border-radius: 2px">搜索</a>
+				</div>
+			</div>
+		</div>
+        <div class="org-content " style="width: 100%;padding: 0;margin-top: 70px;">
+            <table style="border:none;border-collapse:collapse;" class="table  b-t b-light text-center ">
+                <thead>
+                <tr class="tr-th hd_tr-th">
+                    <th style="width: 16%;white-space:nowrap;">申请单号</th>
+                    <th style="width: 10%;white-space:nowrap;">类型</th>
+                    <th style="width: 15%;white-space:nowrap;">维修单号</th>
+                    <th style="width: 15%;white-space:nowrap;">维修设备名称</th>
+                    <th style="width: 12%;white-space:nowrap;">设备所在部门</th>
+                    <th style="width:12% ;white-space:nowrap;">申请人</th>
+                    <th style="width:10% ;white-space:nowrap;">申请时间</th>
+                    <th style="width:10% ;white-space:nowrap;" ng-show="tabIndex==2">状态</th>
+                    <th style="width: 10%;white-space:nowrap;">操作</th>
+                </tr>
+                </thead>
+                <tbody class="hd_treetbpdy">
+                <tr ng-if="loading">
+                    <td colspan="12" class="noContent">
+                        <img src="../../../res/img/loading2.gif" alt="">
+                    </td>
+                </tr>
+                <tr ng-if="noData" style="border: 0">
+                    <td colspan="12" class="noContent">
+                        <img src="../../../res/img/nocontent.png" alt="">
+                        <span class="m-l-lg">暂无数据</span>
+                    </td>
+                </tr>
+                <!--<tr ng-if="res.length" ng-repeat='item in res'>-->
+                <tr class="hd_treetr" ng-repeat="l in tableList track by $index">
+                    <td class="hd_treeleft"  style="vertical-align:middle">{{l.billNo}}</td>
+                    <td  style="vertical-align:middle">{{l.typeText}}</td>
+                    <td  style="vertical-align:middle">{{l.applyNo }}</td>
+                    <td  style="vertical-align:middle">{{l.assetsName}}</td>
+                    <td  style="vertical-align:middle">{{l.assetsDeptName}}</td>
+                    <td  style="vertical-align:middle">{{l.applyUserName}}</td>
+                    <td  style="vertical-align:middle; min-width: 150px;">{{l.applyTime |  date:'yyyy-MM-dd HH:mm'}}</td>
+                    <td  style="vertical-align:middle"  ng-show="tabIndex==2">{{l.statusText}}</td>
+                    <td class="b-r-og last-td hd_treeright"  style="vertical-align:middle">
+                        <a ui-sref="repair.audit.detail({tenantId: ($stateParams.tenantId||$localStorage.userInfo.tenantId),billApplyId: l.id, type: tabIndex})">查看</a>
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+        <!-- /.table-responsive -->
+        <div class="pages-de"></div>
+        <!-- 底部分页 -->
+        <span data-ng-include=" 'src/tpl/newPageInfo.html' "></span>
+	</div>
+</div>

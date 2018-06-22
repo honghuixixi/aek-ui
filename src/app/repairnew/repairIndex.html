@@ -1,0 +1,37 @@
+<div class="fy_repairWrap">
+	<div class="fy_repairIndexWrap">
+	<div class="fy_repairList">
+		<div class="fy_repairOne">
+			<a class="fy_oneWrap" ng-click='repairManage(0)'>
+				<div class="font13px color666">待接单</div>
+				<div class="font30px colorYellow">{{status[0].total}}</div>
+			</a>
+		</div>
+		<div class="fy_repairOne">
+			<a class="fy_oneWrap" ng-click='repairManage(1)'>
+				<div class="font13px color666">维修中</div>
+				<div class="font30px colorYellow">{{status[1].total}}</div>
+			</a>
+		</div>
+		<div class="fy_repairOne">
+			<a class="fy_oneWrap" ng-click='repairManage(2)'>
+				<div class="font13px color666">待验收</div>
+				<div class="font30px colorYellow">{{status[2].total}}</div>
+			</a>
+		</div>
+		<div class="fy_repairOne">
+			<a class="fy_oneWrap" ng-click='repairManage(3)'>
+				<div class="font13px color666">已完成</div>
+				<div class="font30px colorYellow">{{status[3].total}}</div>
+			</a>
+		</div>
+	</div>
+	<div class="fy_repairHomeTitle">
+		<div class="fy_repairTitleTime"><a href="javascript:;" class="fy_timeLeft" ng-click='repairDateChange(-1)'></a><a href="javascript:;" class="fy_timeRight" ng-click='repairDateChange(1)'></a><span>{{repairDate.year}}年{{repairDate.month<10?("0"+repairDate.month):repairDate.month}}月</span></div>
+		<div class="fy_repairTitleRigth"><a class="repairBTN newRepairBTN" ui-sref='repair.newApply'>新建维修申请</a><i class='verticalAdjust'></i></div>
+		<div class="fy_repairTitleLeft"><a class="titleA" ui-sref='repair.newrepair.calendar' ng-class="{repairTitle: $state.includes('**.repair.newrepair.calendar')}">日历视图</a><a class="titleA" ui-sref='repair.newrepair.date' ng-class="{repairTitle: $state.includes('**.repair.newrepair.date')}">时间轴视图</a><div class="fullSrc" ng-show="$state.includes('**.repair.newrepair.calendar')"><a ng-click='repairIndexFullSrc()'></a></div><i class='verticalAdjust'></i></div>
+	</div>
+	<div class="fy_repairHomeCon" ui-view></div>
+	</div>
+	<div><a ui-sref="repair.newrepair.identify({applyid:1,assetsId:2})">click me</a></div>
+</div>

@@ -1,0 +1,115 @@
+<div class="jsqx">
+	<div class="jsList">
+		<div class="listbtn">
+			<a ng-click='addRole("add")' class="addRole">添加角色</a>
+			<a ng-click='addRole("edit")' class="editor">编辑</a>
+		</div>
+		<div id="treeDemo" class="ztree showIcon"></div>
+	</div>
+	<div class="departPerson">
+		<h4>部门人员</h4>
+		<div class="hideDiv"></div>
+		<div class="departSearch"><input ng-model="keywords" type="text" placeholder='请输入工号、姓名、手机号' ng-keypress="($event.which === 13)?search():0">
+			<a href="javascript:;" ng-click="search()">搜索</a>
+		</div>
+		<table border="0" cellspacing="0" cellpadding="0">
+			<tr class="tr-th">
+				<th>工号</th>
+				<th>姓名</th>
+				<th>手机号</th>
+				<th>归属机构</th>
+				<th class="borderR1">操作</th>
+			</tr>
+			<tr ng-show='loading'>
+				<td colspan="5" class="loadingTd"><div  class="text-center m-t-md text-lg"><i class="loadingImg"><img src="../../res/img/loading.gif"></i> 数据加载中...</div></td>
+			</tr>
+			<tr ng-repeat="tr in trData" ng-class="{'b-b-tr':$index == trData.length-1}">
+				<td class="borderL1">
+					<div class="">{{tr.jobNumber}}</div>
+				</td>
+				<td>
+					<div>{{tr.realName }}</div>
+				</td>
+				<td>
+					<div>{{tr.mobile}}</div>
+				</td>
+				<td>
+					<div>{{tr.deptName}}</div>
+				</td>
+				<td class="borderR1">
+					<div>
+						- -
+					</div>
+				</td>
+			</tr>
+		</table>
+		<div class="pages-foot">
+			<!-- 底部分页 -->
+			<span data-ng-include=" 'src/tpl/newPageInfo.html' "></span>
+		</div>
+		<div id="addRole" ng-show='addrole'>
+			<h4>添加角色</h4>
+			<div class="addRoleCon">
+				<div class="lineHeight24"></div>
+				<div class="roleName">
+					<div><span><i>*</i>角色名称：</span></div><div><input style="color: #000;" type="text" ng-model="roleName" placeholder="高级工程师"/></div>
+				</div>
+				<div class="lineHeight24"></div>
+				<div class="roleName">
+					<div><span><i>*</i>数据范围：</span></div><div>
+					<select style="padding-left: 0;color: #000;" ng-model="dRan" ng-options="dd.id as dd.name for dd in dataRange" >
+					</select>
+				</div>
+
+				<div style="display: block;">
+					<span>平台：</span>
+					<em>
+						<div class="aLotOf">
+							<input id="jggly" type="radio" class="radios" name='setCharger' value="1">
+							<label class="aboutRd" for="jggly">
+								<i></i>
+							</label>
+						</div>
+						<label for="jggly">监管</label>
+					</em>
+					<em>
+						<div class="aLotOf">
+							<input id="ksgly" type="radio" class="radios" name='setCharger' value="2">
+							<label class="aboutRd" for="ksgly">
+								<i></i>
+							</label>
+						</div>
+						<label for="ksgly">物资</label>
+					</em>
+					<em>
+						<div class="aLotOf">
+							<input id="member" type="radio" class="radios" name='setCharger' value="3">
+							<label class="aboutRd" for="member">
+								<i></i>
+							</label>
+						</div>
+						<label for="member">质控中心</label>
+					</em>
+					<em>
+						<div class="aLotOf">
+							<input id="member2" type="radio" class="radios" name='setCharger' value="4">
+							<label class="aboutRd" for="member2">
+								<i></i>
+							</label>
+						</div>
+						<label for="member2">会员中心</label>
+					</em>
+				</div>
+				</div>
+
+				<!--<div class="lineHeight24"></div>-->
+				<div class="empower">
+					<div class="emp_d1"><span>角色授权：</span></div>
+					<div class="tree2">
+						<div id="tree2" class="ztree"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

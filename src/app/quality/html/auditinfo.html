@@ -1,0 +1,29 @@
+<div class="quality-nav">
+    <span>质控审核</span> &gt;
+    <span>查看详情</span>
+    <span class="quality-btn quality-detail-btn" ng-click="methods.disPrint()" ng-if="data.server.data.status != 2">打印</span>
+    <span class="quality-btn quality-detail-btn" ng-click="methods.audit()" ng-if="data.server.data.status == 2">审核</span>
+</div>
+<div class="quality-swrap" style="padding: 0;">
+    <div data-ng-include="'src/app/quality/html/browse-tpl.html'"></div>
+</div>
+
+<!-- 打印 -->
+<div data-ng-include="'src/app/quality/html/browse-tpl.html'" id="template_quality_browse_audit" style="display: none;"></div>
+<!-- 审核 -->
+<table class="modal-audit" id="template_quality_audit" style="display: none;">
+    <tr>
+        <td style="width: 100px;text-align: right;">审核结果</td>
+        <td style="padding: 10px;">
+            <span ng-click="methods.chooseResult('1')"><input type="radio" name="radio_audit" value="1" ng-model="data.local.form.result">审核通过</span>&nbsp;&nbsp;&nbsp;&nbsp;
+            <span ng-click="methods.chooseResult('0')"><input type="radio" name="radio_audit" value="0" ng-model="data.local.form.result">审核未通过</span>&nbsp;&nbsp;&nbsp;&nbsp;
+            <span style="color: #f00;">{{data.local.form.err}}</span>
+        </td>
+    </tr>
+    <tr>
+        <td style="width: 100px;text-align: right;vertical-align: top;">审核备注</td>
+        <td style="padding: 0 10px;">
+            <textarea placeholder="请输入，300字符以内" maxlength="300" ng-model="data.local.form.remarks"></textarea>
+        </td>
+    </tr>
+</table>

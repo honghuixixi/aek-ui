@@ -1,0 +1,84 @@
+<div class="jsqx">
+	<div id="shadeDiv" ng-show="shadeState" style="width: 100%;height: 100%;background: rgba(0,0,0,0);position: fixed;top: 0;"></div>
+	<div class="jsList">
+		<div class="listbtn">
+			<a ui-sref='main.users.zzjg.tjzjg' class="addRole">添加子机构</a>
+			<a href="javascript:;" ng-click='editDepart()' class="editor">编辑机构</a>
+		</div>
+		<div id="treeDemo" class="ztree showIcon">
+    	</div>
+	</div>
+	<div class="departPerson">
+		<div class="addPeople">
+			<h4>添加成员</h4>
+			<form id="person" method="post">
+				<div class="infoLi"><div><span>头像：</span></div><div><img src="../../../../res/img/usertx.png" alt="" /></div></div>
+				<div class="paddingLeft"></div>
+				<div class="infoLi">
+					<div><span><i>*</i>真实姓名：</span></div><div><input type="text" id="name" name='name' ng-model='userInfo.realName' required /></div>
+				</div>
+				<div class="paddingLeft"></div>
+				<div class="infoLi">
+					<div><span><i>*</i>工号：</span></div><div><input type="text" id="jobNumber" name='jobNumber' ng-model='userInfo.jobNumber' required /></div>
+				</div>
+				<div class="paddingLeft"></div>
+				<div class="infoLi">
+					<div><span><i>*</i>手机号：</span></div><div><input type="text" placeholder="请输入您的手机号" name='phone' ng-model='userInfo.mobile' id="phone" minlength='11' required /></div>
+				</div>
+				<div class="paddingLeft"></div>
+				<div class="infoLi">
+					<div><span><i>*</i>密码：</span></div><div><input type="password" ng-model='userInfo.password' name='password' placeholder="请输入8位及以上密码，含字母、数字"  id="password" required /></div>
+				</div>
+				<div class="paddingLeft"></div>
+				<div class="infoLi">
+					<div><span><i>*</i>重复密码：</span></div><div><input type="password" ng-model='userInfo.passwordRepeat' name='passwordR' placeholder="请重复输入新密码" id="passwordR"  required /></div>
+				</div>
+				<div class="paddingLeft"><span ng-show='!(userInfo.password==userInfo.passwordRepeat)'>两次密码输入不一致，请重新输入</span></div>
+				<div class="infoLi">
+					<div style="vertical-align: top;"><span><i>*</i>角色：</span></div><div style="position: relative;">
+						<input id="roleInput" type="text" readonly="true" ng-model='roleStrs' ng-change='roleV=false'/>
+						<!--<input type="text" ng-model='roleStrs' readonly ng-click="roleState=!roleState" />-->
+						<!--下拉多选框树-->
+						<ul  ng-show="roleState" id="treeDemo2" class="ztree" style="position:absolute;top: 32px;margin-top:0; width:100%; height: 300px;border-color: #dcdcdc;background-color: #fff;"></ul>
+
+					</div>
+				</div>
+				<div class="paddingLeft"><span ng-show='roleV&&!roleStrs'>请输入角色</span></div>
+				<!--<div class="infoLi">-->
+					<!--<div><span><i>*</i>权限设置：</span></div><div><input type="text" ng-model='userInfo.roleIds'/></div>-->
+				<!--</div>-->
+				<!--<div class="fourChoose">-->
+					<!--<span class="color2fa4e7"><i></i><em>系统设置</em></span><span class="colorf7931e"><i></i><em>财务管理</em></span><span class="color7799fd"><i></i><em>系统设置</em></span><span class="colorf97b89"><i></i><em>财务管理</em></span>-->
+				<!--</div>-->
+				<div class="submitBtn">
+					<input type="submit" value="保存"/>
+				</div>
+			</form>
+		</div>
+		<div class="editDepartCon" id="editDepart" ng-show='alertEdit'>
+			<h4>编辑机构</h4>
+			<ul>
+				<li><div><span><i>*</i>上级机构：</span><div class="selectParent"><input ng-click='selectParentSave=!selectParentSave' readonly="true" type="text" id="" ng-model='deptSave.parentName' >
+						<div class="selectCon" ng-show='selectParentSave'>
+							<div class="selectSearch"><input type="text" ng-model='searchWordSave' ng-change='searchSave()'></div>
+							<ul ng-show='searchResSave' >
+								<li ng-repeat='li in resLisSave' ng-click='addLiNameSave(li)'>{{li.name}}</li>
+							</ul>
+						</div>
+					</div>
+					<div class="lineHeight24"></div>
+				</li>
+				<li><div><span><i></i>名称：</span><input type="text" id="" ng-model='deptSave.name'></div><div class="lineHeight24"></div></li>
+				<li><div><span><i>*</i>类型：</span><select name="" id=""><option value="部门">部门</option></select></div><div class="lineHeight24"></div></li>
+				<!-- <li><div><span><i>*</i>主负责人：</span><input type="text" id="" placeholder="浙江省人民医院"><a href="javascript:;">新建负责人</a></div><div class="lineHeight24"><em>请输入主负责人</em></div></li> -->
+			</ul>
+		</div>
+		<div id="recoverCode" ng-show='alertRecover'>
+			<h4>编辑机构</h4>
+			<div>
+				<img src="../../res/img/wh.png" alt="">
+				<p>提交后不可再修改，您确定恢复初始密码吗？</p>	
+			</div>
+		</div>
+	</div>
+</div>

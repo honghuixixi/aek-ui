@@ -1,0 +1,47 @@
+<div class="mySetWrap">
+	<div class="mySet">
+		<div class="repair">
+			<div class="proFlow borderBottom0">
+				<img src="../../res/img/first1.png" alt="" ng-if='first'>
+				<img src="../../res/img/second.png" alt="" ng-if='second'>
+				<img src="../../res/img/third.png" alt="" ng-if='third'>
+				<img src="../../res/img/findSuc.png" alt="" ng-if='findSuc'>
+				<i></i>
+			</div>
+			<div class="findCode">
+				<div class="write" ng-if='first'>
+					<div class="loginUser"><span>账号：</span><input type="text" placeholder='手机号/邮箱'></div>
+					<div class="errMsg"><span>用户名不存在</span></div>
+					<div class="passCode"><span>验证码：</span><input type="text" placeholder='请输入验证码'><em></em><a href="javascript:;">换一张</a></div>
+					<div class="errMsg padddingBottom58"><span>验证码错误</span></div>
+				</div>
+				<div ng-if='!first&&!third&&!findSuc' class='secondStep'>
+				<div class="phoneN"><span><i>您绑定的手机号为：</i><em>126********</em><a href="javascript:;">已换号？</a></span><button ng-click='from.send=!from.send'>获取验证码</button></div>
+				<div class="emailA"><span><i>您绑定的邮箱地址为：</i><em>m**********@qq.com</em></span><button ng-click='from.send=!from.send'>获取验证码</button></div>
+				<div class="codeGot">
+					<span class='comcode'>验证码：</span><input type="text" placeholder="请输入验证码" name="codes" ng-model='from.codes'>
+				</div>
+				<div class="prompt paddingLeft60">
+					<div class="hasSent" ng-show='from.send'>校验码已发出，请注意查收短信，如果没有收到，你可以在<em>60</em>秒后要求系统重新发送</div>
+					<div class="codeErr" ng-show='!from.codes'>验证码错误，请确认后重新输入</div>
+				</div>
+				</div>
+				<div class="thirdStep" ng-if='third&&!findSuc'>
+					<form class="codeset">
+					<div><span>新密码：</span><input type="password" ng-model='from.newCode' id="newCode"></div>
+					<label for="newCode"><i>8-20位字符，可使用字母、数字或符号的组合</i></label>
+					<div><span>确认新密码：</span><input type="password" ng-model='from.repeatCode' id="repeatCode"></div>
+					<label for="repeatCode"><em>{{from.notRepeat}}</em></label>
+				</form>
+				</div>
+			</div>
+			<div class="codeBtn" ng-if='!findSuc'>
+				<a href="javascript:;" ng-click='pre()' class="preStep" ng-if='!first'>上一步</a><a href="javascript:;" ng-click='next()'>下一步</a>
+			</div>
+			<div class="succ" ng-if='findSuc'>
+				<img src="../../res/img/cg.png" alt="">
+				<div>恭喜，重置密码成功！</div>
+			</div>
+		</div>
+	</div>
+</div>

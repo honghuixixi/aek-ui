@@ -1,0 +1,144 @@
+<div class="membertop">
+	<div ng-if="userInfo.authoritiesStr.indexOf('SYS_DEPT_VIEW_EDIT_DELETE') != -1" class="currentDept fl"><span class="currentDeptTxt font15px">{{currentdeptName}}</span><span ng-click="editDeptDialog()" class="edit-memberDept"></span></div>
+	<div ng-if="userInfo.authoritiesStr.indexOf('SYS_USER_NEW') != -1" class="adduser fr" ng-click="addeptUserDialog()"><span class="btn btn-default btn-org"><i></i>新建用户</span></div>
+</div>
+<div ng-if="userInfo.authoritiesStr.indexOf('SYS_USER_DEPT_VIEW') == -1" class="no-limits">
+	<img src="../../../../res/img/myqx.png" alt="没有权限">您没有该页面的权限
+</div>
+<div style="margin-bottom:15px;" ng-if="userInfo.authoritiesStr.indexOf('SYS_USER_DEPT_VIEW') != -1" ng-init="resetBottomHeight()" class="memberwrap">
+	<!-- section-sort -->
+	<div class="sortCon">
+		<div style="margin-right: -5px;" class="selectWrap">
+			<div class="selector member-selector">
+				<div class="select-box" ng-click="opEnable()">
+					<input class="currEnable acolor999" ng-model="currEnable" readonly="readonly" />
+				</div>
+				<div class="select-options" ng-show="enableList">
+					<ul>
+						<li class="acolor666" ng-repeat="enableOption in enableArr" ng-click="changeEnable(enableOption.name,enableOption.id)">{{enableOption.name || '全部' }}</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="searchWrap">
+			<input class="acolor999" type="text" ng-model="searchKeyword.keyvalue" ng-focus="keyfocus()" ng-blur="keyblur()"/>
+			<a ng-click="getUserList()">搜索</a>
+		</div>
+		<i class="verticalAlign"></i>
+	</div>
+	<!-- content -->
+	<table border="0" cellspacing="0" cellpadding="0" class="memberTable font13px">
+	<tbody>
+		<tr>
+			<th style="padding:0px 15px;"></th>
+			<th style="width:3%">ID</th>
+			<th style="width:9.2%">用户姓名</th>
+			<th style="width:9.56%">手机号</th>
+			<th style="width:15.6%;">邮箱</th>
+			<th style="width:12.56%">部门</th>
+			<th style="width:13.49%">职务</th>
+			<th style="width:10.97%">用户状态</th>
+			<th style="width:10.97%">创建时间</th>
+			<th style="width:14.14%;max-height:320px;">操作</th>
+		</tr>
+
+		<tr ng-repeat='user in userList' ng-class="{diabled:!user.enable}">
+			<td class="fir-td">
+				<div class="checkboxFive" style="margin-right:0 ;">
+					<input type="checkbox" ng-click="changeCheckAll()" ng-model="all" value="{{user.id}}" class="child-checkbox memchildren-checkbox" id="checkboxFiveInput{{$index}}" name="" />
+					<label for="checkboxFiveInput{{$index}}" class="checked" ng-click="checked($event)"></label>
+				</div>
+			</td>
+			<td>{{user.id}}</td>
+			<td>{{user.realName}}</td>
+			<td>{{user.mobile}}</td>
+			<td style="padding: 0 15px;">{{user.email}}</td>
+			<td>{{user.deptName}}</td>
+			<td>{{user.jobName}}</td>
+			<td ng-if="user.enable">启用中</td>
+			<td ng-if="!user.enable">已停用</td>
+			<td>{{user.createTime}}</td>
+			<td class="last-td aTagColor moreOpt">
+				<a ng-if="userInfo.authoritiesStr.indexOf('SYS_USER_DETAILED_VIEW') != -1" target="_blank" ui-sref="usermain.detail.roleset({userId:user.id,id:$stateParams.id})">查看</a>
+				<div class="selectWrap m-l-md">
+					<div ng-if="userInfo.authoritiesStr.indexOf('SYS_USER_MANAGE') != -1" class="selectors">
+						<a ng-click='showMoreOpt($index)'>···</a>
+					</div>
+					<div class="options width116" ng-show='operateList{{$index}}'>
+						<ul>
+							<li>
+								<a ng-if="user.enable && user.id !=userInfo.id " ng-click='alertOpUser($index,user,1)'>停用用户</a>
+								<a ng-if="!user.enable" ng-click='alertOpUser($index,user,2)'>启用用户</a>
+							</li>
+							<!--<li>-->
+								<!--<a ng-if="user.id !=userInfo.id" ng-click='alertOpUser($index,user,0)'>删除用户</a>-->
+							<!--</li>-->
+							<li>
+								<a ng-click="alertOpUser($index,user,3)">修改密码</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</td>
+		</tr>
+		<tr ng-if="userList.length" class="no-p">
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+	  </tbody>
+	</table>
+	<div ng-if="userList.length==0" class="center ay-data-null">
+		<td colspan="12" class="noContent">
+			<img src="../../../res/img/nocontent.png" alt="">
+			<span class="m-l-lg">暂无数据</span>
+		</td>
+	</div>
+	<div ng-if="userInfo.authoritiesStr.indexOf('SYS_USER_DEPT_VIEW') != -1 && userList.length!=0" class="memberBottom">
+
+		<!-- 选择框being -->
+		<div class="bottom-select">
+			<div class="checkboxFive member-checkAll" ng-if="userList.length!=0">
+				<input type="checkbox" value="1" ng-click="checkALl()" class="all-checkbox mem-parent-checkbox" id="checkboxFiveInput{{$index}}" name="" />
+				<label for="checkboxFiveInput{{$index}}" class="checked" ng-click="checked($event)"></label>
+			</div>
+			<div class="select-box bottom-select-box" ng-click="opEnable2()">
+				<input class="currEnable" ng-model="currEnable2" readonly="readonly" />
+			</div>
+			<div class="select-options bottom-select-options" ng-style="topStyle" ng-show="enableOpList">
+				<ul>
+					<li ng-repeat="enableOption in enableArr2" ng-click="changeOp(enableOption.name,enableOption.id)">{{enableOption.name || '全部' }}</li>
+				</ul>
+			</div>
+		</div>
+		<!-- 选择框end -->
+
+	</div>
+	<span data-ng-include=" 'src/tpl/newPageInfo.html' "></span>
+</div>
+</div>
+
+<!--<div id="alertOrgChild" ng-show="alertChildCon">
+	<div class="alertContent">
+		<div class="alertImg"><img src='{{layerImg}}'></div>
+		<p class="font14px acolor666">确定{{orgOperate}}机构 ({{orgId}}){{orgName}}吗？</p>
+		<div class="alertTip font13px acolorred">
+			<span>{{orgTip}}</span>
+		</div>
+		<div class="alertBtn">
+			<a href="javascript:;" ng-click='closeIndex()' class="btnyes">确定</a>
+			<a href="javascript:;" ng-click='closeIndex()' class="btncancel">取消</a>
+		</div>
+	</div>
+</div>-->
+<div class="fixWrap" ng-show='fixWrapShow' ng-click='menuHide()'></div>
+<!-- /content -->
+<!--弹框-->
+<div data-ng-include=" 'src/tpl/alert.html' "></div>

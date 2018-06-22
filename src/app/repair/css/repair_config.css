@@ -1,0 +1,71 @@
+.repair-config-modal {
+    margin-top: 20px;
+    overflow: hidden;
+}
+
+.repair-config-modal .left {
+    float: left;
+    width: 300px;
+    margin-left: 20px;
+    text-align: left;
+}
+
+.repair-config-modal .left .row {
+    margin: 0 0 -1px 0;
+    border: 1px solid #ccc;
+}
+
+.repair-config-modal .left .row a {
+    display: inline-block;
+    font-size: 13px;
+    width: 60px;
+    height: 28px;
+    margin-top: -2px;
+    padding: 0;
+    line-height: 28px;
+    color: #fff;
+    background-color: #f7931e;
+}
+
+.repair-config-modal .left input[type='text'] {
+    width: 228px;
+    height: 36px;
+    padding: 0 10px;
+    line-height: 36px;
+    border: 0;
+    outline: 0;
+}
+
+.repair-config-modal .right {
+    float: left;
+    width: 300px;
+    margin-left: 20px;
+    text-align: left;
+}
+
+.repair-config-modal .title {
+    height: 40px;
+    padding: 0 10px;
+    line-height: 40px;
+    overflow: hidden;
+}
+
+.repair-config-modal .list {
+    height: 300px;
+    padding-bottom: 36px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    border: 1px solid #ccc;
+}
+
+.repair-config-modal .list-item {
+    width: 298px;
+    height: 36px;
+    padding: 0 10px;
+    line-height: 36px;
+    border-bottom: 1px solid #ccc;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    cursor: pointer;
+}

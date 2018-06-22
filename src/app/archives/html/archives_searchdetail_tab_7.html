@@ -1,0 +1,51 @@
+<div ng-show="isshow">
+    <div class="tab-search">
+        <aek-select list="data.local.typeOptions" change="methods.changeType" item="data.local.currentType"></aek-select>
+        <input class="tab-search-keyword" type="text" placeholder="维修单号" ng-model="data.local.keyword">
+        <span class="archives-btn" ng-click="methods.search()">搜索</span>
+    </div>
+    <table class="tab-table">
+        <thead>
+            <tr>
+                <td>维修单号</td>
+                <td>类型</td>
+                <td>报修时间</td>
+                <td>报修人</td>
+                <td>维修人</td>
+                <td>完修时间</td>
+                <td>维修费用</td>
+                <td>操作</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="v in data.server.list">
+                <td>{{v.applyNo}}</td>
+                <td>{{v.modeStatus == 1 ? '自主维修' : (v.modeStatus == 2 ? '外修' : '现场解决')}}</td>
+                <td>{{v.reportRepairDate | date:'yyyy-MM-dd'}}</td>
+                <td>{{v.reportRepairName}}</td>
+                <td>{{v.repairName}}</td>
+                <td>{{v.repairDate | date:'yyyy-MM-dd'}}</td>
+                <td>{{v.totalCost ? '￥' + v.totalCost : ''}}</td>
+                <td>
+                    <a ng-click="methods.disPrint(v)">查看维修报告单</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <!-- 分页 -->
+    <span ng-if="!data.loading && !data.empty" data-ng-include=" 'src/tpl/newPageInfo.html' "></span>
+    <!-- empty -->
+    <div class="empty" ng-if="data.empty && !data.loading">
+        <img src="../../../res/img/nocontent.png">暂无数据</div>
+    <!-- loading -->
+    <div class="loading" ng-if="data.loading">
+        <img src="../../../res/img/loading2.gif">
+    </div>
+    <!-- 维修报告单 -->
+    <archives-repair-report-bill assets-info='assetsInfo' radio='radio' user-info='userInfo' repair-obj='repairReportInfo' repair-result-switch='repairResultSwitch()' usual-repair-print='usualRepairPrint' usual-layer-close='usualLayerClose'>
+        </archives-repair-report-bill>
+    <br>
+    <br>
+    <br>
+    <br>
+</div>

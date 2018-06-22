@@ -1,0 +1,19 @@
+<div class="mySetWrap">
+	<div class="mySet">
+		<div class="toSet">
+			<div class="setTit">
+				<!-- <a ui-sref="main.users.wdsz.aqsz">安全设置</a> --><a ui-sref="main.users.wdsz.mmsz" class='setTitNow'>密码设置</a><!-- <a ui-sref="main.users.wdsz.csmmsz">初始密码设置</a> -->
+				<div class="setTitLine"></div>
+			</div>
+			<form class="pswSet">
+				<div><span>原密码：</span><input type="password" ng-change='pswSet.pswErr=false' ng-model='pswSet.primary' name="primary" id="primary" required></div>
+				<label for="primary"><em ng-show='pswSet.pswErr'>密码错误</em></label>
+				<div><span>新密码：</span><input type="password" ng-model='pswSet.newCode' id="newCode"></div>
+				<label for="newCode"><i>8-20位字符，可使用字母、数字或符号的组合，不建议使用纯字母、纯数字、纯符号</i></label>
+				<div><span>确认新密码：</span><input type="password" ng-model='pswSet.repeatCode' id="repeatCode"></div>
+				<label for="repeatCode"><em ng-show='pswSet.repeatCode!=pswSet.newCode'>{{pswSet.notRepeat}}</em></label>
+				<div class="pswBtn"><input type="submit" value="确定"></div>
+			</form>
+		</div>
+	</div>
+</div>

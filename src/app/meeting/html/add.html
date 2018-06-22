@@ -1,0 +1,68 @@
+<div class="meeting-nav">
+    <span>记录管理</span> &gt;
+    <span ng-if="data.local.isEdit">编辑记录</span>
+    <span ng-if="!data.local.isEdit">新增记录</span>
+    <a class="meeting-btn meeting-btn-cancel meeting-edit-btn" ui-sref="meeting.menu.info({id: data.local.id, type:1})" ng-if="data.local.isEdit">取消</a>
+    <span class="meeting-btn meeting-edit-btn" ng-click="methods.save()">保存</span>
+</div>
+<div class="meeting-swrap">
+    <dl class="meeting-add">
+        <dt>
+            <i>*</i>
+            <span>会议主题</span>
+        </dt>
+        <dd>
+            <input type="text" maxlength="40" placeholder="请输入，40字符以内" ng-model="data.local.record.theme" ng-change="methods.removeErr('theme')">
+            <div class="err">{{data.local.err.theme}}</div>
+        </dd>
+        <dt>
+            <i>*</i>
+            <span>发起人</span>
+        </dt>
+        <dd>
+            <input type="text" maxlength="40" placeholder="请输入，40字符以内" ng-model="data.local.record.initiator" ng-change="methods.removeErr('initiator')">
+            <div class="err">{{data.local.err.initiator}}</div>
+        </dd>
+        <dt>
+            <i>*</i>
+            <span>会议时间</span>
+        </dt>
+        <dd>
+            <input id="meeting-add-time" class="meeting-add-date" type="text" readonly placeholder="请选择">
+            <div class="err">{{data.local.err.time}}</div>
+        </dd>
+        <dt>
+            <i>*</i>
+            <span>会议地点</span>
+        </dt>
+        <dd>
+            <input type="text" maxlength="40" placeholder="请输入，40字符以内" ng-model="data.local.record.place" ng-change="methods.removeErr('place')">
+            <div class="err">{{data.local.err.place}}</div>
+        </dd>
+        <dt>
+            <i>*</i>
+            <span>参会人</span>
+        </dt>
+        <dd>
+            <input type="text" maxlength="40" placeholder="请输入，40字符以内" ng-model="data.local.record.attendee" ng-change="methods.removeErr('attendee')">
+            <div class="err">{{data.local.err.attendee}}</div>
+        </dd>
+        <dt>会议内容</dt>
+        <dd>
+            <textarea maxlength="300" placeholder="请输入，300字符以内" ng-model="data.local.record.content"></textarea>
+            <div class="count">{{data.local.record.content.length}}/300</div>
+        </dd>
+        <dt>附件</dt>
+        <dd>
+            <div style="line-height: 32px;">
+                <span class="meeting-btn meeting-cancle" ng-click="methods.uploadFile()" ng-show="data.local.record.attachments.length < 5">上传附件</span>&nbsp;&nbsp;
+                <label style="color: #999;">*单个文件10M以内，最多上传5个</label>
+                <input id="meeting-add-upload" type="file" style="display: none;">
+            </div>
+            <div ng-repeat="v in data.local.record.attachments">
+                <a>{{v.fileName}}；</a>
+                <span style="margin-left: 10px;color: #f00;cursor: pointer;" ng-click="methods.removeFile($index)">删除</span>
+            </div>
+        </dd>
+    </dl>
+</div>

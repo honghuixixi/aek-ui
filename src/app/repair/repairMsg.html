@@ -1,0 +1,51 @@
+<div class="fy_repairMsg">
+	<div class="fy_repairMsgTitle">消息通知
+		<div class="fy_repairMsgBack"><a ng-click='repairBack()'><span>返回上一页</span><em></em></a></div>
+	</div>
+	<div class="fy_repairMsgCon">
+		<div class="fy_repairMsgConHead">
+			<div class="fy_repairMsgTime">
+				<div class="selectWrap">
+					<div class="selector" ng-click='listShow("timeList")'><input type="text" ng-model='timeModel.name' readonly="true"><a href='javascript:;'></a></div>
+					<div class="options" ng-show='timeList'>
+						<ul>
+							<li ng-repeat='item in optionTime' ng-click='option("timeList","timeModel",item)'>{{item.name}}</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<i class='verticalAdjust'></i><div class="fy_repairMsgScope">
+				<a class="fy_repairMsgAll" ng-click='searchMsg(1)' ng-class='{"fy_repairMsgScopeNow":messageStatus}'>全部消息</a><a class="fy_repairMsgNot" ng-click='searchMsg(0)' ng-class='{"fy_repairMsgScopeNow":!messageStatus}'>未读消息</a>
+			</div><div class="selectWrap">
+					<div class="selector" ng-click='listShow("typeList")'><input type="text" ng-model='typeModel.name' readonly="true"><a href='javascript:;'></a></div>
+					<div class="options" ng-show='typeList'>
+						<ul>
+							<li ng-repeat='item in optionType' ng-click='option("typeList","typeModel",item)'>{{item.name}}</li>
+						</ul>
+					</div>
+				</div>
+		</div>
+		<table border="0" cellspacing="0" cellpadding="0" class="font13px color666">
+			<tr><th class="fy_repairMsgTableTitles">标题</th><th class="repairTextCenter repairMsgMinWidth160">时间</th><th>设备信息</th><th class="repairTextCenter repairMsgMinWidth81">紧急程度</th></tr>
+			<tr ng-repeat='msg in msgData' ng-class='{"fy_repairMsgRead":msg.messageStatus}'>
+				<td class='fy_repairMsgTableTitle'><a ng-click='lookTheRepairMsgDetail(msg)'><span><em></em></span>{{msg.messageContent}}</a></td>
+				<td class="repairTextCenter">{{msg.messageTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+				<td class="repairMsgMinWidth355 repairMsgOver"><span>设备名称：{{msg.assetsName}}</span>      <span class="m-l-md">使用科室：{{msg.assetsDeptName}}</span></td>
+				<td class="repairTextCenter"><span ng-class='{"colorYellow":msg.messageLevel==3,"colorRed":msg.messageLevel==4}'>{{msgLevel(msg.messageLevel)}}</span></td>
+			</tr>
+			<tr ng-show='nocontent'>
+				<td colspan="4" class="repairTextCenter">
+					<img src="../../res/img/nocontent.png" alt=""><span class='m-l-lg'>暂无数据</span>
+				</td>
+			</tr>
+			<tr ng-show='onloading'>
+				<td colspan="4" class="repairTextCenter">
+					<img src="../../res/img/loading2.gif" alt=""><span class='verticalAlignMiddle'></span>
+				</td>
+			</tr>
+		</table>
+		<div class="fy_repairMsgLoading" ng-show='loadingMore'><a class="colorYellow font14px" ng-click='searchMsg(2,1)'>加载更多</a></div>
+	</div>
+	<!-- fix wrap -->
+	<div class="repairFixWrap" ng-show='fixWrapShow' ng-click='menuHide()'></div>
+</div>

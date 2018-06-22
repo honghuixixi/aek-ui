@@ -1,0 +1,17 @@
+<div class="meeting-swrap">
+    <div class="meeting-search">
+        <span>&nbsp;&nbsp;&nbsp;&nbsp;会议时间</span>
+        <input class="meeting-search-date" id="nextDateStart" type="text" readonly placeholder="请选择" ng-value="data.local.nextDateStart | date:'yyyy-MM-dd'">
+        <span>至</span>
+        <input class="meeting-search-date" id="nextDateEnd" type="text" readonly placeholder="请选择" ng-value="data.local.nextDateEnd | date:'yyyy-MM-dd'">
+        <input class="meeting-search-keyword" type="text" placeholder="会议编号/会议主题/发起人/地点" ng-model="data.local.keyword" maxlength="40">
+        <span class="meeting-btn" ng-click="methods.search()">搜索</span>
+    </div>
+    <div ng-transclude></div>
+    <!-- 分页 -->
+    <span ng-if="!data.loading && !data.empty" data-ng-include=" 'src/tpl/newPageInfo.html' "></span>
+    <!-- empty -->
+    <div class="empty" ng-if="data.empty && !data.loading"><img src="../../../res/img/nocontent.png">暂无数据</div>
+    <!-- loading -->
+    <div class="loading" ng-if="data.loading"><img src="../../../res/img/loading2.gif"></div>
+</div>

@@ -1,0 +1,67 @@
+.archives-modal {
+    padding: 10px;
+    font-size: 13px;
+}
+.archives-modal-title {
+    line-height: 30px;
+}
+.archives-modal-search {
+    line-height: 32px;
+}
+.archives-modal-search input[type="text"] {
+    width: 240px;
+    height: 32px;
+    padding: 0 10px;
+    border: 1px solid #dcdcdc;
+    outline: 0;
+}
+.archives-modal-table {
+    width: 100%;
+    margin: 10px 0;
+    border-collapse: collapse;
+    border: 1px solid #dcdcdc;
+}
+.archives-modal-table td {
+    padding: 10px;
+    font-size: 13px;
+    border-bottom: 1px solid #dcdcdc;
+}
+.archives-modal-table thead td {
+    background-color: #e5e5e5;
+}
+.archives-modal-dl {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+.archives-modal-dl dt {
+    float: left;
+    width: 80px;
+    font-weight: 300;
+    line-height: 32px;
+    text-align: right;
+}
+.archives-modal-dl i {
+    color: #f00;
+}
+.archives-modal-dl dd {
+    margin-left: 85px;
+}
+.archives-modal-dl input[type="text"] {
+    width: 300px;
+    height: 32px;
+    padding: 0 10px;
+    border: 1px solid #dcdcdc;
+    outline: 0;
+}
+.archives-modal-dl-err {
+    height: 20px;
+    margin-bottom: 5px;
+    line-height: 20px;
+    color: #f00;
+}
+.archives-modal-date {
+    background-image: url(../../../../res/img/date-icon.png);
+    background-position: 274px 6px;
+    background-repeat: no-repeat;
+}

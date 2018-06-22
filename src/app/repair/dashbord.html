@@ -1,0 +1,295 @@
+<div style="margin-left: 170px;">
+    <style type="text/css">
+    .main-table {
+        width: 100%;
+    }
+
+    .main-table-item {
+        float: left;
+        display: inline-block;
+        width: calc(25% - 10px);
+        margin-left: 10px;
+        background-color: #fff;
+        border-radius: 4px;
+        box-shadow: 0 5px 0 #4DC0D4;
+    }
+
+    .main-table-item2 {
+        display: inline-block;
+        width: calc(100% - 10px);
+        margin-left: 10px;
+        background-color: #fff;
+        border-radius: 4px;
+        box-shadow: 0 5px 0 #4DC0D4;
+    }
+
+    .main-table-item-txt {
+        margin-left: 10px;
+        margin-top: 10px;
+        font-size: 12px;
+        color: #666;
+    }
+
+    .main-table-item-num {
+        margin-bottom: 10px;
+        margin-left: 10px;
+        font-size: 36px;
+        color: #4AB29B;
+    }
+    .sub-item {
+    	float: left;
+    	display: inline-block;
+    	width: calc(20% - 42px);
+    	margin: 20px;
+    	border-left: 2px solid #4AB29B;
+    }
+    .sub-item-txt {
+    	margin-left: 8px;
+    	font-size: 12px;
+    	color: #666;
+    }
+    .sub-item-num {
+    	margin-left: 5px;
+    	font-size: 36px;
+    	color: #4AB29B;
+    }
+    .sub-table {
+    	width: 100%;
+    	margin: 0;
+    	border-collapse: collapse;
+    }
+    .sub-table td {
+        padding-left: 10px;
+    	font-size: 14px;
+    	line-height: 34px;
+    }
+    .sub-table thead td {
+        background-color: #4DC0D4;
+        color: #fff;
+    }
+    .sub-table tbody td {
+    	border-top: 1px solid #e5e5e5;
+    }
+    .chart-item {
+    	position: relative;
+    	display: inline-block;
+    	float: left;
+    	width: 50%;
+    }
+    .chart-item-txt{
+    	position: relative;
+    	margin-left: 20px;
+    	font-size: 12px;
+    	color: #666;
+    }
+    .chart-item-num {
+    	margin-left: 17px;
+    	margin-bottom: 5px;
+    	font-size: 24px;
+    	color: #4AB29B;
+    }
+    .chart-item::before{
+    	content: '';
+    	position: absolute;
+    	top: 5px;
+    	left: 5px;
+    	display: inline-block;
+    	width: 6px;
+    	height: 6px;
+    	border-radius: 50%;
+    }
+    .chart-one {
+    	margin-left: -1px;
+    	border-right: 1px solid #eee;
+    	border-bottom: 1px solid #eee;
+    }
+    .chart-one::before{
+    	background-color: #7971F1;
+    }
+    .chart-two {
+    	border-bottom: 1px solid #eee;
+    }
+    .chart-two::before{
+    	left: 15px;
+    	background-color: #D3398F;
+    }
+    .chart-three {
+    	margin-left: -1px;
+    	padding-top: 10px;
+    	border-right: 1px solid #eee;
+    }
+    .chart-three::before{
+    	top: 15px;
+    	background-color: #FF7C56;
+    }
+    .chart-four {
+    	padding-top: 10px;
+    }
+    .chart-four::before{
+    	top: 15px;
+    	left: 15px;
+    	background-color: #FFC834;
+    }
+    .c1 {
+        color: #7971F1;
+    }
+    .c2 {
+        color: #D3398F;
+    }
+    .c3 {
+        color: #FF7C56;
+    }
+    .fy_generalChartHead {
+        font-size: 14px;
+    }
+    .fullPage {
+        position: fixed;
+        top:0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 198910131;
+        background-color: #eff3f6;
+        padding: 10px;
+    }
+    .full-img {
+        float: right;
+        width: 20px;
+        margin-top: 18px;
+        cursor: pointer;
+    }
+    .main-tab {
+        float: left;
+    }
+
+    .main-tab-item {
+        float: left;
+        display: inline-block;
+        width: 130px;
+        font-size: 14px;
+        line-height: 40px;
+        text-align: center;
+        border-bottom: 1px solid #fff;
+        cursor: pointer;
+    }
+
+    .main-tab-item-check {
+        color: #4AB29B;
+        border-bottom: 1px solid #4AB29B;
+    }
+
+    .main-type {
+        float: right;
+        margin-top: 8px;
+        margin-right: 10px;
+        border: 1px solid #4AB29B;
+        border-radius: 3px;
+    }
+
+    .main-type-item {
+        float: left;
+        display: inline-block;
+        width: 60px;
+        font-size: 14px;
+        line-height: 24px;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .main-type-item-check {
+        background-color: #4AB29B;
+        color: #fff;
+    }
+
+    .fy_generalChartHead {
+        font-size: 14px;
+    }
+    </style>
+    <div class="fy_generalWrap" style="margin-left: -20px;overflow: auto">
+        <div class="fy_general">
+             <div ng-class="{'fullpage': data.isFull}">
+                <div class="fy_generalTitle" style="margin-left: 10px;">
+                    概览
+                    <span style="font-size: 12px;color: #999;"> （数据截止日期：{{data.local.endDate}}）</span>
+                </div>           
+                <table class="main-table">
+                    <tr>
+                        <td>
+                            <div class="main-table-item">
+                                <div class="main-table-item-txt">本年度报修总数（台/次）</div>
+                                <div class="main-table-item-num">{{data.server.applyTotalNumYear || 0}}</div>
+                            </div>
+                            <div class="main-table-item">
+                                <div class="main-table-item-txt">本年度完修总数</div>
+                                <div class="main-table-item-num">{{data.server.completeTotalNumYear || 0}}</div>
+                            </div>
+                            <div class="main-table-item">
+                                <div class="main-table-item-txt">设备7天完修率</div>
+                                <div class="main-table-item-num">{{data.server.servenCompleteRate || 100}}%</div>
+                            </div>
+                            <div class="main-table-item">
+                                <div class="main-table-item-txt">年度维修费总额（元）</div>
+                                <div class="main-table-item-num">￥{{data.server.repairTotalCapitalYear ? data.server.repairTotalCapitalYear.toFixed(2) : '0.00'}}</div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="main-table-item2">
+                                <div class="main-table-item-txt">在修设备总数</div>
+                                <div class="main-table-item-num">{{data.server.repairAssetsNum || 0}}</div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="vertical-align: top;position: relative;">
+                            <div style="margin-left: 10px;margin-top: 15px;background-color: #fff;border-radius: 4px;">
+                                <div style="margin-bottom: 10px;overflow: hidden;box-shadow:2px 0 9px rgba(0,0,0,0.07);">
+                                    <div class="main-tab">
+                                        <div class="main-tab-item" ng-class='{"main-tab-item-check": data.local.group==1}' ng-click='methods.changeGroup(1)'>完修总数</div>
+                                        <div class="main-tab-item" ng-class='{"main-tab-item-check": data.local.group==2}' ng-click='methods.changeGroup(2)'>完修费用</div>
+                                        <div class="main-tab-item" ng-class='{"main-tab-item-check": data.local.group==3}' ng-click='methods.changeGroup(3)'>7天完修率</div>
+                                    </div>                                    
+                                </div>
+                                <div class="fy_generalChartHead" style="position: absolute;top: 20px;right: 10px;">                                    
+                                    <div class="selector">
+                                        <input type="text" ng-click='methods.showOption("yearOptionShow")' value='{{data.local.yearOption[data.local.year]}}年' readonly="true">
+                                        <div class="options" ng-show='data.local.yearOptionShow'>
+                                            <ul>
+                                                <li ng-repeat='item in data.local.yearOption' ng-click='methods.chooseOption("year", "yearOptionShow", $index)'>{{item}}年</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="fy_generalChart" style="height:{{data.local.height - 280}}px;"></div>
+                            </div>
+                        </td>
+                        <td width="25%" style="vertical-align: top;">
+                            <div style="margin: 15px 0 0 10px;background-color: #fff;border-radius: 4px;">
+                                <div style="margin-left: 10px;font-size: 14px;line-height: 30px;">当前维修状态分布</div>
+                                <div id="fy_pie" style="height: {{data.local.height - 425}}px;"></div>
+                                <div style="padding: 0 20px 50px 20px;overflow: hidden;">
+                                    <div class="chart-item chart-one">
+                                        <div class="chart-item-txt">待接单</div>
+                                        <div class="chart-item-num">{{data.server.waitTakeNum}}</div>
+                                    </div>
+                                    <div class="chart-item chart-two">
+                                        <div class="chart-item-txt" style="margin-left: 30px;">维修中</div>
+                                        <div class="chart-item-num" style="margin-left: 27px;">{{data.server.repairingNum}}</div>
+                                    </div>
+                                    <div class="chart-item chart-three">
+                                        <div class="chart-item-txt">待验收</div>
+                                        <div class="chart-item-num">{{data.server.waitCheckNum}}</div>
+                                    </div>
+                                    <div class="chart-item chart-four">
+                                        <div class="chart-item-txt" style="margin-left: 30px;">已完成</div>
+                                        <di class="chart-item-num" style="margin-left: 27px;">{{data.server.completedNum}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="generalFixWrap" ng-show='fixWrapShow' ng-click='menuHide()'></div>
+        </div>
+    </div>
+</div>

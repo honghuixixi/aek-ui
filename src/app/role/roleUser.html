@@ -1,0 +1,84 @@
+	<!-- con -->
+		<div class="indexCon">
+			<!-- section-sort -->
+			<div class="sortCon">
+				<div class="selectWrap setDataScope">
+					<div class="selector" ng-click='listShow("stateList")'><input type="text" ng-model='stateModel' readonly="true"><a href='javascript:;'></a></div>
+					<div class="options" ng-show='stateList'>
+						<ul>
+							<li ng-repeat='item in optionState' ng-click='option("stateList","stateModel",item)'>{{item.name}}</li>
+						</ul>
+					</div>
+				</div>
+				<i class="verticalAlignMiddle"></i>
+			</div>
+			<!-- content -->
+			<table border="0" cellspacing="0" cellpadding="0" class="font13px acolor666 tabelConList minwidth1306">
+				<tr>
+					<th class="b-l-dcdcdc" style="width:3%">ID</th>
+					<th style="width:9.4%">用户姓名</th>
+					<th style="width:10.75%">手机号</th>
+					<th style="width:27.15%">邮箱</th>
+					<th style="width:16.12%">部门</th>
+					<th style="width:16.12%">职务</th>
+					<th style="width:7.52%">用户状态</th>
+					<th style="width:9.4%">操作</th>
+				</tr>
+				<tr class="hideTr">
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr ng-repeat='td in tdData' ng-class='{"acolorbe": !td.enable}'>
+					<td class="b-l-dcdcdc firstTd">{{td.id}}</td>
+					<td>{{td.realName}}</td>
+					<td>{{td.mobile}}</td>
+					<td>{{td.email}}</td>
+					<td>{{td.deptName}}</td>
+					<td>{{td.jobName}}</td>
+					<td>{{td.enable?'启用中':'已停用'}}</td>
+					<td class="aTagColor moreOpt lastTd">
+						<a ng-click='lookDetail(td)'>查看</a>
+					</td>
+				</tr>
+				<tr class="copyBorder">
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr class="hideTr" ng-show='nocontent'>
+					<td colspan="8" class="h-b-c-f b-l-dcdcdc b-r-dcdcdc height100 p-top-20">
+						<img src="../../res/img/nocontent.png" alt=""><span class='m-l-lg'>暂无数据</span>
+					</td>
+				</tr>
+				<tr class="b-b-tr" ng-show='onloading'>
+					<td colspan="8" class="h-b-c-f b-l-dcdcdc b-r-dcdcdc height100">
+						<img src="../../res/img/loading2.gif" alt=""><span class='verticalAlignMiddle'></span>
+					</td>
+				</tr>
+			</table>
+			<div id="alertOrgChild" ng-show="alertChildCon">
+				<div class="alertContent">
+				<div class="alertImg"><img src='{{layerImg}}'></div>
+				<p class="font14px acolor666">确定{{orgOperate}}机构 ({{orgId}}){{orgName}}吗？</p>
+				<div class="alertTip font13px acolorred">
+					<span>{{orgTip}}</span>
+				</div>
+				<div class="alertBtn">
+					<a href="javascript:;" ng-click='closeIndex()' class="btnyes">确定</a><a href="javascript:;" ng-click='closeIndex()' class="btncancel">取消</a>
+				</div>
+				</div>
+			</div>
+			<div class="roleFixWrap" ng-show='fixWrapShow' ng-click='menuHide()'></div>
+			<!-- /content -->
+		</div>

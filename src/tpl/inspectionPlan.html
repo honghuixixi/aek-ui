@@ -1,0 +1,35 @@
+<div class="implement-detail">
+	<div class="title2">巡检名称：{{obj.name}} <span class="tip" ng-class='{"implement-detail-stop": obj.status>1,"implement-detail-use": obj.status==1}'>{{obj.status > 1 ? '停用' : '启用'}}</span></div>
+	<table>
+		<tr>
+			<td class="c6">计划编号</td>
+			<td class="c9" style="width: 40%;">{{obj.planNo}}</td>
+			<td class="c6">负责人</td>
+			<td class="c9">{{obj.director}}</td>
+		</tr>
+		<tr>
+			<td class="c6">巡检类型</td>
+			<td class="c9">{{obj.type}}</td>
+			<td class="c6">创建时间</td>
+			<td class="c9">{{obj.createTime==0 ? '无' : (obj.createTime | date:'yyyy-MM-dd HH:mm')}}</td>
+		</tr>
+		<tr>
+			<td class="c6">巡检周期</td>
+			<td class="c9">{{obj.cycle}}</td>
+			<td class="c6">报告验收人</td>
+			<td class="c9">{{obj.checkMan | inspectionCheckMan}}</td>
+		</tr>
+		<tr>
+			<td class="c6">首次巡检日期</td>
+			<td class="c9">{{obj.firstDate==0 ? '无' : (obj.firstDate | date:'yyyy-MM-dd')}}</td>
+			<td class="c6"></td>
+			<td class="c9"></td>
+		</tr>
+		<tr>
+			<td class="c6">下次巡检日期</td>
+			<td class="c9">{{obj.status==2?'无':(obj.nextDate==0 ? '无' : (obj.nextDate | date:'yyyy-MM-dd'))}}</td>
+			<td class="c6"></td>
+			<td class="c9"></td>
+		</tr>
+	</table>
+</div>

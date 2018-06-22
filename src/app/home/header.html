@@ -1,0 +1,64 @@
+<!-- navbar header -->
+<div class="navbar-header {{app.settings.navbarHeaderColor}}">
+    <a href="javascript:void(0);" class="navbar-brand text-lt">
+        <i class="fa fa-btc"></i>
+        <img src="../../res/img/logo.png" alt="">
+    </a>
+</div>
+<div class="collapse pos-rlt navbar-collapse box-shadow {{app.settings.navbarCollapseColor}}">
+    <div class="nav navbar-nav modul-nav">
+        <span class="text-white line-cut">|</span>
+        <span class="text-white ay-module dropdown-toggle" data-toggle="dropdown">平台首页</span>
+        <b class="caret"></b>
+        <!--点击出现的下拉菜单-->
+        <div class="dropdown-module dropdown-menu">
+            <ul>
+                <li><a ui-sref="main.tre.ytz.list"><span>平台首页 </span></a></li>
+                <li><a ui-sref="main.tre.ytz.list"><span>资产管理 </span></a></li>
+                <li><a ui-sref="main.users.jbxx.jbxx"><span>用户管理 </span></a></li>
+                <li><a ui-sref="org.index({id:1})"><span>机构管理</span></a></li>
+                <li><a ui-sref="main.member.list"><span>成员管理 </span></a></li>
+                <li><a ui-sref="role.index"><span>角色管理 </span></a></li>
+            </ul>
+        </div>
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown dropdownWrap">
+            <span class="m-r-md ay-r-sm dropdown-toggle" data-toggle="dropdown">{{userInfo.tenantName}}</span>
+            <b class="caret"></b>
+            <!--医院的选择-->
+            <div class="dropdown-module dropdown-menu dropdown-deprt">
+                <ul>
+                    <li><a><span>骨科 </span></a></li>
+                    <li><a><span>皮肤科 </span></a></li>
+                </ul>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href class="dropdown-toggle clear" data-toggle="dropdown">
+                <span class="thumb-sm m-t-n-sm m-b-n-sm m-r-sm">{{userInfo.realName}}</span>
+                <span class="hidden-sm hidden-md" ng-bind="userInfo.userName || userInfo.account"></span><b class="caret list-caret"></b>
+            </a>
+            <!-- dropdown -->
+            <div class="dropdown-menu usersInfo">
+                <ul>
+                    <li class="borderL1"><a ui-sref="main.users.zzrz.zzrz"><img src="../../../res/img/202.png" alt=""><img src="../../../res/img/212.png" class="imgHover">账户信息</a></li>
+                    <li class="borderL1"><a ui-sref="main.users.zzjg.zzjg"><img src="../../../res/img/404.png" alt=""><img src="../../../res/img/414.png" class="imgHover">系统公告</a></li>
+                    <li><a ng-click='NewLogout()'><img src="" alt=""><img src="../../../res/img/505.png" alt=""><img src="../../../res/img/515.png" class="imgHover">退出系统</a></li>
+                    <li class="borderL1"></li>
+                </ul>
+            </div>
+            <!-- / dropdown -->
+        </li>
+        <!--站内通知-->
+        <!--<li class="m-l-sm m-r-lg m-t-sm msg-clock">
+            <span>
+                <img src="../../res/img/9.png"/>
+                <a href="javascript:;">32</a>
+            </span>
+        </li>-->
+    </ul>
+    <!-- / navbar right -->
+
+</div>
+<!-- / navbar collapse -->

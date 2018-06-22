@@ -1,0 +1,120 @@
+<!-- 分成三部分 -->
+<div style="background:#eff3f6">
+	<div class="mf_tilnav" style="width:100%;">
+		<span class="hd_titleLeft"><span ui-sref="repair.manage" class="hd_manage">维修管理</span><span>&gt;维修单详情</span></span>
+		<input type="button" class="mf_getMenu" value="接单">
+	</div>
+</div>
+<!--中间内容布局左、上、下-->
+<!-- 内容左边部分-->
+<div class="mf_content">
+  <div class="mf_contentleft">
+  <div class="mf_border">
+  	
+  </div>
+  <div class="mf_bigimg">
+		<span><img src="../../res/img/dt.png" alt="">
+	<div>点击查看</div></span>
+</div>
+<div class="ul1">
+	<ul class="mf_ul">
+   	  <li class="mf_firstli"><span>设备名称（后台获取）</span></li>
+   	  <li class="mf_li"><span>规则型号:</span></li>
+   	  <li class="mf_li"><span>设备编号:</span></li>
+   	  <li class="mf_li"><span>所在部门:</span></li>
+   	  <li class="mf_li"><span>启用日期:</span></li>
+   	  <li class="mf_li"><span>保修期至:</span></li>
+   </ul>
+</div>
+   
+   <div class="mf_fengeline"></div>
+  <div class="ul2">
+  	<ul class="mf_ul2">
+   	<li class="mf_li2"><span>维修单号:</span></li>
+   	<li class="mf_li2"><span>申请人:</span></li>
+   	<li class="mf_li2"><span>联系电话:</span></li>
+   	<li class="mf_li2"><span>申请时间:</span></li>
+   </ul>
+  </div>
+  
+</div>
+<!-- 内容右边部分-->
+ <div class="mf_contentRight">
+   	   <div class="mf_contentRightUp">
+<!-- 流程图部分 -->
+
+<ul class="mf_tabmenu">
+    <li class="mf_tabmenuli">
+    	<div>
+    	<img src="../../res/img/shenqing.png" class="mf_tabImg" >
+
+    	</div>
+	    <div class="mf_tabLine" style="border-top: 1px dashed #19b2bc;"></div>
+	</li>
+    	<li class="mf_tabmenuli">
+    		<div><img src="../../res/img/daijiedan.png" class="mf_tabImg"></div>
+	        <div class="mf_tabLine" ></div>
+    	</li>
+    	<li class="mf_tabmenuli">
+    		<div><img src="../../res/img/weixiu2.png" class="mf_tabImg"></div>
+	        <div class="mf_tabLine"></div>
+    	</li> 
+    	<li class="mf_tabmenuli">
+    		<div><img src="../../res/img/daiyanshou2.png" class="mf_tabImg"></div>
+	        <div class="mf_tabLine"></div>
+    	</li>
+    	<li class="mf_tabmenuli">
+    		<div><img src="../../res/img/wancheng2.png" class="mf_tabImg"></div>
+	         
+    	</li>
+</ul>
+
+<ul class="mf_msg">
+	<li class="mf_tabmenuli2">
+		<span class="mf_getdata">王二小</span>&nbsp;&nbsp;<span class="mf_getdata">申请</span><br>
+		<span class="mf_getdata">2017-01-01 12:00</span><br>
+		<a class="mf_checkbut" ng-click=>查看</a>
+	</li>
+	<li class="mf_tabmenuli2">
+		<span class="mf_getdata" style="position:relative;padding-left: 170px;">待接单</span>
+	</li>
+	<li class="mf_tabmenuli2">
+		<span class="mf_getdata" style="position:relative;padding-left: 220px;">维修中</span>
+	</li>
+	<li class="mf_tabmenuli2">
+		<span class="mf_getdata" style="position:relative;padding-left: 220px;">待验收</span>
+	</li>
+	<li class="mf_tabmenuli2">
+		<span class="mf_getdata" style="position:relative;padding-left: 220px;">已完成</span>
+	</li>
+</ul>
+	
+
+<!-- 待续另一种TAB效果 -->
+
+
+<!-- 另一种TAB效果的结尾 -->
+
+   	   </div>
+   	   <div class="mf_contentRightDown">
+   	   	  <div class="mf_baojie">
+   	   	  	  <span class="newhd_left" style="padding-left:15px;">报修</span>
+   	   	  	  <p class="mf_baoxiucontent" style="color: #666;">内容:<span class="mf_baoxiucontent">故障停机，部分功能失效</span></p>
+   	   	  	  <p class="mf_baoxiucontent" style="position: relative;padding-top: 20px;padding-left: 60px;">故障现象故障现象故障现象故障现象故障现象故障现象故障现象故障现象故障现象</p>
+   	   	  </div>
+
+   	   	  <div class="mf_baojie">
+   	   	  	  <span class="newhd_left" style="padding-left:15px;">接单</span>
+   	   	  	  <p class="mf_baoxiucontent" style="color: #666;">预计到达科室时间:</p>
+   	   	  	  <ul class="mf_chooseTime">
+   	   	  	  	<li><a class="mf_checkbut">30分钟后</a></li>
+   	   	  	  	<li><a class="mf_checkbut">1小时后</a></li>
+   	   	  	  	<li><a class="mf_checkbut">3小时后</a></li>
+   	   	  	  	<li><a class="mf_checkbut">12小时后</a></li>
+   	   	  	  	<li><input ng-value="repairDate1 | date : 'yyyy-MM-dd HH:mm'" attrvar="repairDate1" class="m-r-xl input-datepicker date-startDate editRepairResultInputLong" readonly="" value="2017-09-02 11:53" type="text" style="background-image: url(../../res/img/datepicker.png);background-repeat: no-repeat;background-position: 130px;"></li>
+   	   	  	  </ul>
+   	   	  	  <p class="mf_baoxiucontent" style="color: #666;padding-left: 92px;">备注:</p><textarea placeholder="请输入备注说明(非必填)" ng-model="remark" ng-change="writesum()" ng-paste="writesum()" ng-keyup="writesum()" ng-disabled="writeDisabled" class="mf_beizhu"></textarea><span class="mf_count">{{remark.length}}/300字</span>
+   	   	  </div>
+   	   </div>
+ </div>
+</div>

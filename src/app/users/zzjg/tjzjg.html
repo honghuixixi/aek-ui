@@ -1,0 +1,107 @@
+<div class="jsqx">
+	<div id="shadeDiv" ng-show="shadeState" style="width: 100%;height: 100%;background: rgba(0,0,0,0);position: fixed;top: 0;"></div>
+	<div class="jsList">
+		<div class="listbtn">
+			<a href="javascript:;" class="addRole">添加子机构</a>
+			<a href="javascript:;" ng-click='editDepart()' class="editor">编辑机构</a>
+		</div>
+		<div id="treeDemo" class="ztree showIcon"></div>
+	</div>
+	<div class="departPerson">
+	<div class="editDepartCon addChild">
+		<h4>添加子机构</h4>
+		<ul>
+			<li><div><span><i>*</i>上级机构：</span><div class="selectParent"><input readonly="true" type="text" id="organization" placeholder="浙江省人民医院" ng-model='dept.parentName' >
+					<div class="selectCon" ng-show='selectParent'>
+						<div class="selectSearch"><input type="text" ng-model='searchWord' ng-change='search()'></div>
+						<ul ng-show='searchRes' >
+							<li ng-repeat='li in resLis' data-name="{{li.name}}" data-id="{{li.id}}" ng-click='addLiName(li)'>{{li.name}}</li>
+						</ul>
+					</div>
+				</div>
+				<div class="lineHeight24"></div>
+			</li>
+			<li><div><span><i>*</i>名称：</span><input ng-change='dept.nameErr=false' type="text" id="" placeholder="浙江省人民医院" ng-model='dept.name'></div><div class="lineHeight24"><em ng-show='dept.nameErr'>请输入科室名称</em></div></li>
+			<li><div><span><i>*</i>类型：</span><select name="" ng-model='dept.typeName'><option value="科室">科室</option></select></div><div class="lineHeight24"></div></li>
+			<!-- <li><div><span><i>*</i>主负责人：</span><input type="text" id="" placeholder="浙江省人民医院" ng-model='dept.masterName'><a ng-click='charge()'>新建负责人</a></div><div class="lineHeight24"><em>请输入主负责人</em></div></li> -->
+		</ul>
+		<div class="editDepartBtn"><a class="saveDept" ng-click='save()'>保存</a></div>
+	</div>
+	<div class="editDepartCon" id="editDepart" ng-show='alertEdit'>
+		<h4>编辑机构</h4>
+		<ul>
+			<li><div><span><i>*</i>上级机构：</span><div class="selectParent"><input ng-click='selectParentSave=!selectParentSave' readonly="true" type="text" id="" ng-model='deptSave.parentName' >
+					<div class="selectCon" ng-show='selectParentSave'>
+						<div class="selectSearch"><input type="text" ng-model='searchWordSave' ng-change='searchSave()'></div>
+						<ul ng-show='searchResSave' >
+							<li ng-repeat='li in resLisSave' ng-click='addLiNameSave(li)'>{{li.name}}</li>
+						</ul>
+					</div>
+				</div>
+				<div class="lineHeight24"></div>
+			</li>
+			<li><div><span><i>*</i>名称：</span><input type="text" id="" ng-model='deptSave.name'></div><div class="lineHeight24"></div></li>
+			<li><div><span><i>*</i>类型：</span><select name="" ng-model='deptSave.typeName'><option value="科室">科室</option></select></div><div class="lineHeight24"></div></li>
+			<!-- <li><div><span><i>*</i>主负责人：</span><input type="text" id="" placeholder="浙江省人民医院" ng-model='deptSave.masterName'><a ng-click='charge()'>新建负责人</a></div><div class="lineHeight24"><em>请输入主负责人</em></div></li> -->
+		</ul>
+	</div>
+	<!-- 负责人 -->
+	<div id="Ccharger" ng-show='charger'>
+		<h4>主负责人</h4>
+		<div class="chargerLine"></div>
+		<div class="departSearch"><input type="text" placeholder='请输入工号、手机号'>
+			<a href="javascript:;">搜索</a>
+		</div>
+		<table border="0" cellspacing="0" cellpadding="0">
+			<tr class="tr-th">
+				<th class="minWidth16px"></th>
+				<th>工号</th>
+				<th>姓名</th>
+				<th>手机号</th>
+				<th class="borderR1" ng-if='hadCharger'><div class="chargerSet">设为负责人</div></th>
+			</tr>
+			<tr ng-repeat="tr in trData" ng-mouseover='tr.hover=true' ng-mouseleave='tr.hover=false' ng-class="{'b-b-tr':$index == trData.length-1}">
+				<td class="borderL1">
+					<div ng-if='aLotOf' class="aLotOf">
+					<input id="{{tr.ckid}}" type="radio" class="radios" name='setCharger'>
+					<label class="aboutRd" for="{{tr.ckid}}">
+                    	<i></i>
+                    </label>
+                    </div>
+				</td>
+				<td>
+					<div class="">{{tr.one}}</div>
+				</td>
+				<td>
+					<div>{{tr.two}}</div>
+				</td>
+				<td ng-class='{"borderR1": !hadCharger}'>
+					<div>{{tr.three}}</div>
+				</td>
+				<td class="borderR1" ng-if='hadCharger'>
+					<div>
+						<span>{{tr.charge}}</span>
+						<a href="javascript:;" ng-if='tr.hover&&!tr.charge' ng-click='setCharge($index)'>设为负责人</a>
+					</div>
+				</td>
+			</tr>
+		</table>
+		<div class="pages-foot">
+			<div class="pages-content">
+				<div class="pages-ctrl">
+					<a href="javascript:;"><i style="background: url(../../res/img/first.png) no-repeat center;"></i></a>
+					<a href="javascript:;"><i style="background: url(../../res/img/pre.png) no-repeat center;"></i></a>
+					<span><em>第</em><input type="text" value="4"/><em>/5页</em></span>
+					<a href="javascript:;"><i style="background: url(../../res/img/next.png) no-repeat center;"></i></a>
+					<a href="javascript:;"><i style="background: url(../../res/img/last.png) no-repeat center;"></i></a>
+					<a href="javascript:;"><i style="background: url(../../res/img/go.png) no-repeat center;"></i></a>
+					<a href="javascript:;"><i style="background: url(../../res/img/f5.png) no-repeat center;"></i></a>
+				</div>
+				<div class="page-total">
+					<span>共43条，</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+</div>

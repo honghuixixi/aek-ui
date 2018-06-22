@@ -1,0 +1,109 @@
+<div class="pm-report pm-content">
+    <div class="pm-top">
+        巡检验收
+    </div>
+    <div class="pm-main" style="min-height: {{data.height}}px;">
+        <div class="pm-main-search">
+            <aek-select list="data.departments" change="changeItem" item="data.selectItem" style="width: 100px;margin-right: 10px;"></aek-select>
+            <span>提交日期：</span>
+            <input class="dt" id="startDt" readonly="readonly" placeholder="请选择" type="text" ng-value="data.condition.startDt | date:'yyyy-MM-dd'">
+            <span>&nbsp;&nbsp;至&nbsp;&nbsp;</span>
+            <input class="dt" id="endDt" readonly="readonly" placeholder="请选择" type="text" ng-value="data.condition.endDt | date:'yyyy-MM-dd'">
+            <input type="text" placeholder="巡检名称/报告编号" maxlength="40" ng-model="data.condition.keyword">
+            <span class="pm-btn" ng-click="search()">搜索</span>
+        </div>
+        <table class="pm-main-list">
+            <thead>
+                <tr>
+                    <td style="width: 50px;">序号</td>
+                    <td>报告编号</td>
+                    <td>巡检名称</td>
+                    <td>巡检类型</td>
+                    <td>巡检周期</td>
+                    <td>提交日期</td>
+                    <td>负责人</td>
+                    <td>状态</td>
+                    <td style="width: 60px;">操作</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat=" v in data.list">
+                    <td style="width: 50px;">{{(pageInfo.current - 1) * pageInfo.size + $index + 1}}</td>
+                    <td>{{v.reportNo}}</td>
+                    <td>{{v.planName}}</td>
+                    <td>{{v.planType==1?'按科室巡检':''}}</td>
+                    <td style="width: 90px;">{{v.planCycle}}{{v.cycleType==1?'个月':'天'}}</td>
+                    <td style="width: 100px;">{{v.actualEndDate | date:'yyyy-MM-dd'}}</td>
+                    <td>{{v.chargeName}}</td>
+                    <td>{{v.status == 1 ? '待验收' : '已验收'}}</td>
+                    <td style="width: 60px;">
+                        <a ng-click="browse(v.id, v.status)">查看</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- 分页 -->
+        <span ng-if="!data.loading && !data.empty" data-ng-include=" 'src/tpl/newPageInfo.html' "></span>
+        <!-- empty -->
+        <div class="empty" ng-if="data.empty && !data.loading">
+            <img src="../../../res/img/nocontent.png">暂无数据</div>
+        <!-- loading -->
+        <div class="loading" ng-if="data.loading">
+            <img src="../../../res/img/loading2.gif">
+        </div>
+    </div>
+</div>
+<!-- 巡检报告单 -->
+<div class="implement-print" id="template_ques_acceptance" style="display: none;">
+    <div class="modal-tab">
+        <span ng-class="{'modal-tab-active': data.reportType == 1}" ng-click="changeReportType(1)">简易版</span>
+        <span ng-class="{'modal-tab-active': data.reportType == 2}" ng-click="changeReportType(2)">标准版</span>
+    </div>
+    <h2>{{data.print.hospital}}--医疗设备巡检记录单</h2>
+    <div class="info">
+        <dl style="margin-right: 250px;">
+            <dt>计划编号：</dt>
+            <dd>{{data.print.planNo}}&nbsp;</dd>
+            <dt>巡检科室：</dt>
+            <dd>{{data.print.scope}}&nbsp;</dd>
+            <dt>负责人：</dt>
+            <dd>{{data.print.director}}&nbsp;</dd>
+        </dl>
+        <dl class="dt" style="width: 230px;">
+            <dt>报告编号：</dt>
+            <dd>{{data.print.reportNo}}&nbsp;</dd>
+            <dt>开始日期：</dt>
+            <dd>{{data.print.firstDate ? (data.print.firstDate | date: 'yyyy-MM-dd') : ''}}&nbsp;</dd>
+            <dt>结束日期：</dt>
+            <dd>{{data.print.nextDate ? (data.print.nextDate | date: 'yyyy-MM-dd') : ''}}&nbsp;</dd>
+        </dl>
+    </div>
+    <div style="width: 900px;margin:0 auto 20px auto;overflow-x: auto;" ng-if="data.reportType == 2">
+        <implement-template-q type1="3" type2="3" page="1" page-size="data.print.records.length" equipments="data.print.records"
+            templates="data.print.template"></implement-template-q>
+    </div>
+    <div class="summary">
+        <div class="summary-title">临床使用情况</div>
+        <div class="summary-con">{{data.print.condition}}</div>
+    </div>
+    <div class="summary">
+        <div class="summary-title">存在的问题及分析</div>
+        <div class="summary-con">{{data.print.analysis}}</div>
+    </div>
+    <div class="summary">
+        <div class="summary-title">改进的问题及建议</div>
+        <div class="summary-con">{{data.print.suggestion}}</div>
+    </div>
+    <div style="width: 900px;margin:20px auto 20px auto;overflow-x: auto;">
+        <table class="implement-template">
+            <tr>
+                <td style="width: 100px; text-align: center;">计划验收人</td>
+                <td>{{data.print.checkMan ? data.print.checkMan.join("；") : ''}}&nbsp;</td>
+            </tr>
+            <tr>
+                <td style="width: 100px; text-align: center;">已验收人</td>
+                <td>{{data.print.checkedMan ? data.print.checkedMan.join("；") : ''}}&nbsp;</td>
+            </tr>
+        </table>
+    </div>
+</div>

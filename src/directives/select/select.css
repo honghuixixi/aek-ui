@@ -1,0 +1,77 @@
+/* select */
+.aek-select {
+    display: inline-block;
+}
+
+.aek-select-input {
+    height: 32px;
+    font-size: 14px;
+    line-height: 32px;
+    padding-left: 10px;
+    border: 1px solid #dcdcdc;
+    background: #fff url('../../../res/img/down.png') no-repeat 94% center;
+}
+
+.aek-select-input:focus {
+    border-color: #f7931e;
+    color: #666;
+}
+
+.aek-select-options {
+    position: absolute;
+    right: 0;
+    left: 0;
+    z-index: 110;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+    list-style: none;
+    box-shadow: 0 5px 15px 0px #cfcfcf;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.aek-select-options li {
+    padding-left: 10px;
+    font-size: 14px;
+    line-height: 28px;
+    cursor: pointer;
+    word-break: break-all;
+}
+
+.aek-select-options li:hover {
+    background-color: #f7931e;
+    color: #fff;
+}
+
+.aek-select .fixWrap {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 100;
+}
+
+
+/* placeholder */
+
+::-webkit-input-placeholder {
+    /* WebKit browsers */
+    color: #999;
+}
+
+:-moz-placeholder {
+    /* Mozilla Firefox 4 to 18 */
+    color: #999;
+}
+
+::-moz-placeholder {
+    /* Mozilla Firefox 19+ */
+    color: #999;
+}
+
+:-ms-input-placeholder {
+    /* Internet Explorer 10+ */
+    color: #999;
+}

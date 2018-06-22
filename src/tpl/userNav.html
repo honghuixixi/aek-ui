@@ -1,0 +1,44 @@
+<!-- list -->
+<ul class="nav"  ng-controller="navCtrl" >
+	<li ng-class="{active: $state.includes('**.users.**')}" class="ng-scope usersNav">
+	    <!-- <a href="" class="auto ng-scope">
+	      <span class="pull-right text-muted">
+	        <i class="fa fa-fw fa-angle-up text"></i>
+	        <i class="fa fa-fw fa-angle-down text-active"></i>
+	      </span>
+	      <i class="glyphicon nav-fixd"><img src="../../res/img/2.png"/></i><span class="ng-binding">资产管理</span>
+	    </a> -->
+	    <ul class="nav nav-sub dk ng-scope">
+	    	<li ng-class="{active: $state.includes('**.users.jbxx.**')}" class="ng-scope">
+		        <a ui-sref="main.users.jbxx.jbxx">
+		        	<i class="glyphicon nav-fixd imgNow"><img src="../../res/img/101.png"/><img src="../../res/img/111.png" class="active-img"/></i>
+		        	<span class="ng-binding">基本信息</span>
+		        </a>
+			</li>
+			<li ng-class="{active: $state.includes('**.users.zzrz.**')}" class="ng-scope">
+		        <a ui-sref="main.users.zzrz.zzrz">
+		        	<i class="glyphicon nav-fixd imgNow"><img src="../../res/img/202.png"/><img src="../../res/img/212.png" class="active-img"/></i>
+		        	<span class="ng-binding">资质认证</span>
+		        </a>
+			</li>
+			<li ng-class="{active: $state.includes('**.users.wdsz.**')}" class="ng-scope">
+				<a ui-sref="main.users.wdsz.mmsz">
+					<i class="glyphicon nav-fixd imgNow"><img src="../../res/img/303.png"/><img src="../../res/img/313.png" class="active-img"/></i>
+					<span class="ng-binding">我的设置</span>
+				</a>
+			</li>
+			<li ng-class="{active: $state.includes('**.users.zzjg.**')}" class="ng-scope">
+				<a ui-sref="main.users.zzjg.zzjg">
+					<i class="glyphicon nav-fixd imgNow"><img src="../../res/img/404.png"/><img src="../../res/img/414.png" class="active-img"/></i>
+					<span class="ng-binding">组织机构</span>
+				</a>
+			</li>
+			<li ng-class="{active: $state.includes('**.users.jsqx.**')}" class="ng-scope">
+				<a ui-sref="main.users.jsqx.jsqx">
+					<i class="glyphicon nav-fixd imgNow"><img src="../../res/img/505.png"/><img src="../../res/img/515.png" class="active-img"/></i>
+					<span class="ng-binding">角色权限</span>
+				</a>
+			</li>
+	    </ul>
+	</li>
+</ul>

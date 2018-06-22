@@ -1,0 +1,14 @@
+<div class="quality-nav">
+    <span>质控填报</span> &gt;
+    <span>查看详情</span>
+    <span class="quality-btn quality-detail-btn" style="width:100px;" ng-click="methods.print()">打印单据</span>
+    <span class="quality-btn quality-detail-btn" style="width:100px;" ng-click="methods.reEdit()" ng-if="data.server.data.status == 4 || data.server.data.status == 5">重新编辑</span>
+    <span class="quality-btn quality-detail-btn" style="width:100px;" ng-click="methods.drop()" ng-if="data.server.data.status == 5">作废</span>
+    <span class="quality-btn quality-detail-btn" style="width:100px;" ng-click="methods.back()" ng-if="data.server.data.status == 2">撤回</span>
+</div>
+<div class="quality-swrap">
+    <div data-ng-include="'src/app/quality/html/browse-tpl.html'"></div>
+</div>
+
+<!-- 打印 -->
+<div data-ng-include="'src/app/quality/html/browse-tpl.html'" id="template_quality_browse_apply" style="display: none;"></div>

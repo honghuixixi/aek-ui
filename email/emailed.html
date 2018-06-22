@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            height: 360px;
+            width: 650px;
+            text-align: center;
+            margin:200px auto;
+            font-size: 20px;
+            color: #666;
+            line-height: 40px;
+        }
+        p{
+            font-size: 25px;
+        }
+        .login{
+            width: 260px;
+            height: 45px;
+            background: #f7931e;
+            color: #fff;
+            border: 3px;
+            line-height: 45px;
+            margin: 30px auto;
+            border-radius: 3px;
+            display: block;
+            text-decoration: none;
+        }
+        .content{
+            margin-top:100px;
+        }
+        .overdata{
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+<div class="box" style="display: none">
+    <p>绑定邮箱</p>
+    <div class="content">绑定邮箱成功，您的邮箱地址为</div>
+    <div>783247888@aek.com</div>
+    <a class="login" href="http://dev.aek.com:8081/#/access/login">现在登录</a>
+</div>
+<div class="box" >
+    <p>绑定邮箱</p>
+    <div class="content"><img src="../../../res/img/overemail.png" alt=""></div>
+    <div class="overdata">绑定邮箱地址已经过期，请检查您的邮箱或者</div>
+    <div class="overdata">重新设置</div>
+</div>
+</body>
+</html>

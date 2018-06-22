@@ -1,0 +1,43 @@
+<div ng-show="isshow">
+    <table class="tab-table">
+        <thead>
+            <tr>
+                <td>报告单号</td>
+                <td>所在部门</td>
+                <td>报损类型</td>
+                <td>申请人</td>
+                <td>申请时间</td>
+                <td>审批人</td>
+                <td>审批时间</td>
+                <td>操作</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="v in data.server.list">
+                <td>{{v.discardNo}}</td>
+                <td>{{v.deptName}}</td>
+                <td>{{v.typeStr}}</td>
+                <td>{{v.applyName}}</td>
+                <td>{{v.creatTime | date:'yyyy-MM-dd'}}</td>
+                <td>{{v.verifyName}}</td>
+                <td>{{v.verifyTime | date:'yyyy-MM-dd'}}</td>
+                <td>
+                    <a ng-click="methods.getBsPrint(v.id)">查看</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <!-- empty -->
+    <div class="empty" ng-if="data.server.list.length < 1">
+        <img src="../../../res/img/nocontent.png">
+        <span>暂无数据</span>
+    </div>
+    <!-- 打印报告 -->
+    <div class="template-print" id="template_bs_print" style="display: none;">
+        <browse-print title="固定资产报损单" title2="报损单号" title3="报损方式" iszk="false" obj="data.server.bsPrint"></browse-print>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+</div>

@@ -1,0 +1,51 @@
+.meeting-content .meeting-detail-btn {
+    float: right;
+    width: 100px;
+    margin-left: 10px;
+    text-align: center;
+}
+.meeting-info {
+    margin: 0;
+    font-size: 13px;
+    overflow: hidden;
+}
+.meeting-info dt {
+    float: left;
+    width: 80px;
+    font-weight: 300;
+    color: #333;
+    text-align: right;
+}
+.meeting-info dd {
+    margin-left: 90px;
+    margin-bottom: 10px;
+    color: #999;
+    word-break: break-all;
+}
+.meeting-info a {
+    display: inline-block;
+}
+/* report */
+.meeting-report {
+    margin: 10px 15px;
+}
+.meeting-report-title {
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 50px;
+    text-align: center;
+}
+.meeting-report-no {
+    font-size: 13px;
+    line-height: 30px;
+}
+.meeting-report-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.meeting-report-table td {
+    padding: 10px;
+    font-size: 13px;
+    border: 1px solid #dcdcdc;
+    word-break: break-all;
+}

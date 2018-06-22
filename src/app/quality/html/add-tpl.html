@@ -1,0 +1,136 @@
+<div class="quality-print quality-apply" style="margin: 20px 0;">
+    <div class="quality-print-title" ng-if="data.local.applyId > 0">{{data.local.tenantName}}-{{data.server.template.name}}检测报告单</div>
+    <div class="quality-print-row" ng-if="data.local.applyId > 0">
+        <span>质控检测单号：{{data.server.data.mdNum}}</span>
+        <span>质控检测类型：{{data.local.currentType.name}}</span>
+        <!-- <span>质控检测档案号：{{data.server.data.mdArchiveNum}}</span> -->
+        <span>&nbsp;</span>
+    </div>
+    <table class="quality-print-table">
+        <tr>
+            <td style="width: 120px;">设备名称</td>
+            <td style="position:relative;text-align:left;">
+                <input type="text" placeholder="设备名称" maxlength="40" ng-model="data.local.assets.assetsName" ng-change="methods.getAssets()"
+                    ng-blur="methods.blur()">
+                <div class="quick-result" ng-if="data.local.showResult">
+                    <table>
+                        <tr ng-repeat="v in data.local.assetsList" ng-click="methods.chooseAssets(v)">
+                            <td>{{v.assetsName}}</td>
+                            <td>{{v.assetsNum}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </td>
+            <td style="width: 120px;">设备编号</td>
+            <td style="text-align: left;">{{data.local.assets.assetsNum}}</td>
+        </tr>
+        <tr>
+            <td>规格型号</td>
+            <td style="text-align: left;">{{data.local.assets.assetsSpec}}</td>
+            <td>出厂编号</td>
+            <td style="text-align: left;">{{data.local.assets.factoryNum}}</td>
+        </tr>
+        <tr>
+            <td>生产商</td>
+            <td style="text-align: left;" colspan="3">{{data.local.assets.factoryName}}</td>
+        </tr>
+        <tr>
+            <td>所在部门</td>
+            <td style="text-align: left;">{{data.local.assets.deptName}}</td>
+            <td>联系电话</td>
+            <td style="text-align: left;">
+                <input type="text" placeholder="请输入" maxlength="40" ng-model="data.local.form.contactNumber">
+            </td>
+        </tr>
+        <tr>
+            <td>检测依据</td>
+            <td style="text-align: left;">
+                <input type="text" placeholder="请输入" maxlength="40" ng-model="data.local.form.checkAccording">
+            </td>
+            <td>环境条件</td>
+            <td style="text-align: left;">
+                <input type="text" placeholder="请输入" maxlength="40" ng-model="data.local.form.environmentCondition">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" style="text-align: left;">检测仪器（标准器）</td>
+        </tr>
+        <tr>
+            <td>设备名称</td>
+            <td style="text-align: left;">
+                <input type="text" placeholder="请输入" maxlength="40" ng-model="data.local.form.checkInstrumentName">
+            </td>
+            <td>规格型号</td>
+            <td style="text-align: left;">
+                <input type="text" placeholder="请输入" maxlength="40" ng-model="data.local.form.checkInstrumentSpec">
+            </td>
+        </tr>
+        <tr>
+            <td>生产商</td>
+            <td style="text-align: left;" colspan="3">
+                <input type="text" placeholder="请输入" maxlength="40" ng-model="data.local.form.checkInstrumentProducer">
+            </td>
+        </tr>
+    </table>
+    <table class="quality-print-table">
+        <tr ng-if="data.server.txtItems.length > 0">
+            <td style="width: 120px;" rowspan="{{data.server.txtItems.length}}">最大允差</td>
+            <td>{{data.server.txtItems[0].name}}</td>
+            <td style="text-align: left;" colspan="{{data.server.col}}">
+                <input type="text" placeholder="请输入" maxlength="40" ng-model="data.server.txtItems[0].answer">
+            </td>
+        </tr>
+        <tr ng-repeat="v in data.server.txtItems" ng-if="data.server.txtItems.length > 0 && $index > 0">
+            <td>{{v.name}}</td>
+            <td style="text-align: left;" colspan="{{data.server.col}}">
+                <input type="text" placeholder="请输入" maxlength="40" ng-model="v.answer">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">外观及工作正常性检查</td>
+            <td style="text-align: left;" colspan="{{data.server.col}}">
+                <input type="text" placeholder="请输入" maxlength="40" ng-model="data.local.form.appearanceWorkCheck">
+            </td>
+        </tr>
+        <tr ng-repeat="v in data.server.items">
+            <td ng-repeat="td in v" style="width:{{td.width}}" rowspan="{{td.row}}" colspan="{{td.col}}" ng-if="td.type != 1 && td.type != 3 && td.type != 6">
+                <div ng-if="td.type == 2">{{td.txt}}</div>
+                <div style="text-align: left;" ng-if="td.type == 4">
+                    <div class="tpl-option" ng-repeat="op in td.data.options">
+                        <input type="radio" name="radio_add_{{td.data.id}}" value="{{op.id}}" ng-model="td.data.answer">
+                        <span>{{op.name}}</span>
+                    </div>
+                </div>
+                <div style="text-align: left;" ng-if="td.type == 5">
+                    <div class="tpl-option" ng-repeat="op in td.data.options">
+                        <input type="checkbox" ng-model="op.checked">
+                        <span>{{op.name}}</span>
+                    </div>
+                </div>
+                <div style="text-align: left;" ng-if="td.type == 7">
+                    <input type="text" placeholder="请输入" maxlength="40" ng-model="td.data.answer">
+                </div>
+                <div style="text-align: left;" ng-if="td.type == 8">{{td.txt}}</div>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 120px;">监测结论</td>
+            <td style="text-align: left" colspan="{{data.server.col + 1}}">
+                <div class="tpl-option">
+                    <input type="radio" name="radio_result" value="1" ng-model="data.local.form.checkResult">
+                    <span>合格</span>
+                </div>
+                <div class="tpl-option">
+                    <input type="radio" name="radio_result" value="0" ng-model="data.local.form.checkResult">
+                    <span>不合格</span>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 120px;">偏离情况记录</td>
+            <td style="text-align: left;" colspan="{{data.server.col + 1}}">
+                <input type="text" placeholder="请输入" maxlength="40" ng-model="data.local.form.deviationRecord">
+            </td>
+        </tr>
+    </table>
+</div>

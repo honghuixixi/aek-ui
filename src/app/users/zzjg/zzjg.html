@@ -1,0 +1,152 @@
+<div class="jsqx">
+	<div class="jsList">
+		<div class="listbtn">
+			<a ui-sref='main.users.zzjg.tjzjg' class="addRole">添加子机构</a>
+			<a href="javascript:;" ng-click='editDepart()' class="editor">编辑机构</a>
+		</div>
+		<div id="treeDemo" class="ztree showIcon">
+    	</div>
+	</div>
+	<div class="departPerson">
+		<h4>部门人员</h4>
+		<div class="hideDiv"><!-- <a >批量导入</a><a >调整部门</a> --><a class="addPer" ui-sref='main.users.zzjg.tjcy'>添加成员</a></div>
+		<!-- <div class="departSearch"><input type="text" placeholder='请输入工号、手机号'>
+			<a href="javascript:;">搜索</a>
+		</div> -->
+		<table border="0" cellspacing="0" cellpadding="0">
+			<tr class="tr-th">
+				<th class="minWidth36px"></th>
+				<th>序列</th>
+				<th class="minWidth108px">姓名</th>
+				<th class="minWidth150px">手机号</th>
+				<th class="borderR1">操作</th>
+			</tr>
+			<tr ng-show='loading'>
+				<td colspan="5" class="loadingTd"><div  class="text-center m-t-md text-lg"><i class="loadingImg"><img src="../../res/img/loading.gif"></i> 数据加载中...</div></td>
+			</tr>
+			<tr ng-repeat="tr in trData" ng-class="{'b-b-tr':$index == trData.length-1}">
+				<td class="borderL1">
+					<div ng-if='aLotOf' class="aLotOf">
+					<input id="id{{tr.id}}" type="checkbox"  ng-checked="all" class="checks">
+					<label class="aboutCk" for="id{{tr.id}}">
+                    	<i></i>
+                    </label>
+                    </div>
+				</td>
+				<td>
+					<div>{{$index + 1}}</div>
+				</td>
+				<td>
+					<div>{{tr.realName}}</div>
+				</td>
+				<td>
+					<div>{{tr.mobile}}</div>
+				</td>
+				<td class="borderR1">
+					<div class="operateTr">
+						<a href="javascript:;" class="editTr" ng-click='editThis(tr)'>编辑</a><a href="javascript:;" ng-click='layerWinOpen("delete",tr,delete)'>删除</a>
+					</div>
+				</td>
+			</tr>
+		</table>
+		<div class=""></div>
+		<div class="pages-foot">
+			<!-- 底部分页 -->
+			<span data-ng-include=" 'src/tpl/newPageInfo.html' "></span>
+			<!--<div class="pages-content">-->
+				<!--<div class="pages-ctrl">-->
+					<!--<a href="javascript:;"><i style="background: url(../../res/img/first.png) no-repeat center;"></i></a>-->
+					<!--<a href="javascript:;"><i style="background: url(../../res/img/pre.png) no-repeat center;"></i></a>-->
+					<!--<span><em>第</em><input type="text" value="4"/><em>/5页</em></span>-->
+					<!--<a href="javascript:;"><i style="background: url(../../res/img/next.png) no-repeat center;"></i></a>-->
+					<!--<a href="javascript:;"><i style="background: url(../../res/img/last.png) no-repeat center;"></i></a>-->
+					<!--<a href="javascript:;"><i style="background: url(../../res/img/go.png) no-repeat center;"></i></a>-->
+					<!--<a href="javascript:;"><i style="background: url(../../res/img/f5.png) no-repeat center;"></i></a>-->
+				<!--</div>-->
+				<!--<div class="page-total">-->
+					<!--<span>共43条，</span>-->
+				<!--</div>-->
+			<!--</div>-->
+		</div>
+	<div class="editDepartCon" id="editDepart" ng-show='alertEdit'>
+		<h4>编辑机构</h4>
+		<ul>
+			<li><div><span><i>*</i>上级机构：</span><div class="selectParent"><input ng-click='selectParentSave=!selectParentSave' readonly="true" type="text" id="" ng-model='deptSave.parentName' >
+						<div class="selectCon" ng-show='selectParentSave'>
+							<div class="selectSearch"><input type="text" ng-model='searchWordSave' ng-change='searchSave()'></div>
+							<ul ng-show='searchResSave' >
+								<li ng-repeat='li in resLisSave' ng-click='addLiNameSave(li)'>{{li.name}}</li>
+							</ul>
+						</div>
+					</div>
+					<div class="lineHeight24"></div>
+				</li>
+			<li><div><span><i></i>名称：</span><input type="text" id="" ng-model='deptSave.name'></div><div class="lineHeight24"></div></li>
+			<li><div><span><i>*</i>类型：</span><select name="" id=""><option value="部门">部门</option></select></div><div class="lineHeight24"></div></li>
+			<!-- <li><div><span><i>*</i>主负责人：</span><input type="text" id="" placeholder="浙江省人民医院"><a href="javascript:;">新建负责人</a></div><div class="lineHeight24"><em>请输入主负责人</em></div></li> -->
+		</ul>
+	</div>
+	<div id="recoverCode" ng-show='alertRecover'>
+		<h4>恢复初始密码</h4>
+		<div>
+			<img src="../../res/img/wh.png" alt="">
+			<p>提交后不可再修改，您确定恢复初始密码吗？</p>
+		</div>
+	</div>
+	<div class="addPeople" id="editPeople" ng-show='editPeople' style="z-index: 22;">
+
+		<div id="shadeDiv" ng-show="shadeState" style="width: 100%;height: 860px;background: rgba(0,0,0,0);position: absolute;top: 0;z-index: 10;"></div>
+
+			<h4>编辑成员</h4>
+			<form id="editPer" method="post">
+				<div class="paddingLeft peopleLine"></div>
+				<div class="baseInfoDiv infoLi">
+					<div>
+						<span>头像：</span>
+					</div>
+					<input ng-hide="true" type="file" id="headFile" onchange="angular.element(this).scope().setImagePreview(this.files)">
+					<div class="headChange" ng-click="headClick()">
+						<img ng-src="{{imgSrc}}" alt="" />
+						<a href="javascript:;">修改头像</a>
+					</div>
+				</div>
+				<div class="paddingLeft"></div>
+				<div class="infoLi">
+					<div><span><i>*</i>真实姓名：</span></div><div><input type="text" name="name" ng-model='thisPeople.realName' required/></div>
+				</div>
+				<div class="paddingLeft"><span><!--请输入真实姓名--></span></div>
+				<div class="infoLi">
+					<div><span><i>*</i>工号：</span></div><div><input type="text" name="jobNumber" ng-model='thisPeople.jobNumber' required/></div>
+				</div>
+				<div class="paddingLeft"></div>
+				<div class="infoLi">
+					<div><span><i>*</i>手机号：</span></div><div><input type="text" name="mobile" ng-model='thisPeople.mobile' required/></div>
+				</div>
+				<div class="infoLi lineHeight34 paddingtop4">
+					<div><span><i></i>注册时间：</span></div><div><em>{{thisPeople.registTime}}</em></div>
+				</div>
+				<div class="infoLi lineHeight34">
+					<div><span><i></i>注册ID：</span></div><div><em>{{thisPeople.registId}}</em></div>
+				</div>
+				<div class="infoLi">
+					<div><span><i>*</i>所属部门：</span></div><div><input name="deptName" type="text" ng-model='thisPeople.deptName'required /></div>
+				</div>
+				<div class="paddingLeft"></div>
+				<div class="infoLi">
+					<div><span><i>*</i>角色：</span></div><div style="position: relative;">
+						<input id="roleInput" type="text" ng-model='roleStrs'/>
+						<!--下拉多选框树-->
+						<ul ng-show="roleState" id="treeDemo2" class="ztree" style="position:absolute;z-index: 10;top: 31px;margin-top:0; width:100%; height: 300px;border-color: #dcdcdc;background-color: #fff;"></ul>
+					</div>
+				</div>
+				<div class="paddingLeft"><span ng-show='roleV&&!roleStrs'>请选择角色</span></div>
+				<!--<div class="infoLi">-->
+					<!--<div><span><i>*</i>权限设置：</span></div><div><input type="text" /></div>-->
+				<!--</div>-->
+				<!--<div class="fourChoose">-->
+					<!--<span class="color2fa4e7"><i></i><em>系统设置</em></span><span class="colorf7931e"><i></i><em>财务管理</em></span><span class="color7799fd"><i></i><em>系统设置</em></span><span class="colorf97b89"><i></i><em>财务管理</em></span>-->
+				<!--</div>-->
+			</form>
+		</div>
+	</div>
+</div>

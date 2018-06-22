@@ -1,0 +1,172 @@
+<div class="maintain-implement-execute">
+	<div class="maintain-top">
+        <a ui-sref="maintain.menu.plan" style="color: #999;">保养计划</a>&gt;<span>编辑保养计划</span>
+        <span class="maintain-top-btn2" ng-click="cancle()">取消</span>
+        <span class="maintain-top-btn2" ng-click="save()">保存</span>
+    </div>
+    <div class="maintain-info">
+    	<div class="maintain-info-name" style="color: #666;">设备名称：{{data.plan.name}}<span class="{{+data.plan.status > 1 ? 'tag disable-tag' : 'tag enable-tag'}}">{{data.plan.status | pmplanstatus}}</span></div>
+    	<table class="maintain-info-table">
+    		<tbody>
+    			<tr>
+    				<td style="width: 100px; color: #666;">设备编号</td>
+    				<td style="color: #999;">{{data.plan.no}}</td>
+    				<td style="width: 120px; color: #666;">上次实施日期</td>
+    				<td style="color: #999;">{{data.plan.prevDate ? (data.plan.prevDate | date:'yyyy-MM-dd') : '无'}}</td>
+    			</tr>
+    			<tr>
+    				<td style="width: 100px; color: #666;">规格型号</td>
+    				<td style="color: #999;">{{data.plan.model}}</td>
+    				<td style="width: 120px; color: #666;">下次实施日期</td>
+    				<td style="color: #999;">{{data.plan.status > 1 ? '无' : (data.plan.nextDate | date:'yyyy-MM-dd')}}</td>
+    			</tr>
+    			<tr>
+    				<td style="width: 100px; color: #666;">所在部门</td>
+    				<td style="color: #999;">{{data.plan.departmentName}}</td>
+    				<td style="width: 120px; color: #666;">使用专管人</td>
+    				<td style="color: #999;">{{data.plan.directorName.name}}</td>
+    			</tr>
+    			<tr>
+    				<td style="width: 100px; color: #666;">保养频率</td>
+    				<td style="color: #999;">{{data.plan.cycle2}}个月</td>
+    				<td style="width: 120px; color: #666;">创建时间</td>
+    				<td style="color: #999;">{{data.plan.createTime | date:'yyyy-MM-dd HH:mm'}}</td>
+    			</tr>
+    			<!-- <tr>
+    				<td style="width: 100px; color: #666;">PM等级</td>
+    				<td style="color: #999;">{{data.plan.level2 | pmlevel}}</td>
+    				<td style="width: 120px;">&nbsp;</td>
+    				<td>&nbsp;</td>
+    			</tr> -->
+    		</tbody>
+    	</table>
+    </div>
+    <div class="maintain-info-main maintain-add">
+	    <dl>
+           <!-- <dt><span class="require">*</span>保养模板：</dt>
+           <dd>
+                <span ng-if="data.plan.template.id > 0">{{data.plan.template.name}}&nbsp;&nbsp;</span>
+                <span class="maintain-btn choose-template-btn" ng-click="showTemplateDialog()">选择模板</span>
+                <div class="err" ng-if="data.err.template">*请选择模板</div>
+            </dd>
+           <dt><span class="require">*</span>设置周期：</dt>
+           <dd>
+                <input class="cycle" type="text" placeholder="请输入数字" ng-model="data.plan.cycle" ng-change="checkNum()">月
+                <div class="err" ng-if="data.err.cycle">*请设置周期</div>
+            </dd> -->
+           <dt><span class="require">*</span>率频率：</dt>
+           <dd>
+               <maintain-select list="data.status" change="changeStatus" item="data.selectStatus"></maintain-select>
+               <div class="err" ng-if="data.err.level">*请选择保养频率</div>&nbsp;
+           </dd>
+           <dt><span class="require">*</span>下次实施日期：</dt>
+            <dd>
+                <input id="startDate" class="dt" type="text" placeholder="选择下次实施日期" readonly="readonly">
+                <div class="err" ng-if="data.err.date">*请选择下次实施日期：</div>
+            </dd>
+           <dt><span class="require">*</span>使用专管人：</dt>
+           <dd>
+                <!-- <span ng-if="data.plan.director.id > 0">{{data.plan.director.realName}}&nbsp;&nbsp;</span>
+                <span class="maintain-btn choose-user-btn" ng-click="showUserDialog()">选择人员</span> -->
+                <input class="cycle" type="text" placeholder="请输入" ng-model="data.plan.director.realName">
+                <div class="err" ng-if="data.err.director">*请选择使用专管人</div>
+                <br><br><br><br>
+            </dd>
+       </dl>
+	</div>
+</div>
+
+<!-- 选择模板 -->
+<div id="template_templates" style="display: none;">
+    <table class="maintain-choose-template">
+        <tbody>
+            <tr>
+                <td style="width: 300px; vertical-align: top;">
+                    <div class="maintain-choose-template-search">
+                        <input type="text" placeholder="模板名称" ng-model="data.templateName">
+                        <span class="maintain-btn" ng-click="getTemplatesForPlan()">搜索</span>
+                    </div>
+                    <div class="maintain-choose-template-list">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td>模板名称</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="hover-tr" ng-repeat="v in data.templates" ng-click="chooseTemplate(v)">
+                                    <td>
+                                        <span class="{{data.chooseTemplate.id === v.id ? 'single checked' : 'single'}}"></span>
+                                        <div class="name" style="width:{{v.type === 1 ? 150 : 200;}}px;margin:0;">{{v.name}}</div>
+                                        <div class="tpl" ng-if="v.type === 1">系统模板</div>
+                                    </td>
+                                </tr>
+                                <tr ng-if="data.templates.length < 1">
+                                  <td style="height: 380px;vertical-align: top;">暂无相应模板，请到PM模板中<a ui-sref="maintain.menu.template" target="_blank" style="color: #f7931e;">添加&gt;&gt;</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </td>
+                <td style="vertical-align: top;">
+                    <div class="maintain-choose-template-info" ng-if="data.chooseTemplate.id > 0">
+                        <dl>
+                          <dt>已选模板：</dt>
+                          <dd>{{data.templateInfo.name}}&nbsp;</dd>
+                        </dl>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td style="width: 50px;">序号</td>
+                                    <td style="text-align: left;">项目名称</td>
+                                    <td style="text-align: left;">项目内容及说明</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat=" v in data.templateInfo.items">
+                                    <td>{{$index + 1}}</td>
+                                    <td style="text-align: left;">{{v.name}}<span class="tag" ng-if="v.status > 1">已停用</span></td>
+                                    <td style="padding: 0; text-align: left;">
+                                        <div class="div" style="padding: 8px 10px;" ng-repeat="o in v.options">{{o.name}}</div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="maintain-choose-template-info" style="line-height: 450px; text-align: center;" ng-if="data.chooseTemplate.id < 1"><img src="../../../res/img/nocontent.png">&nbsp;暂无数据</div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<!-- 选择人员 -->
+<div id="template_user" style="padding: 10px; display: none;">
+    <table class="maintain-choose-uer">
+        <thead>
+            <tr>
+                <td style="padding-left: 45px;">姓名</td>
+                <td style="width: 130px;">手机号</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="v in data.users" ng-click="chooseUser(v)">
+                <td>
+                    <span class="{{data.chooseUser.id === v.id ? 'maintain-choose-uer-radio checked' : 'maintain-choose-uer-radio'}}"></span>
+                    <div class="maintain-choose-uer-name">{{v.realName}}</div>
+                </td>
+                <td style="width: 130px;">{{v.mobile}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<!-- 保存提示 -->
+<div id="template_sure" class="inspectionLayer" style="display: none;">
+    <div style="text-align: center; color: #666;">
+        <div>
+            <div class="inspectionLayerImg m-t-lg m-b-md"><img src='../../res/img/wh.png'></div>
+            <div>
+                <span>确定保存更改后的PM计划信息？</span>
+            </div>
+        </div>
+    </div>
+</div>

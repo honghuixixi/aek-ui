@@ -1,0 +1,269 @@
+/*公共样式*/
+.m-t-10{
+	margin-top:10px;
+}
+
+/*新建部门begin*/
+#addmemberdept .m-t-10{
+	margin-top:10px;
+}
+#addmemberdept .form-group input {
+	height: 32px;
+}
+
+#addmemberdept .form-group {
+	margin-bottom: 20px;
+	position: relative;
+}
+
+#addmemberdept .errWrap {
+	position: absolute;
+	left: 115px;
+	top: 29px;
+}
+
+#addmemberdept .form-group .deptMsg {
+	color: #999;
+	margin-top: 3px;
+	display: inline-block;
+	font-size: 13px;
+}
+
+#addmemberdept .form-group label {
+	padding: 0;
+	font-size: 13px;
+}
+
+#addmemberdept .form-group label i {
+	color: #ed5a53;
+	font-size: 12px;
+	margin-right: 5px;
+}
+
+.deldeptbtn {
+	position: fixed;
+	bottom: 24px;
+	left: 50px;
+	background-color: #fff;
+	border: 1px solid #c5c5c5;
+	padding: 0 10px;
+	height: 32px;
+	line-height: 32px;
+}
+
+.deldeptbtn:hover {
+	background-color: #fff;
+}
+
+
+/*新建部门end*/
+
+
+/*提示信息begin*/
+
+.msgIcon {
+	text-align: center;
+	margin-top: 12px;
+	margin-bottom: 15px;
+}
+
+.msgIcon span {
+	display: inline-block;
+	background: url(../img/wh.png) no-repeat center;
+	width: 30px;
+	height: 30px;
+}
+
+.msgTxt {
+	text-align: center;
+    font-size: 13px;
+    color: #666;
+    max-width: 300px;
+    margin: 0 auto;
+    /*overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;*/
+   word-break: break-all;
+}
+
+
+/*提示信息end*/
+
+
+/*新增角色 begin*/
+
+#addrole {
+	overflow-x: hidden;
+}
+
+#addrole .mem-roleName {
+	width: 181px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.rolelist .role-item {
+	width: 200px;
+	height: 40px;
+	line-height: 40px;
+	margin-right: 68px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.rolelist .even {
+	margin-right: 0;
+}
+
+.form-group {
+	margin-top: 25px;
+}
+
+.ay-form-roleList {
+	margin-top: 0px;
+}
+
+.fromdept {
+	height: 35px;
+	background: url(../img/6.png) no-repeat 98% center;
+}
+
+
+/*新增角色 end*/
+
+/*删除权限*/
+
+/*删除权限end*/
+
+
+/*修改密码*/
+
+.inputHeight input[type='text'],
+.inputHeight label {
+	height: 35px;
+	line-height: 35px;
+	padding: 0;
+	padding-left: 5px;
+	padding-right: 0;
+}
+
+
+/*.layui-layer-page .layui-layer-content {
+	overflow: hidden !important;
+}*/
+
+.edit-OrgName {
+	margin-top: 12px;
+	display: inline-block;
+	color: #999;
+}
+
+.overlayer-alert {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+
+
+/*用户详情--修改密码*/
+#changePwd{
+	padding-right:25px !important;
+	width: 620px;
+}
+#changePwd + .layui-layer-setwin + .layui-layer-btn-r{
+	padding-right: 40px;
+}
+
+
+/*新建预台账begin*/
+#addYtzCon{
+	overflow-x: hidden;
+	overflow-y: scroll;
+}
+#addYtzCon .overlayer-alert{
+	margin-right:12px;
+}
+#addytzForm .m-t-10{
+	margin-top:10px;
+}
+#addytzForm .errWrap {
+	position: absolute;
+	left: 110px;
+	top: 29px;
+}
+#addytzForm .form-group input {
+	height: 32px;
+}
+
+#addytzForm .form-group {
+	margin-bottom: 20px;
+	position: relative;
+	width:100%;
+	margin-left: 0px;
+	margin-right: 0px;
+	margin-top: 0;
+}
+
+#addytzForm .form-group .deptMsg {
+	color: #999;
+	margin-top: 3px;
+	display: inline-block;
+	font-size: 13px;
+}
+
+#addytzForm .form-group label {
+	padding: 0;
+	font-size: 13px;
+}
+#addytzForm .select-options{
+	width:93%;
+}
+#addytzForm .input-datepicker{
+	line-height: 32px;
+	font-size: 12px;
+	height: 32px;
+	text-indent: 10px;
+	border: 1px solid #d6d6d6;
+	color: #999999;
+	box-sizing: border-box;
+	width: 100%;
+	background: url(../img/date-icon.png) no-repeat 95.5%;
+}
+
+#addytzForm .form-group label i {
+	color: #ed5a53;
+	font-size: 12px;
+	margin-right: 5px;
+}
+#addytzForm .select-box .currEnable{
+	line-height: 32px;
+	font-size: 12px;
+	height: 32px;
+	text-indent: 10px;
+	border: 1px solid #d6d6d6;
+	color: #999999;
+	box-sizing: border-box;
+	width:100% !important;
+}
+
+.deldeptbtn {
+	position: fixed;
+	bottom: 24px;
+	left: 50px;
+	background-color: #fff;
+	border: 1px solid #c5c5c5;
+	padding: 0 10px;
+	height: 32px;
+	line-height: 32px;
+}
+
+.deldeptbtn:hover {
+	background-color: #fff;
+}
+
+
+/*新建预台账end*/

@@ -1,0 +1,44 @@
+<div class="p-t-15">
+<!-- title -->
+	<div class="roleTitle">
+		<div class="roleTitleBtn">
+			<div ng-show='lookOrEdit'><a class="roleOperateBtn acolorhoveryellow roleEditBtn" ng-if='!role.presetId' ng-click='alertLayer(editBtn,"227px")'>编辑名称</a><a class="m-l-15 roleOperateBtn acolorhoveryellow roleStopBtn" ng-click='alertLayer(stopBtn,"287px")' ng-show='role.enable'>停用角色</a><a class="m-l-15 roleOperateBtn acolorhoveryellow roleRecoverBtn" ng-click='useRole()' ng-hide='role.enable'>启用角色</a><a class="m-l-15 roleOperateBtn acolorhoveryellow roleDelBtn" ng-show='!role.presetId' ng-click='alertLayer(delBtn,"250px")'>删除角色</a></div><a class="btnYellow acolorfff" ng-click='submitEdit()' ng-show='!lookOrEdit'>提交</a><i class='verticalAlignMiddle'></i>
+		</div>
+		<div class="roleTitleNow acolor666">
+			<span class='font15px'>{{roleTitle}}</span><span class='font12px m-l-sm'>({{userInfo.nowOrgName}})</span>
+		</div>
+	</div>
+	<!-- info -->
+		<div class="roleInfo p-t-15">
+			<div class="roleStatus">
+				<span>{{role.name}}<span class='m-l-sm hadStatus' ng-class='{true:"hadUse",false:"hadStop"}[role.enable]'>{{role.enable?'启用中':'已停用'}}</span></span>
+			</div>
+			<table border="0" cellspacing="0" cellpadding="0" class="acolor666 m-l-lg">
+				<tr><td style="width:7.92%"></td><td style="width:39.61%"></td><td style="width:7.92%"></td><td style="width:39.61%"></td></tr>
+				<tr><td>ID</td><td class="acolor999">{{role.id}}</td><td>创建人</td><td class="acolor999">{{role.createName}}</td></tr>
+				<tr><td>类型</td><td class="acolor999">{{role.presetId?'系统预设':'自定义'}}</td><td>创建时间</td><td class="acolor999">{{role.time}}</td></tr>
+			</table>
+		</div>
+	<!-- con -->
+		<div class="detailCon p-t-15">
+			<!-- section -->
+			<div class="sectionHead">
+				<div class="sectionLine"></div>
+				<div class="sectionBtn" ng-show="$state.includes('role.detail.power')">
+					<a ng-click='defineEditCon()' ng-show='lookOrEdit&&!role.presetId'>编辑角色权限</a>
+				</div>
+				<div class="sectionSelect">
+					<a href="javascript:;" ng-class="{sectionActive: $state.includes('role.detail.power')}" ui-sref='role.detail.power' ui-sref-opts="{reload:true}">包含的权限</a>
+					<a href="javascript:;" ng-show='lookOrEdit' ng-class="{sectionActive: $state.includes('role.detail.user')}" ui-sref='role.detail.user' ui-sref-opts="{reload:true}">有此权限的用户</a>
+				</div>
+			</div>
+			<!-- con section -->
+			<div class="overScroll" ui-view>
+			
+			</div>
+			<!-- /con section -->
+			<!-- /content -->
+		</div>
+</div>
+<!-- alert -->
+<div data-ng-include=" 'src/tpl/alert.html' "></div>

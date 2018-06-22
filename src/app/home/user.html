@@ -1,0 +1,100 @@
+<!-- section-sort -->
+<div class="sortCon">
+    <div class="selectWrap">
+        <div class="selector" ng-click='listShow("optionList")'><input type="text" ng-model='model' readonly="true"><a href='javascript:;'></a></div>
+        <div class="options" ng-show='optionList'>
+            <ul>
+                <li ng-repeat='item in optionBar' ng-click='option(item)'>{{item.name}}</li>
+            </ul>
+        </div>
+    </div>
+    <i class="verticalAlign"></i>
+</div>
+<!-- content -->
+<table ng-class="!tdData.length && 'no-con'" border="0" cellspacing="0" cellpadding="0" class="font13px">
+    <thead>
+    <th>ID</th>
+    <th>用户姓名</th>
+    <th>手机号</th>
+    <th>邮箱</th>
+    <th>用户状态</th>
+    <th>创建时间</th>
+    <th>最后登录时间</th>
+    <th>操作</th>
+    </thead>
+    <tr ng-if="loading2">
+        <td colspan="12" class="noContent">
+            <img src="../../../res/img/loading2.gif" alt="">
+        </td>
+    </tr>
+    <tr ng-if="!tdData.length&&!loading2">
+        <td colspan="12" class="noContent">
+            <img src="../../../res/img/nocontent.png" alt="">
+            <span class="m-l-lg">暂无数据</span>
+        </td>
+    </tr>
+    <tr ng-if="tdData.length" ng-repeat='td in tdData' ng-class="!td.enable && 'disabled'">
+        <td class="fir-td" style="width:3%">{{td.id}}</td>
+        <td style="width:12.9%">{{td.realName}}<span ng-if='!td.enable' class='dis-span' style="background-color: #F3756F;">已停用</span></td>
+        <td style="width:13.87%">{{td.mobile}}</td>
+        <td style="width:30.67%">{{td.email}}</td>
+        <td style="width:10.64%">
+            <span ng-if="td.enable == true">启用中</span>
+            <span ng-if="td.enable == false">已停用</span>
+        </td>
+        <td style="width:10.64%">{{td.createTime}}</td>
+        <td style="width:10.64%">{{td.lastLoginTime}}</td>
+        <td class="last-td" style="width:10.64%" class="aTagColor moreOpt">
+            <a href="javascript:;" target="_blank" ng-if="userInfo.authoritiesStr.indexOf('SYS_USER_DETAILED_VIEW') != -1" ui-sref="usermain.detail.roleset({userId:td.id,loginId:$stateParams.loginId})">查看</a><div class="selectWrap m-l-md">
+            <div class="selectors" ng-if="userInfo.authoritiesStr.indexOf('SYS_USER_MANAGE') != -1" ><a href="javascript:;" ng-click='showMoreOpt($index)'>···</a></div>
+            <div class="options width120" ng-show='operateList{{$index}}'>
+                <ul>
+                    <li><a href="javascript:;" ng-click='alertLayer($index,td,0)'>修改密码</a></li>
+                    <li ng-if="td.enable&&td.id!=userInfo.id"><a href="javascript:;" ng-click='alertLayer($index,td,1)'>停用账号</a></li>
+                    <li ng-if="!td.enable&&td.id!=userInfo.id"><a href="javascript:;" ng-click='alertLayer($index,td,3)'>恢复账号</a></li>
+                    <!--<li ng-if="td.id!=userInfo.id"><a href="javascript:;" ng-click='alertLayer($index,td,2)'>删除账号</a></li>-->
+                </ul>
+            </div>
+        </div>
+        </td>
+    </tr>
+    <tr ng-if="tdData.length" class="no-p">
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+</table>
+
+<!-- 底部分页 -->
+<span data-ng-include=" 'src/tpl/newPageInfo.html' "></span>
+
+<div id="alertOrgChild" ng-show="alertChildCon">
+    <div class="alertContent">
+        <div class="alertImg"><img src='{{layerImg}}'></div>
+        <p class="font14px acolor666">确定{{orgOperate}}用户 ({{orgId}}){{orgName}}吗？</p>
+        <div class="alertTip font13px acolorred">
+            <span>{{orgTip}}</span>
+        </div>
+        <div class="alertBtn">
+            <a href="javascript:;" ng-click='operateOrg()' class="btnyes">确定</a><a href="javascript:;" ng-click='closeIndex()' class="btncancel">取消</a>
+        </div>
+    </div>
+</div>
+<div id="modifyPsw" ng-show='pswMod'>
+    <div class="modifyWrap">
+        <div class="divWrap"><div class="width106 txtRight">新密码：</div><input ng-model="userPwd" placeholder="8-16位字符" type="password" class="width480"></div>
+        <div class="pdl106 error" ng-show="pwdNull">{{userPwdMsg}}</div>
+        <div class="divWrap"><div class="width106 txtRight">确认密码：</div><input ng-model="userPwdAgain" placeholder="8-16位字符" type="password" class="width480"></div>
+        <div class="pdl106 error" ng-show="pwd2Null">{{userPwd2Msg}}</div>
+        <div class="alertBtn">
+            <a href="javascript:;" ng-click='changePwd()' class="btnyes">确定</a><a href="javascript:;" ng-click='closeIndex()' class="btncancel">取消</a>
+        </div>
+    </div>
+</div>
+<div class="fixWrap" ng-show='fixWrapShow' ng-click='menuHide()'></div>
+<!-- /content -->

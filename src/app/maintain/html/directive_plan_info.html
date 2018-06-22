@@ -1,0 +1,38 @@
+<div class="maintain-info">
+    <div class="maintain-info-name" style="color: #666;">
+    	设备名称：{{obj.assetsName}}
+    	<span ng-if="showState" class="{{+obj.enable > 1 ? +obj.enable > 2 ? 'tag end-tag' : 'tag disable-tag' : 'tag enable-tag'}}">{{obj.enable | pmplanstatus}}</span>
+    	<span ng-if="obj.reportNo" style="float: right;">报告编号：{{obj.reportNo}}</span>
+    </div>
+    <table class="maintain-info-table">
+        <tbody>
+            <tr>
+                <td style="width: 100px; color: #666;">设备编号</td>
+                <td style="color: #999;">{{obj.assetsNum}}</td>
+                <td style="width: 120px; color: #666;">上次实施日期</td>
+                <td style="color: #999;">{{obj.lastImplementTime ? (obj.lastImplementTime | date:'yyyy-MM-dd') : '无'}}</td>
+            </tr>
+            <tr>
+                <td style="width: 100px; color: #666;">规格型号</td>
+                <td style="color: #999;">{{obj.assetsSpec}}</td>
+                <td style="width: 120px; color: #666;">下次实施日期</td>
+                <td style="color: #999;">
+                	{{obj.enable == 2 ? '无' : (obj.nextImplementTime | date:'yyyy-MM-dd')}}
+                	<span class="{{obj.attention.length > 0 && obj.attention === '已过期' ? 'tag tag-err' : 'tag'}}" ng-if="showTip && obj.attention.length > 0">{{obj.attention}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 100px; color: #666;">所在部门</td>
+                <td style="color: #999;">{{obj.assetsDeptName}}</td>
+                <td style="width: 120px; color: #666;">使用专管人</td>
+                <td style="color: #999;">{{obj.administrator}}</td>
+            </tr>
+            <tr>
+                <td style="width: 100px; color: #666;">保养频率</td>
+                <td style="color: #999;">{{obj.rate > 1 ? '每周' : '每天'}}</td>
+                <td style="width: 120px;">创建时间</td>
+                <td style="color: #999;">{{obj.createTime | date:'yyyy-MM-dd HH:mm'}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

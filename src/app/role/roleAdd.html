@@ -1,0 +1,88 @@
+<div class="p-t-15">
+	<!-- title -->
+	<div class="roleTitle">
+		<div class="roleTitleBtn">
+			<a class="btnYellow acolorfff ahoverBTN" ng-click='newSubmit()'>提交</a><i class='verticalAlignMiddle'></i>
+		</div>
+		<div class="roleTitleNow acolor666 font15px">
+			<a ui-sref="role.index" class="ay-linkActive" ><span class='acolor999'>角色管理</span></a><span class='m-l-sm'> > 新建角色</span>
+		</div>
+	</div>
+	<!-- con -->
+	<!-- con section -->
+	<div class="conSection minwidth1306 indexCon p-t-15">
+		<!-- con head -->
+		<div class="sectionConHead height64 acolor999 font12px">
+			<div class="setRoleName">
+				<span class='vetically'>角色名称：</span><div ng-click='roleNameNone=false' class="newRoleNameWrap"><input ng-show='roleNameNone' type="text" class="newRoleNameInput" value='请输入角色名称'><input type="text" ng-model='roleName' class='vetically'></div>
+			</div>
+			<div class="setDataScope">
+				<span class='vetically'>数据范围：</span>
+				<div class="selectWrap vetically">
+					<div class="selector" ng-click='listShow("stateList")'><input type="text" ng-model='stateModel.name' readonly="true">
+						<a href='javascript:;'></a>
+					</div>
+					<div class="options acolor666" ng-show='stateList'>
+						<ul>
+							<li ng-repeat='item in optionState' ng-click='option("stateList","stateModel",item)'>{{item.name}}</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="scopeSelfDept" ng-if='stateModel.id==4'>
+				<span title='{{depts}}' class='scopeSelfDeptWrap'><span class='m-r'>{{depts}}</span></span><a href="javascript:;" ng-if='depts' ng-click='addSelfDept()' class="editSelfDept"></a>
+			</div>
+		</div>
+		<!-- content -->
+		<div class="roleDetailSectionContent">
+			<ul class="b-l-d5 b-t-d5">
+				<li ng-repeat='first in role' ng-if="first.enable" class="b-b-d5 b-r-d5 p-v-15"><strong class='powerListHead vetically'>{{first.moduleName}}</strong>
+					<div class='powerListRight vetically'>
+						<div ng-repeat='second in first.menus'>
+							<div class="fontItalic menuList"><span class='m-r-sm vetically'><input name="checkModel" ng-click='inputAllSelect(second)' data-mid="{{second.menuId}}" id="check{{second.menuId}}" type="checkbox">
+								<label  class="check check-label opcity checkbox" for="check{{second.menuId}}">
+			                    <i class="fa fa-check"></i></label></span><label for="check{{second.menuId}}" class="acolor666 font13px vetically" ng-class="{'disabled':second.delFlag}" >{{second.menuName}}</label></div>
+							<ul class="powerParent">
+								<li class="powerChild" ng-repeat='third in second.permissions'>
+									<span ng-click='inputSelect(second,$event)' data- class='m-r-sm vetically'>
+								<input  name="checkModel" data-mid="{{third.id}}" id="check{{third.id}}" type="checkbox">
+								<label  class="check check-label opcity checkbox" for="check{{third.id}}">
+			                    <i class="fa fa-check"></i></label></span><label for="check{{third.id}}" class="acolor666 font13px vetically" ng-class="{'disabled':third.delFlag}" >{{third.name}}</label><span class='m-l-sm positionRelative' ng-show='third.description'><img src="../../res/img/infoInstrction.png"><div class="selfDefineTitle">{{third.description}}<div class="theTitleTail"></div></div></span>
+								</li>
+								<li class="clearFloat"></li>
+							</ul>
+						</div>
+						<div>
+							<ul class="powerParent">
+								<li class="powerChild" ng-repeat='third in first.permissions' ng-class="{'disabled':third.delFlag}">
+									<span class='m-r-sm vetically'><input name="checkModel" data-mid="{{third.id}}" id="check{{third.id}}" type="checkbox">
+								<label class="check check-label opcity checkbox" for="check{{third.id}}">
+			                    <i class="fa fa-check"></i></label></span><label for="check{{third.id}}" class="acolor666 font13px vetically">{{third.name}}</label><span class='m-l-sm positionRelative' ng-show='third.description'><img src="../../res/img/infoInstrction.png"><div class="selfDefineTitle">{{third.description}}<div class="theTitleTail"></div></div></span>
+								</li>
+								<li class="clearFloat"></li>
+							</ul>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<!-- <div class="roleDetailSectionContent">
+				<ul class="b-l-d5 b-t-d5">
+					<li ng-repeat='first in list' class="b-b-d5 b-r-d5 p-v-15"><strong class='powerListHead vetically'>{{first.name}}</strong><div class='powerListRight vetically'>
+					<div ng-repeat='second in first.second'>
+						<div class="fontItalic">{{second.name}}</div>
+						<ul class="powerParent">
+							<li class="powerChild" ng-repeat='third in second.third'>
+								<span ng-show='!lookOrEdit' class='m-r-sm vetically'><input name="checkModel" data-mid="{{third.id}}" id="{{third.logo}}{{$index}}" type="checkbox" ng-checked="all">
+								<label class="check acolor666 check-label opcity checkbox" for="{{third.logo}}{{$index}}">
+			                    <i class="fa fa-check"></i></label></span><label for="{{third.logo}}{{$index}}" class="vetically acolor666 font13px">{{third.name}}</label><div ng-if='third.info' class="infoInstructionWrap vetically"><div class="instrcutCon"><p>包含成员用户的基本信息编辑/修改密码/停用/删除，为成员用户赋予/编辑/移除角色权限等等。</p><div class="popBot"></div></div><a href="javascript:;" class=" infoInstructions"></a></div>
+							</li>
+							<li class="clearFloat"></li>
+						</ul>
+					</div></div></li>
+				</ul>
+			</div> -->
+	</div>
+	<div id="treeDemo" class="ztree ztreeLayerHidden"></div>
+	<div class="roleFixWrap" ng-show='fixWrapShow' ng-click='menuHide()'></div>
+</div>

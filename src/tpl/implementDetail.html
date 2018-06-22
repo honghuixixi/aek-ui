@@ -1,0 +1,38 @@
+<div class="implement-detail">
+	<div class="title2">巡检名称：{{obj.name}} 
+		<span class="tip {{type === 3 ? 'finish' : obj.status > 1 ? 'execute' : 'wait'}}">{{type === 3 ? '已结束' : obj.status > 1 ? '巡检中' : '待巡检'}}</span> 
+		<span ng-if="no && no.length" style="float: right;">报告编号：{{no}}</span>
+	</div>
+	<table>
+		<tr>
+			<td class="c6">计划编号</td>
+			<td class="c9" style="width: 40%;">{{obj.planNo}}</td>
+			<td class="c6">负责人</td>
+			<td class="c9">{{obj.director}}</td>
+		</tr>
+		<tr>
+			<td class="c6">巡检类型</td>
+			<td class="c9">{{obj.type}}</td>
+			<td class="c6">创建时间</td>
+			<td class="c9">{{obj.createTime ? (obj.createTime | date:'yyyy-MM-dd HH:mm') : '无'}}</td>
+		</tr>
+		<tr>
+			<td class="c6">巡检周期</td>
+			<td class="c9">{{obj.cycle}}</td>
+			<td class="c6">报告验收人</td>
+			<td class="c9">{{obj.checkMan | inspectionCheckMan}}</td>
+		</tr>
+		<tr>
+			<td class="c6">上次巡检日期</td>
+			<td class="c9">{{obj.preDate ? (obj.preDate | date:'yyyy-MM-dd') : '无' }}</td>
+			<td class="c6"></td>
+			<td class="c9"></td>
+		</tr>
+		<tr>
+			<td class="c6">下次巡检日期</td>
+			<td class="c9">{{obj.nextDate ? (obj.nextDate | date:'yyyy-MM-dd'): '无'}}<span class="tip {{ obj.attention.length && obj.attention.indexOf('已过期') >= 0 ? 'execute' : 'wait'}}" ng-if="obj.attention && obj.attention.length > 0">{{obj.attention}}</span></td>
+			<td class="c6"></td>
+			<td class="c9"></td>
+		</tr>
+	</table>
+</div>

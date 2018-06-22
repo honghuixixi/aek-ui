@@ -1,0 +1,92 @@
+<div class="billDetail">
+	<div class="billInfo">
+		<div class="billOperateListBtn" ng-class='{billOperateListBtnShow: billListShow}'><a href="javascript:void(0);" ng-click='billListChange()'></a></div>
+		<div class="billInfoHead"><span class='m-r'>申请单号：{{billObj.billNo}}</span><span>状态：{{billObj.statusTxt}}</span></div>
+		<ul class="billOperateList" ng-class='{billOperateListShow: billListShow}'>
+			<li ng-repeat='li in billObj.billLogs track by $index'><span class='billOperateMan m-r-md'>{{li.operator}}</span><span class='billOperateName m-r-md'>{{li.operateName}}</span><span class='billOperateTime m-r-md'>{{li.operateTime | date : 'yyyy-MM-dd HH:mm'}}</span><a href="javascript:;" ng-click='applyListDetail(li.checkFlowId)' ng-if='li.operateStatus>1'>查看详情</a></li>
+		</ul>
+	</div>
+	<div class="applyInfo">
+		<div class="applyInfoBody">
+			<div class="applyInfoItem">
+				<div class="applyInfoItembody applyInfoItembodyTable">
+					<table class="table">
+				        <thead>
+				            <tr>
+				                <th>维修单号</th>
+				                <th>设备名称</th>
+				                <th>所在部门</th>
+				                <th>规格型号</th>
+				                <th>院内编码</th>
+				                <th>启用日期</th>
+				                <th>维修申请时间</th>
+				            </tr>
+				        </thead>
+				        <tbody>
+				            <tr>
+				                <td>{{billObj.applyNo}}</td>
+				                <td>{{billObj.assetsName}}</td>
+				                <td>{{billObj.assetsDeptName}}</td>
+				                <td>{{billObj.assetsSpec}}</td>
+				                <td>{{billObj.serialNum}}</td>
+				                <td>{{billObj.startUseDate | date : 'yyyy-MM-dd'}}</td>
+				                <td>{{billObj.reportRepairDate | date : 'yyyy-MM-dd HH:mm'}}</td>
+				            </tr>
+				        </tbody>
+				    </table>
+				</div>
+			</div>
+			<div class="applyInfoItem">
+				<div class="applyInfoItemHead">类型：</div>
+				<div class="applyInfoItembody">{{billObj.type==1?"外修费用":""}}{{billObj.type==2?"配件采购":""}}</div>
+			</div>
+			<div class="applyInfoItem">
+				<div class="applyInfoItemHead">金额：</div>
+				<div class="applyInfoItembody">{{billObj.fee.toFixed(2)}}</div>
+			</div>
+			<div class="applyInfoItem">
+				<div class="applyInfoItemHead">配件：</div>
+				<div class="applyInfoItembody">
+					<table border="0" cellspacing="0" cellpadding="0" class="table" ng-if='billObj.billParts.length'>
+						<tr>
+							<th class='b-l-dcdcdc' style="border-left: 0;">配件名称</th>
+							<th>规格型号</th>
+							<th class="textOverEllipsis">生产商</th>
+							<th>单价</th>
+							<th>单位</th>
+							<th>数量</th>
+							<th>合计</th>
+						</tr>
+						<tr ng-repeat="l in billObj.billParts track by $index">
+							<td>{{l.partName}}</td>
+							<td>{{l.partSpec}}</td>
+							<td>{{l.partProduce}}</td>
+							<td>{{l.partPrice?(l.partPrice*1).toFixed(2):'0.00'}}</td>
+							<td>{{l.unit}}</td>
+							<td>{{l.num}}</td>
+							<td>{{(l.num*l.partPrice).toFixed(2)}}</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="applyInfoItem">
+				<div class="applyInfoItemHead">外修单位：</div>
+				<div class="applyInfoItembody">{{billObj.externalRepairCompany}}</div>
+			</div>
+			<div class="applyInfoItem">
+				<div class="applyInfoItemHead">申请理由：</div>
+				<div class="applyInfoItembody">
+					<div style="word-break: break-all;">{{billObj.remark}}</div>
+				</div>
+			</div>
+			<div class="applyInfoItem">
+				<div class="applyInfoItemHead">附件：</div>
+				<div class="applyInfoItembody">
+					<div ng-repeat="l in billObj.billFiles" style="line-height: 26px;">
+						<a href="{{l?('api/download?path='+ l.urlEncode) :''}}" class="m-r-md" target="_blank">{{l.name}}</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

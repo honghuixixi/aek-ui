@@ -1,0 +1,53 @@
+<!-- toaster directive -->
+<toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container>
+<!-- / toaster directive -->
+
+<!-- 导航条 -->
+<div class="bg-white bread-crumb2">
+    <ul class="breadcrumb b-1 b-a m-b-n-xs lter b-b wrapper-md">
+        <li><a ui-sref="main.tre.ytz.list">预台账</a></li>
+        <li><a ui-sref="main.tre.ytz.assets">预台账详情</a></li>
+    </ul>
+    <div ng-click="btnFn($event)" class="btn-list">
+        <a class="btn-submit" name="submit">提交验收</a>
+        <a class="btn-save" name="save">保存</a>
+        <a class="btn-delete" name="delete">删除</a>
+    </div>
+    <div class="pro-status">
+        <div class="pro-tit">
+            <span>验收单编号：<i>201703093712</i></span><span>状态：<em>验收未通过</em></span>
+            <div ng-click="proUl($event,5)">
+                <a href="javascript:;" ng-show='isClick' name="down" class="ul-operate"><i><img src="" alt=""></i></a>
+                <a href="javascript:;" ng-hide='isClick' name="up" class="ul-operate ul-operate-up"><i><img src="" alt=""></i></a>
+            </div>
+        </div>
+        <ul class="pro-ul">
+            <li class="row"><span class="col-md-2">刘夏</span><span class="col-md-2">提交申请</span><span class="col-md-2">2017-03-09    17:21</span><span class="col-md-2"><a href="javascript:;">查看详情</a></span></li>
+            <li class="row"><span class="col-md-2">刘夏</span><span class="col-md-2">提交申请</span><span class="col-md-2">2017-03-09    17:21</span><span class="col-md-2"><a href="javascript:;">查看详情</a></span></li>
+            <li class="row"><span class="col-md-2">刘夏</span><span class="col-md-2">提交申请</span><span class="col-md-2">2017-03-09    17:21</span><span class="col-md-2"><a href="javascript:;">查看详情</a></span></li>
+            <li class="row"><span class="col-md-2">刘夏</span><span class="col-md-2">提交申请</span><span class="col-md-2">2017-03-09    17:21</span><span class="col-md-2"><a href="javascript:;">查看详情</a></span></li>
+            <li class="row"><span class="col-md-2">刘夏</span><span class="col-md-2">提交申请</span><span class="col-md-2">2017-03-09    17:21</span><span class="col-md-2"><a href="javascript:;">查看详情</a></span></li>
+        </ul>
+    </div>
+    <ul class="bg-white b-2 b-a m-b-n-xs b-b">
+        <li><a ui-sref="main.tre.ytz.assets">设备信息</a></li>
+        <li><a ui-sref="main.tre.ytz.purchase">采购信息</a></li>
+        <li class="active"><a ui-sref="main.tre.ytz.null">档案信息</a></li>
+        <li><a ui-sref="main.tre.ytz.assets">设备日志</a></li>
+        <li><a ui-sref="main.tre.ytz.assets">更多<i class="arrows"></i></a></li>
+    </ul>
+</div>
+
+<!-- 加载提醒 -->
+<div ng-show="loading" class="text-center m-t-md text-lg"><i class="fa fa-spin fa-spinner"></i> 数据加载中...</div>
+
+<!-- 内容区域 -->
+<div class="wrapper-md ytz-detail content">
+    <div class="panel panel-default">
+        <div class="null-wrap">
+			<div class="data-null">
+				<img src="../../../../res/img/null.png"/><span class="fs26ml55">数据开发中...</span>
+			</div>
+		</div>
+    </div>
+</div>

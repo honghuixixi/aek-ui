@@ -1,0 +1,23 @@
+<div class="pm">
+	<div class="pm-menu" ng-if="data.menu.length">
+		<div ng-class="data.menu === 'dashbord' ? 'pm-menu-item active' : 'pm-menu-item'" ng-if="data.limit.dashbord.hasView">
+		  <a class="dashbord" ui-sref="pm.menu.dashbord">PM概览</a>
+		</div>
+		<div ng-class="data.menu === 'plan' ? 'pm-menu-item active' : 'pm-menu-item'" ng-if="data.limit.plan.hasView">
+			<a class="plan" ui-sref="pm.menu.plan">PM计划</a>
+		</div>
+		<div ng-class="data.menu === 'implement' ? 'pm-menu-item active' : 'pm-menu-item'" ng-if="data.limit.implement.hasView">
+			<a class="implement2" ui-sref="pm.menu.implement">PM实施</a>
+		</div>
+		<div ng-class="data.menu === 'template' ? 'pm-menu-item active' : 'pm-menu-item'" ng-if="data.limit.template.hasView">
+			<a class="template" ui-sref="pm.menu.template">PM模板</a>
+		</div>
+		<div ng-class="data.menu === 'acceptance' ? 'pm-menu-item active' : 'pm-menu-item'" ng-if="data.limit.acceptance.hasView">
+			<a class="accept" ui-sref="pm.menu.acceptance({status: 0})">PM验收</a>
+		</div>
+		<div ng-class="data.menu === 'report' ? 'pm-menu-item active' : 'pm-menu-item'" ng-if="data.limit.report.hasView">
+			<a class="report" ui-sref="pm.menu.report">PM查询</a>
+		</div>
+	</div>
+	<div class="pm-content" ui-view></div>
+</div>

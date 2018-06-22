@@ -1,0 +1,76 @@
+<!-- 字典表管理 -->
+<div class="dic-content-group">
+    字典表管理（{{data.orgName}}）
+    <span class="fr btn2" ng-click="showAddTabke()" ng-if="data.limit.manager">新建字典表</span>
+</div>
+<div class="dic-content-body" id="dic-content-body">
+    <div ng-if="!data.limit.browse && !data.limit.manager" class="nolimit"><img src="../../../res/img/myqx.png">您没有该页面的权限</div>
+    <div ng-if="data.limit.browse || data.limit.manager">
+        <div class="top">
+            <my-select options="data.types" search="changeType(type)"></my-select>
+            <input class="fl" type="text" placeholder="字典表名称" ng-model="data.search.keyword">
+            <span class="fl btn2 searchbtn" ng-click="search()">搜索</span>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <td style="width: 50px;">ID</td>
+                    <td style="min-width:120px;">字典表名称</td>
+                    <td style="min-width:96px;">包含字典值数</td>
+                    <td style="min-width:64px;">默认值</td>
+                   <!--  <td style="min-width:74px;">级联状态</td> -->
+                    <td style="min-width:74px;">管理类型</td>
+                    <td>备注</td>
+                    <td style="width:120px;">操作</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="v in data.list">
+                    <td>{{v.id}}</td>
+                    <td>{{v.name}}</td>
+                    <td>{{v.dictValueCount}}</td>
+                    <td>{{v.value ? v.value : ""}}</td>
+                   <!--  <td>{{v.cascadeStatus > 1 ? "独立" : "允许级联"}}</td> -->
+                    <td>{{v.manageType > 1 ? "自定义" :  "基础"}}</td>
+                    <td style="padding: 5px 10px;line-height: 20px;">{{v.remarks ? v.remarks : ""}}</td>
+                    <td>
+                        <a ui-sref="dictionary.menu.field({id: v.id})">管理</a>
+                        <a ng-if="v.manageType > 1 && data.limit.manager" ng-click="showAddTabke(v)"> 编辑</a>
+                        <a ng-if="v.manageType > 1 && data.limit.manager" ng-click="delTable(v)">删除</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- 分页 -->
+        <span ng-if="!data.loading && !data.empty" data-ng-include=" 'src/tpl/newPageInfo.html' "></span>
+        <!-- empty -->
+        <div class="empty" ng-if="data.empty && !data.loading"><img src="../../../res/img/nocontent.png">暂无数据</div>
+        <!-- loading -->
+        <div class="loading" ng-if="data.loading"><img src="../../../res/img/loading2.gif"></div>
+    </div>
+</div>
+
+<!-- 新建、编辑字典表 -->
+<div id="template_add_table" style="display: none;">
+    <dl class="modal-table">
+        <dt>字典表名称<span class="require">*<span></dt>
+        <dd>
+            <input type="text" placeholder="最多40个字符" maxlength="40" ng-model="data.record.name" ng-change="removeErr()">
+            <div class="err">{{data.err}}&nbsp;</div>
+        </dd>
+        <!-- <dt>级联状态</dt>
+        <dd>
+            <select ng-model="data.record.type">
+                <option value="2">独立</option>
+                <option value="1">级联</option>
+            </select>
+        </dd> -->
+        <dt>备注</dt>
+        <dd>
+            <div class="absc">
+                <textarea ng-model="data.record.absc" maxlength="100" ng-trim="false"></textarea>
+                <div>{{data.record.absc.length}}/100</div>
+            </div>
+        </dd>
+    </dl>
+</div>

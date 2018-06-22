@@ -1,0 +1,28 @@
+<div class="fy_generalWrap" style="overflow: auto">
+    <div class="fy_general">
+        <div class="fy_generalTitle">概览<span class='m-l'>({{userInfo.nowOrgName||('/'+userInfo.tenantName)}})</span></div>
+        <div class="fy_gegeralBaseInfo">
+            <div class="fy_gegeralBaseInfoOneWrap" ng-class='{"p-l-none": $index==0}' ng-repeat='one in generalList track by $index'><div class="fy_gegeralBaseInfoOne"><a ng-click='generalFlush($index)'></a><div class="fy_gegeralBaseInfoNum" ng-class='{fy_gegeralBaseInfoNumErr: one.err}'>{{one.num}}</div><div class="fy_gegeralBaseInfoTxt">{{one.name}}</div></div></div>
+        </div>
+        <div class="fy_generalChartWrap">
+            <div class="fy_generalChartHead">
+                <div class="selector"><input type="text" ng-click='listShow("typeList")' ng-model='typeModel.name' readonly="true">
+                    <div class="options" ng-show='typeList'>
+                        <ul>
+                            <li ng-repeat='item in optionType' ng-click='option("typeList","typeModel",item,1)'>{{item.name}}</li>
+                         </ul>
+                    </div>
+                </div><div class="fy_generalChartWhat"><a></a></div><div class="fy_generalChartSesstion">
+                    <a ng-class='{fy_generalChartSesstionNow: chartScope==1}' ng-click='chartScopeChange(1)'>本月</a><a class="b-l-none b-r-none" ng-class='{fy_generalChartSesstionNow: chartScope==2}' ng-click='chartScopeChange(2)'>本季度</a><a ng-click='chartScopeChange(3)' ng-class='{fy_generalChartSesstionNow: chartScope==3}'>本年</a>
+                </div><div class="generalChartDate"><input type="text" id='chartDateScope' ng-change='chartScopeChange()' ng-value='chartDateRootScope' ng-model='chartDateRootScope' readonly="true"></div>
+                <a ng-click='chartScopeChange()' class="fy_generalChartFreshen"></a>
+            </div>
+            <div class="fy_generalChartCon">
+                <div id="fy_generalChart" style="height:500px;">
+                    
+                </div>
+            </div>
+        </div>
+        <div class="generalFixWrap" ng-show='fixWrapShow' ng-click='menuHide()'></div>
+    </div>
+</div>

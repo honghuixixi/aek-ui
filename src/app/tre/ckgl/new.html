@@ -1,0 +1,93 @@
+<!-- toaster directive -->
+<toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container>
+<!-- / toaster directive -->
+
+<!-- 导航条 -->
+<div class="bg-white bread-crumb">
+    <!-- <ul class="breadcrumb lter b-b wrapper-md">
+        <li><a ui-sref="main.tre.ckgl.list"><i class="fa fa-home"></i>入库管理</a></li>
+        <li class="active" ng-bind="title"></li>
+    </ul> -->
+    <div class="tab-tit">
+        <a ui-sref="main.tre.ckgl.list">出库管理</a>><a ui-sref="main.tre.ckgl.new">{{tit2}}</a>
+    </div>
+    <div ng-click="btnFn($event)" class="fix-btn fix-btns">
+    <a ng-repeat="btn in btns" class="{{btn.class}}" ng-show="{{btn.show}}" name="{{btn.name}}">{{btn.con}}</a>
+    	<!-- <a name="print" class="pos-fix-btn pf-btn-save">打印入库单</a>
+        <a name="cancle" class="pos-fix-btn pf-btn-save">取消</a>
+        <a name="save" class="pos-fix-btn pf-btn-save">保存</a>
+        <a name="submit" class="pos-fix-btn pf-btn-sub btn-hover">提交入库申请</a> -->
+    </div>
+</div>
+
+<!-- 加载提醒 -->
+<!--<div ng-show="loading" class="text-center m-t-md text-lg"><i class="fa fa-spin fa-spinner"></i> 数据加载中...</div>-->
+
+<!-- 内容区域 -->
+<div data-ng-include=" 'src/app/tre/ckgl/iframe.html' " id="addDev" ng-show="unAddDev" ></div>
+<div data-ng-include=" 'src/app/tre/ckgl/print.html' " id="toPrint" ng-show="unPrint" ></div>
+<div ng-hide="loading" class="wrapper-md content content-m height-full">
+    <!-- 数据显示 -->
+    <div class="wrapper-data">
+        <div class="panel panel-default bcgc-gray">
+            <!-- 头部 -->
+            <div class="pro-status m-t-xl pos-normal" ng-show="div">
+            <div class="pro-tit">
+                <span>验收单编号：<i>201703093712</i></span><span>状态：<em>{{divcon}}</em></span>
+                <div ng-click="proUl($event,5)">
+                    <a href="javascript:;" ng-show='isClick' name="down" class="ul-operate"><i><img src="" alt=""></i></a>
+                    <a href="javascript:;" ng-hide='isClick' name="up" class="ul-operate ul-operate-up"><i><img src="" alt=""></i></a>
+                </div>
+            </div>
+            <ul class="pro-ul">
+                <li class="row" ng-show='li1'><span class="col-md-2">刘夏</span><span class="col-md-2">提交申请</span><span class="col-md-2">2017-03-09    17:21</span><span class="col-md-2"><a href="javascript:;">查看详情</a></span></li>
+                <li class="row" ng-show='li2' ng-class='{"unpass": li2none}'><span class="col-md-2">刘能</span><span class="col-md-2">{{li2con}}</span><span class="col-md-2">2017-03-09    18:01</span><span class="col-md-2"><a href="javascript:;">查看详情</a></span></li>
+                <li class="row" ng-show='li3' ng-class='{"unpass": li3none}'><span class="col-md-2">刘欢</span><span class="col-md-2">{{li3con}}</span><span class="col-md-2">2017-03-09    20:00</span><span class="col-md-2"><a href="javascript:;">查看详情</a></span></li>
+                </ul>
+        </div>
+        <div class="content-wrap">
+        	<div class="con-reg" ng-show='regdiv'>
+        		<div class="reg-tit">申请信息</div>
+        		<div class="reg-info">
+        			<span>申请说明：</span><div><textarea ng-change="applyChange(num)" ng-model="applyValue"></textarea><i>({{applyForNum}}/300)</i></div>
+        		</div>
+        	</div>
+        	<div class="con-dev">
+        		<div class="dev-tit">设备明细</div>
+        		<div class="dev-list">
+        			<div class="dev-btn m-b-sm"><a href="javascript:;" class="" ng-click="toAddDev()">添加设备</a></div>
+        			<div class="list-con">
+        				<table border="0" cellspacing="0" cellpadding="0" class="dev-table">
+        					<tbody>
+                            <tr class="tb-tr-th">
+        						<th style="width: 13.1%;">设备编号</th>
+        						<th style="width: 13.66%;">设备名称</th>
+        						<th style="width: 12.66%;">合同号</th>
+        						<th style="width: 10.4%;">规格型号</th>
+        						<th style="width: 17.17%;">生产商</th>
+        						<th style="width: 15.82%;">供应商</th>
+        						<th style="width: 10.4%;">所属科室</th>
+        						<th style="width: 6.79%;">操作</th>
+        					</tr>
+                            <tr ng-repeat="tr in trData" ng-class="{'b-b-tr':$index == trData.length-1}">
+                                <td class="b-l-dcdcdc"><div class="">{{tr.one}}</div></td>
+                                <td><div>{{tr.two}}</div></td>
+                                <td><div>{{tr.three}}</div></td>
+                                <td><div>{{tr.four}}</div></td>
+                                <td><div>{{tr.five}}</div></td>
+                                <td><div>{{tr.six}}</div></td>
+                                <td><div>{{tr.seven}}</div></td>
+                                <td class="b-r-dcdcdc"><div><a ng-class="{'f-c':operaState}" ng-click="removeTr(tr)">{{operation}}</a></div></td>
+                            </tr>
+        					</tbody>
+        				</table>
+        			</div>
+        		</div>
+        	</div>
+        </div>
+        </div><!-- /.panel -->
+    </div><!-- /.wrapper-data -->
+	<!-- 底部分页 -->
+<!--<span data-ng-include=" 'src/tpl/pageInfo.html' "></span>-->
+</div><!-- /.wrapper-md -->
+<!-- addDev -->

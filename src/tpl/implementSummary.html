@@ -1,0 +1,14 @@
+<div class="implent_summary">
+	<p>临床使用情况</p>
+	<textarea ng-if="type === 1" placeholder="请在巡检开始后输入" readonly="readonly"></textarea>
+	<textarea ng-if="type === 2" ng-model="obj.condition" placeholder="请输入，300字符以内" maxlength="300"></textarea>
+	<textarea ng-if="type === 3" ng-model="obj.condition" readonly="readonly"></textarea>
+	<p>存在的问题及分析</p>
+	<textarea ng-if="type === 1" placeholder="请在巡检开始后输入" readonly="readonly"></textarea>
+	<textarea ng-if="type === 2" ng-model="obj.analysis" placeholder="请输入，300字符以内" maxlength="300"></textarea>
+	<textarea ng-if="type === 3" ng-model="obj.analysis" readonly="readonly"></textarea>
+	<p>改进的问题及建议</p>
+	<textarea ng-if="type === 1" placeholder="请在巡检开始后输入" readonly="readonly"></textarea>
+	<textarea ng-if="type === 2" ng-model="obj.suggestion" placeholder="请输入，300字符以内" maxlength="300"></textarea>
+	<textarea ng-if="type === 3" ng-model="obj.suggestion" readonly="readonly"></textarea>
+</div>

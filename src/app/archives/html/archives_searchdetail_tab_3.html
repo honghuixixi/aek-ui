@@ -1,0 +1,247 @@
+<div ng-show="isshow">
+    <table class="tab2" style="margin-top: 15px;" ng-show="!isedit">
+        <tr>
+            <td colspan="2">
+                <div class="tab2-group">申购信息</div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <dl class="search-archives">
+                    <dt>购置类别：</dt>
+                    <dd>{{data.server.purchaseTypeStr}}&nbsp;</dd>
+                    <dt>申购部门：</dt>
+                    <dd>{{data.server.applyDeptName}}&nbsp;</dd>
+                    <dt>资金来源：</dt>
+                    <dd>{{(data.server.listFundSources && data.server.listFundSources.length > 0) ? data.server.listFundSources[0].name
+                        : '' }}&nbsp;</dd>
+                    <dt ng-if="data.server.listFundSources && data.server.listFundSources.length > 0">{{data.server.listFundSources[0].subName}}：</dt>
+                    <dd ng-if="data.server.listFundSources && data.server.listFundSources.length > 0">{{data.server.listFundSources[0].moneyStr}}&nbsp;</dd>
+                    <dt>申购理由：</dt>
+                    <dd>{{data.server.applyReason}}&nbsp;</dd>
+                </dl>
+            </td>
+            <td style="min-width:500px;padding-left: 100px;vertical-align: top;">
+                <dl class="search-archives">
+                    <dt>申购日期：</dt>
+                    <dd>{{data.server.applyDate | date:'yyyy-MM-dd'}}&nbsp;</dd>
+                    <dt>论证日期：</dt>
+                    <dd>{{data.server.proveDate | date:'yyyy-MM-dd'}}&nbsp;</dd>
+                    <dt>预到日期：</dt>
+                    <dd>{{data.server.previewArriveDate | date:'yyyy-MM-dd'}}&nbsp;</dd>
+                    <dt ng-if="data.server.listFundSources && data.server.listFundSources.length > 1">{{data.server.listFundSources[1].subName}}：</dt>
+                    <dd ng-if="data.server.listFundSources && data.server.listFundSources.length > 1">{{data.server.listFundSources[1].moneyStr}}&nbsp;</dd>
+                </dl>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <div class="tab2-group">招标信息</div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <dl class="search-archives">
+                    <dt>采购方式：</dt>
+                    <dd>{{data.server.purchaseModeStr}}&nbsp;</dd>
+                    <dt>单项预算：</dt>
+                    <dd>{{data.server.singleBudgetStr}}&nbsp;</dd>
+                    <dt>立项依据：</dt>
+                    <dd>{{data.server.buildItemBasis}}&nbsp;</dd>
+                    <dt>附件：</dt>
+                    <dd>
+                        <div ng-repeat="v in data.server.bidAttachments">
+                            <a href="{{v.fileUrl | archivesDownloadURL}}">{{v.fileName }}；</a>
+                        </div>
+                        &nbsp;
+                    </dd>
+                </dl>
+            </td>
+            <td style="padding-left: 100px;vertical-align: top;">
+                <dl class="search-archives">
+                    <dt>招标形式：</dt>
+                    <dd>{{data.server.tenderFormStr}}&nbsp;</dd>
+                    <dt>中标日期：</dt>
+                    <dd>{{data.server.tenderDate | date:'yyyy-MM-dd'}}&nbsp;</dd>
+                </dl>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <div class="tab2-group">验收信息</div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <dl class="search-archives">
+                    <dt>验收人员：</dt>
+                    <dd>{{data.server.acceptor}}&nbsp;</dd>
+                    <dt>验收部门：</dt>
+                    <dd>{{data.server.acceptorDeptName}}&nbsp;</dd>
+                    <dt>附件：</dt>
+                    <dd>
+                        <div ng-repeat="v in data.server.acceptAttachments ">
+                            <a href="{{v.fileUrl | archivesDownloadURL}}">{{v.fileName }}；</a>
+                        </div>
+                        &nbsp;
+                    </dd>
+                </dl>
+            </td>
+            <td style="padding-left: 100px;vertical-align: top;">
+                <dl class="search-archives">
+                    <dt>验收日期：</dt>
+                    <dd>{{data.server.acceptorTime | date:'yyyy-MM-dd'}}&nbsp;</dd>
+                    <dt>到货日期：</dt>
+                    <dd>{{data.server.arrivalTime | date:'yyyy-MM-dd'}}&nbsp;</dd>
+                </dl>
+            </td>
+        </tr>
+    </table>
+    <table class="tab2 tab-form" style="margin-top: 15px;" ng-show="isedit">
+        <tr>
+            <td colspan="2">
+                <div class="tab2-group">申购信息</div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <dl class="search-archives">
+                    <dt>购置类别：</dt>
+                    <dd>
+                        <com-select list="data.local.PURCHASE_TYPE" id="data.local.record.purchaseType"></com-select>
+                    </dd>
+                    <dt>申购部门：</dt>
+                    <dd>
+                        <com-select list="data.local.DEPARTS" id="data.local.record.applyDeptId"></com-select>
+                    </dd>
+                    <dt>资金来源：</dt>
+                    <dd>
+                        <com-select list="data.local.FUND_SOURCES" id="data.local.record.listFundSourcesType"></com-select>
+                    </dd>
+                    <dt ng-show="data.local.record.listFundSourcesType > 0">{{data.local.record.listFundSourcesType == 4 ? '财政资金' : data.local.FUND_SOURCES_MAP[data.local.record.listFundSourcesType]}}额度：</dt>
+                    <dd ng-show="data.local.record.listFundSourcesType > 0">
+                        <input type="text" placeholder="请输入" oninput="this.value=this.value.match(/^[1-9]\d*(?:\.\d{0,2})?/)" ng-model="data.local.record.listFundSourcesMoney1">
+                    </dd>
+                    <dt>申购理由：</dt>
+                    <dd>
+                        <textarea maxlength="300" placeholder="请输入申购理由，300个字符以内" ng-model="data.local.record.applyReason"></textarea>
+                    </dd>
+                </dl>
+            </td>
+            <td style="padding-left: 100px;vertical-align: top;">
+                <dl class="search-archives">
+                    <dt>申购日期：</dt>
+                    <dd>
+                        <input id="tab3-applyDate" class="tab-form-date" type="text" placeholder="请选择" readonly>
+                    </dd>
+                    <dt>论证日期：</dt>
+                    <dd>
+                        <input id="tab3-proveDate" class="tab-form-date" type="text" placeholder="请选择" readonly>
+                    </dd>
+                    <dt>预到日期：</dt>
+                    <dd>
+                        <input id="tab3-previewArriveDate" class="tab-form-date" type="text" placeholder="请选择" readonly>
+                    </dd>
+                    <dt ng-show="data.local.record.listFundSourcesType == 4">自筹资金额度：</dt>
+                    <dd ng-show="data.local.record.listFundSourcesType == 4">
+                        <input type="text" placeholder="请输入" oninput="this.value=this.value.match(/^[1-9]\d*(?:\.\d{0,2})?/)" ng-model="data.local.record.listFundSourcesMoney2">
+                    </dd>
+                </dl>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <div class="tab2-group">招标信息</div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <dl class="search-archives">
+                    <dt>采购方式：</dt>
+                    <dd>
+                        <com-select list="data.local.PURCHASE_MODE" id="data.local.record.purchaseMode"></com-select>
+                    </dd>
+                    <dt>单项预算：</dt>
+                    <dd>
+                        <input type="text" placeholder="请输入" oninput="this.value=this.value.match(/^[1-9]\d*(?:\.\d{0,2})?/)" ng-model="data.local.record.singleBudget">
+                    </dd>
+                    <dt>立项依据：</dt>
+                    <dd>
+                        <textarea maxlength="300" placeholder="请输入，300个字符以内" ng-model="data.local.record.buildItemBasis"></textarea>
+                    </dd>
+                    <dt>附件：</dt>
+                    <dd>
+                        <div style="line-height: 32px;">
+                            <span class="archives-btn archives-cancle" ng-click="methods.uploadFile('tab3-uploadId-1')" ng-show="data.local.record.bidAttachments.length < 5">上传附件</span>&nbsp;&nbsp;
+                            <label style="color: #999;">*单个文件5M以内，最多上传5个</label>
+                            <input id="tab3-uploadId-1" type="file" style="display: none;">
+                        </div>
+                        <div ng-repeat="v in data.local.record.bidAttachments">
+                            <a>{{v.fileName}}；</a>
+                            <span style="margin-left: 10px;color: #f00;cursor: pointer;" ng-click="methods.removeFile($index, 'bidAttachments')">删除</span>
+                        </div>
+                    </dd>
+                </dl>
+            </td>
+            <td style="padding-left: 100px;vertical-align: top;">
+                <dl class="search-archives">
+                    <dt>招标形式：</dt>
+                    <dd>
+                        <com-select list="data.local.TENDER_FORM" id="data.local.record.tenderForm"></com-select>
+                    </dd>
+                    <dt>中标日期：</dt>
+                    <dd>
+                        <input id="tab3-tenderDate" class="tab-form-date" type="text" placeholder="请选择" readonly>
+                    </dd>
+                </dl>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <div class="tab2-group">验收信息</div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <dl class="search-archives">
+                    <dt>验收人员：</dt>
+                    <dd>
+                        <input type="text" maxlength="40" placeholder="请输入" ng-model="data.local.record.acceptor">
+                    </dd>
+                    <dt>验收部门：</dt>
+                    <dd>
+                        <com-select-name list="data.local.DEPARTS" id="data.local.record.acceptorDeptName"></com-select-name>
+                    </dd>
+                    <dt>附件：</dt>
+                    <dd>
+                        <div style="line-height: 32px;">
+                            <span class="archives-btn archives-cancle" ng-click="methods.uploadFile('tab3-uploadId-2')" ng-show="data.local.record.acceptAttachments.length < 5">上传附件</span>&nbsp;&nbsp;
+                            <label style="color: #999;">*单个文件5M以内，最多上传5个</label>
+                            <input id="tab3-uploadId-2" type="file" style="display: none;">
+                        </div>
+                        <div ng-repeat="v in data.local.record.acceptAttachments">
+                            <a>{{v.fileName}}；</a>
+                            <span style="margin-left: 10px;color: #f00;cursor: pointer;" ng-click="methods.removeFile($index, 'acceptAttachments')">删除</span>
+                        </div>
+                    </dd>
+                </dl>
+            </td>
+            <td style="padding-left: 100px;vertical-align: top;">
+                <dl class="search-archives">
+                    <dt>验收日期：</dt>
+                    <dd>
+                        <input id="tab3-acceptorTime" class="tab-form-date" type="text" placeholder="请选择" readonly>
+                    </dd>
+                    <dt>到货日期：</dt>
+                    <dd>
+                        <input id="tab3-arrivalTime" class="tab-form-date" type="text" placeholder="请选择" readonly>
+                    </dd>
+                </dl>
+            </td>
+        </tr>
+    </table>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+</div>

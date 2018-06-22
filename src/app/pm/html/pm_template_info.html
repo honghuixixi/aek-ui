@@ -1,0 +1,94 @@
+<div>
+    <div class="pm-top">
+        <a ui-sref="pm.menu.template" style="color: #999;">PM模板</a>&gt;<span>查看详情</span>
+        <span ng-if="data.template.type === 2 && data.limit.delete" class="pm-top-btn pm-top-del" ng-click="delTemplate()">删除模板</span>
+        <span ng-if="data.template.type === 2 && data.limit.disable && data.template.status === 2" class="pm-top-btn pm-top-enable" ng-click="enableTemplate()">启用模板</span>
+        <span ng-if="data.template.type === 2 && data.limit.disable && data.template.status === 1" class="pm-top-btn pm-top-disable" ng-click="disableTemplate()">停用模板</span>
+    </div>
+    <div class="pm-main" style="min-height: {{data.height}}px;">
+        <div class="pm-main-search">
+            <div class="pm-main-search-name">{{data.template.name}}<span class="tag {{data.template.status > 1 ? 'disenable' : ''}}">{{data.template.status > 1 ? '停用' : '启用'}}</span></div>
+            <div style="margin-bottom:10px;font-size:14px;color: #999;">备注：{{data.template.remarks || ''}}</div>
+            <div ng-if="data.template.type > 1 && data.limit.edit" style="overflow: hidden;"><span class="pm-btn add-item" ng-click="addTemplateItem()">新建项目</span></div>
+        </div>
+        <table class="pm-main-list">
+            <thead>
+                <tr>
+                    <td style="width: 50px;">序号</td>
+                    <td style="text-align: left;">项目名称</td>
+                    <td style="text-align: left;">项目内容及说明</td>
+                    <td style="width: 130px;" ng-if="data.template.type > 1 && data.limit.edit">操作</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat=" v in data.template.items">
+                    <td>{{$index + 1}}</td>
+                    <td style="text-align: left;">{{v.name}}<span class="tag" ng-if="v.status > 1">已停用</span></td>
+                    <td style="padding: 0; text-align: left;">
+                       <div class="div" style="padding: 0 10px;" ng-repeat="o in v.options">{{o.name}}</div> 
+                    </td>
+                    <td ng-if="data.template.type > 1 && data.limit.edit">
+                        <a ng-click="editTemplateItem(v, $index)">编辑</a>
+                        <a ng-click="delTemplateItem(v.id)">删除</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- empty -->
+        <div class="empty" ng-if="data.empty && !data.loading"><img src="../../../res/img/nocontent.png">暂无数据</div>
+        <!-- loading -->
+        <div class="loading" ng-if="data.loading"><img src="../../../res/img/loading2.gif"></div>
+	</div>
+</div>
+
+<!-- 新建/编辑对话框 -->
+<div id="template_add_template_item" style="display: none;">
+    <div style="height:24px;margin-top:5px;margin-left: 110px;line-height: 24px;color: #ff2a2a;">{{data.err}}</div>
+    <dl class="modal-add" style="height: 300px;margin: 0; overflow: auto;">
+        <dt><span class="require">*</span>项目名称：</dt>
+        <dd>
+            <input id="templateItemName" style="margin-bottom: 10px;" type="text" placeholder="40个字符以内" maxlength="40" ng-model="data.templateItem.name" ng-change="removeErr()">
+        </dd>
+        <dt><span class="require">*</span>项目内容：</dt>
+        <dd>
+            <div style="margin-bottom: 10px; overflow: hidden;" ng-repeat="v in data.templateItem.options track by $index">
+                <input id="option_{{$index}}" style="float: left;width:{{$index > 1 ? 360 : 400;}}px;" type="text" ng-model="v.name" placeholder="选项{{$index + 1}}，40个字符以内"  maxlength="40" ng-change="removeErr()">
+                <span class="del" ng-if="$index > 1" ng-click="delItemOption($index)"></span>
+            </div>
+            <div ng-if="data.templateItem.options.length < 20"><span class="pm-btn" ng-click="addItemOption()">新增项目内容</span></div>
+        </dd>
+    </dl>
+</div>
+<!-- 删除模板 -->
+<div id="template_delete" class="inspectionLayer" style="display: none;">
+    <div style="text-align: center; color: #666;">
+        <div>
+            <div class="inspectionLayerImg m-t-lg m-b-md"><img src='../../res/img/icon20.png'></div>
+            <div>
+                <span>删除模板后不可恢复，确定要删除吗？</span>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 停用模板 -->
+<div id="template_disable" class="inspectionLayer" style="display: none;">
+    <div style="text-align: center; color: #666;">
+        <div>
+            <div class="inspectionLayerImg m-t-lg m-b-md"><img src='../../res/img/wh.png'></div>
+            <div>
+                <span>停用后，该模板将无法使用，确定要停用吗？</span>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 启用模板 -->
+<div id="template_enable" class="inspectionLayer" style="display: none;">
+    <div style="text-align: center; color: #666;">
+        <div>
+            <div class="inspectionLayerImg m-t-lg m-b-md"><img src='../../res/img/wh.png'></div>
+            <div>
+                <span>确定启用该模板？</span>
+            </div>
+        </div>
+    </div>
+</div>

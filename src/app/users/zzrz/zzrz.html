@@ -1,0 +1,140 @@
+<div class="baseInfoWrap">
+	<div class="baseInfoCon">
+		<!-- 超管 -->
+		<div class="baseInfoDiv" ng-if='!personal'>
+			<a class="editCon" ng-click='toEdit()' ng-if='!editName'>编辑</a>
+			<h4>机构信息</h4>
+			<!-- <div class="toastComplete">请完善以下信息，方便我们更好的为您服务</div> -->
+			<ul class="baseData">
+				<li>
+					<div class="listHead"><span><i></i><em>机构logo：</em></span></div>
+					<input ng-hide="true" type="file" id="headFile" onchange="angular.element(this).scope().setImagePreview(this.files)">
+					<div class="listCon headChange" ng-click="headClick()">
+						<img id="headImg" src="../../../res/img/jglg.png" alt="">
+						<a href="javascript:;">修改头像</a>
+					</div>
+				</li><li class="linheight24px"></li>
+				<li>
+					<div class="listHead"><span><i ng-if='editName'>*</i><em>机构类别：</em></span></div><div class="listCon">
+					<select ng-show='editName' ng-model='org.category' class="width330px" ng-options='list.value as list.name for list in categorylists'></select><span ng-if='!editName'>{{org.categoryTransfer}}</span></div>
+				</li><li class="linheight24px"></li>
+				<li>
+					<div class="listHead"><span><i ng-if='editName'>*</i><em>机构名称：</em></span></div><div class="listCon"><input type="text" ng-if='editName' class="editName" ng-model='org.name'><span ng-if='!editName'>{{org.name}}</span></div>
+				</li><li class="linheight24px"></li>
+				<li>
+					<div class="listHead"><span><i ng-if='editName'>*</i><em>机构类型：</em></span></div><div class="listCon"><!--   
+					--><select name="" id="" ng-show='editName' class="width182px" ng-model='org.orgtype'  ng-options='list for list in typelists'>
+					</select><select name="" id="" ng-show='editName' class="width138px m-l-sm" ng-model='org.orgtypeGrade' ng-options='list for list in gradelists'>
+					</select><span ng-if='!editName'>{{org.orgtype}}/{{org.orgtypeGrade}}</span></div>
+				</li><li class="linheight24px"></li>
+				<li>
+					<div class="listHead"><span><i ng-if='editName'>*</i><em>机构代码：</em></span></div><div class="listCon"><input type="text" ng-if='editName' class="editName" ng-model='org.code'><span ng-if='!editName'>{{org.code}}</span></div>
+				</li><li class="linheight24px"></li>
+				<!-- <li><div class="listHead"><span><i ng-show='editName'>*</i><em>真实姓名：</em></span></div><div class="listCon"><input type="text" ng-if='editName' class="editName"><span ng-if='!editName'>林夏</span></div></li>
+ -->			<!-- <li  ng-repeat="list in baseList " >
+					<div class="listHead"><span><i ng-if='editName'>*</i><em>{{list.head}}</em></span></div><div class="listCon"><input type="text" ng-if='editName' class="editName"><span ng-if='!editName'>{{list.con}}</span></div>
+				</li> -->
+				<li><div class="listHead vTop"><span><i ng-if='editName'>*</i><em>机构简介：</em></span></div><div class="listCon"><p class="simpleDes" ng-if='!editName'>{{org.brief}}</p>
+				<div class="textArea" ng-if="editName"><span>剩余{{500 - org.brief.length}}字</span><textarea ng-change='pC()' ng-model='org.brief' name="" id="" cols="30" rows="10"></textarea></div></div></li>
+			</ul>
+		</div>
+		<div class="baseInfoDiv" ng-if='!personal'>
+			<h4>通信信息</h4>
+			<ul class="baseData" ng-if='!super'>
+				<!-- <li  ng-repeat="list in commonList ">
+					<div class="listHead"><span><i>{{list.required}}</i><em>{{list.head}}</em></span></div><div class="listCon">{{list.con}}</div>
+				</li> -->
+				<li>
+					<div class="listHead"><span><i></i><em>所在地区：</em></span></div><div class="listCon">{{org.proSel}}/{{org.citySel}}/{{org.regionSel}}</div>
+				</li><li class="linheight24px"></li>
+				<li>
+					<div class="listHead"><span><i></i><em>街道地址：</em></span></div><div class="listCon">{{org.address}}</div>
+				</li><li class="linheight24px"></li>
+				<li>
+					<div class="listHead"><span><i></i><em>联系人：</em></span></div><div class="listCon">{{org.contactPerson}}</div>
+				</li><li class="linheight24px"></li>
+				<li>
+					<div class="listHead"><span><i></i><em>联系电话：</em></span></div><div class="listCon">{{org.phone}}</div>
+				</li><li class="linheight24px"></li>
+				<li>
+					<div class="listHead"><span><i></i><em>传真：</em></span></div><div class="listCon">{{org.fax}}</div>
+				</li>
+			</ul>
+			<ul class="baseData" ng-if='super'>
+				<li>
+					<div class="listHead"><span><i></i><em>所在地区：</em></span></div><div class="threeState">
+						<select ng-change="provChange(org.proSel)" ng-model='org.proSel' ng-options='item for item in province'></select>
+						<!-- <select ng-change="provChange(proSel)" ng-model="proSel" ng-value='selectProvince'>
+							<option value="{{item.id}}" ng-repeat="item in province">{{item.name}}</option>
+						</select> -->
+						<!--<input type="text" placeholder='浙江省'>-->
+						<span>-</span>
+						<select ng-change="cityChange(org.citySel)" ng-model='org.citySel' ng-options='item for item in city'></select>
+						<!-- <select ng-change="cityChange(citySel)" ng-model='citySel' ng-value="selectCity">
+							<option value="{{item.id}}" ng-repeat="item in city">{{item.name}}</option>
+						</select> -->
+						<!--<input type="text" placeholder='杭州市'>-->
+						<span>-</span>
+						<select ng-model='org.regionSel' ng-options='item for item in region'></select>
+						<!-- <select ng-model='selectRegion'>
+							<option value="{{item.id}}" ng-repeat="item in area">{{item.name}}</option>
+						</select> -->
+						<!--<input type="text" placeholder='萧山区'>-->
+					</div>
+				</li><li class="linheight24px"></li>
+				<li>
+					<div class="listHead"><span><i>*</i><em>街道地址：</em></span></div><div class="listCon"><input type="text" class="editName" ng-model='org.address'></div>
+				</li><li class="linheight24px"></li>
+				<li>
+					<div class="listHead"><span><i>*</i><em>联系人：</em></span></div><div class="listCon"><input type="text" ng-model='org.contactPerson' class="editName"></div>
+				</li><li class="linheight24px"></li>
+				<li>
+					<div class="listHead"><span><i>*</i><em>联系电话：</em></span></div><div class="listCon"><input type="text" ng-model='org.phone' class="editName"><span class='example'>例如：0571-88888888</span></div>
+				</li><li class="linheight24px"></li>
+				<li>
+					<div class="listHead"><span><i></i><em>传真：</em></span></div><div class="listCon"><input type="text" ng-model='org.fax' class="editName"><span class='example'>例如：86057188888888</span></div>
+				</li>
+				<!-- <li><div class="listHead"><span><i ng-if="editName">*</i><em>所在地区：</em></span></div><div class="threeState"><input type="text" placeholder='浙江省'><span>-</span><input type="text" placeholder='杭州市'><span>-</span><input type="text" placeholder='萧山区'></div></li>
+				<li ng-repeat="list in commonListEdit "><div class="listHead"><span><i>{{list.required}}</i><em>{{list.head}}</em></span></div><div class="listCon"><input type="text" class="editName"><span class='example'>{{list.example}}</span></div></li> -->
+			</ul>
+		</div>
+		<!-- 个人 -->
+		<div class="baseInfoDiv" ng-if='personal'>
+			<h4>身份信息</h4>
+			<ul class="baseData" ng-if='!super'>
+				<li  ng-repeat="list in commonList ">
+					<div class="listHead"><span><i>{{list.required}}</i><em>{{list.head}}</em></span></div><div class="listCon">{{list.con}}</div>
+				</li>
+			</ul>
+			<ul class="baseData" ng-if='super'>
+				<li><div class="listHead"><span><i ng-if="editName">*</i><em>所在地区：</em></span></div><div class="threeState"><input type="text" placeholder='浙江省'><span>-</span><input type="text" placeholder='杭州市'><span>-</span><input type="text" placeholder='萧山区'></div></li><li class="linheight24px"></li>
+				<li ng-repeat="list in commonListEdit "><div class="listHead"><span><i>{{list.required}}</i><em>{{list.head}}</em></span></div><div class="listCon"><input type="text" class="editName"><span class='example'>{{list.example}}</span></div></li>
+			</ul>
+		</div>
+		<!-- 企业 -->
+		<div class="baseInfoDiv" ng-class='{"p-b-seven": !editName}' ng-if='!superviser'>
+			<h4>资质信息</h4>
+			<ul class="baseData zzul" ng-if='!company'>
+				<li class="zzli" ng-repeat="list in zzList ">
+					<div><img ng-src="{{list.src}}" alt=""></div>
+					<p>{{list.tit}}</p>
+				</li>
+			</ul>
+			<ul class="baseData zzul" ng-if='company'>
+				<li class="zzli" ng-repeat="list in zzList">
+					<div><img ng-src="{{list.img}}" class="imgExample"></div>
+					<input ng-hide="true" type="file" id="paperFile{{$index}}" onchange="angular.element(this).scope().setImagePreview2(this.files,this.id)">
+					<div><a href="javascript:;" class="upLoad" ng-click="papersClick($index)">上传</a></div>
+					<p>{{list.tit}}</p>
+				</li>
+			</ul>
+			<!-- <ul class="baseData" ng-if='super'>
+				<li><div class="listHead"><span><i></i><em>所在地区：</em></span></div><div class="threeState"><input type="text" placeholder='浙江省'><span>-</span><input type="text" placeholder='杭州市'><span>-</span><input type="text" placeholder='萧山区'></div></li>
+				<li ng-repeat="list in commonListEdit "><div class="listHead"><span><i>{{list.required}}</i><em>{{list.head}}</em></span></div><div class="listCon"><input type="text" class="editName"><span class='example'>{{list.example}}</span></div></li>
+			</ul> -->
+		</div>
+		<div class="baseBtn" ng-if="editName">
+			<input class="baseBtnSave" ng-click='toEdit()' value="保存" /><a class="baseBtnCancel" ng-click='cancel()'>取消</a>
+		</div>
+	</div>
+</div>

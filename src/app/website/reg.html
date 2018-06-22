@@ -1,0 +1,158 @@
+<!-- navbar -->
+<div data-ng-include=" 'src/tpl/head.html' " class="website_head"></div>
+<!-- / navbar -->
+<div class="fy_website_reg_wrap fy_website_wrap ">
+	<div class="fy_website_reg">
+	<div class="fy_website_reg_div">
+		<div class="fy_website_reg_title">申请试用</div>
+		<form action="" id="regform">
+			<div class="fy_website_reg_block">
+				<div class="fy_website_reg_block_title">用户信息</div>
+				<div class="fy_website_reg_info">
+					<div class="fy_website_reg_info_head"><em>*</em>用户姓名：</div><div class="fy_website_reg_info_body"><input type="text" ng-change='inputLimit("name",40,"nameErr")' ng-model='name' ng-blur='verifyName()'></div>
+					<div class="fy_website_reg_info_err" ng-if='nameErr'>请输入用户姓名</div>
+				</div>
+				<div class="fy_website_reg_info">
+					<div class="fy_website_reg_info_head"><em>*</em>手机号：</div><div class="fy_website_reg_info_body"><input oninput="this.value=this.value.match(/[0-9]{0,11}/)" placeholder='手机号可以用于登录' ng-change='inputChange("mobileErr")' type="text" ng-model='mobile' ng-blur='verifyMobile()'></div>
+					<div class="fy_website_reg_info_err" ng-cloak ng-if='mobileErr'>{{mobileTxt}}</div>
+				</div>
+				<div class="fy_website_reg_info" ng-cloak>
+					<div class="fy_website_reg_info_head"><em>*</em>验证码：</div><div class="fy_website_reg_info_body fy_website_reg_info_body2"><input type="text" ng-change='inputChange("codeErr")' ng-blur='verifyCodes()' oninput="this.value=this.value.match(/[0-9]+/)" ng-model='verifyCode'><a ng-click='getcode()' ng-class='{regcodecd:codetxt!="获取验证码"}'>{{codetxt}}</a></div>
+					<div class="fy_website_reg_info_err" ng-cloak ng-if='codeErr'>{{codeText}}</div>
+				</div>
+				<div class="fy_website_reg_info" ng-cloak>
+					<div class="fy_website_reg_info_head"><em>*</em>密码：</div><div class="fy_website_reg_info_body"><input placeholder='8-16位字符' type="password" ng-change='inputChange("passwordErr")' ng-blur='verifyPassword()' oninput="this.value=this.value.slice(0,16)" ng-model='password'></div>
+					<div class="fy_website_reg_info_err" ng-cloak ng-if='passwordErr'>{{passwordTxt}}</div>
+				</div>
+			</div>
+			<div class="fy_website_reg_block">
+				<div class="fy_website_reg_block_title">机构信息</div>
+				<div class="fy_website_reg_info">
+					<div class="fy_website_reg_info_head"><em>*</em>机构名称：</div><div class="fy_website_reg_info_body"><input type="text" ng-change='inputLimit("orgName",40,"orgNameErr")' ng-model='orgName' ng-blur='verifyOrgName("orgName")'></div>
+					<div class="fy_website_reg_info_err" ng-if='orgNameErr'>{{orgNameTxt}}</div>
+				</div>
+				<div class="fy_website_reg_info">
+					<div class="fy_website_reg_info_head fy_website_reg_region_head"><em>*</em>所在地区：</div><div class="fy_website_reg_info_region">
+						<div class="width150" style="position: relative;">
+								<ui-select style="" on-select="provChange($item, $model)" ng-model="proSel" theme="" append-to-body="false">
+									<ui-select-match placeholder="请选择"><div style="padding-right: 10px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">{{$select.selected.name}}</div></ui-select-match>
+									<ui-select-choices repeat="proSel in province | filter: $select.search">
+										<span ng-bind-html="proSel.name | highlight: $select.search"></span>
+										<!--<small ng-bind-html="orgType.id | highlight: $select.search"></small>-->
+									</ui-select-choices>
+								</ui-select>
+							</div><span class="ib-width"></span><div class="width150 m-l">
+								<ui-select class="selectTwo" style="" on-select="cityChange($item, $model)"  ng-model="selected.citySel" theme="" append-to-body="false">
+									<ui-select-match placeholder="请选择">
+										<div style="padding-right: 10px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">{{$select.selected.name}}</div>
+									</ui-select-match>
+									<ui-select-choices repeat="citySel in city | filter: $select.search">
+										<span ng-bind-html="citySel.name | highlight: $select.search"></span>
+										<!--<small ng-bind-html="orgType.id | highlight: $select.search"></small>-->
+									</ui-select-choices>
+								</ui-select>
+							</div><span class="ib-width"></span><div class="width150 m-l">
+								<ui-select class="selectThree" style="margin-right: 0" on-select="regionChange($item, $model)" ng-model="selected.regionSel" theme="" append-to-body="false">
+									<ui-select-match placeholder="请选择"><div style="padding-right: 10px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">{{$select.selected.name}}</div></ui-select-match>
+									<ui-select-choices repeat="regionSel in region | filter: $select.search">
+										<span ng-bind-html="regionSel.name | highlight: $select.search"></span>
+										<!--<small ng-bind-html="orgType.id | highlight: $select.search"></small>-->
+									</ui-select-choices>
+								</ui-select>
+							</div>
+					</div>
+					<div class="fy_website_reg_info_err" ng-if='regionErr'>请选择所在地区</div>
+				</div>
+				<div class="fy_website_reg_info">
+					<div class="fy_website_reg_info_head"><em>*</em>上级行政机构：</div><div class="fy_website_reg_info_body">
+							<div class="selectWrap">
+				                <div class="selector" ng-click='listShow("orgShow")'><input type="text" placeholder='请选择' ng-model='orgModel.name' readonly="true"><a href='javascript:;'></a></div>
+				                <div class="options" ng-if='orgShow'>
+				                    <ul ng-class='{optionsScroll: orgs.length>5}'>
+				                        <li ng-repeat='item in orgs' ng-click='option("orgShow","orgModel",item)'>{{item.name}}</li>
+				                    </ul>
+				                </div>
+		                	</div>
+					</div>
+					<div class="fy_website_reg_info_err" ng-if='orgErr'>请选择上级行政机构</div>
+				</div>
+				<div class="fy_website_reg_info">
+					<div class="fy_website_reg_info_head"><em>*</em>医疗机构代码：</div><div class="fy_website_reg_info_body"><input ng-change='inputLimit("hplCode",225,"hplCodeErr")' ng-blur='verifyHplCode()' ng-model='hplCode' type="text"></div>
+					<div class="fy_website_reg_info_err" ng-if='hplCodeErr'>{{hplcodeTxt}}</div>
+				</div>
+				<div class="fy_website_reg_info">
+					<div class="fy_website_reg_info_head"><em></em>组织机构代码：</div><div class="fy_website_reg_info_body"><input ng-change='inputLimit("orgCode",225)' type="text" ng-model='orgCode'></div>
+				</div>
+				<div class="fy_website_reg_info fy_website_reg_img_info">
+					<div class="fy_website_reg_info_head"><em></em>组织机构代码照片：</div><div class="fy_website_reg_info_body">
+						<div class="fy_website_reg_picture">
+							<input id='detailUploadImg' type="file" onchange='angular.element(this).scope().replaceImg()'>
+							<img src='{{codeImg?("/api/file/"+codeImg):"../../res/img/tjtp.png"}}' id='assetDetailImg'><span>照片大小需≤2M</span>
+						</div>
+					</div>
+				</div>
+				<div class="fy_website_reg_info">
+					<div class="fy_website_reg_info_head"><em></em>医疗机构类别：</div><div class="fy_website_reg_info_body">
+							<div class="selectWrap">
+				                <div class="selector" ng-click='listShow("tenantShow")'><input type="text" placeholder='请选择' ng-model='tenantModel.name' readonly="true"><a href='javascript:;'></a></div>
+				                <div class="options" ng-if='tenantShow'>
+				                    <ul ng-class='{optionsScroll: tenantType.length>5}'>
+				                        <li ng-repeat='item in tenantType' ng-click='option("tenantShow","tenantModel",item)'>{{item.name}}</li>
+				                    </ul>
+				                </div>
+		                	</div>
+					</div>
+				</div>
+				<div class="fy_website_reg_info">
+					<div class="fy_website_reg_info_head"><em></em>经济类型：</div><div class="fy_website_reg_info_body">
+							<div class="selectWrap">
+				                <div class="selector" ng-click='listShow("economicShow")'><input type="text" placeholder='请选择' ng-model='economicModel.name' readonly="true"><a href='javascript:;'></a></div>
+				                <div class="options" ng-if='economicShow'>
+				                    <ul>
+				                        <li ng-repeat='item in economicType' ng-click='option("economicShow","economicModel",item)'>{{item.name}}</li>
+				                    </ul>
+				                </div>
+		                	</div>
+					</div>
+				</div>
+				<div class="fy_website_reg_info">
+					<div class="fy_website_reg_info_head"><em></em>机构分类管理类型：</div><div class="fy_website_reg_info_body">
+							<div class="selectWrap">
+				                <div class="selector" ng-click='listShow("manageShow")'><input type="text" placeholder='请选择' ng-model='manageModel.name' readonly="true"><a href='javascript:;'></a></div>
+				                <div class="options" ng-if='manageShow'>
+				                    <ul>
+				                        <li ng-repeat='item in manageType' ng-click='option("manageShow","manageModel",item)'>{{item.name}}</li>
+				                    </ul>
+				                </div>
+		                	</div>
+					</div>
+				</div>
+				<div class="fy_website_reg_info">
+					<div class="fy_website_reg_info_head"><em></em>医院等级：</div><div class="fy_website_reg_info_body fy_website_reg_info_body3">
+							<div class="selectWrap">
+				                <div class="selector" ng-click='listShow("gradeShow")'><input type="text" placeholder='级别' ng-model='gradeModel.name' readonly="true"><a href='javascript:;'></a></div>
+				                <div class="options" ng-if='gradeShow'>
+				                    <ul>
+				                        <li ng-repeat='item in grade' ng-click='option("gradeShow","gradeModel",item)'>{{item.name}}</li>
+				                    </ul>
+				                </div>
+		                	</div><div class="selectWrap m-l">
+				                <div class="selector" ng-click='listShow("hierarchyShow")'><input type="text" placeholder='等次' ng-model='hierarchyModel.name' readonly="true"><a href='javascript:;'></a></div>
+				                <div class="options" ng-if='hierarchyShow'>
+				                    <ul ng-class='{optionsScroll: hierarchy.length>5}'>
+				                        <li ng-repeat='item in hierarchy' ng-click='option("hierarchyShow","hierarchyModel",item)'>{{item.name}}</li>
+				                    </ul>
+				                </div>
+		                	</div>
+					</div>
+				</div>
+			</div>
+			<div class="fy_reg_fix_wrap" ng-if='fixWrapShow' ng-click='menuHide()'></div>
+			<div class="fy_website_reg_submit">
+				<a ng-click='submit()'>提交</a>
+			</div>
+		</form>
+	</div>
+	</div>
+	<div class="fy_website_reg_bottom"></div>
+</div>

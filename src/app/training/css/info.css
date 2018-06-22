@@ -1,0 +1,50 @@
+.training-content .training-detail-btn {
+    float: right;
+    width: 100px;
+    margin-left: 10px;
+    text-align: center;
+}
+.training-info {
+    margin: 0;
+    font-size: 13px;
+    overflow: hidden;
+}
+.training-info dt {
+    float: left;
+    width: 80px;
+    font-weight: 300;
+    color: #333;
+    text-align: right;
+}
+.training-info dd {
+    margin-left: 90px;
+    margin-bottom: 10px;
+    color: #999;
+    word-break: break-all;
+}
+.training-info a {
+    display: block;
+}
+/* report */
+.training-report {
+    margin: 10px 15px;
+}
+.training-report-title {
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 50px;
+    text-align: center;
+}
+.training-report-no {
+    font-size: 13px;
+    line-height: 30px;
+}
+.training-report-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.training-report-table td {
+    padding: 10px;
+    font-size: 13px;
+    border: 1px solid #dcdcdc;
+}

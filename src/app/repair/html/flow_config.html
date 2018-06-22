@@ -1,0 +1,76 @@
+<div class="flow-config" ng-click="closeSearch($event)">
+    <div class="flow-config-top">
+        工作流配置
+        <span class="flow-config-btn" ng-click="showEdit()" ng-if="!data.isEdit">编辑</span>        
+        <span class="flow-config-btn flow-config-btn-default" ng-click="cancle()" ng-if="data.isEdit">取消</span>
+        <span class="{{data.canSave ? 'flow-config-btn' : 'flow-config-btn flow-config-btn-default'}}" ng-click="save()" ng-if="data.isEdit">保存</span>
+    </div>
+    <div class="flow-config-main" style="min-height: {{data.height}}px;">
+    	<div class="flow-config-main-search">
+    		<div ng-if="!data.isEdit">当前层级：{{data.list.length}}</div>
+    		<span ng-if="data.isEdit">请选择层级</span>
+            <pm-select list="data.levels" change="changeLevel" item="data.selectLevel" ng-if="data.isEdit"></pm-select>
+        </div>
+        <table class="flow-config-main-table">
+            <thead>
+                <tr>
+                    <td style="width: 50px; text-align: center;">层级</td>
+                    <td>层级名称</td>
+                    <td style="min-width: 240px;">金额区间</td>
+                    <td>审批人</td>
+                    <td>职务</td>
+                    <td>备注</td>
+                </tr>
+            </thead>
+            <tbody ng-if="!data.isEdit">
+                <tr ng-repeat=" v in data.list track by $index">
+                    <td style="width: 50px; text-align: center;">{{v.level}}</td>
+                    <td>{{v.name}}</td>
+                    <td>
+                    	<span>{{v.rangeStart}}</span>
+                    	<span>至</span>
+                    	<span>{{v.rangeEnd}}</span>
+                    </td>
+                    <td>{{v.audit.name}}</td>
+                    <td>{{v.audit.job}}</td>
+                    <td>{{v.remark}}</td>
+                </tr>
+            </tbody>
+            <tbody ng-if="data.isEdit">
+                <tr ng-repeat=" v in data.list track by $index">
+                    <td style="width: 50px; text-align: center;">{{v.level}}</td>
+                    <td>
+                    	<input type="text" ng-model="v.name" placeholder="请输入" maxlength="40"> 
+                    	<span style="color: #f00;">{{v.nameMsg}}</span>
+                    </td>
+                    <td>
+                    	<input class="num" type="text" ng-model="v.rangeStart" readonly ng-if="v.level > 1" style="background-color: #f5f5f5;">
+                    	<input class="num" type="text" ng-model="v.rangeStart" placeholder="请输入" ng-if="v.level <= 1" ng-change="checkNum(v, 1)" ng-blur="convertNum(v, 1)">
+                    	<span>至</span>
+                    	<input class="num" type="text" ng-model="v.rangeEnd" placeholder="请输入" ng-change="checkNum(v, 2)" ng-blur="convertNum(v, 2)">
+                    	<span style="color: #f00;">{{v.rangeMsg}}</span>
+                    </td>
+                    <td>
+                    	<div class="swrap">
+                    		<input class="audit" type="text" ng-model="v.audit.name" placeholder="请选择" readonly ng-click="showSearch(v)" style="padding-right: 30px;">
+                    		<div class="swrap-search" ng-if="v.showSearch">
+                    			<input type="text" ng-model="v.keyword" ng-change="getAuditUsers(v)">
+                    			<div class="swrap-search-list">
+                    				<div class="item" ng-repeat="u in data.auditUsers track by $index" ng-click="chooseAuditUser(v, u)">{{u.name}}</div>
+                    			</div>                    			
+                    		</div>
+                    	</div>                    	
+                    	<span style="color: #f00;">{{v.audit.msg}}</span>
+                    </td>
+                    <td><input type="text" ng-model="v.audit.job" placeholder="请输入" maxlength="40"></td>
+                    <td><input type="text" ng-model="v.remark" placeholder="请输入" maxlength="40"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- empty -->
+        <div class="empty" ng-if="data.empty && !data.loading && !data.isEdit"><img src="../../../res/img/nocontent.png">暂无配置</div>
+        <!-- loading -->
+        <div class="loading" ng-if="data.loading"><img src="../../../res/img/loading2.gif"></div>
+	</div>
+</div>

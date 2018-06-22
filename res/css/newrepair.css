@@ -1,0 +1,563 @@
+/*1.维修单部分CSS*/
+.btn{
+	width: 89px;
+	height: 30px;
+	border:1px solid #d5d5d5;
+	color: #666;
+	font-size: 13px;
+	line-height: 30px;
+	
+	float: right;
+	
+	
+	/*position: absolute;
+	margin-top: 10%;*/
+}
+/*公共按钮部分*/
+.mf_titleRight{
+    float: right;
+    margin-right: 15px;
+}
+.mf_titleRight span{
+    display: inline-block;
+    cursor: pointer;
+    padding: 0 12px;
+    height: 32px;
+    line-height: 32px;
+    border-radius: 3px;
+    margin-right: 20px;
+}
+.mf_titleRight button{
+    border: none;
+    width:90px;
+    height: 32px;
+    line-height: 32px;
+    border-radius: 3px;
+    padding: 0 10px;
+    font-size:13px;
+}
+.mf_titleRight button:first-child{
+	background-color: #f7931e;
+	color:#fff;
+}
+.mf_titleRight button:first-child.hg_prinft{
+    
+    border: 1px solid #f7931e;
+    border-radius: 2px;
+    
+}
+.mf_titleRight button:first-child:hover,.hg_prinft:hover{
+    background: #ffac4a;
+}
+.mf_titleRight button:last-child{
+    border: 1px solid #c5c5c5;
+    height: 33px;
+    line-height: 33px;
+    background: #eff3f6;
+    margin-left: 20px;
+    padding: 0 25px;
+}
+.mf_titleRight button:nth-child(2){
+	width:90px;
+    height: 32px;
+    border:1px solid #b6b6b6;
+	 background-color:#fff;
+	 margin-left:15px;
+}
+.mf_titleRight button:nth-child(2):hover{
+    border: 1px solid #f7931e;
+    color: #f7931e;
+}
+.mf_titleRight button:last-child{
+     width:90px;
+    height: 32px;
+    border:1px solid #b6b6b6;
+	 background-color:#fff;
+}
+.mf_titleRight button:last-child:hover{
+    border: 1px solid #f7931e;
+    color: #f7931e;
+}
+.table-responsive .table tbody .new td{
+	border-right:1px solid #dcdcdc !important;
+	background-color: #fff;
+
+}
+/*.table-responsive .table tbody .new tr:hover{
+	border:1px solid #f7931e;
+}*/
+.hd_mainmsg td:last-child{
+	border-right:0;
+}
+.floatRight{
+	width: 90px;
+	height: 30px;
+	background-color: #fff;
+	font-size: 13px;
+	color: #666;
+	float: right;
+}
+.newhd_left{
+	float:left;
+	border-left:2px solid #f7931e;
+	padding-left:15px;
+	margin-top:15px;
+}
+.smallmark{
+	width:2px;
+	height:15px;
+	background-color:#f7931e;
+}
+.hd_mainmsg{
+	border:1px solid #f7931e;
+}
+
+/*.table-responsive .table tbody tr:hover td{
+	border:1px solid #f7931e;
+}*/
+/*2.维修部分--待接单部分CSS样式*/
+.mf_tilnav{
+	width: 100%;
+    padding-left: 175px;
+    height: 56px;
+    line-height: 56px;
+    font-size: 15px;
+    color: #999;
+    cursor: pointer;
+}
+
+.mf_getMenu{
+	float:right;
+   
+    margin-right:15px;
+    width:90px;
+    height:32px;
+    background-color:#f7931e;
+    color:#fff;
+    line-height:32px;
+    font-size:13px;
+    text-align:center;
+    vertical-align:center;
+    border-radius:2px;
+}
+.mf_content{
+	background-color:#eff3f6;
+	min-width:1090px;
+	position: relative;
+	margin: 56px 15px 0px 175px;
+}
+.mf_contentleft{
+	width:330px;
+	top: 0px;
+	left: 0px;
+	bottom: 0px;
+	background-color:#fff;
+	position:absolute;
+	padding: 0px 15px;
+	min-height: 640px;
+}
+
+
+.mf_bigimg{
+	margin-top:70px;
+	position:relative;
+	text-align:center;
+
+}
+.mf_bigimg img{
+	width:136px;
+	height:136px;
+	z-index:9999;
+}
+.mf_bigimg div{
+	display:none;
+	position:absolute;
+	bottom:0;
+	width:136px;
+	height:32px;
+	background:rgba(123,127,133,.6);
+	color:#fff;
+	left:31%;
+	line-height:32px;
+
+
+}
+.mf_bigimg span:hover  div{
+	display:block;
+	cursor:pointer;
+}
+.mf_imgborder{
+	width:136px;
+	height:136px;
+	border:1px solid #d5d5d5;
+	z-index:1;
+	position:relative;
+	left:40%;
+	top:-15%;
+}
+.ul1{
+	position: relative;
+	margin-left: -15px;
+}
+.mf_ul{
+	list-style-type:none;
+	position:relative;
+	margin-top:67px;
+	/*padding-left:15px;*/
+}
+.mf_firstli{
+  padding-bottom:20px;
+  font-size:15px;
+  font-family:"微软雅黑";
+  /*padding-left:15px;*/
+  color:#666;
+}
+.mf_li{
+  padding-bottom:20px;
+  font-size:13px;
+  font-family:"微软雅黑";
+  /*padding-left:15px;*/
+  color:#999;
+}
+.mf_border{
+	width:136px;
+	height:136px;
+	border:1px solid #e5e5e5;
+	position:absolute;
+	left:50%;
+	margin-left:-60px;
+	margin-top:60px;
+}
+.mf_fengeline{
+   width:300px;
+   border-top:3px solid #e5e5e5;
+   text-align:center;
+   position: left;
+   margin-left: 15px;
+}
+.ul2{
+	position: relative;
+	margin-left: -15px;
+}
+.mf_ul2{
+	list-style-type:none;
+	position: relative;
+	margin-top: 20px;
+	/*padding-left:15px;*/
+}
+.mf_li2{
+	font-family:"微软雅黑";
+	font-size: 13px;
+	color: #666;
+	padding-top: 20px;
+}
+/*内容右边部分内容*/
+.mf_contentRight{
+	padding-left: 330px;
+	padding-top: 272px;
+	background-color:#eff3f6;
+}
+/*内容右边上半部分*/
+.mf_contentRightUp{
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	left: 345px;
+	min-width: 735px;
+	height: 272px;
+	background-color:#fff;
+}
+/*流程图部分*/
+.mf_tabmenu{
+	width: 95%;
+	height: 100%;
+	/*border:1px solid #f00;*/
+	/*padding: 22% 10% 7% 10%;*/
+	position: relative;
+	margin: 0 auto;
+	/*margin-left: 120px;
+	margin-right: 120px;*/
+	list-style-type: none;
+
+	
+}
+.mf_tabmenuli{
+	float: left;
+}
+.mf_tabImg{
+     position: relative;
+     margin-top: 60px;
+     /*margin-top: -80px;*/
+     padding-left: 40px;
+     padding-right: 40px;
+     
+
+}
+.mf_tabLine{
+	width: 160px;
+	/*height: 1px;*/
+	/*background-color: #bebebe;*/
+	border-top: 1px dashed #bebebe;
+	position: relative;
+	margin-left: 100px;
+	
+	margin-top: -20px;
+	
+
+}
+.mf_tabmenuli2{
+	float: left;
+	 
+    
+
+}
+@media .mf_tabImg{
+
+}
+.mf_msg{
+	list-style-type: none;
+	position: relative;
+	margin-top: -105px;
+	margin-left: 60px;
+}
+.mf_getdata{
+	font-family: "微软雅黑";
+	font-size: 13px;
+	color: #666;
+    
+
+
+}
+.mf_checkbut{
+	text-decoration: none;
+	display: block;
+	border:1px solid #d5d5d5;
+	font-size: 13px;
+	color: #666;
+	font-family: "微软雅黑";
+	border-radius: 2px;
+	width: 90px;
+	height: 32px;
+	line-height: 32px;
+	text-align: center;
+	border-radius: 2px;
+	text-align: center;
+	
+
+}
+
+.mf_checkbut:hover{
+   color: #f7931e;
+   border:1px solid #f7931e;
+}
+
+/*找的例子*/
+
+/*找的例子end*/
+.mf_contentRightDown{
+	background-color:#fff;
+	padding: 15px;
+	margin-left: 15px;
+	min-height: 350px;
+	margin-top: 15px;
+}
+.mf_baojie{
+	margin-left: 22px;
+}
+.mf_baoxiucontent{
+	font-family: "微软雅黑";
+	font-size: 13px;
+	color: #999;
+	position: relative;
+	padding-top: 60px;
+	padding-left: 15px;
+}
+.mf_chooseTime{
+	list-style-type: none;
+	position: relative;
+    top: -40px;
+	padding-left: 135px;
+}
+.mf_chooseTime>li{
+	float: left;
+	padding-right: 15px;
+}
+.mf_chooseTime>li>a:hover{
+   border-style: solid;
+   border-color:  #f7931e ; 
+   color: #f7931e;
+}
+.mf_beizhu{
+	color: #bebebe;
+	font-size: 13px;
+	width: 1096px;
+	height: 180px;
+	position: relative;
+	left: 135px;
+	top: -20px;
+}
+.mf_count{
+	position: fixed;
+	padding-top: 130px;
+	padding-left: 65px;
+}
+/*新建维修管理*/
+.mf_chooseGuzhang{
+	list-style-type: none;
+	position: relative;
+    top: 60px;
+	padding-left: 135px;
+}
+.mf_chooseGuzhang>li{
+	float: left;
+	padding-right: 15px;
+}
+.mf_chooseGuzhang>li>a:hover{
+   border-style: solid;
+   border-color:  #f7931e ; 
+   color: #f7931e;
+}
+.mf_radio{
+	position: relative;
+	padding-left: 30px;
+	font-size: 13px;
+	color: #666;
+}
+.mf_radio2{
+	position: relative;
+	padding-right: 10px;
+}
+.mf_div1{
+	float: right;
+}
+/*.mf_div2{
+   text-align:center;
+   padding-top:12px;
+   font-size:13px;
+   font-weight:800;
+   border: 1px solid #f7931e；
+   width: 90px;
+	height: 32px;
+
+}*/
+.mf_inputstyle{
+	position: absolute;
+	left: 560px;
+	width: 90px;
+	height: 32px;
+}
+/*.mf_inputstyle{
+	
+	background-color: #f7931e;
+	cursor: pointer;
+    
+    outline: medium none;
+    position: absolute;
+    /*filter:alpha(opacity=0);
+    -moz-opacity:0;
+    opacity:0;*/ 
+
+}*/
+/*完成页面*/
+.mf_finallySuccess{
+	position: relative;
+	padding-top: 120px;
+	padding-left: 500px;
+
+}
+.mf_checkReport{
+	width:120px;
+    height: 32px;
+    line-height: 32px;
+    border-radius: 3px;
+    padding: 0 10px;
+    font-size:13px;
+    position: relative;
+    margin-top: 85px;
+    margin-left: -90px;
+    background-color: #f7931e;
+    border: 1px solid #fff;
+    color: #fff;
+}
+.mf_checkReport:hover{
+    border: 1px solid #f7931e;
+}
+.mf_successUp{
+    position: relative;
+    padding-left: 120px;
+}
+.mf_successUp>ul{
+	list-style-type: none;
+}
+.mf_successUp>ul>li{
+	float: left;
+}
+.mf_successUp>ul>li>img{
+	width: 35px;
+	height: 35px;
+}
+
+/* repair msg  */
+
+.mf_msgbuju{
+	margin: 0 auto;
+	width: 1280px;
+	height: auto;
+	position: relative;
+	padding-top: 85px;
+	
+}
+.mf_repairMsgCenterTitle{
+	font-size: 16px;
+	font-family: "微软雅黑";
+	color: #666;
+}
+.mf_allMarkRead{
+	font-size: 14px;
+	font-family: "微软雅黑";
+	color: #666;
+	margin-left: 83%;
+}
+.mf_allMarkRead:hover {
+	color: #666;
+}
+.mf_repairMsgCon{
+	min-width: 1208px;
+	background-color: #fff;
+	padding-left: 15px;
+	padding-bottom: 15px;
+	padding-right: 15px;
+	margin-top: 15px;
+	min-height: calc(100% - 90px);
+}
+.mf_msgTable{
+	
+	color: #666;
+	font-size: 13px;
+	position: relative;
+	top: 50px;
+	margin:0 auto;
+}
+.mf_msgTable tr{
+   border:1px solid #666;
+}
+.mf_msgTable tr:hover{
+	border:1.5px solid #f7931e;
+}
+.mf_msgTable td{
+	height: 80px;
+	border:0px;
+}
+.mf_repairTextCenter{
+	text-align: center;
+	position: relative;
+	/*left: 50px;*/
+
+}
+.mf_tab3{
+	position: relative;
+	top: 50px;
+	text-align: center;
+	color:#bebebe;
+	font-size: 13px;
+}

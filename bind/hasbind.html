@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>设备管理服务平台</title>
+    <script src="zepto.min.js"></script>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        html body{
+            height: 100%;
+            width: 100%;
+            font-size: 16px;
+        }
+        .content{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        img{
+            width: 4.8rem;
+            height: 4.8rem;
+            margin-top: 3.75rem;
+        }
+        .btn{
+            color: #fff;
+            font-size: 1.1rem;
+            width: 70%;
+            height: 44px;
+            background: #508CEE;
+            line-height:44px;
+            text-align: center;
+            border-radius: 5px;
+            margin-top: 40px;
+            display: inline-block;
+        }
+        .title{
+            font-size: 1.125rem;
+            color: #333;
+            margin-top: 1.125rem;
+        }
+        .smatitle{
+            font-size: 0.9rem;
+            color: #999;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+<div class="content">
+    <img src="./images/success.png" alt="">
+    <div class="title">该账号已绑定</div>
+    <div class="smatitle">您的微信可以直接收到小程序的消息哦~</div>
+    <span class="btn">知道了</span>
+</div>
+
+</body>
+</html>
+<script>
+    $('.btn').on('click',function(e){
+        WeixinJSBridge.call('closeWindow');
+    })
+</script>

@@ -1,0 +1,86 @@
+<div class="metering-report">
+    <div class="metering-report-title">{{report.tenantName}}计量检测报告单</div>
+    <table class="metering-report-dl">
+        <tr>
+            <td>
+                <dl>
+                    <dt>设备名称：</dt>
+                    <dd>{{report.msCheckHistory.assetsName}}&nbsp;</dd>
+                    <dt>设备编号：</dt>
+                    <dd>{{report.msCheckHistory.assetsNum}}&nbsp;</dd>
+                    <dt>规格型号：</dt>
+                    <dd>{{report.msCheckHistory.assetsSpec}}&nbsp;</dd>
+                    <dt>所在部门：</dt>
+                    <dd>{{report.msCheckHistory.assetsDeptName}}&nbsp;</dd>
+                </dl>
+            </td>
+            <td>
+                <dl>
+                    <dt>计量管理类别：</dt>
+                    <dd>{{report.msCheckHistory.measureManageType | measureManageType}}&nbsp;</dd>
+                    <dt>计量类别：</dt>
+                    <dd>{{report.msCheckHistory.measureType | measureType}}&nbsp;</dd>
+                    <dt>计量分类：</dt>
+                    <dd>{{report.msCheckHistory.measureCategory | measureCategory}}&nbsp;</dd>
+                    <dt>计量周期：</dt>
+                    <dd>{{report.msCheckHistory.measureCycle}}个月</dd>
+                </dl>
+            </td>
+            <td>
+                <dl style="float: right;">
+                    <dt>报告编号：</dt>
+                    <dd>{{report.msCheckResultInfo.checkReportNo}}&nbsp;</dd>
+                    <dt>检定日期：</dt>
+                    <dd>{{report.msCheckHistory.submitTime | date:'yyyy-MM-dd'}}&nbsp;</dd>
+                    <dt>检定方式：</dt>
+                    <dd>{{report.msCheckHistory.checkMode | checkMode}}&nbsp;</dd>
+                    <dt>负责人：</dt>
+                    <dd>{{report.msCheckHistory.chargeUserName}}&nbsp;</dd>
+                </dl>
+            </td>
+        </tr>
+    </table>
+    <table class="metering-report-table">
+        <tr>
+            <td style="width:120px;text-align:center;background-color:#f5f5f5;">实际检定方式</td>
+            <td>{{report.msCheckResultInfo.checkMode | checkMode}}</td>
+            <td style="width:120px;text-align:center;background-color:#f5f5f5;">证书编号</td>
+            <td>{{report.msCheckResultInfo.certificateNum}}</td>
+        </tr>
+        <tr>
+            <td style="width:120px;text-align:center;background-color:#f5f5f5;">本次检定日期</td>
+            <td>{{report.msCheckResultInfo.currentCheckTime | date:'yyyy-MM-dd'}}</td>
+            <td style="width:120px;text-align:center;background-color:#f5f5f5;">下次检定日期</td>
+            <td>{{report.msCheckResultInfo.nextCheckTime | date:'yyyy-MM-dd'}}</td>
+        </tr>
+        <tr>
+            <td style="width:120px;text-align:center;background-color:#f5f5f5;">检定形式</td>
+            <td>{{report.msCheckResultInfo.checkForm | checkForm}}</td>
+            <td style="width:120px;text-align:center;background-color:#f5f5f5;">检定结果</td>
+            <td>{{report.msCheckResultInfo.checkResultStatus | checkResultStatus}}</td>
+        </tr>
+        <tr>
+            <td style="width:120px;text-align:center;background-color:#f5f5f5;">检定机构</td>
+            <td>{{report.msCheckResultInfo.checkOrganization}}</td>
+            <td style="width:120px;text-align:center;background-color:#f5f5f5;">检定费用</td>
+            <td>{{report.msCheckResultInfo.checkFee}}元</td>
+        </tr>
+        <tr>
+            <td style="width:120px;text-align:center;background-color:#f5f5f5;">检定人</td>
+            <td>{{report.msCheckResultInfo.checkUserName}}</td>
+            <td style="width:120px;text-align:center;background-color:#f5f5f5;">审核人</td>
+            <td>{{report.msCheckResultInfo.auditor}}</td>
+        </tr>
+        <tr>
+            <td style="width:120px;text-align:center;background-color:#f5f5f5;">备注</td>
+            <td colspan="3">{{report.msCheckResultInfo.remarks}}</td>
+        </tr>
+        <tr>
+            <td style="width:120px;text-align:center;background-color:#f5f5f5;">附件</td>
+            <td colspan="3">
+                <div ng-repeat="v in report.msCheckResultInfo.files" ng-if="report.showDownload"><a target="_blank" href="{{v.url | downloadURL}}">{{v.name}}</a></div>
+                <div ng-repeat="v in report.msCheckResultInfo.files" ng-if="!report.showDownload"><a>{{v.name}}</a></div>
+            </td>
+        </tr>
+    </table>
+</div>

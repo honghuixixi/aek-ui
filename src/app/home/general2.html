@@ -1,0 +1,182 @@
+<style type="text/css">
+.main-table {
+    width: 100%;
+}
+
+.main-table-item {
+    float: left;
+    display: inline-block;
+    width: calc(25% - 10px);
+    margin-left: 10px;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 5px 0 #4DC0D4;
+}
+
+.main-table-item2 {
+    display: inline-block;
+    width: calc(100% - 10px);
+    margin-top: 15px;
+    margin-left: 10px;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 5px 0 #4DC0D4;
+}
+
+.main-table-item-txt {
+    margin-left: 10px;
+    margin-top: 10px;
+    font-size: 12px;
+    color: #666;
+}
+
+.main-table-item-num {
+    margin-bottom: 10px;
+    margin-left: 10px;
+    font-size: 36px;
+    color: #4AB29B;
+}
+.main-tab {
+    float: left;
+}
+.main-tab-item {
+    float: left;
+    display: inline-block;
+    width: 130px;
+    font-size: 14px;
+    line-height: 40px;
+    text-align: center;
+    border-bottom: 1px solid #fff;
+    cursor: pointer;
+}
+.main-tab-item-check {
+    color: #4AB29B;
+    border-bottom: 1px solid #4AB29B;
+}
+.main-type {
+    float: right;
+    margin-top: 8px;
+    margin-right: 10px;
+    border: 1px solid #4AB29B;
+    border-radius: 3px;
+}
+.main-type-item {
+    float: left;
+    display: inline-block;
+    width: 60px;
+    font-size: 14px;
+    line-height: 24px;
+    text-align: center;
+    cursor: pointer;
+}
+.main-type-item-check {
+    background-color: #4AB29B;
+    color: #fff;
+}
+.fy_generalChartHead {
+    font-size: 14px;
+}
+.fullPage {
+    position: fixed;
+    top:0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 198910131;
+    background-color: #eff3f6;
+    padding: 10px;
+}
+.full-img {
+    float: right;
+    width: 20px;
+    margin-top: 18px;
+    cursor: pointer;
+}
+</style>
+<div class="fy_generalWrap" style="margin-left: -10px; overflow: auto;">
+    <div class="fy_general">
+        <div ng-class="{'fullpage': data.local.isFull}">
+            <div class="fy_generalTitle" style="margin-left: 10px;">
+                概览<span style="font-size: 12px;color: #999;"> （数据截止日期：{{data.local.endDate}}）</span>
+                <img ng-if="!data.local.isFull" ng-click="methods.setFull(true)" class="full-img" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADIBAMAAABfdrOtAAAAJ1BMVEVHcEwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB+jSoGAAAADHRSTlMA8DBgv39AmxDQIE9QzR7+AAAEQ0lEQVR42u2cMW8UMRCFRywiEqKyKFPc9SlcUmwBEoiGEhACCppQUaSgpIiEKPgHV9DS09BzOaLopPwoFFiF21vb8+yZvGqnzey++W6zXs94bJGfL/7bx8dje3Q52ELS9mn4+/29C5/u3PSNyMElYj8yIkfIxSfXsRRtk9GQD8jVFwKBxJxIB10uJhCR3k0k5kU6L5ECCIYiNhAMRYwgEIoYQSAUsYIgKGIFQVDEDAKgiBkEQBE7iI4idhAdRRxAVBRxAFFRxANEQxEPEA1FXEAUFHEBUVDEB6SMIj4gZRRxAimiFETO6kS6JpH1okrk1mHTMwlVIsu2B1+FUgApvycrH5CyyPbUBUQZu1YuIIrI1gVE+56ceIBoIhceIOo3/sQBRBU5dwBxmXdpIC4zSA3EYy6sggAiZ2YQQEQdJlUQJAkKVhBEREHRQaDEdGUEgUSKIz4AghULVjYQTGRrA8FE8sMkBAKKXJhAQJEcCgaCipxbQMYi54d1w2QeZP02KxKXdSN+3j10OZFN6TeOVSCL0SRfxvdZ1oz4y9KY2qVFNlpwNSCjfEX2fpAlPuIrrl1KZIOEh4Psosj+k83H93Ascltj7qYiGzXAX2OReypyPxGJ6k+NkoRJFimTly2Hgj6THb9+TySq/zXof1eYJsQyHTXSIaLvycivH4lENcQAvvEhkdtLYvhLhZiaFwF+/Y5IVEMM4CgcUmUKSY3j0xDTEzzAr78WiWqIAfwyhmTFRZIfpP0QczNVwK8fRKIaYgBnKyFdPJL0l3UcYn7KDfj1f0WiGmIAZ5AhUweTTFK4G2IpdwD8+ks5jGqIAUxPMn7dGgixnAShfkqIwcevGKIWIOpXDDF4+RVC1ANE/QohBj+/bIhIgKhfNsTg6ZcJEQsQ9Uvbl9eY3/dXMttss80222yzzTbbbLPV2md0wv2gXYOSOjCSIEo6x0hMKSk2o1hAKXswCjiupShKUY1SHuQUOjklW0rxmVNGpywIcJY2KIs0nOUmysIZZwmQspjJWZalLDBzlsr1Rf+9LpyDhkV/vX3hdCxyt6V9gdKIwWkpKTfHoG+80hxTbPNBxy61zafUsISOwmrDUqH1Cv2eAK1X1V2dLU1k1U2dru1w6GzFIoLOu0wi6AzSIoLOhU0i6Kz+5vqFnVp50UzrJnu4Xdqr0ezXIoLm8SYRtCJhEUFrKyYRtEpkEUHrXSYRsMpg2uSC1ktM23Xgcolh4xFe+DFsoaqo+zRvBqupYDVva6sqYDVu0KsrxTVuNaysxDVtmqytKbZt/4x1Im0bWSlbcimbiznbpCkbvjlb1ymb8DnHCVAORuAc8UA5rIJz7AblABHOUSiUQ104x9NQDtrhHBlEOfyIc4wT5UAqztFa5kPCniFe2U3fR8jVvzG37Mbfr1iId64mftvh5Lgnw6lxL9//Mzw/GS44Hm7wfLjht6up6Ls/5TZPtnGXgFsAAAAASUVORK5CYII=">
+                    <img ng-if="data.local.isFull" ng-click="methods.setFull(false)" class="full-img" src="data:image/png;base64,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">
+            </div>
+            <table class="main-table">
+                <tr>
+                    <td colspan="2">                    
+                        <div class="main-table-item">
+                            <div class="main-table-item-txt">资产设备总数（台/个）</div>
+                            <div class="main-table-item-num">{{data.server.assetsTotalNum}}</div>
+                        </div>
+                        <div class="main-table-item">
+                            <div class="main-table-item-txt">资产设备总额（万元）</div>
+                            <div class="main-table-item-num">￥{{data.server.assetsTotalCapital.toFixed(2)}}</div>
+                        </div>
+                        <div class="main-table-item">
+                            <div class="main-table-item-txt">待修设备总数（台/个）</div>
+                            <div class="main-table-item-num">{{data.server.waitRepairAssetsNum}}</div>
+                        </div>
+                        <div class="main-table-item">
+                            <div class="main-table-item-txt">设备7天完修率</div>
+                            <div class="main-table-item-num">{{data.server.servenCompleteRate}}%</div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div style="margin-left: 10px;margin-top: 15px;background-color: #fff;border-radius: 4px;">
+                            <div style="margin-bottom: 10px;overflow: hidden;box-shadow:2px 0 9px rgba(0,0,0,0.07);">
+                                <div class="main-tab">
+                                    <div class="main-tab-item" ng-class='{"main-tab-item-check": data.local.group==1}' ng-click='methods.changeGroup(1)'>资产设备总数</div>
+                                    <div class="main-tab-item" ng-class='{"main-tab-item-check": data.local.group==2}' ng-click='methods.changeGroup(2)'>资产设备总额</div>
+                                </div>
+                                <div class="main-type">
+                                    <div class="main-type-item" ng-class='{"main-type-item-check": data.local.type==1}' ng-click='methods.changeType(1)'>季度</div>
+                                    <div class="main-type-item" ng-class='{"main-type-item-check": data.local.type==2}' ng-click='methods.changeType(2)'>年度</div>
+                                </div>
+                            </div>
+                            <div class="fy_generalChartHead">
+                                <div class="selector" style="margin-left: 10px;">
+                                    <input type="text" ng-click='methods.showOption("yearOptionShow")' readonly="true" value="{{data.local.yearOption[data.local.year]}}年">
+                                    <div class="options" ng-show='data.local.yearOptionShow'>
+                                        <ul>
+                                            <li ng-repeat='item in data.local.yearOption' ng-click='methods.chooseOption("year", "yearOptionShow", $index)'>{{item}}年</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="selector">
+                                    <input type="text" ng-click='methods.showOption("compareOptionShow")' readonly="true" value="{{data.local.compareOption[data.local.compare]}}">
+                                    <div class="options" ng-show='data.local.compareOptionShow'>
+                                        <ul>
+                                            <li ng-repeat='item in data.local.compareOption' ng-click='methods.chooseOption("compare", "compareOptionShow", $index)'>{{item}}</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="fy_generalChart" style="height:{{data.local.height - 330}}px;"></div>
+                        </div>
+                    </td>
+                    <td width="25%" style="vertical-align: top;">
+                        <div class="main-table-item2">
+                            <div class="main-table-item-txt">本年度巡检总数（台/次）</div>
+                            <div class="main-table-item-num">{{data.server.inspectionTotalYear}}</div>
+                        </div>
+                        <div class="main-table-item2">
+                            <div class="main-table-item-txt">巡检执行率</div>
+                            <div class="main-table-item-num">{{data.server.inspectionRateYear}}%</div>
+                        </div>
+                        <div class="main-table-item2">
+                            <div class="main-table-item-txt">本年度PM总数（台/次）</div>
+                            <div class="main-table-item-num">{{data.server.pmImplementTotalYear}}</div>
+                        </div>
+                        <div class="main-table-item2">
+                            <div class="main-table-item-txt">PM执行率</div>
+                            <div class="main-table-item-num">{{data.server.pmRateYear}}%</div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="generalFixWrap" ng-show='fixWrapShow' ng-click='methods.hideAllOption()'></div>
+    </div>
+</div>

@@ -1,0 +1,134 @@
+<!-- 分成三部分 -->
+<div style="background:#eff3f6">
+	<!-- <div class="mf_tilnav" style="width:100%;">
+		<span class="hd_titleLeft"><span ui-sref="repair.manage" class="hd_manage">维修管理</span><span>&gt;维修单详情</span></span>
+		<input type="button" class="mf_getMenu" value="接单">
+	</div> -->
+	<div class="hd_tilnav">
+    <span class="hd_titleLeft"><span ui-sref="repair.manage" class="hd_manage">维修管理</span>><span>维修单详情</span></span>
+    <span class="hd_titleRight"><button ng-click="subApply()" ng-disabled="applyBtn">提交维修申请</button><button ng-click="calcel()">取消</button></span>
+</div>
+</div>
+<!--中间内容布局左、上、下-->
+
+<div class="mf_content">
+<!-- 内容左边部分-->
+  <div class="mf_contentleft">
+  <div class="mf_border">
+  	
+  </div>
+  <div class="mf_bigimg">
+		<span><img src="../../res/img/dt.png" alt="">
+	<div>点击查看</div></span>
+</div>
+<div class="ul1">
+	<ul class="mf_ul">
+   	  <li class="mf_firstli"><span>设备名称（后台获取）</span></li>
+   	  <li class="mf_li"><span>规则型号:</span></li>
+   	  <li class="mf_li"><span>设备编号:</span></li>
+   	  <li class="mf_li"><span>所在部门:</span></li>
+   	  <li class="mf_li"><span>启用日期:</span></li>
+   	  <li class="mf_li"><span>保修期至:</span></li>
+   </ul>
+</div>
+   
+   <div class="mf_fengeline"></div>
+  <div class="ul2">
+  	<ul class="mf_ul2">
+   	<li class="mf_li2"><span>维修单号:</span></li>
+   	<li class="mf_li2"><span>申请人:</span></li>
+   	<li class="mf_li2"><span>联系电话:</span></li>
+   	<li class="mf_li2"><span>申请时间:</span></li>
+   </ul>
+  </div>
+  
+</div>
+<!-- 内容右边部分-->
+<div class="mf_contentRight">
+<!-- 内容右上部分-->
+	<div class="mf_contentRightUp">
+		<!-- 流程图部分 -->
+
+<ul class="mf_tabmenu">
+    <li class="mf_tabmenuli">
+    	<div>
+    	<img src="../../res/img/shenqing.png" class="mf_tabImg" >
+
+    	</div>
+	    <div class="mf_tabLine" style="border-top: 1px dashed #19b2bc;"></div>
+	</li>
+    	<li class="mf_tabmenuli">
+    		<div><img src="../../res/img/daijiedan.png" class="mf_tabImg"></div>
+	        <div class="mf_tabLine" ></div>
+    	</li>
+    	<li class="mf_tabmenuli">
+    		<div><img src="../../res/img/weixiu2.png" class="mf_tabImg"></div>
+	        <div class="mf_tabLine"></div>
+    	</li> 
+    	<li class="mf_tabmenuli">
+    		<div><img src="../../res/img/daiyanshou2.png" class="mf_tabImg"></div>
+	        <div class="mf_tabLine"></div>
+    	</li>
+    	<li class="mf_tabmenuli">
+    		<div><img src="../../res/img/wancheng2.png" class="mf_tabImg"></div>
+	         
+    	</li>
+</ul>
+
+<ul class="mf_msg">
+	<li class="mf_tabmenuli2">
+		<span class="mf_getdata">王二小</span>&nbsp;&nbsp;<span class="mf_getdata">申请</span><br>
+		<span class="mf_getdata">2017-01-01 12:00</span><br>
+		<a class="mf_checkbut" ng-click=>查看</a>
+	</li>
+	<li class="mf_tabmenuli2">
+		<span class="mf_getdata" style="position:relative;padding-left: 170px;">待接单</span>
+	</li>
+	<li class="mf_tabmenuli2">
+		<span class="mf_getdata" style="position:relative;padding-left: 220px;">维修中</span>
+	</li>
+	<li class="mf_tabmenuli2">
+		<span class="mf_getdata" style="position:relative;padding-left: 220px;">待验收</span>
+	</li>
+	<li class="mf_tabmenuli2">
+		<span class="mf_getdata" style="position:relative;padding-left: 220px;">已完成</span>
+	</li>
+</ul>
+	</div>
+<!-- 内容右下部分-->
+    <div class="mf_contentRightDown">
+    	<div class="mf_baojie">
+   	   	  	  <span class="newhd_left" style="padding-left:15px;">故障现象</span>
+   	   	  	  <textarea placeholder="" ng-model="remark" ng-change="writesum()" ng-paste="writesum()" ng-keyup="writesum()" ng-disabled="writeDisabled" class="mf_beizhu" style="position: relative;top: 50px;left:5px;width: 1226px;height: 180px;"></textarea>
+
+   	   	  </div>
+   	   	  <span  class="newhd_left" style="margin-left:15px;margin-top: 65px;">常见故障现象:</span>
+   	   	  <ul class="mf_chooseGuzhang">
+   	   	  	  	<li><a class="mf_checkbut" >附件损坏</a></li>
+   	   	  	  	<li><a class="mf_checkbut" style="width:150px;position: relative;padding-left: 20px;padding-right: 20px;">不规则或偶发事件</a></li>
+   	   	  	  	<li><a class="mf_checkbut">性能偏离指标</a></li>
+   	   	  	  	<li><a class="mf_checkbut">开机后死机</a></li>
+   	   	  	  	<li><a class="mf_checkbut">其他</a></li>
+   	   	 </ul>
+   	   	 <span  class="newhd_left" style="margin-left:-705px;margin-top: 95px;">故障图片</span>
+   	<div class="hd_msgImg" style="position: relative;top: 120px;left: -685px;">
+    
+            <input  type="file" multiple class="muchinput" ng-disabled="!delactInput">
+            <input  type="file" multiple class="muchinput" ng-disabled="delactInput">
+            <input  type="file" onchange="angular.element(this).scope().replaceImg()"  class="oneinput">
+            <span ng-repeat="l in url" class="hd_images" ng-mouseenter="change=!change" ng-mouseleave="change=!change"><img src="{{l}}" alt=""><div  ng-show="change" class="hd_imgDelet"><i ng-click="replace($index)">更换</i><i ng-click="delect($index)">删除</i></div></span>
+            <span class="hd_upload" ng-click="upload()" ng-show="clickAdd" ></span><span class="hd_alert">图片仅支持png、jpg、jpeg格式，<br>单张大小不超过2M，最多可添加5张图片。</span>
+        </div> 
+    </div>
+</div>
+<!-- 维修 提交 -->
+<!--<div id="alertRepairSubmit" ng-show='repairSubmitShow' class="alertRepair">
+    <div class="alertRepairSubmitContent">
+        <div class="alertRepairSubmitImg"><img src='../../res/img/wh.png'></div>
+        <p class="font14px color666">提交后，将不能修改，确定提交么?</p>
+        <div class="alertRepairSubmitBtn alertRepairBtn">
+            <a href="javascript:;" class="btnyes" ng-click="btnyes()">确定</a><a href="javascript:;" class="btncancel" ng-click="btncancel()">取消</a>
+        </div>
+    </div>
+</div>-->
+</div>

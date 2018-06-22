@@ -1,0 +1,62 @@
+<!-- section-sort -->
+
+<!-- content -->
+<table border="0" cellspacing="0" cellpadding="0" class="font13px">
+	<thead>
+		<tr>
+			<th style="width:3%">ID</th>
+			<th style="width:16.13%">所属机构</th>
+			<th style="width:50%">角色</th>
+			<th style="width:13.17%">操作</th>
+		</tr>
+	</thead>
+	<tr ng-repeat="roleuser in roleInfo">
+		<td class="fir-td">{{roleuser.tenantId}}</td>
+		<td style="text-align: left;padding-left:15px;">{{roleuser.tenantName}}</td>
+		<td style="text-align: left;padding:2px 15px;">
+			<span ng-repeat="role in roleuser.roles" data-id="{{role.id}}"> {{role.name}} ; </span>
+		</td>
+		<td class="last-td">
+			<a ng-if="userInfo.authoritiesStr.indexOf('SYS_ROLE_MANAGE') != -1" ng-click="editRoleDialog(roleuser.tenantId,roleuser.tenantName)" class="ahoverblue acolorblue">编辑角色</a>
+			<a ng-click="delRoleDialog({tenantId:roleuser.tenantId, tenantName:roleuser.tenantName,})" class="ahoverblue acolorblue">删除</a>
+		</td>
+	</tr>
+	<tr ng-if="roleInfo.length" class="no-p">
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+</table>
+<div class="fixWrap" ng-show='fixWrapShow' ng-click='menuHide()'></div>
+<!-- /content -->
+<div data-ng-include=" 'src/tpl/alert.html' "></div>
+
+<div id="ay-editrole" style="overflow-x: hidden;" ng-show="isEditRole">
+	<form name="form_role" class="form-horizontal">
+		<div class="form-group">
+			<label class="col-lg-2 col-sm-2 control-label" for="fromdept">所属机构</label>
+			<div class="col-sm-9">
+				<span ng-if="editRole" class="edit-OrgName">{{orgName}}</span>
+				<input ng-if="!editRole" type="text" class="form-control fromdept" id="fromdept" />
+			</div>
+		</div>
+		<div class="form-group ay-form-roleList">
+			<label class="col-lg-2 col-sm-2 control-label" for="rolelist">角色</label>
+			<div class="col-sm-9 rolelist">
+				<div class="role-item fl" ng-repeat="role in rolesList">
+					<div class="checkboxFive" ng-mouseover="ishover6=true" ng-mouseleave="ishover6=false">
+						<input type="checkbox" ng-if="!role.check" data-id="{{ role.id }}" value="{{role.id}}" class="child-checkbox ay-edit-checkbox" id="checkboxFiveInput" />
+						<input type="checkbox" ng-if="role.check" data-id="{{ role.id }}" checked="checked" value="{{role.id}}" class="child-checkbox ay-edit-checkbox" id="checkboxFiveInput" />
+						<label ng-class="{'labelhover':ishover6}"  class="checked" ng-click="checked($event)"></label>
+					</div>
+					<span class="mem-roleName">{{role.name}}</span>
+
+				</div>
+			</div>
+
+		</div>
+
+	</form>
+
+</div>

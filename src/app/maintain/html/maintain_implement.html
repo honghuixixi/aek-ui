@@ -1,0 +1,59 @@
+<div>
+    <div class="maintain-top">
+        保养实施
+    </div>
+    <div class="maintain-main" style="min-height: {{data.height}}px;">
+        <div class="maintain-main-search">
+            <!-- <maintain-select list="data.departments" item="data.selectItem" change="changeItem"></maintain-select> -->
+            <input type="text" placeholder="设备名称/设备编号" ng-model="data.condition.keyword">
+            <span class="maintain-btn" ng-click="search()">搜索</span>
+        </div>
+        <table class="maintain-main-list">
+            <thead>
+                <tr>
+                    <td style="width: 50px;">序号</td>
+                    <td>设备编号</td>
+                    <td>设备名称</td>
+                    <td>规格型号</td>
+                    <td>所在部门</td>
+                    <td style="width: 90px;">保养频率</td>
+                    <td style="width: 100px;">上次实施日期</td>
+                    <td style="width: {{data.hasTag ? 180 : 100;}}px;">下次实施日期</td>
+                    <td>使用专管人</td>
+                    <td style="width: 60px;">操作</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat=" v in data.list">
+                    <td style="width: 50px;">{{(pageInfo.current - 1) * pageInfo.size + $index + 1}}</td>
+                    <td>{{v.assetsNum}}</td>
+                    <td>{{v.assetsName}}</td>
+                    <td>{{v.assetsSpec}}</td>
+                    <td>{{v.assetsDeptName}}</td>
+                    <td style="width: 90px;">{{v.rate == 1 ? '每天' : '每周'}}</td>
+                    <td style="width: 100px;">{{v.lastImplementTime ? (v.lastImplementTime | date:'yyyy-MM-dd') : '无'}}</td>
+                    <td style="width: {{data.hasTag ? 180 : 100;}}px;text-align: left;">{{v.nextImplementTime | date:'yyyy-MM-dd'}}<span class="{{v.attention.length > 0 && v.attention === '已过期' ? 'tag tag-err' : 'tag'}}" ng-if="v.attention.length > 0">{{v.attention}}</span></td>
+                    <td>{{v.administrator}}</td>
+                    <td style="width: 60px;">
+                    	<a ng-click="implementCheck(v.id)">实施</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- 分页 -->
+        <span ng-if="!data.loading && !data.empty" data-ng-include=" 'src/tpl/newPageInfo.html' "></span>
+        <!-- empty -->
+        <div class="empty" ng-if="data.empty && !data.loading"><img src="../../../res/img/nocontent.png">暂无数据</div>
+        <!-- loading -->
+        <div class="loading" ng-if="data.loading"><img src="../../../res/img/loading2.gif"></div>
+	</div>
+</div>
+<!-- 启用模板 -->
+<div id="template_unable_implement" style="display: none;">
+    <div style="text-align: center; color: #666;">
+        <div>
+            <div class="inspectionLayerImg m-t-lg m-b-md"><img src='../../res/img/wh.png'></div>
+            <div style="padding: 0 30px; line-height: 24px;" ng-bind-html="data.msg"></div>
+        </div>
+    </div>
+</div>

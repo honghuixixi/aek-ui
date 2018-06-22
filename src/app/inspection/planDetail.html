@@ -1,0 +1,132 @@
+<div class="implement">
+	<div class="implement-nav">
+		<span class="c9">
+			<a class="model_a_c9" ui-sref="inspection.plan.list({tenantId:$stateParams.tenantId||$localStorage.userInfo.tenantId})">巡检计划</a>&gt;
+			<i class="c6">查看详情</i>
+		</span>
+		<a class="inspectionOperateBtn inspectionOperateBtnStop planDetailStopBtn" ng-click='planStop()' ng-if='data.plan.status==1 && userInfo.authoritiesStr.indexOf("QC_PLAN_DISABLE") != -1'>停用巡检计划</a>
+	</div>
+	<inspection-plan obj="data.plan"></inspection-plan>
+	<div class="main">
+		<div class="title2 inspectionTabList">
+			<div class="tab">
+				<div class="{{data.conType === 1 ? 'tab-item tab-active' : 'tab-item'}}" ng-click="changeConType(1)">巡检范围</div>
+				<div class="{{data.conType === 2 ? 'tab-item tab-active' : 'tab-item'}}" ng-click="changeConType(2)">巡检模板</div>
+				<div class="{{data.conType === 3 ? 'tab-item tab-active' : 'tab-item'}}" ng-click="changeConType(3)">巡检记录</div>
+			</div>
+		</div>
+		<div class="main-content" ng-if="data.conType === 1">
+			<table class="m-t-lg">
+				<tr>
+					<td class="c6">巡检范围：</td>
+					<td class="c9">{{data.plan.scope}}</td>
+				</tr>
+			</table>
+		</div>
+		<div class="main-summary" ng-if="data.conType === 2">
+			<model-detail is-edit-model='false' model-select='data.plan.template'></model-detail>
+		</div>
+		<div class="planDetailRecords" ng-if="data.conType === 3">
+			<table>
+				<tr>
+					<th>序号</th>
+					<th>计划巡检日期</th>
+					<th>实际开始日期</th>
+					<th>实际结束日期</th>
+					<th>设备数</th>
+					<th>操作</th>
+				</tr>
+				<tr ng-repeat="td in data.records  track by $index" ng-class='{fy_inspectionStoped:td.num==2}'>
+					<td>{{(pageInfo.current-1)*pageInfo.size+$index+1}}</td>
+					<td>{{td.planDate==0?'无':(td.planDate | date:'yyyy-MM-dd')}}</td>
+					<td>{{td.actualStartDate==0?'无':(td.actualStartDate | date:'yyyy-MM-dd')}}</td>
+					<td>{{td.actualEndDate==0?'无':(td.actualEndDate | date:'yyyy-MM-dd')}}</td>
+					<td>{{td.equipments}}</td>
+					<td class="b-r-dcdcdc">
+						<a href="javascript:;" ng-click='printReport(td)'>查看巡检报告</a>
+					</td>
+				</tr>
+				<tr ng-show='nocontent'>
+					<td colspan="6" class="repairTextCenter b-r-dcdcdc b-b-dcdcdc">
+						<img src="../../res/img/nocontent.png" alt="">
+						<span class='m-l-lg'>暂无数据</span>
+					</td>
+				</tr>
+				<tr ng-show='onloading'>
+					<td colspan="6" class="repairTextCenter b-r-dcdcdc b-b-dcdcdc">
+						<img src="../../res/img/loading2.gif" alt="">
+						<span class='verticalAlignMiddle'></span>
+					</td>
+				</tr>
+			</table>
+			<!-- 分页 -->
+			<span ng-if="!onloading" data-ng-include=" 'src/tpl/newPageInfo.html' "></span>
+		</div>
+	</div>
+</div>
+<!-- 打印巡检报告单 -->
+<div class="implement-print" id="template_ques" style="display: none;">
+	<div class="modal-tab">
+		<span ng-class="{'modal-tab-active': data.reportType == 1}" ng-click="changeReportType(1)">简易版</span>
+		<span ng-class="{'modal-tab-active': data.reportType == 2}" ng-click="changeReportType(2)">标准版</span>
+	</div>
+	<h2>{{data.print.hospital}}--医疗设备巡检记录单</h2>
+	<div class="info">
+		<dl style="margin-right: 250px;">
+			<dt>计划编号：</dt>
+			<dd>{{data.print.planNo}}&nbsp;</dd>
+			<dt>巡检科室：</dt>
+			<dd>{{data.print.scope}}&nbsp;</dd>
+			<dt>负责人：</dt>
+			<dd>{{data.print.director}}&nbsp;</dd>
+		</dl>
+		<dl class="dt" style="width: 230px;">
+			<dt>报告编号：</dt>
+			<dd>{{data.print.reportNo}}&nbsp;</dd>
+			<dt>开始日期：</dt>
+			<dd>{{data.print.firstDate ? (data.print.firstDate | date: 'yyyy-MM-dd') : ''}}&nbsp;</dd>
+			<dt>结束日期：</dt>
+			<dd>{{data.print.nextDate ? (data.print.nextDate | date: 'yyyy-MM-dd') : ''}}&nbsp;</dd>
+		</dl>
+	</div>
+	<div style="width: 900px;margin:0 auto 20px auto;overflow-x: auto;" ng-if="data.reportType == 2">
+		<implement-template-q type1="3" type2="3" page="1" page-size="data.print.records.length" equipments="data.print.records"
+		 templates="data.print.template"></implement-template-q>
+	</div>
+	<div class="summary">
+		<div class="summary-title">临床使用情况</div>
+		<div class="summary-con">{{data.print.condition}}</div>
+	</div>
+	<div class="summary">
+		<div class="summary-title">存在的问题及分析</div>
+		<div class="summary-con">{{data.print.analysis}}</div>
+	</div>
+	<div class="summary">
+		<div class="summary-title">改进的问题及建议</div>
+		<div class="summary-con">{{data.print.suggestion}}</div>
+	</div>
+	<div style="width: 900px;margin:20px auto 20px auto;overflow-x: auto;">
+		<table class="implement-template">
+			<tr>
+				<td style="width: 100px; text-align: center;">计划验收人</td>
+				<td>{{data.print.checkMan.join("；")}}</td>
+			</tr>
+			<tr>
+				<td style="width: 100px; text-align: center;">已验收人</td>
+				<td>{{data.print.checkedMan ? data.print.checkedMan.join("；") : ''}}&nbsp;</td>
+			</tr>
+		</table>
+	</div>
+</div>
+<div id="inspectionLayer" class="inspectionLayer" style="display: none;">
+	<div class="inspectionLayerCon">
+		<div>
+			<div class="inspectionLayerImg m-t-lg m-b-md">
+				<img src='../../res/img/icon20.png'>
+			</div>
+			<div>
+				<span>巡检计划停用后不可恢复，确认停用吗？</span>
+			</div>
+		</div>
+	</div>
+</div>

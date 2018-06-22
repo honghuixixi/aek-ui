@@ -1,0 +1,60 @@
+<dl class="archives-modal-dl">
+    <dt>
+        <i>*</i>档案名称</dt>
+    <dd>
+        <input style="width: 767px;" type="text" maxlength="40" placeholder="请输入" ng-model="form.name" ng-change="methods.removeErr('name')">
+        <div class="archives-modal-dl-err">{{err.name}}</div>
+    </dd>
+    <dt><i>*</i>保管期限</dt>
+    <dd>
+        <div style="float:left;width: 400px;display: inline-block;">
+            <aek-select style="width: 300px;" list="data.timeOptions" change="methods.changeTime" item="form.qixian"></aek-select>
+            <div class="archives-modal-dl-err"></div>
+        </div>
+        <div style="display: inline-block;">
+            <span style="display: inline-block;width: 60px;text-align: right;"><i>*</i>保密级</span>
+            <aek-select style="width: 300px;" list="miji" change="methods.changeType" item="form.miji"></aek-select>
+            <div class="archives-modal-dl-err" style="padding-left: 65px;">{{err.miji}}</div>
+        </div>
+    </dd>
+    <dt>
+        <i>*</i>立卷人</dt>
+    <dd>
+        <div style="float:left;width: 400px;display: inline-block;">
+            <input type="text" maxlength="40" placeholder="请输入" ng-model="form.ljr" ng-change="methods.removeErr('ljr')">
+            <div class="archives-modal-dl-err">{{err.ljr}}</div>
+        </div>
+        <div style="display: inline-block;">
+            <span style="display: inline-block;width: 60px;text-align: right;"><i>*</i>立卷日期</span>
+            <input class="archives-modal-date" id="ljrq" readonly type="text" placeholder="请选择" ng-value="form.ljrq | date:'yyyy-MM-dd'">
+            <div class="archives-modal-dl-err" style="padding-left: 65px;">{{err.ljrq}}</div>
+        </div>
+    </dd>
+    <dt>
+        <i>*</i>检查人</dt>
+    <dd>
+        <div style="float:left;width: 400px;display: inline-block;">
+            <input type="text" maxlength="40" placeholder="请输入" ng-model="form.jcr" ng-change="methods.removeErr('jcr')">
+            <div class="archives-modal-dl-err">{{err.jcr}}</div>
+        </div>
+        <div style="display: inline-block;">
+            <span style="display: inline-block;width: 60px;text-align: right;"><i>*</i>检查日期</span>
+            <input class="archives-modal-date" id="jcrq" readonly type="text" placeholder="请选择" ng-value="form.jcrq | date:'yyyy-MM-dd'">
+            <div class="archives-modal-dl-err" style="padding-left: 65px;">{{err.jcrq}}</div>
+        </div>
+    </dd>
+    <dt>
+        <i>*</i>起止日期</dt>
+    <dd>
+        <input class="archives-modal-date" id="rangeStart" readonly type="text" placeholder="请选择" ng-value="form.rangeStart | date:'yyyy-MM-dd'">
+        <span>&nbsp;&nbsp;至&nbsp;&nbsp;</span>
+        <input class="archives-modal-date" id="rangeEnd" readonly type="text" placeholder="请选择" ng-value="form.rangeEnd | date:'yyyy-MM-dd'">
+        <div class="archives-modal-dl-err">{{err.range}}</div>
+    </dd>
+    <dt>
+        <i>*</i>立卷单位</dt>
+    <dd>
+        <input style="width: 767px;" type="text" maxlength="40" placeholder="请输入" ng-model="form.ljdw" ng-change="methods.removeErr('ljdw')">
+        <div class="archives-modal-dl-err">{{err.ljdw}}</div>
+    </dd>
+</dl>

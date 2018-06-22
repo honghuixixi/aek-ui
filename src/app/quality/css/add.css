@@ -1,0 +1,93 @@
+.quality-content .quality-detail-btn {
+    float: right;
+    width: 80px;
+    margin-left: 10px;
+    text-align: center;
+}
+.quality-add {
+    margin: 0;
+    font-size: 13px;
+    overflow: hidden;
+}
+.quality-add dt {
+    float: left;
+    width: 80px;
+    font-weight: 300;    
+    line-height: 32px;
+    color: #333;
+    text-align: right;
+}
+.quality-add dt i {
+    color: #f00;
+}
+.quality-add dd {
+    position: relative;
+    margin-left: 90px;
+}
+.quality-add dd input[type="text"] {
+    width: 400px;
+    height: 32px;
+    padding: 0 10px;
+    line-height: 32px;
+    border: 1px solid #dcdcdc;
+    outline: 0;
+}
+.quality-add dd textarea {
+    width: 800px;
+    height: 182px;
+    padding: 10px;
+    margin-bottom: 20px;
+    font-size: 13px;
+    line-height: 26px;
+    border: 1px solid #dcdcdc;
+    outline: 0;
+    resize: none;
+}
+.quality-add a {
+    display: inline-block;
+}
+.quality-add dd .err {
+    height: 20px;
+    line-height: 20px;
+    color: #f00;
+}
+.quality-add dd .count {
+    position: absolute;
+    left: 735px;
+    bottom: 22px;
+    z-index: 1;
+    width: 60px;
+    text-align: right;
+    color: #999;
+}
+.quality-add-date {
+    background-image: url(../../../../res/img/date-icon.png);
+    background-position: 376px 6px;
+    background-repeat: no-repeat;
+}
+.quick-result {
+    position: absolute;
+    top: 36px;
+    left: -1px;
+    right: 0;
+    z-index: 5;
+    height: 300px;
+    overflow-y: auto;
+    background: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 10px 15px 0 rgba(0,0,0,.3);
+}
+.quick-result table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.quick-result td {
+    padding: 7px;
+    text-align: left;
+    border: 0;
+    border-bottom: 1px solid #dcdcdc;
+}
+.quick-result tr:hover td {
+    background-color: #eee;
+    cursor: pointer;
+}

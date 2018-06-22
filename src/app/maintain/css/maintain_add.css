@@ -1,0 +1,347 @@
+.maintain-add {
+    overflow: hidden;
+}
+
+.maintain-add .maintain-top .maintain-btn {
+    width: 70;
+    background-image: none;
+    text-align: center;
+    padding: 0;
+}
+
+.maintain-add .row {
+    font-size: 14px;
+    overflow: hidden;
+    margin: 10px 0 10px 0;
+}
+
+.maintain-add .require {
+    color: #ff2a2a;
+}
+
+.maintain-add table {
+    width: 80%;
+    border-collapse: collapse;
+}
+
+.maintain-add td {
+    border: 1px solid #dcdcdc;
+    padding: 5px 10px;
+    font-size: 14px;
+    line-height: 24px;
+}
+
+.maintain-add thead td {
+    background-color: #f5f5f5;
+    white-space: nowrap;
+}
+
+.maintain-add td input[type="checkbox"] {
+    float: left;
+    width: 18px;
+    height: 18px;
+    margin-right: 5px;
+    margin-top: 2px;
+}
+
+.maintain-add td input[type="checkbox"] {
+    float: left;
+    width: 19px;
+    height: 20px;
+}
+
+.maintain-add .checkbox2 {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    background-image: url('../../../../res/img/checkbox.png');
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+.maintain-add .checked2 {
+	background-position: -26px 0;
+}
+
+.maintain-add dl {
+    overflow: hidden;
+    margin: 10px 0 0 0;
+}
+
+.maintain-add dt {
+    float: left;
+    width: 110px;
+    font-weight: 400;
+    line-height: 30px;
+    color: #666;
+}
+
+.maintain-add dd {
+    margin-left: 120px;
+    margin-bottom: 20px;
+}
+
+.maintain-add .search-btn {
+    width: 95px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.maintain-add .choose-template-btn {
+    width: 90px;
+    padding-left: 30px;
+    background-position: 10px 9px;
+    background-image: url('../../../../res/img/add.png');
+    background-repeat: no-repeat;
+    text-align: left;
+    cursor: pointer;
+}
+
+.maintain-add .choose-user-btn {
+    width: 95px;
+    padding-left: 30px;
+    background-position: 10px 9px;
+    background-image: url('../../../../res/img/add.png');
+    background-repeat: no-repeat;
+    text-align: left;
+    cursor: pointer;
+}
+
+.maintain-add .keyword {
+    width: 250px;
+    height: 32px;
+    padding-left: 10px;
+    border: 1px solid #dcdcdc;
+}
+
+.maintain-add .count {
+    margin: 0 5px 0 5px;
+    color: #4ab29b;
+}
+
+.maintain-add .cycle {
+    width: 90px;
+    height: 32px;
+    margin-right: 5px;
+    padding-left: 10px;
+    border: 1px solid #dcdcdc;
+}
+
+.maintain-add .cycle {
+    width: 100px;
+    height: 32px;
+    margin-right: 5px;
+    padding-left: 10px;
+    border: 1px solid #dcdcdc;
+}
+
+.maintain-add .dt {
+    width: 300px;
+    height: 32px;
+    padding-left: 10px;
+    padding-right: 30px;
+    border: 1px solid #dcdcdc;
+    background-image: url('../../../../res/img/date-icon.png');
+    background-position: 276px 6px;
+    background-repeat: no-repeat;
+}
+
+.maintain-add .err {
+    color: #ff2a2a;
+}
+
+
+/* choose user */
+
+.maintain-choose-uer {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #dcdcdc;
+}
+
+.maintain-choose-uer td {
+    padding: 5px;
+    font-size: 14px;
+    border-top: 1px solid #dcdcdc;
+}
+
+.maintain-choose-uer thead td {
+    background-color: #f5f5f5;
+}
+
+.maintain-choose-uer tbody tr:hover {
+    border: 1px solid #f7931e;
+}
+
+.maintain-choose-uer tbody tr:hover td {
+    border-top: 1px solid #f7931e;
+    border-bottom: 1px solid #f7931e;
+    cursor: pointer;
+}
+
+.maintain-choose-uer-radio {
+    position: relative;
+    float: left;
+    width: 18px;
+    height: 18px;
+    border: 1px solid #dcdcdc;
+    border-radius: 50%;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.maintain-choose-uer-name {
+    width: 130px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.maintain-choose-uer .checked:before {
+    content: '';
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #f7931e;
+}
+
+
+/* choose template */
+
+.maintain-choose-template {
+    overflow: hidden;
+}
+
+.maintain-choose-template-search {
+    margin: 10px 0 0 10px;
+}
+
+.maintain-choose-template-search input[type="text"] {
+    width: 215px;
+    height: 32px;
+    padding: 0 10px;
+    font-size: 14px;
+    line-height: 32px;
+    border: 1px solid #dcdcdc;
+}
+
+.maintain-choose-template-search .maintain-btn {
+    width: 60px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.maintain-choose-template-list {
+    height: 440px;
+    padding: 10px;
+    overflow-y: auto;
+}
+
+.maintain-choose-template-list table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #dcdcdc;
+}
+
+.maintain-choose-template-list thead td {
+    background-color: #f5f5f5;
+}
+
+.maintain-choose-template-list td {
+    position: relative;
+    padding: 8px 10px;
+    font-size: 14px;
+    border-top: 1px solid #dcdcdc;
+}
+
+.maintain-choose-template-list .hover-tr:hover {
+    border: 1px solid #f7931e;
+    cursor: pointer;
+}
+
+.maintain-choose-template-list .hover-tr:hover td {
+    border-top: 1px solid #f7931e;
+    border-bottom: 1px solid #f7931e;
+}
+
+.maintain-choose-template-list tbody td .single {
+    position: relative;
+    float: left;
+    width: 18px;
+    height: 18px;
+    border: 1px solid #dcdcdc;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.maintain-choose-template-list tbody td .checked:before {
+    content: '';
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #f7931e;
+}
+
+.maintain-choose-template-list tbody td .name {
+    float: left;
+    width: 220px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.maintain-choose-template-list tbody td .tpl {
+    position: absolute;
+    top: 8px;
+    right: 5px;
+    color: #4ab29b;
+}
+
+.maintain-choose-template-info {
+    width: 700px;
+    height: 490px;
+    padding: 10px;
+    font-size: 14px;
+    overflow-y: auto;
+}
+
+.maintain-choose-template-info dl {
+    margin: 5px 0 10px 0;
+    overflow: hidden;
+}
+
+.maintain-choose-template-info dt {
+    float: left;
+    width: 70px;
+    font-weight: 300;
+}
+
+.maintain-choose-template-info dd {
+    margin-left: 70px;
+}
+
+.maintain-choose-template-info table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.maintain-choose-template-info table td {
+    padding: 8px 10px;
+    font-size: 14px;
+    border: 1px solid #dcdcdc;
+}
+
+.maintain-choose-template-info thead td {
+    white-space: nowrap;
+    background-color: #f5f5f5;
+}
+
+.maintain-choose-template-info td .div+.div {
+    border-top: 1px solid #dcdcdc;
+}

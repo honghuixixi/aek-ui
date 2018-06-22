@@ -1,0 +1,147 @@
+<!-- navbar -->
+<div style="height: 100%">
+<div data-ng-include=" 'src/tpl/header.html' " class="app-header navbar b-b-3x-orange">
+</div>
+<div class="hd_tdetailcont">
+    <div class="hd_treetitle">医疗机构详情</div>
+    <div class="hd_tdetailtxt">
+        <div class="hd_tdetailnav">
+            <span ng-class="{'hd_active':index==0}" ng-click="navChange(0)">医疗机构详情</span>
+            <span ng-class="{'hd_active':index==1}" ng-click="navChange(1)">设备信息</span>
+        </div>
+        <div class="hd_tdetailtit" ng-if="index==0">{{msg.tenant.name}}<span ng-if="!msg.tenant.enable"class='dis-span'>已停用</span></span></div>
+        <div class="hd_tdetailul" ng-if="index==0">
+            <ul>
+                <li><span>ID</span><span>{{msg.tenant.id}}</span></li>
+                <li><span>原始管理员</span><span>{{msg.tenantAdmin.realName}}</span></li>
+                <li><span>来源</span>
+                    <span ng-if="msg.tenant.origin==1 ">后台创建</span>
+                    <span ng-if="msg.tenant.origin==2 ">前台注册</span>
+                    <span ng-if="msg.tenant.origin==3 ">其他 </span>
+                </li>
+                <li><span>手机号</span><span>{{msg.tenantAdmin.mobile}}</span></li>
+                <li><span>审核状态</span>
+                    <span ng-if="msg.tenant.auditStatus==1 ">待审核</span>
+                    <span ng-if="msg.tenant.auditStatus==2 ">自动通过</span>
+                    <span ng-if="msg.tenant.auditStatus==3 ">人工通过</span>
+                    <span ng-if="msg.tenant.auditStatus==4 ">已拒绝</span>
+                </li>
+                <li><span>邮箱</span><span>{{msg.tenantAdmin.email}}</span></li>
+                <li><span>创建人</span><span>{{msg.createName}}</span></li>
+                <li ><span></span> </li>
+                <li><span>创建时间</span><span>{{msg.tenant.createTime.slice(0, -3)}}</span></li>
+            </ul>
+        </div>
+        <div class="hd_tdetailul" style="height: 100px" ng-if="index==0">
+            <ul>
+                <li><span>机构类型</span>
+                    <span ng-if="msg.tenant.tenantType == 1">医疗机构</span>
+                    <span ng-if="msg.tenant.tenantType == 2">监管机构</span>
+                    <span ng-if="msg.tenant.tenantType == 3">设备供应商</span>
+                    <span ng-if="msg.tenant.tenantType == 4">设备维修商</span>
+                    <span ng-if="msg.tenant.tenantType == 5">配件供应商</span>
+                </li>
+                <li><span>账户类型</span>
+                    <span ng-if="msg.tenant.commercialUse">正式</span>
+                    <span ng-if="!msg.tenant.commercialUse">试用</span>
+                </li>
+                <li><span>是否测试机构</span>
+                    <span ng-if="msg.tenant.trial==0">是</span>
+                    <span ng-if="msg.tenant.trial==1">否</span>
+                </li>
+                <li><span>子机构</span>
+                    <span ng-if="msg.tenant.subTenantLimit == 0 ">不可创建</span>
+                    <span ng-if="msg.tenant.subTenantLimit != 0">已创建{{msg.tenant.subTenant }}个/可创建{{msg.tenant.subTenantLimit}}个</span>
+                </li>
+                <li><span>到期时间</span>
+                    <span ng-if="msg.tenant.expireTime">{{msg.tenant.expireTime.slice(0, 10)}}</span>
+                    <span ng-if="!msg.tenant.expireTime">永久有效</span>
+                </li>
+            </ul>
+        </div>
+        <div class="hd_tdetailul" style="height: 128px" ng-if="index==0">
+            <ul>
+                <li><span>组织机构代码</span><span>{{msg.tenant.license }}</span></li>
+                <li></li>
+                <li><span>机构类别</span>
+                    <span>{{category}}</span>
+                </li>
+                <li></li>
+                <li><span>机构分类管理类型</span>
+                    <span ng-if="!msg.tenant.hplTenant.manageType"></span>
+                    <span ng-if="msg.tenant.hplTenant.manageType==1">营利性</span>
+                    <span ng-if="msg.tenant.hplTenant.manageType==2">非营利性</span>
+                    <span ng-if="msg.tenant.hplTenant.manageType==3">其他</span>
+                </li>
+                <li></li>
+                <li><span>医院等级</span><span>{{grade}}{{hierarchy}}</span></li>
+
+            </ul>
+        </div>
+
+
+        <!--机构详情2-->
+        <div ng-if="index==1">
+            <div class="assets-overlay" ng-click='hideAll()' ng-show='devshow'></div>
+            <div class="hd_tdetailtit org-panel" style="height: 70px;padding-top: 20px">
+                <div class="org-header">
+                    <div class="org-sel hd_org-sel">
+                        <div class="i-info"  style="width: 120px !important;margin-right: 20px">
+                            <div class="input-wrap ">
+                                <input class="depetName " type="text" readonly="true" placeholder="全部状态" ng-model="orgType" ng-focus="focus()" style="width: 120px"/>
+                                <div class="depetList" ng-show="devshow1" >
+                                    <label ng-repeat="l in statusArr track by $index" data-id="{{l.id}}" ng-click="click($event)">{{l.name}}</label>
+                                </div>
+                            </div>
+                        </div>
+                        <input id="keywords" class="hd_keywords"  type="text"  placeholder="设备名称/编号" ng-model="$parent.keywords">
+                        <div class="t-search">
+                            <b ng-click="search()" id="search" style="height: 30px">搜索</b>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="org-content " style="width: 100%;padding: 0;margin-top: 20px;min-width: 1075px">
+                <table style="border:none;border-collapse:collapse;" class="table  b-t b-light text-center ">
+                    <thead>
+                    <tr class="tr-th hd_tr-th">
+                        <th style="width: 15%;white-space:nowrap;">设备编号</th>
+                        <th style="width: 32%;white-space:nowrap;">设备名称</th>
+                        <th style="width: 15%;white-space:nowrap;">规格型号</th>
+                        <th style="width: 32%;white-space:nowrap;">生产商</th>
+                        <th style="width: 18%;white-space:nowrap;">状态</th>
+                    </tr>
+                    </thead>
+                    <tbody class="hd_treetbpdy">
+                    <tr ng-if="loading">
+                        <td colspan="12" class="noContent">
+                            <img src="../../../res/img/loading2.gif" alt="">
+                        </td>
+                    </tr>
+                    <tr ng-if="noData" style="border: 0;">
+                        <td colspan="12" class="noContent" >
+                            <img src="../../../res/img/nocontent.png" alt="">
+                            <span class="m-l-lg">暂无数据</span>
+                        </td>
+                    </tr>
+                    <!--<tr ng-if="res.length" ng-repeat='item in res'>-->
+                    <tr class="hd_treetr" ng-repeat="l in list track by $index">
+                        <td class="hd_treeleft">{{l.assetsNum}}</td>
+                        <td>{{l.assetsName}}</td>
+                        <td>{{l.assetsSpec}}</td>
+                        <td>{{l.factoryName}}</td>
+                        <td class="hd_treeright">{{l.statusName}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.table-responsive -->
+            <div class="pages-de"></div>
+            <!-- 底部分页 -->
+            <span data-ng-include=" 'src/tpl/newPageInfo.html' "></span>
+        </div>
+    </div>
+</div>
+</div>
+<!-- / navbar -->

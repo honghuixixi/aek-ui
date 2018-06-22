@@ -1,0 +1,64 @@
+<div class="fy_repairWrap no-padder">
+<!-- 导航条 -->
+<div class="bg-white bread-crumb">
+    <ul class="breadcrumb b-a m-b-n-xs lter b-b wrapper-md">
+        <li><a ui-sref="repair.audit.list({tenantId: ($stateParams.tenantId||$localStorage.userInfo.tenantId)})">单据审批</a></li>
+        <li>查看详情</li>
+    </ul>
+    <div class="fix-btn">
+        <a ng-click="newTre()" ng-if='billObj.status==1 && userId===billObj.currentCheckUserId && billType===1' class="fix-btn-sub pos-fix-btn">审批</a>
+        <a ng-click="printBill()" ng-if='billObj.status!=1' class="fix-btn-sub pos-fix-btn">打印</a>
+    </div>
+</div>
+
+<!-- 内容区域 -->
+<div class="p-l p-r p-b zctz-con treContent content content-m">
+    <repair-bill-detail bill-obj='billObj' apply-list-detail='applyListDetail'></repair-bill-detail>
+</div>
+
+<!-- 审核 -->
+<div class="adjustWrap" id='adjustWrapO' style="display: none;">
+    <div class="adjustCon">
+        <div class="adjustConOne">
+            <div class="adjustConHead">审批结果：</div>
+            <div class="adjustConBody">
+                <div class="adjustConBodyRadio m-r" ng-click='adjust.adjusted=true'>
+                    <div class="adjustConBodyCheck">
+                        <div class="adjustConBodyChecked" ng-show='adjust.adjusted'></div>
+                    </div>
+                    <div class="adjustConBodyRadioTxt">审批通过</div>
+                </div><!-- 
+                 --><div class="adjustConBodyRadio" ng-click='adjust.adjusted=false'>
+                    <div class="adjustConBodyCheck">
+                        <div class="adjustConBodyChecked" ng-hide='adjust.adjusted'></div>
+                    </div>
+                    <div class="adjustConBodyRadioTxt">审批未通过</div>
+                </div>
+            </div>
+        </div>
+        <div class="adjustConOne">
+            <div class="adjustConHead">备注：</div>
+            <div class="adjustConBody">
+                <textarea ng-model='adjust.remarks' maxlength='300' placeholder='请输入，300字符以内'></textarea>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 审核结果 -->
+<div class="adjustWrap" id='adjustWrapD' style="display: none;">
+    <div class="adjustCon">
+        <div class="adjustConOne">
+            <div class="adjustConHead">审批结果：</div>
+            <div class="adjustConBody">{{listDetail.checkResult}}</div>
+        </div>
+        <div class="adjustConOne">
+            <div class="adjustConHead">备注：</div>
+            <div class="adjustConBody" style="word-break: break-all; margin-right: 20px; line-height: 20px;">
+                {{listDetail.checkRemark}}
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<!-- 打印申请单 -->
+<div data-ng-include="'src/app/repair/html/template_print.html'" class="pm-report-dialog" id="template_report" style="display: none;"></div>

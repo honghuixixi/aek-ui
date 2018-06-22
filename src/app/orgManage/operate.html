@@ -1,0 +1,36 @@
+			<!-- section-sort -->
+			<!-- <div class="sortCon">
+				<div class="selectWrap">
+					<div class="selector"><input type="text" ng-model='model' readonly="true"><a href='javascript:;' ng-click='optionList=!optionList'></a></div>
+					<div class="options" ng-show='optionList'>
+						<ul>
+							<li ng-repeat='item in optionBar' ng-click='option(item)'>{{item.name}}</li>
+						</ul>
+					</div>
+				</div>
+			</div> -->
+			<div class="height18px"></div>
+			<!-- content -->
+			<table border="0" cellspacing="0" cellpadding="0" class="font13px">
+				<thead>
+					<th style="width:3%">ID</th>
+					<!--<th style="width:82.63%">操作记录</th>-->
+					<th style="width:14.14%">操作时间</th>
+				</thead>
+				<tr ng-repeat='td in tdData'>
+					<td class="fir-td">{{td.id}}</td>
+					<td class="recordSpan"><span class='m-r-sm fir-span'>{{td.name}}</span><span class='m-r-sm'>{{td.operate}}</span><span class='m-r-sm'>{{td.obj}}</span></td>
+					<td class="last-td">{{td.updateTime}}</td>
+				</tr>
+				<tr class="no-p">
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+			</table>
+			<!-- /content -->

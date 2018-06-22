@@ -1,0 +1,159 @@
+<div class="navbar-header {{app.settings.navbarHeaderColor}}" ng-cloak>
+          <!-- <a href="javascript:void(0);" class="navbar-brand text-lt">
+              <i class="fa fa-btc"></i>
+              <img ng-if="!$stateParams.loginId" src="../../res/img/logo2.png" alt="" ui-sref="home.use({id:$stateParams.id, tenantId:$stateParams.tenantId||$localStorage.userInfo.tenantId})">
+              <img ng-if="$stateParams.loginId" src="../../res/img/logo2.png" alt="" ui-sref="home.use({id:$stateParams.loginId, tenantId:$stateParams.tenantId||$localStorage.userInfo.tenantId})">
+          </a> -->
+    <div style="height: 60px;line-height: 60px;text-align: center;color: #fff;font-weight: 700;">设备管理服务平台</div>
+</div>
+      <div class="collapse pos-rlt navbar-collapse box-shadow {{app.settings.navbarCollapseColor}}">
+          <div class="nav navbar-nav modul-nav header-nav" >
+              <span class="text-white line-cut header-line">|</span>
+              <span class="text-white ay-module dropdown-toggle pagename header-line" data-toggle="dropdown" style="margin-left: 0;padding-left: 20px" ng-cloak>{{currentmodule||'平台首页'}}<b class="headerXia " ng-show="userInfo.modules.length!=0"></b></span>
+              <!--点击出现的下拉菜单-->
+              <div class="dropdown-module dropdown-menu headerSlect" ng-show="meau">
+                  <img src="../../res/img/sjx.png" alt="">
+                  <ul class="headerMeau" >
+                      <li>
+                          <a ng-if="$stateParams.loginId" ui-sref="home.use({id:$stateParams.loginId, tenantId:$stateParams.tenantId||$localStorage.userInfo.tenantId})" ui-sref-opts="{reload:true}">
+                              <img src="../../res/img/sydj.png" alt="">
+                              <span>平台首页</span>
+                          </a>
+                          <a ng-if="!$stateParams.loginId" ui-sref="home.use({id:$stateParams.id, tenantId:$stateParams.tenantId||$localStorage.userInfo.tenantId})" ui-sref-opts="{reload:true}">
+                              <img src="../../res/img/sydj.png" alt="">
+                              <span>平台首页</span>
+                          </a>
+                      </li>
+                      <li ng-repeat="l in userInfo.modules">
+                          <a ng-if="$stateParams.loginId && l.url" ng-click='modulesLink(l)'>
+                              <img src="../../res/img/jsgl.png" ng-if="l.moduleId==2" alt="" >
+                              <img src="../../res/img/inspectionSm.png" ng-if="l.moduleId==6" alt="" >
+                              <img src="../../res/img/zdbgl.png" ng-if="l.moduleId==8" alt="" >
+                              <img src="../../res/img/cyyhgl.png" ng-if="l.moduleId==1" alt="" >
+                              <img src="../../res/img/jggl.png" ng-if="l.moduleId==3" alt="" >
+                              <img src="../../res/img/wxgl.png" ng-if="l.moduleId==5" alt="" >
+                              <img src="../../res/img/zcgl.png" ng-if="l.moduleId==4" alt="">
+                              <img src="../../res/img/gygl.png" ng-if="l.moduleId==10" alt="">
+                              <img src="../../res/img/znfx.png" ng-if="l.moduleId==9" alt="">
+                              <img src="../../res/img/ptsyjg.png" ng-if="l.moduleId==11" alt="">
+                              <img src="../../res/img/apply12-sm.png" ng-if="l.moduleId==12" alt="">
+                              <img src="../../res/img/suptrees.png" ng-if="l.moduleId==13" alt="">
+                              <img src="../../res/img/apply7-sm.png" ng-if="l.moduleId==7" alt="">
+                              <img src="../../res/img/mt14.png" ng-if="l.moduleId==14" alt="">
+                              <img src="../../res/img/apply15.png" ng-if="l.moduleId==15" alt="">
+                              <img src="../../res/img/apply16.png" ng-if="l.moduleId==16" alt="">
+                              <img src="../../res/img/apply17.png" ng-if="l.moduleId==17" alt="">
+                              <span>{{l.name}}</span>
+                          </a>
+                          <a ng-if="!$stateParams.loginId && l.url" ng-click='modulesLink(l)'>
+                              <img src="../../res/img/jsgl.png" ng-if="l.moduleId==2" alt="" >
+                              <img src="../../res/img/inspectionSm.png" ng-if="l.moduleId==6" alt="" >
+                              <img src="../../res/img/zdbgl.png" ng-if="l.moduleId==8" alt="" >
+                              <img src="../../res/img/cyyhgl.png" ng-if="l.moduleId==1" alt="" >
+                              <img src="../../res/img/jggl.png" ng-if="l.moduleId==3" alt="" >
+                              <img src="../../res/img/wxgl.png" ng-if="l.moduleId==5" alt="" >
+                              <img src="../../res/img/zcgl.png" ng-if="l.moduleId==4" alt="">
+                              <img src="../../res/img/gygl.png" ng-if="l.moduleId==10" alt="">
+                              <img src="../../res/img/znfx.png" ng-if="l.moduleId==9" alt="">
+                              <img src="../../res/img/ptsyjg.png" ng-if="l.moduleId==11" alt="">
+                              <img src="../../res/img/apply12-sm.png" ng-if="l.moduleId==12" alt="">
+                              <img src="../../res/img/suptrees.png" ng-if="l.moduleId==13" alt="">
+                              <img src="../../res/img/apply7-sm.png" ng-if="l.moduleId==7" alt="">
+                              <img src="../../res/img/mt14.png" ng-if="l.moduleId==14" alt="">
+                              <img src="../../res/img/apply15.png" ng-if="l.moduleId==15" alt="">
+                              <img src="../../res/img/apply16.png" ng-if="l.moduleId==16" alt="">
+                              <img src="../../res/img/apply17.png" ng-if="l.moduleId==17" alt="">
+                              <span>{{l.name}}</span>
+                          </a>
+
+                      </li>
+
+                      <!-- <li>
+                        <a ui-sref="dictionary.menu.table({tenantId:$stateParams.tenantId||$localStorage.userInfo.tenantId})" >
+                          <img src="../../res/img/dictionary.png">
+                          <span>字典管理</span>
+                        </a>
+                      </li> -->
+
+                  </ul>
+              </div>
+          </div>
+          <ul class="nav navbar-nav navbar-right">
+              <li class="dropdown dropdownWrap " style="padding: 0;position: relative">
+                  <span class="m-r-md ay-r-sm dropdown-toggle header-jigou" data-toggle="dropdown" ng-cloak>{{userInfo.tenantName}}<b class="headerXia"></b></span>
+                  <!--医院的选择-->
+                  <div class="headerMeau dropdown-module dropdown-menu hddropdown-deprt headerSlect" ng-show='userInfo.orgs.length' style="position: absolute;right: 0">
+                      <img src="../../res/img/sjx.png">
+                      <ul class="top-r-menu">
+                          <li ng-repeat='item in userInfo.orgs'><a ng-click="headReload(item)"><span ng-cloak>{{item.name}} </span></a></li>
+                          <!--<li><a><span>皮肤科 </span></a></li>-->
+                      </ul>
+                  </div>
+              </li>
+              <li class="msgManager">
+                <a href='javascript:;' class='repairMsg' ng-click='msgManageAlert()'><div class="msgManageDiv"><!-- <span class='msgManageNums'>{{unreadMsg}}</span> --><img src="../../res/img/xiaoxi.png"></div></a>
+                <div class="msgFixWrap" ng-click='msgWrapClick()' ng-show='msgAlertShow'></div>
+                <div class="msgManageDrop" ng-show='msgManageShow'>
+                  <img class="msgManageDropTop" src="../../res/img/sjx.png">
+                  <div class="msgManageCon">
+                    <div class="msgManageConHead">
+                      <div class="msgManageConHeadMark" ng-if='msgSession==1'><a href="javascript:;" ng-click='readAll()'>全部标记为已读</a></div>
+                      <div class="msgManageConHeadTitle">消息中心</div>
+                    </div>
+                    <div class="msgManageConSessions">
+                      <a href="javascript:;" ng-click='msgSessionC(0)' class="msgManageConSession border-r-none" ng-class='{msgManageConSessionNow: msgSession==0}'>待办</a><a href="javascript:;" class="msgManageConSession" ng-click='msgSessionC(1)' ng-class='{msgManageConSessionNow: msgSession==1}'>通知</a><a href="javascript:;" class="msgManageConSession border-l-none" ng-click='msgSessionC(2)' ng-class='{msgManageConSessionNow: msgSession==2}'>公告</a>
+                    </div>
+                    <div class="msgManageConSessionCon">
+                      <ul class="msgManageConSession0" ng-if='msgSession==0'>
+                        <li class="msgManageConSessionLi" ng-repeat='item in waitDoList track by $index'>
+                          <a href="javascript:;" ng-click='msgHrefGo(1,item)'>
+                            <div class="msgManageConSessionBigImg"><img src="../../res/img/repairbig.png"><span class='verticalMiddle'></span></div>
+                            <div class="msgManageConSessionLiBody">
+                              <div class="msgManageConSessionLiHead">{{item.title}}</div>
+                              <div class="msgManageConSessionLiBodyCon">你有{{item.total}}{{item.des}}</div>
+                              <div class="msgManageConSessionLiBodyModule"><img ng-src="../../res/img/apply{{item.moduleId}}.png"><span>{{item.module}}</span></div>
+                            </div>
+                            <div class="msgEnterDiv"><span>{{item.total}}</span><img src="../../res/img/msgenterimg.png"></div>
+                          </a>
+                        </li>
+                      </ul>
+                      <ul class="msgManageConSession1" ng-if='msgSession==1' ng-class='{msgManageConSessionConScroll: msgList.length>5}'>
+                        <li class="msgManageConSessionLi" ng-repeat='item in msgList track by $index'>
+                          <a href="javascript:;" ng-click='msgHrefGo(2,item)'>
+                            <div class="msgManageConSessionLiHead"><em class='unreadMarkEM' ng-if='item.messageStatus==0'></em>{{item.messageContent}}</div>
+                            <div class='msgManageConSessionLiCon'><span class='msgManageConSessionLiDept'>{{item.remarks}}</span><span class='msgManageConSessionLiTime'>{{item.messageTime | date:'yyyy-MM-dd HH:mm'}}</span></div>
+                            <img src="../../res/img/msgenterimg.png" class="msgEnterImg">
+                          </a>
+                        </li>
+                      </ul>
+                      <div class="msgManageConSession2" ng-if='msgSession==2'>
+                        <img src="../../res/img/noticeimg.png">
+                        <div class="msgManageConSessionNone">暂无公告</div>
+                      </div>
+                      <div class="msgManageConSessionConMore"><a href="javascript:;" ng-click='msgHrefGoMore()'>查看更多</a></div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="dropdown">
+                  <a href class="dropdown-toggle clear header-back" data-toggle="dropdown">
+                      <span class=" m-t-n-sm m-b-n-sm m-r-sm">{{userInfo.realName}}</span>
+                      <span class="hidden-sm hidden-md" ng-bind="userInfo.userName || userInfo.account"></span><b class="caret list-caret" style="margin-top: 5px"></b>
+                  </a>
+                  <!-- dropdown -->
+                  <div class="dropdown-menu  dropdown-module  headerSlect exitMeus">
+                          <img src="../../res/img/sjx.png">
+                          <ul class="headerMeau" >
+                              <li  ng-mouseenter="ishovert=!ishovert" ng-mouseleave="ishovert=!ishovert"><a ui-sref="personal.account" target="_blank"><img ng-if="!ishovert" src="../../res/img/zhxx.png" alt=""><img  ng-if="ishovert" src="../../res/img/zhxxdj.png" alt=""><span>账号信息 </span></a></li>
+                              <!--<li  ng-mouseenter="ishoverf=!ishoverf" ng-mouseleave="ishoverf=!ishoverf"><a ui-sref="main.users.jbxx.jbxx"><img ng-if="!ishoverf" src="../../res/img/ggxx.png" alt=""><img  ng-if="ishoverf" src="../../res/img/ggxxdj.png" alt=""><span>系统公告</span></a></li>-->
+                              <li class="exit" ng-mouseenter="ishoverr=!ishoverr" ng-mouseleave="ishoverr=!ishoverr"><a ng-click='NewLogout()'><img  ng-if="!ishoverr" src="../../res/img/tcxt.png" alt=""><img  ng-if="ishoverr" src="../../res/img/tcxtdj.png" alt="">退出系统</a></li>
+                          </ul>
+                      </div>
+                  <!-- / dropdown -->
+              </li>
+
+          </ul>
+          <!-- / navbar right -->
+
+      </div>
+      <!-- / navbar collapse -->

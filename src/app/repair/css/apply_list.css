@@ -1,0 +1,281 @@
+.repair29 {
+    min-width: 1360px;
+    margin-left: 170px;
+}
+
+
+/* common */
+
+.repair29-btn {
+    display: inline-block;
+    font-size: 13px;
+    height: 32px;
+    line-height: 32px;
+    color: #fff;
+    background-color: #f7931e;
+}
+
+
+/* top */
+
+.repair29-top {
+    margin: 10px 15px 10px 0;
+    font-size: 15px;
+    line-height: 32px;
+    overflow: hidden;
+}
+
+.repair29-top .repair29-btn {
+    float: right;
+    width: 100px;
+    padding-left: 30px;
+    background-position: 10px 9px;
+    background-image: url('../../../../res/img/add.png');
+    background-repeat: no-repeat;
+    text-align: left;
+    cursor: pointer;
+}
+
+.repair29-top-btn {
+    float: right;
+    margin-left: 20px;
+    padding-left: 25px;
+    font-size: 14px;
+    color: #999;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+.repair29-top-btn2 {
+    float: right;
+    margin-left: 20px;
+    padding: 0 25px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    color: #333;
+    cursor: pointer;
+}
+
+.repair29-top-btn2+.repair29-top-btn2 {
+    background-color: #f7931e;
+    border-color: #f7931e;
+    color: #fff;
+}
+
+.repair29-top-btn:hover {
+    color: #4baaf6;
+}
+
+.repair29-top-edit {
+    background-position: 0 8px;
+    background-image: url('../../../../res/img/edit.png');
+}
+
+.repair29-top-del {
+    background-position: 0 8px;
+    background-image: url('../../../../res/img/sc.png');
+}
+
+.repair29-top-enable {
+    background-position: 0 10px;
+    background-image: url('../../../../res/img/hfjg.png');
+}
+
+.repair29-top-disable {
+    background-position: 0 8px;
+    background-image: url('../../../../res/img/ty.png');
+}
+
+
+/* main */
+
+.repair29-main {
+    margin: 0 15px 15px 0;
+    padding: 10px;
+    background-color: #fff;
+    overflow: hidden;
+}
+
+.tag {
+    height: 20px;
+    margin-left: 20px;
+    padding: 2px 10px;
+    font-size: 12px;
+    line-height: 20px;
+    background-color: #f7931e;
+    color: #fff;
+    border-radius: 10px;
+}
+
+.tag-err {
+    background-color: #f3756f;
+}
+
+.disable-tag {
+    background-color: #f3756f;
+}
+
+.enable-tag {
+    background-color: #f7931e;
+}
+
+
+/* main search */
+
+.repair29-main-search {
+    margin-bottom: 15px;
+}
+
+.repair29-main-search input[type="text"] {
+    width: 300px;
+    height: 32px;
+    padding-left: 10px;
+    font-size: 14px;
+    line-height: 32px;
+    border: 1px solid #ccc;
+    outline: 0;
+}
+
+.repair29-main-search .repair29-btn {
+    width: 60px;
+    margin-left: 5px;
+    text-align: center;
+    cursor: pointer;
+}
+
+
+/* main list */
+
+.repair29-main-list {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.repair29-main-list td {
+    padding: 10px;
+    font-size: 14px;
+    line-height: 22px;
+    border: 1px solid #dcdcdc;
+    text-align: center;
+}
+
+.repair29-main-list td a+a {
+    margin-left: 20px;
+}
+
+.repair29-main-list td .div {
+    line-height: 40px;
+}
+
+.repair29-main-list td .div+.div {
+    border-top: 1px solid #dcdcdc;
+}
+
+.repair29-main-list thead td {
+    background-color: #f5f5f5;
+    white-space: nowrap;
+}
+
+
+/* .repair29-main-list .tag {
+	background-color: #f3756f;
+} */
+
+.repair29-main-list .disable {
+    color: #ccc;
+}
+
+.loading {
+    margin: 30px 0;
+    text-align: center;
+}
+
+.empty {
+    margin: 30px 0;
+    text-align: center;
+}
+
+.empty img {
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+
+/* select */
+
+.pm-select {
+    display: inline-block;
+}
+
+.pm-select-input {
+    height: 32px;
+    font-size: 14px;
+    line-height: 32px;
+    padding-left: 10px;
+    border: 1px solid #dcdcdc;
+    background: #fff url('../../../../res/img/down.png') no-repeat 94% center;
+}
+
+.pm-select-input:focus {
+    border-color: #f7931e;
+    color: #666;
+}
+
+.pm-select-options {
+    position: absolute;
+    right: 0;
+    left: 0;
+    z-index: 110;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+    list-style: none;
+    box-shadow: 0 5px 15px 0px #cfcfcf;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.pm-select-options li {
+    padding-left: 10px;
+    font-size: 14px;
+    line-height: 28px;
+    cursor: pointer;
+    word-break: break-all;
+}
+
+.pm-select-options li:hover {
+    background-color: #f7931e;
+    color: #fff;
+}
+
+.pm-select .fixWrap {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 100;
+}
+
+
+/* placeholder */
+
+::-webkit-input-placeholder {
+    /* WebKit browsers */
+    color: #999;
+}
+
+:-moz-placeholder {
+    /* Mozilla Firefox 4 to 18 */
+    color: #999;
+}
+
+::-moz-placeholder {
+    /* Mozilla Firefox 19+ */
+    color: #999;
+}
+
+:-ms-input-placeholder {
+    /* Internet Explorer 10+ */
+    color: #999;
+}

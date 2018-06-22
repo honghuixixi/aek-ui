@@ -1,0 +1,191 @@
+<div class="metering-nav metering-execute-nav">
+    <a ui-sref="metering.menu.testing" style="color: #666;">计量检测</a> &gt;
+    <span>检测详情</span>
+    <span class="metering-btn" ng-if="data.local.isExecute" ng-click="methods.submit()">提交</span>
+    <span class="metering-btn metering-btn-temp" ng-if="data.local.isExecute" ng-click="methods.saveTemp()">暂存</span>
+    <span class="metering-btn" ng-if="!data.local.isExecute" ng-click="methods.getAndDisReport()">打印计量报告单</span>
+</div>
+<div class="metering-swrap metering-execute">
+    <table class="metering-info">
+        <tr>
+            <td>
+                <dl>
+                    <dt>设备名称：</dt>
+                    <dd>{{data.server.record.assetsName}}&nbsp;</dd>
+                    <dt>计量编号：</dt>
+                    <dd>{{data.server.record.measureNum}}&nbsp;</dd>
+                    <dt>规格型号：</dt>
+                    <dd>{{data.server.record.assetsSpec}}&nbsp;</dd>
+                    <dt>所在部门：</dt>
+                    <dd>{{data.server.record.assetsDeptName}}&nbsp;</dd>
+                </dl>
+            </td>
+            <td>
+                <dl>
+                    <dt>计量管理类别：</dt>
+                    <dd>{{data.server.record.measureManageType | measureManageType}}&nbsp;</dd>
+                    <dt>计量类别：</dt>
+                    <dd>{{data.server.record.measureType | measureType}}&nbsp;</dd>
+                    <dt>计量分类：</dt>
+                    <dd>{{data.server.record.measureCategory | measureCategory}}&nbsp;</dd>
+                    <dt>计量周期：</dt>
+                    <dd>{{data.server.record.measureCycle}}个月</dd>
+                </dl>
+            </td>
+            <td>
+                <dl>
+                    <dt>下次检定日期：</dt>
+                    <dd>{{data.server.record.nextCheckTime | date:'yyyy-MM-dd'}}
+                        <span class="tip" ng-if="data.server.record.attention && data.server.record.attention.length">{{data.server.record.attention}}</span>&nbsp;</dd>
+                    <dt>检定方式：</dt>
+                    <dd>{{data.server.record.checkMode | checkMode}}&nbsp;</dd>
+                    <dt>负责人：</dt>
+                    <dd>{{data.server.record.chargeUserName}}&nbsp;</dd>
+                </dl>
+            </td>
+        </tr>
+    </table>
+    <div style="line-height: 40px;overflow: hidden;">
+        <span>检定信息</span>
+        <span style="float:right;" ng-if="!data.local.isExecute">报告编号：{{data.server.reportNum}}</span>
+    </div>
+    <div class="metering-form" ng-if="data.local.isExecute">
+        <div class="metering-form-row">
+            <div class="div">
+                <span class="div-span">
+                    <i>*</i>实际检定方式</span>
+                <aek-select list="data.local.methodOptions" change="methods.changeMethod" item="data.local.record.method" style="width: 200px;"></aek-select>
+                <label class="div-label">{{data.local.err.method}}</label>
+            </div>
+            <div class="div">
+                <span class="div-span">
+                    <i>*</i>证书编号</span>
+                <input type="text" maxlength="40" placeholder="请输入" ng-model="data.local.record.zsbh" ng-change="methods.removeErr('zsbh')">
+                <label class="div-label">{{data.local.err.zsbh}}</label>
+            </div>
+        </div>
+        <div class="metering-form-row">
+            <div class="div">
+                <span class="div-span">
+                    <i>*</i>本次检定日期</span>
+                <input id="currentDate" type="text" placeholder="请选择" readonly ng-value="data.local.record.currentDate | date:'yyyy-MM-dd'">
+                <label class="div-label">{{data.local.err.currentDate}}</label>
+            </div>
+            <div class="div">
+                <span class="div-span">
+                    <i>*</i>下次检定日期</span>
+                <input id="nextDate" type="text" placeholder="请选择" readonly ng-value="data.local.record.nextDate | date:'yyyy-MM-dd'">
+                <label class="div-label">{{data.local.err.nextDate}}</label>
+            </div>
+        </div>
+        <div class="metering-form-row">
+            <div class="div">
+                <span class="div-span">
+                    <i>*</i>检定形式</span>
+                <aek-select list="data.local.typeOptions" change="methods.changeType" item="data.local.record.type" style="width: 200px;"></aek-select>
+                <label class="div-label">{{data.local.err.type}}</label>
+            </div>
+            <div class="div">
+                <span class="div-span">检定结果</span>
+                <aek-select list="data.local.resultOptions" change="methods.changeResult" item="data.local.record.result" style="width: 200px;"></aek-select>
+                <label class="div-label"></label>
+            </div>
+        </div>
+        <div class="metering-form-row">
+            <div class="div">
+                <span class="div-span">检定机构</span>
+                <input type="text" maxlength="40" placeholder="请输入" ng-model="data.local.record.jdjg">
+                <label class="div-label"></label>
+            </div>
+            <div class="div">
+                <span class="div-span">检定费用</span>
+                <input type="text" placeholder="0.00" oninput="this.value=this.value.match(/^[1-9]\d*(?:\.\d{0,2})?/)" ng-change="checkNum()" ng-model="data.local.record.jdfy">
+                <label class="div-label"></label>
+            </div>
+        </div>
+        <div class="metering-form-row">
+            <div class="div">
+                <span class="div-span">
+                    <i>*</i>检定人</span>
+                <input type="text" maxlength="40" placeholder="请输入" ng-model="data.local.record.jdr" ng-change="methods.removeErr('jdr')">
+                <label class="div-label">{{data.local.err.jdr}}</label>
+            </div>
+            <div class="div">
+                <span class="div-span">
+                    <i>*</i>审核人</span>
+                <input type="text" maxlength="40" placeholder="请输入" ng-model="data.local.record.shr" ng-change="methods.removeErr('shr')">
+                <label class="div-label">{{data.local.err.shr}}</label>
+            </div>
+        </div>
+        <dl class="metering-form-dl">
+            <dt>备注</dt>
+            <dd>
+                <textarea maxlength="300" placeholder="请输入" ng-model="data.local.record.remark"></textarea>
+            </dd>
+            <dt style="margin-top: 12px;">附件</dt>
+            <dd style="margin-top: 10px;">
+                <div style="line-height: 32px;">
+                    <span class="metering-btn" ng-if="data.local.record.files.length < 5" ng-click="uploadFile()">上传附件</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <label>*单个文件5M以内，最多上传5个</label>
+                    <input id="uploadId" type="file" style="display: none;">
+                </div>
+                <div>
+                    <div ng-repeat="v in data.local.record.files">
+                        <a style="display: inline;" href="{{v.url | downloadURL}}">{{v.name}}；</a>
+                        <span ng-click="methods.removeFile(v)" style="margin-left: 10px;color: #f00;cursor: pointer;">删除</span>
+                    </div>
+                </div>
+            </dd>
+        </dl>
+    </div>
+    <div class="metering-form-result" ng-if="!data.local.isExecute">
+        <table>
+            <tr>
+                <td>
+                    <dl>
+                        <dt>实际检定方式：</dt>
+                        <dd>{{data.local.record.method.name}}&nbsp;</dd>
+                        <dt>本次检定日期：</dt>
+                        <dd>{{data.local.record.currentDate | date:'yyyy-MM-dd'}}&nbsp;</dd>
+                        <dt>检定形式：</dt>
+                        <dd>{{data.local.record.type.name}}&nbsp;</dd>
+                        <dt>检定机构：</dt>
+                        <dd>{{data.local.record.jdjg}}&nbsp;</dd>
+                        <dt>检定人：</dt>
+                        <dd>{{data.local.record.jdr}}&nbsp;</dd>
+                    </dl>
+                </td>
+                <td>
+                    <dl>
+                        <dt>证书编号：</dt>
+                        <dd>{{data.local.record.zsbh}}&nbsp;</dd>
+                        <dt>下次检定日期：</dt>
+                        <dd>{{data.local.record.nextDate | date:'yyyy-MM-dd'}}&nbsp;</dd>
+                        <dt>检定结果：</dt>
+                        <dd>{{data.local.record.result.name}}&nbsp;</dd>
+                        <dt>检定费用：</dt>
+                        <dd>{{data.local.record.jdfy ? data.local.record.jdfy + '元' : ''}}&nbsp;</dd>
+                        <dt>审核人：</dt>
+                        <dd>{{data.local.record.shr}}&nbsp;</dd>
+                    </dl>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <dl>
+                        <dt>备注：</dt>
+                        <dd>{{data.local.record.remark}}&nbsp;</dd>
+                        <dt>附件：</dt>
+                        <dd>
+                            <a href="{{v.url | downloadURL}}" ng-repeat="v in data.local.record.files">{{v.name}}；</a>&nbsp;</dd>
+                    </dl>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<!-- 计量报告单 -->
+<div id="template_report" style="display: none;">
+    <metering-report report="data.server.report"></metering-report>
+</div>

@@ -1,0 +1,123 @@
+<div class="sortCon">
+    <div class="selectWrap">
+        <div class="selector" ng-click='listShow("accountTypeList")'><input type="text" ng-model='accountType' readonly="true"><a href='javascript:;'></a></div>
+        <div class="options" ng-show='accountTypeList'>
+            <ul>
+                <li data-id="" ng-click='option($event,6,"accountType")'>账户类型</li>
+                <li ng-repeat='item in optionType' data-id="{{item.id}}" ng-click='option($event,6,"accountType")'>{{item.name}}</li>
+            </ul>
+        </div>
+    </div><div class="selectWrap">
+    <div class="selector" ng-click='listShow("openList")'><input type="text" ng-model='open' readonly="true"><a href='javascript:;'></a></div>
+    <div class="options" ng-show='openList'>
+        <ul>
+            <li data-id="" ng-click='option($event,6,"open")'>开通状态</li>
+            <li ng-repeat='item in optionState' data-id="{{item.id}}" ng-click='option($event,6,"open")'>{{item.name}}</li>
+        </ul>
+    </div>
+</div><div class="selectWrap">
+    <div class="selector" ng-click='listShow("testList")'><input type="text" ng-model='test' readonly="true"><a href='javascript:;'></a></div>
+    <div class="options" ng-show='testList'>
+        <ul>
+            <li data-id="" ng-click='option($event,6,"test")'>是否测试</li>
+            <li ng-repeat='item in optionTest' data-id="{{item.id}}" ng-click='option($event,6,"test")'>{{item.name}}</li>
+        </ul>
+    </div>
+</div><div class="searchWrap">
+    <input type="text" ng-model="keywords"  ng-keypress="($event.which === 13)?getList():0" placeholder="ID/机构名称"><a href="javascript:;" ng-click="getList()">搜索</a>
+</div>
+    <i class="verticalAlign"></i>
+</div>
+<!-- content -->
+<table ng-class="!tdData.length && 'no-con'" border="0" cellspacing="0" cellpadding="0" class="font13px">
+    <thead>
+    <th>ID</th>
+    <th >子机构名称</th>
+    <th>账户类型</th>
+    <th>所在地区</th>
+    <th>是否测试</th>
+    <th>子机构</th>
+    <th>到期时间</th>
+    <th>创建时间</th>
+    <th>操作</th>
+    </thead>
+    <tr ng-if="loading2">
+        <td colspan="12" class="noContent">
+            <img src="../../../res/img/loading2.gif" alt="">
+        </td>
+    </tr>
+    <tr ng-if="!tdData.length">
+        <td colspan="12" class="noContent">
+            <img src="../../../res/img/nocontent.png" alt="">
+            <span class="m-l-lg">暂无数据</span>
+        </td>
+    </tr>
+    <tr ng-if="tdData.length" ng-repeat='td in tdData' ng-class="!td.enable && 'disabled'">
+        <td class="fir-td">{{td.id}}</td>
+        <td class="p-l-15 text-lf">{{td.name}}
+            <span ng-if='!td.enable' class='dis-span' style="background-color: #F3756F;">已停用</span>
+        </td>
+        <!--<td>-->
+        <!--<span ng-if="td.tenantType == 1">医疗机构</span>-->
+        <!--<span ng-if="td.tenantType == 2">监管机构</span>-->
+        <!--<span ng-if="td.tenantType == 3">设备供应商</span>-->
+        <!--<span ng-if="td.tenantType == 4">设备维修商</span>-->
+        <!--<span ng-if="td.tenantType == 5">配件供应商</span>-->
+        <!--</td>-->
+        <td>
+            <span ng-if="td.commercialUse  == 0">试用</span>
+            <span ng-if="td.commercialUse  == 1">正式</span>
+        </td>
+        <td>{{td.areaMsg}}</td>
+        <td>
+            <span ng-if="td.trial == 0">是</span>
+            <span ng-if="td.trial == 1">不是</span>
+        </td>
+        <td>
+            <span ng-if="td.subTenantLimit == 0 ">不可创建</span>
+            <span ng-if="td.subTenantLimit != 0">已创建{{td.subTenant }}个/可创建{{td.subTenantLimit}}个</span>
+        </td>
+        <td>{{td.expireTime}}</td>
+        <td>{{td.createTime}}</td>
+        <td class="aTagColor moreOpt last-td">
+            <a href="javascript:;" data-id="{{td.id}}" ng-click="lookDetail($event)">查看</a>
+            <div ng-if="false" class="selectWrap m-l-md">
+                <div class="selectors"><a href="javascript:;" ng-click='showMoreOpt($index)'>···</a></div>
+                <div class="options width64" ng-show='operateList{{$index}}'>
+                    <ul>
+                        <li ng-if="td.enable"><a href="javascript:;" ng-click='alertLayer($index,td,1)'>停用机构</a></li>
+                        <li ng-if="!td.enable"><a href="javascript:;" ng-click='alertLayer($index,td,2)'>恢复机构</a></li>
+                        <li><a href="javascript:;" ng-click='alertLayer($index,td,0)'>删除机构</a></li>
+                    </ul>
+                </div>
+            </div>
+        </td>
+    </tr>
+    <tr ng-if="tdData.length" class="no-p">
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+</table>
+
+<span data-ng-include=" 'src/tpl/newPageInfo.html' "></span>
+
+<div id="alertOrgChild" ng-show="alertChildCon">
+    <div class="alertContent">
+        <div class="alertImg" style="padding-top:45px;"><img src='{{layerImg}}'></div>
+        <p class="font14px acolor666">确定{{orgOperate}}机构 ({{orgId}}){{orgName}}吗？</p>
+        <div style="height: 30px;margin-bottom:20px;" class="alertTip font13px acolorred">
+            <span>{{orgTip}}</span>
+        </div>
+        <div class="alertBtn" style="padding-right:10px;">
+            <a href="javascript:;" ng-click='operateOrg()' class="btnyes">确定</a><a href="javascript:;" ng-click='closeIndex()' class="btncancel">取消</a>
+        </div>
+    </div>
+</div>
+<div class="fixWrap" ng-show='fixWrapShow' ng-click='menuHide()'></div>

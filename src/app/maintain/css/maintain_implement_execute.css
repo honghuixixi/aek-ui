@@ -1,0 +1,244 @@
+.maintain-implement-execute .maintain-btn {
+    background-image: none;
+    padding: 0;
+    text-align: center;
+}
+
+.maintain-implement-execute .temp-btn {
+    width: 80px;
+    margin-right: 10px;
+    background-color: transparent;
+    color: #333;
+    border: 1px solid #ccc;
+}
+
+.maintain-implement-execute .maintain-info {
+    margin-right: 10px;
+    padding: 10px;
+    background-color: #fff;
+}
+
+.maintain-implement-execute .maintain-info-name {
+    font-size: 14px;
+    line-height: 30px;
+    border-bottom: 1px solid #dcdcdc;
+    overflow: hidden;
+}
+
+.maintain-implement-execute .maintain-info-table {
+    width: 100%;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.maintain-implement-execute .maintain-info-table td {
+    padding-left: 20px;
+    font-size: 14px;
+    line-height: 30px;
+}
+
+.maintain-implement-execute .maintain-info-main {
+    margin: 10px 10px 10px 0;
+    padding: 10px;
+    background-color: #fff;
+    overflow: hidden;
+}
+
+.maintain-implement-execute .maintain-info-main-tab {
+    border-bottom: 1px solid #dcdcdc;
+    overflow: hidden;
+}
+
+.maintain-implement-execute .maintain-info-main-tab .maintain-btn {
+    width: 80px;
+}
+
+.maintain-implement-execute .maintain-info-main-tab .maintain-btn+.maintain-btn {
+    float: right;
+    width: 60px;
+    height: 28px;
+    margin-top: -2px;
+    line-height: 28px;
+    cursor: pointer;
+}
+
+.maintain-implement-execute .maintain-info-main-tab .tab-item {
+    display: inline-block;
+    float: left;
+    width: 80px;
+    height: 30px;
+    margin-bottom: -1px;
+    font-size: 14px;
+    line-height: 30px;
+    text-align: center;
+    border: 1px solid #dcdcdc;
+    cursor: pointer;
+}
+
+.maintain-implement-execute .maintain-info-main-tab .tab-item+.tab-item {
+    margin-left: -1px;
+}
+
+.maintain-implement-execute .maintain-info-main-tab .checked {
+    background-color: #f7931e;
+    border-color: #f7931e;
+    color: #fff;
+}
+
+.maintain-implement-execute .maintain-info-main-dt {
+    margin-top: 15px;
+}
+
+.maintain-implement-execute .maintain-info-main-dt input[type="text"] {
+    width: 240px;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 30px 0 10px;
+    border: 1px solid #dcdcdc;
+    background-image: url('../../../../res/img/date-icon.png');
+    background-position: 217px 6px;
+    background-repeat: no-repeat;
+}
+
+.maintain-implement-execute .maintain-info-main-table {
+    width: 100%;
+    margin: 15px 0;
+    border-collapse: collapse;
+}
+
+.maintain-implement-execute .maintain-info-main-table td {
+    padding: 8px 10px;
+    font-size: 14px;
+    border: 1px solid #dcdcdc;
+    word-break: break-all;
+}
+
+.maintain-implement-execute .maintain-info-main-table td .radio2 {
+    position: relative;
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border: 1px solid #dcdcdc;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.maintain-implement-execute .maintain-info-main-table td .check2:before {
+    content: '';
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background-color: #f7931e;
+    border-radius: 50%;
+}
+
+.maintain-implement-execute .maintain-info-main-table td input[type="text"] {
+    width: 300px;
+    height: 30px;
+    padding: 0 10px;
+    font-size: 14px;
+    line-height: 30px;
+    border: 0;
+    outline: 0;
+}
+
+.maintain-implement-execute .dl {
+    margin-bottom: 20px;
+    font-size: 14px;
+    overflow: hidden;
+}
+
+.maintain-implement-execute .dl dt {
+    float: left;
+    width: 80px;
+    font-weight: 400;
+    color: #666;
+    text-align: right;
+}
+
+.maintain-implement-execute .dl dd {
+    margin-left: 90px;
+    margin-bottom: 5px;
+}
+
+.maintain-implement-execute .dl dd textarea {
+    width: 800px;
+    height: 160px;
+    padding: 10px;
+    font-size: 14px;
+    line-height: 20px;
+    resize: none;
+}
+
+.maintain-implement-execute .dl dd .num {
+    width: 80px;
+    height: 30px;
+    padding: 0 10px;
+    line-height: 30px;
+    border: 1px solid #dcdcdc;
+}
+
+.maintain-implement-execute .dl dd .maintain-btn {
+    width: 100px;
+    margin-bottom: 10px;
+    margin-right: 15px;
+    padding-left: 30px;
+    background-position: 10px 9px;
+    background-image: url('../../../../res/img/add.png');
+    background-repeat: no-repeat;
+    text-align: left;
+    cursor: pointer;
+}
+
+.maintain-implement-execute .require {
+    color: #ff2a2a;
+}
+
+.maintain-implement-success-dl {
+    overflow: hidden;
+}
+
+.maintain-implement-success-dl dt {
+    float: left;
+    width: 90px;
+    font-weight: 400;
+    color: #666;
+    text-align: right;
+}
+
+.maintain-implement-success-dl dd {
+    margin-bottom: 90px;
+    margin-bottom: 10px;
+    word-break: break-all;
+    color: #999;
+}
+
+
+
+/* 提交巡检 */
+
+.implement-submit {
+    text-align: center;
+}
+
+.implement-submit img {
+    margin: 20px 0;
+}
+
+.implement-submit div {
+    margin-bottom: 5px;
+}
+
+.implement-submit input[type="text"] {
+    width: 190px;
+    height: 30px;
+    padding: 0 30px 0 10px;
+    line-height: 30px;
+    border: 1px solid #dcdcdc;
+    background-image: url('../../../../res/img/date-icon.png');
+    background-position: 167px 6px;
+    background-repeat: no-repeat;
+}

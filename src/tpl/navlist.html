@@ -1,0 +1,5 @@
+
+
+<div ng-if="userInfo.authoritiesStr.indexOf('SYS_DEPT_VIEW_EDIT_DELETE') != -1" class="js-adddept center"><span class="btn btn-default btn-org" ng-click="addDeptAction()"><i></i>新建部门</span></div>
+<hr class="memHorline" />
+<div ng-if="userInfo.authoritiesStr.indexOf('SYS_USER_DEPT_VIEW') != -1" id="depttree" class="ztree showIcon"></div>

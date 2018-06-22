@@ -1,0 +1,65 @@
+<div class="repair29">
+    <div class="repair29-top">
+        维修配置
+    </div>
+    <div class="repair29-main" style="min-height: {{data.height}}px;">
+        <table class="repair29-main-list">
+            <thead>
+                <tr>
+                    <td style="width: 50px;">序号</td>
+                    <td>人员姓名</td>
+                    <td>手机号</td>
+                    <td>所在部门</td>
+                    <td>职务</td>
+                    <td>接单科室</td>
+                    <td style="width: 60px;">操作</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat=" v in data.list track by $index">
+                    <td style="width: 50px;">{{(pageInfo.current - 1) * pageInfo.size + $index + 1}}</td>
+                    <td>{{v.realName}}</td>
+                    <td>{{v.mobile}}</td>
+                    <td>{{v.deptName}}</td>
+                    <td>{{v.jobName}}</td>
+                    <td>{{v.takeOrderDeptNames || '未配置'}}</td>
+                    <td style="width: 60px;">
+                    	<a ng-click="showConfigModal(v.id)">配置</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- 分页 -->
+        <span ng-if="!data.loading && !data.empty" data-ng-include=" 'src/tpl/newPageInfo.html' "></span>
+        <!-- empty -->
+        <div class="empty" ng-if="data.empty && !data.loading"><img src="../../../res/img/nocontent.png">暂无数据</div>
+        <!-- loading -->
+        <div class="loading" ng-if="data.loading"><img src="../../../res/img/loading2.gif"></div>
+	</div>
+</div>
+
+<!-- 配置 -->
+<div id="template_config" class="repair-config-modal" style="display: none; text-align: center;">
+    <div class="left">
+    	<div class="title">
+    		<span>所有部门</span>
+    		<a ng-click="chooseAllDep()" style="float: right;cursor: pointer;">全部选择</a>
+    	</div>
+    	<div class="row">
+    		<input type="text" placeholder="输入关键字搜索" ng-model="data.keyword" ng-change="search()">
+    		<a class="btn" ng-click="search()">搜索</a>
+    	</div>
+    	<div class="list" style="height: 264px;">
+    		<div class="list-item" ng-repeat="v in data.modalLeftList" ng-click="chooseDep(v)">{{v.name}}</div>
+    	</div>
+    </div>
+    <div class="right">
+    	<div class="title">
+    		<span>已选部门</span>
+    		<a ng-click="removeAllDep()" style="float: right;cursor: pointer;">清空</a>
+    	</div>
+    	<div class="list">
+    		<div class="list-item" ng-repeat="v in data.modalRightList" ng-click="removeDep(v)">{{v.name}}</div>
+    	</div>
+    </div>
+</div>

@@ -1,0 +1,115 @@
+<div ng-show="isshow">
+    <table class="tab3" style="margin-top: 15px;" ng-show="!isedit">
+        <tr>
+            <td>
+                <dl class="search-archives">
+                    <dt>合同编号：</dt>
+                    <dd>{{data.server.contractNum}}&nbsp;</dd>
+                    <dt>签订日期：</dt>
+                    <dd>{{data.server.signDate | date:'yyyy-MM-dd'}}&nbsp;</dd>
+                    <dt>合同截止日期：</dt>
+                    <dd>{{data.server.endDate | date:'yyyy-MM-dd'}}&nbsp;</dd>
+                    <dt>乙方联系人：</dt>
+                    <dd>{{data.server.partybContactPerson}}&nbsp;</dd>
+                    <dt>档案编号：</dt>
+                    <dd>{{data.server.contractArchiveNum}}&nbsp;</dd>
+                    <dt>合同内容：</dt>
+                    <dd>{{data.server.contractContent}}&nbsp;</dd>
+                    <dt>附件：</dt>
+                    <dd>
+                        <div ng-repeat="v in data.server.attachments">
+                            <a target="_blank" href="{{v.fileUrl | archivesDownloadURL}}">{{v.fileName}}</a>
+                        </div>
+                    </dd>
+                </dl>
+            </td>
+            <td style="padding-left: 100px;vertical-align: top;">
+                <dl class="search-archives">
+                    <dt>合同名称：</dt>
+                    <dd>{{data.server.contractName}}&nbsp;</dd>
+                    <dt>合同金额：</dt>
+                    <dd>{{data.server.contractPriceStr}}&nbsp;</dd>
+                    <dt>发票号：</dt>
+                    <dd>{{data.server.invoiceNo}}&nbsp;</dd>
+                    <dt>乙方联系电话：</dt>
+                    <dd>{{data.server.partybContactPhone}}&nbsp;</dd>
+                    <dt>档案管理员：</dt>
+                    <dd>{{data.server.contractArchiveAdministrator}}&nbsp;</dd>
+                </dl>
+            </td>
+        </tr>
+    </table>
+    <table class="tab3 tab-form" style="margin-top: 15px;" ng-show="isedit">
+        <tr>
+            <td>
+                <dl class="search-archives">
+                    <dt>合同编号：</dt>
+                    <dd>
+                        <input type="text" maxlength="40" placeholder="请输入" ng-model="data.local.contractNum">
+                    </dd>
+                    <dt>签订日期：</dt>
+                    <dd>
+                        <input id="tab4-qdrq" class="tab-form-date" type="text" placeholder="请选择" readonly>
+                    </dd>
+                    <dt>合同截止日期：</dt>
+                    <dd>
+                        <input id="tab4-htjzrq" class="tab-form-date" type="text" placeholder="请选择" readonly>
+                    </dd>
+                    <dt>乙方联系人：</dt>
+                    <dd>
+                        <input type="text" maxlength="40" placeholder="请输入" ng-model="data.local.partybContactPerson">
+                    </dd>
+                    <dt>档案编号：</dt>
+                    <dd>
+                        <input type="text" maxlength="40" placeholder="请输入" ng-model="data.local.contractArchiveNum">
+                    </dd>
+                    <dt>合同内容：</dt>
+                    <dd>
+                        <input type="text" maxlength="40" placeholder="请输入" ng-model="data.local.contractContent">
+                    </dd>
+                    <dt>附件：</dt>
+                    <dd>
+                        <div style="line-height: 32px;">
+                            <span class="archives-btn archives-cancle" ng-click="methods.uploadFile()" ng-show="data.local.attachments.length < 5">上传附件</span>&nbsp;&nbsp;
+                            <label style="color: #999;">*单个文件5M以内，最多上传5个</label>
+                            <input id="tab4-uploadId" type="file" style="display: none;">
+                        </div>
+                        <div ng-repeat="v in data.local.attachments">
+                            <a>{{v.fileName}}；</a>
+                            <span style="margin-left: 10px;color: #f00;cursor: pointer;" ng-click="methods.removeFile($index)">删除</span>
+                        </div>
+                    </dd>
+                </dl>
+            </td>
+            <td style="padding-left: 100px;vertical-align: top;">
+                <dl class="search-archives">
+                    <dt>合同名称：</dt>
+                    <dd>
+                        <input type="text" maxlength="40" placeholder="请输入" ng-model="data.local.contractName">
+                    </dd>
+                    <dt>合同金额：</dt>
+                    <dd>
+                        <input type="text" maxlength="40" placeholder="请输入" oninput="this.value=this.value.match(/^[1-9]\d*(?:\.\d{0,2})?/)" ng-model="data.local.contractPrice">
+                    </dd>
+                    <dt>发票号：</dt>
+                    <dd>
+                        <input type="text" onkeyup="this.value=this.value.replace(/[;]+/g,';')" onblur="this.value=this.value.replace(/[\D]+/g,';')"
+                            onkeydown="this.value=this.value.match(/^[0-9;]+/)" maxlength="300" placeholder="请输入" ng-model="data.local.invoiceNo">
+                    </dd>
+                    <dt>乙方联系电话：</dt>
+                    <dd>
+                        <input type="text" maxlength="40" placeholder="请输入" ng-model="data.local.partybContactPhone">
+                    </dd>
+                    <dt>档案管理员：</dt>
+                    <dd>
+                        <input type="text" maxlength="40" placeholder="请输入" ng-model="data.local.contractArchiveAdministrator">
+                    </dd>
+                </dl>
+            </td>
+        </tr>
+    </table>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+</div>

@@ -1,0 +1,56 @@
+<div>
+    <div class="pm-top">
+        PM计划
+        <span class="pm-btn" ng-if="data.limit.edit" ng-click="addPlan()">新建PM计划</span>
+    </div>
+    <div class="pm-main" style="min-height: {{data.height}}px;">
+        <div class="pm-main-search">
+            <pm-select list="data.status" change="changeStatus" item="data.selectStatus"></pm-select>
+            <pm-select list="data.departments" change="changeDepart" item="data.selectDepart"></pm-select>
+            <input type="text" placeholder="设备名称/设备编号" ng-model="data.condition.keyword">
+            <span class="pm-btn" ng-click="search()">搜索</span>
+        </div>
+        <table class="pm-main-list">
+            <thead>
+                <tr>
+                    <td style="width: 50px;">序号</td>
+                    <td>设备编号</td>
+                    <td>设备名称</td>
+                    <td>规格型号</td>
+                    <td>所在部门</td>
+                    <td style="width: 90px;">PM周期</td>
+                    <td style="width: 90px;">PM等级</td>
+                    <td style="width: 100px;">首次实施日期</td>
+                    <td style="width: 100px;">下次实施日期</td>
+                    <td>负责人</td>
+                    <td style="width: 60px;">状态</td>
+                    <td style="width: 60px;">操作</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="{{v.status > 1 ? 'disable' : ''}}" ng-repeat=" v in data.list">
+                    <td style="width: 50px;">{{(pageInfo.current - 1) * pageInfo.size + $index + 1}}</td>
+                    <td>{{v.no}}</td>
+                    <td>{{v.name}}</td>
+                    <td>{{v.model}}</td>
+                    <td>{{v.departmentName}}</td>
+                    <td style="width: 90px;">{{v.cycle}}个月</td>
+                    <td style="width: 90px;">{{v.level | pmlevel}}</td>
+                    <td style="width: 100px;">{{v.firstDate | date:'yyyy-MM-dd'}}</td>
+                    <td style="width: 100px;">{{v.status > 1 ? '无' : (v.nextDate | date:'yyyy-MM-dd')}}</td>
+                    <td>{{v.directorName}}</td>
+                    <td style="width: 60px;">{{v.status | pmplanstatus}}</td>
+                    <td style="width: 60px;">
+                    	<a ui-sref="pm.menu.planinfo({id: v.id})">查看</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- 分页 -->
+        <span ng-if="!data.loading && !data.empty" data-ng-include=" 'src/tpl/newPageInfo.html' "></span>
+        <!-- empty -->
+        <div class="empty" ng-if="data.empty && !data.loading"><img src="../../../res/img/nocontent.png">暂无数据</div>
+        <!-- loading -->
+        <div class="loading" ng-if="data.loading"><img src="../../../res/img/loading2.gif"></div>
+	</div>
+</div>

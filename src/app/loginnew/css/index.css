@@ -1,0 +1,440 @@
+body, div, img, input {
+	margin: 0px;
+	padding: 0px;
+	font-family: "Microsoft YaHei", "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+body {
+	min-width: 1366px;
+	min-height:550px;
+	height: 100%;
+	/*background-color: #fff !important;*/
+	/*overflow: scroll;*/
+	/*height: 100%;*/
+}
+a {
+	text-decoration: none;
+}
+body .loginHTML{
+	height: 100%;
+	min-width: 1366px;
+	background: #eaf6f6;
+	position: relative;
+	background-image: url(../img/shan.png);
+	background-repeat: no-repeat;
+	background-position: 0px 100%;
+}
+.loginHTML input {
+	line-height: 34px;
+	height: 34px;
+	font-size: 14px;
+	color: #666;
+	border: none;
+	border-radius: 3px;
+	border: 1px solid #cdcdcd;
+}
+.loginHTML input:focus {
+	outline-color: #f7931e;
+	outline-width: 1px;
+	border: 1px solid #f7931e;
+}
+.loginHTML label {
+	font-size: 12px;
+	display: block;
+	color: #ed5a53;
+	line-height: 22px;
+	height: 24px;
+}
+.loginHTML label span {
+	margin: 0px;
+	color: #ed5a53;
+	padding-left: 18px;
+	display: block;
+	background-image: url(../img/err.png);
+	background-repeat: no-repeat;
+	background-position: 0px 6px;
+}
+/**/
+.loginHTML .header {
+	height: 70px;
+	line-height: 70px;
+	width: 100%;
+	background: #fff;
+	box-shadow:0 5px 5px #eee ;
+	position: absolute;
+	top:0;
+	z-index: 100;
+}
+.headerContent{
+	width: 70%;
+	margin: 0 auto;
+	height: 100%;
+}
+.headerContent img{
+	display: inline-block;
+	vertical-align: middle;
+	width: 89px;
+	height: 26px;
+	float: left;
+	margin-top: 22px;
+}
+.headerContent span{
+	font-size: 16px;
+	color: #999;
+	float: left;
+	margin-left: 1%;
+}
+.headerRight{
+	float: right;
+	width: 70%;
+}
+.headerRight ul li{
+	float: right;
+	list-style: none;
+	color: #757575;
+	margin-left: 6%;
+	cursor: pointer;
+}
+.headerRight ul li:hover{
+	opacity: .75;
+}
+.headerRight ul li img{
+	width: 14px;
+	height: 14px;
+	display: inline-block;
+	margin-top: 28px;
+	margin-right:10px;
+}
+.gongzhonghao{
+	position: relative;
+}
+.headerRight ul li.gongzhonghao img{
+	position: absolute;
+	width: 128px;
+	height: 128px;
+	top: 42px;
+	left: -92%;
+	display: none;
+	z-index: 6;
+}
+.headerRight ul li.gongzhonghao:hover img{
+	display: block;
+}
+.hd_content{
+	position: absolute;
+	top: 0px;
+	bottom: 0px;
+	left: 0;
+	right: 0;
+}
+.loginHTML .con {
+	width: 430px;
+	height: 414px;
+	background: #fff;
+	margin: 0 auto;
+	padding: 55px;
+	box-shadow: 0px 0px 20px #eee;
+	padding-top: 20px;
+	top: 50%;
+	position: fixed;
+	margin-top: -207px;
+	left: 50%;
+	margin-left: -215px;
+}
+.loginHTML .conTit {
+	font-size: 18px;
+	text-align: left;
+	height: 55px;
+	margin-bottom: 45px;
+	border-bottom: 1px solid #e7e7e7;
+	box-shadow: 0 5px 5px #fafafa;
+}
+.choose>span{
+	display: inline-block;
+	height: 55px;
+	line-height: 55px;
+	margin: 0 50px;
+}
+.loginHTML .longInput {
+	width: 320px;
+	padding-left: 28px;
+	background-position: 14px 8px;
+	background-repeat: no-repeat;
+	text-indent: 10px;
+	margin-bottom: 30px;
+}
+.loginHTML .userName {
+	background-image: url(../img/1.png) !important;
+}
+.loginHTML .msgLoginInput{
+	background-image: url(../img/1.png) !important;
+}
+.loginHTML .passWord {
+	background-image: url(../img/2.png);
+}
+.loginHTML .shortInput {
+	width: 118px;
+	text-indent: 14px;
+	vertical-align: middle;
+}
+.loginHTML .proveImg {
+	vertical-align: middle;
+	display: inline-block;
+	width: 118px;
+	height: 34px;
+	margin-left: 10px;
+	border: 1px solid #b5b5b5;
+	border-radius: 3px;
+	text-align: center;
+}
+.loginHTML .proveImg img {
+	height: 34px;
+}
+.loginHTML .oprate a {
+	float: right;
+	color: #1c95f5;
+	font-size: 12px;
+}
+.loginHTML span.error {
+	visibility: visible;
+	background-position: 1px 4px;
+	display: inline-block;
+	margin: 0px;
+	height: 24px;
+	line-height: 24px;
+	background-repeat: no-repeat;
+	background-image: url(../img/err.png);
+	padding-left: 21px;
+}
+.loginHTML .checkit {
+	height: 16px;
+	visibility: visible;
+	font-size: 12px;
+	width: auto;
+	line-height: 16px;
+	margin-bottom: 23px;
+	margin-top: -3px;
+	padding-left: 0px;
+	vertical-align: middle;
+	background-image: none;
+}
+.loginHTML .checkit span, .checkit i {
+	vertical-align: middle;
+	display: inline-block;
+	font-style: normal;
+	padding: 0px;
+	background-position: 0px 0px;
+	color: #666666;
+}
+.loginHTML .checkit span {
+	border: 1px solid #b5b5b5;
+	border-radius: 3px;
+	width: 16px;
+	background-image: none;
+	background-repeat: no-repeat;
+	margin-right: 11px;
+	height: 16px;
+}
+.loginHTML input[type='submit'] {
+	width: 320px;
+	height: 45px;
+	color: #fff;
+	border: 1px solid #f7931e;
+	margin-bottom: 38px;
+	border-radius: 3px;
+	font-weight: bold;
+	background-color: #f7931e;
+	margin-top: 30px;
+}
+.loginHTML .loginSubmitBtn{
+	width: 260px;
+	height: 45px;
+	color: #fff;
+	border: 1px solid #f7931e;
+	margin-bottom: 38px;
+	border-radius: 3px;
+	font-weight: bold;
+	background-color: #f7931e;
+	margin-top: 30px;
+}
+/*.loginHTML{*/
+	/*width: 260px;*/
+	/*height: 45px;*/
+	/*color: #fff;*/
+	/*border: 1px solid #f7931e;*/
+	/*margin-bottom: 38px;*/
+	/*border-radius: 3px;*/
+	/*font-weight: bold;*/
+	/*background-color: #f7931e;*/
+	/*margin-top: 30px;*/
+/*}*/
+.loginHTML input[type='submit']:hover{
+	background-color:#ffac4a;
+}
+
+.loginHTML input:disabled{
+	color:#fff;
+}
+.oprate{
+	height: 30px;
+	line-height: 30px;
+	margin-top: -30px;
+}
+.clear::-ms-clear { display: none;}
+.clear::-ms-reveal { display: none;}
+
+
+
+.loginHTML .footer {
+	/*background: url("../img/shan.png");*/
+	position: absolute;
+	bottom: 0px;
+	font-size: 13px;
+	color: #757575;
+	text-align: center;
+	height: 45px;
+	background-color: transparent;
+}
+body .layui-layer-btn  .layui-layer-btn0 {
+	background-color: #f7931e;
+	color: #fff;
+	margin-right: 40px;
+	line-height:34px;
+}
+body .layui-layer-btn a {
+	height: 34px;
+	border: none;
+	margin: 0px;
+	width: 86px;
+	border:1px solid #c5c5c5;
+	color: #666;
+	line-height: 34px;
+	font-size: 14px;
+}
+.choose{
+	color: #999;
+}
+.choose>span:first-child{
+	color: #666;
+	cursor: pointer;
+	border-bottom: 1px solid #f7931e;
+}
+.choose>span:nth-child(2){
+	margin-left: 10px;
+	cursor: pointer;
+	border-bottom: 1px solid #e7e7e7;
+}
+.warn{
+	margin-top: -30px;
+	line-height: 30px;
+	height: 30px;
+	font-size: 15px;
+	color: #ff2a2a;
+}
+ .loginHTML .getMessage:hover{
+	background:#ffac4a ;
+	 border: 1px solid #ffac4a;
+}
+form>input.sendMessage{
+	float: left;
+	width: 205px;
+	background-image: url(../img/yanzhengmabe.png);
+	background-repeat: no-repeat;
+	padding-left: 28px;
+	background-position: 14px 8px;
+	text-indent: 10px;
+}
+.reset>div:first-child{
+	color: #999;
+}
+.resetPass{
+	margin-top: 30px;
+}
+.titlelogin{
+	color: #719291;
+	font-size: 18px;
+	position: relative;
+	top:13px;
+	left: 5px;
+}
+.loginHTML form .daojishi{
+	background: #ccc;
+	color: #000;
+	border:#ccc !important;
+}
+input[type=button]{
+	color: #fff;
+	height: 34px;
+	border-radius: 3px;
+	display: inline-block;
+	width:105px;
+	margin-left: 20px;
+	line-height: 34px;
+	text-align: center;
+	cursor: pointer;
+	margin-top: -34px;
+	float: right;
+	position: relative;
+	right: 0px;
+	outline: none;
+	background: #bebebe ;
+	border:1px solid  #bebebe;
+}
+.loginHTML .getMessage{
+	color: #fff;
+	border: #f7931e;
+	background:#f7931e ;
+	position: relative;
+	z-index: 2;
+}
+.maxtime{
+	position: relative;
+	top:65px;
+}
+form input{
+	color: #666;
+}
+::-webkit-input-placeholder {
+	color: #bebebe;
+}
+input:-webkit-autofill {
+	-webkit-box-shadow: 0 0 0px 1000px white inset;
+	border: 1px solid #CCC!important;
+}
+.msglogin-from{
+	position: relative;
+	z-index: 1;
+}
+.oprate{
+	position: relative;
+	z-index: 2;
+}
+.msglogin-from .ay-backPhoneImg{
+	background-image: url(../img/1.png);
+	position: absolute;
+	width:28px;
+	height:28px;
+	background-repeat: no-repeat;
+	left: 15px;
+	top: 9px;
+
+}
+.msglogin-from .ay-backPassWordImg{
+	background-image:url(../img/yanzhengmabe.png) ;
+	position: absolute;
+	width:28px;
+	height:28px;
+	background-repeat: no-repeat;
+	left: 15px;
+	top: 9px;
+}
+.msglogin-from .ay-PassWordImg{
+	background-image: url(../img/2.png);
+}
+.msglogin-from .sendMessage{
+	padding-left:38px;
+}
+.msglogin-from .ay-resetpassWordImg{
+	background-image: url(../img/2.png);
+	top: 38px;
+}

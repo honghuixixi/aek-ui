@@ -1,0 +1,367 @@
+<!-- toaster directive -->
+<toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container>
+<!-- / toaster directive -->
+
+<!-- 导航条 -->
+<div class="bg-white bread-crumb2">
+    <ul class="breadcrumb b-1 b-a m-b-n-xs lter b-b wrapper-md">
+        <li><a ui-sref="main.lcks.kstz.list">预台账</a></li>
+        <li><a ui-sref="main.lcks.kstz.assets">预台账详情</a></li>
+    </ul>
+    <div ng-click="btnFn($event)" class="btn-list">
+        <!--<a class="btn-submit" name="submit">提交验收</a>-->
+        <!--<a class="btn-save" name="save">保存</a>-->
+        <!--<a class="btn-delete" name="delete">删除</a>-->
+    </div>
+    <!--<div class="pro-status">-->
+        <!--<div class="pro-tit">-->
+            <!--<span>验收单编号：<i>201703093712</i></span><span>状态：<em>验收未通过</em></span>-->
+            <!--<div ng-click="proUl($event,5)">-->
+                <!--<a href="javascript:;" ng-show='isClick' name="down" class="ul-operate"><i><img src="" alt=""></i></a>-->
+                <!--<a href="javascript:;" ng-hide='isClick' name="up" class="ul-operate ul-operate-up"><i><img src="" alt=""></i></a>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<ul class="pro-ul">-->
+                <!--<li class="row"><span class="col-md-2">刘夏</span><span class="col-md-2">提交申请</span><span class="col-md-2">2017-03-09    17:21</span><span class="col-md-2"><a href="javascript:;">查看详情</a></span></li>-->
+                <!--<li class="row"><span class="col-md-2">刘能</span><span class="col-md-2">验收通过</span><span class="col-md-2">2017-03-09    18:01</span><span class="col-md-2"><a href="javascript:;">查看详情</a></span></li>-->
+                <!--<li class="row"><span class="col-md-2">刘欢</span><span class="col-md-2">记账通过</span><span class="col-md-2">2017-03-09    20:00</span><span class="col-md-2"><a href="javascript:;">查看详情</a></span></li>-->
+                <!--</ul>-->
+    <!--</div>-->
+    <ul class="bg-white b-2 b-a m-b-n-xs b-b">
+        <li class="active"><a ui-sref="main.lcks.kstz.assets" >设备信息</a></li>
+        <li><a ui-sref="main.lcks.kstz.purchase" href="#/lcks/kstz/purchase">采购信息</a></li>
+        <li><a ui-sref="main.lcks.kstz.null">档案信息</a></li>
+        <li><a ui-sref="main.lcks.kstz.assets">设备日志</a></li>
+        <li><a ui-sref="main.lcks.kstz.assets">更多<i class="arrows"></i></a></li>
+    </ul>
+</div>
+
+<!-- 加载提醒 -->
+<div ng-show="loading" class="text-center m-t-md text-lg"><i class="fa fa-spin fa-spinner"></i> 数据加载中...</div>
+
+<!-- 内容区域 -->
+<div class="wrapper-md ytz-detail content">
+    <div class="panel panel-default">
+        <!-- 头部 -->
+        <div class="add-title">基本信息</div>
+        <!--表单-->
+        <div class="panel-body">
+            <form class="form-horizontal" id="form1"  name="assets_form">
+                <div class="form-group">
+                    <label class="col-lg-2 col-sm-2 control-label" for="assetNum">设备编号：</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" name="" id="assetNum">
+                    </div>
+                    <label class="col-lg-2 col-sm-2 control-label" for="assetName">
+                        <span class="text-danger wrapper-sm">*</span>设备名称：</label>
+                    <div class="form-group col-sm-4">
+                        <input type="text" class="form-control" name="assetName" id="assetName" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-2 col-sm-2 control-label" for="splName">
+                        <span class="text-danger wrapper-sm">*</span>生产商：</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" name="splName" id="splName" required>
+                    </div>
+                    <label class="col-lg-2 col-sm-2 control-label">规格型号：</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" name="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 col-sm-2 control-label">单位：</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" name="">
+                    </div>
+                    <label class="col-lg-2 col-sm-2 control-label">产地：</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" name="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 col-sm-2 control-label">供应商：</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" name="">
+                    </div>
+                    <label class="col-lg-2 col-sm-2 control-label">设备价格：</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" name="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 col-sm-2 control-label">购入日期：</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" name="">
+                    </div>
+                    <label class="col-lg-2 col-sm-2 control-label"><span class="text-danger wrapper-sm">*</span>所属科室：</label>
+                    <div class="form-group col-sm-4">
+                        <input type="text" class="form-control" name="belongDept" id="belongDept" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 col-sm-2 control-label">品牌：</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" name="">
+                    </div>
+                    <label class="col-lg-2 col-sm-2 control-label">管理科室：</label>
+                    <div class="col-sm-4">
+                        <select class="form-control" placeholder="请选择管理科室">
+                            <option value="">设备科</option>
+                            <option value="">后勤部</option>
+                            <option value="">信息科</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 col-sm-2 control-label">仓库类型：</label>
+                    <div class="col-sm-4">
+                        <select class="form-control" placeholder="请选择仓库类型">
+                            <option value="">固定资产</option>
+                            <option value="">无形资产</option>
+                            <option value="">低值易耗</option>
+                            <option value="">信息资产</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 col-sm-3 control-label" for="">设备图片：</label>
+                    <div class="col-sm-6">
+                        <div class="m-b upload-pic-box">
+                            <a href="javascript:void(0);" class="btn btn-default btn-addon">
+                                <i class="fa fa-upload"></i>上传图片
+                            </a>
+                        </div>
+                        <input type="file" id="fileInput" ng-hide="1" />
+                        <!--<div class="hbox hbox-auto-xs">-->
+                            <!--<div class="col">-->
+                                <!--<div class="wrapper-sm b-a bg-white m-r-xs m-b-xs">-->
+                                    <!--<div class="bg-light" style="height:320px">-->
+                                        <!--<img-crop-->
+                                                <!--image="myImage"-->
+                                                <!--result-image="myCroppedImage"-->
+                                                <!--result-image-size="160"-->
+                                                <!--area-type="square"-->
+                                        <!--&gt;</img-crop>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="col">-->
+                                <!--<div class="inline bg-white wrapper-sm b-a">-->
+                                    <!--<div class="bg-light">-->
+                                        <!--<img ng-src="{{myCroppedImage}}" />-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <!--&lt;!&ndash;<a class="btn btn-info" ng-click="uploadImg()">上传头像</a>&ndash;&gt;-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<span class="help-block m-b-none">logo尺寸要求宽度*高度为150px*150px。图片格式支持gif,jpg,png</span>-->
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="add-title">设备属性</div>
+        <div class="panel-body">
+            <form class="form-horizontal" id="form2"  name="">
+                <div class="form-group">
+                    <label class="col-lg-2 col-sm-2 control-label">设备来源：</label>
+                    <div class="col-sm-4">
+                        <select class="form-control">
+                            <option value="">购入</option>
+                            <option value="">租用</option>
+                            <option value="">捐赠</option>
+                            <option value="">调入</option>
+                            <option value="">其他</option>
+                        </select>
+                    </div>
+                    <label class="col-lg-2 col-sm-2 control-label">启用日期：</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" name="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 col-sm-2 control-label">保修期至：</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" name="">
+                    </div>
+                    <label class="col-lg-2 col-sm-2 control-label">管理级别：</label>
+                    <div class="col-sm-4">
+                        <select class="form-control">
+                            <option value="">第一级</option>
+                            <option value="">第二级</option>
+                            <option value="">第三级</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 col-sm-2 control-label"><span class="text-danger wrapper-sm">*</span>注册证号：</label>
+                    <div class="form-group col-sm-4">
+                        <input type="text" class="form-control" name="regNo" id="regNo">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 col-sm-2 control-label">设备用途：</label>
+                    <div class="col-sm-4" style="height: 30px;line-height:30px;">
+                        <div class="radio-list">
+                            <input id="check_1" name="use" type="radio">
+                            <label class="check check-label" for="check_1">
+                                <i class="fa fa-check"></i>
+                            </label>
+                            医疗
+                        </div>
+                        <div class="radio-list">
+                            <input id="check_2" name="use" type="radio">
+                            <label class="check check-label" for="check_2">
+                                <i class="fa fa-check"></i>
+                            </label>
+                            非医疗
+                        </div>
+                    </div>
+                    <label class="col-lg-2 col-sm-2 control-label">商检设备：</label>
+                    <div class="col-sm-4" style="height: 30px;line-height:30px;">
+                        <div class="radio-list">
+                            <input id="check_3" name="use2" type="radio">
+                            <label class="check check-label" for="check_3">
+                                <i class="fa fa-check"></i>
+                            </label>
+                            是
+                        </div>
+                        <div class="radio-list">
+                            <input id="check_4" name="use2" type="radio">
+                            <label class="check check-label" for="check_4">
+                                <i class="fa fa-check"></i>
+                            </label>
+                            否
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 col-sm-2 control-label">免税设备：</label>
+                    <div class="col-sm-4" style="height: 30px;line-height:30px;">
+                        <div class="radio-list">
+                            <input id="check_5" name="use3" type="radio">
+                            <label class="check check-label" for="check_5">
+                                <i class="fa fa-check"></i>
+                            </label>
+                            医疗
+                        </div>
+                        <div class="radio-list">
+                            <input id="check_6" name="use3" type="radio">
+                            <label class="check check-label" for="check_6">
+                                <i class="fa fa-check"></i>
+                            </label>
+                            非医疗
+                        </div>
+                    </div>
+                    <label class="col-lg-2 col-sm-2 control-label">计量设备：</label>
+                    <div class="col-sm-4" style="height: 30px;line-height:30px;">
+                        <div class="radio-list">
+                            <input id="check_7" name="use4" type="radio">
+                            <label class="check check-label" for="check_7">
+                                <i class="fa fa-check"></i>
+                            </label>
+                            是
+                        </div>
+                        <div class="radio-list">
+                            <input id="check_8" name="use4" type="radio">
+                            <label class="check check-label" for="check_8">
+                                <i class="fa fa-check"></i>
+                            </label>
+                            否
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 col-sm-2 control-label">PM标志：</label>
+                    <div class="col-sm-4" style="height: 30px;line-height:30px;">
+                        <div class="radio-list">
+                            <input id="check_9" name="use4" type="radio">
+                            <label class="check check-label" for="check_9">
+                                <i class="fa fa-check"></i>
+                            </label>
+                            医疗
+                        </div>
+                        <div class="radio-list">
+                            <input id="check_10" name="use4" type="radio">
+                            <label class="check check-label" for="check_10">
+                                <i class="fa fa-check"></i>
+                            </label>
+                            非医疗
+                        </div>
+                    </div>
+                    <label class="col-lg-2 col-sm-2 control-label">质检设备：</label>
+                    <div class="col-sm-4" style="height: 30px;line-height:30px;">
+                        <div class="radio-list">
+                            <input id="check_11" name="use5" type="radio">
+                            <label class="check check-label" for="check_11">
+                                <i class="fa fa-check"></i>
+                            </label>
+                            是
+                        </div>
+                        <div class="radio-list">
+                            <input id="check_12" name="use5" type="radio">
+                            <label class="check check-label" for="check_12">
+                                <i class="fa fa-check"></i>
+                            </label>
+                            否
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 col-sm-2 control-label">折旧状态：</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control">
+                    </div>
+                    <label class="col-lg-2 col-sm-2 control-label">折旧年数：</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 col-sm-2 control-label">折旧月数：</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="add-title">资金结构</div>
+        <div class="panel-body">
+            <form class="form-horizontal" id="form3"  name="">
+                <div class="form-group">
+                    <label class="col-lg-2 col-sm-2 control-label">自筹资金：</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control">
+                    </div>
+                    <label class="col-lg-2 col-sm-2 control-label">政府拨款：</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 col-sm-2 control-label">科研经费：</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control">
+                    </div>
+                    <label class="col-lg-2 col-sm-2 control-label">教学经费：</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 col-sm-2 control-label">接受捐赠：</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control">
+                    </div>
+                    <label class="col-lg-2 col-sm-2 control-label">其他：</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

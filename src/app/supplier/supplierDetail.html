@@ -1,0 +1,212 @@
+<!-- detail -->
+<div class="org-content-body">
+	<!-- alert -->
+	<div id="alertOrg" ng-show="alertCon">
+		<div class="alertContent">
+		<div class="alertImg"><img src='{{layerImg}}'></div>
+		<p ng-class="orgOperate == '恢复' && 'mb-58'" class="font14px acolor666 p-lr30">确定{{orgOperate}}供应商 ({{orgId}}){{orgName}}吗？</p>
+		<div ng-if="orgOperate != '恢复'" class="alertTip font13px acolorred">
+			<span ng-class="orgOperate == '删除' && 'ali-cen'">{{orgTip}}</span>
+		</div>
+		<div class="alertBtn">
+			<a href="javascript:;" ng-click='operateOrg()' class="btnyes">确定</a><a href="javascript:;" ng-click='closeIndex()' class="btncancel">取消</a>
+		</div>
+		</div>
+	</div>
+
+	<!--停用机构恢复时设置到期时间弹框-->
+	<div id="recoverTime" ng-show="recoverCon">
+		<div class="alertContent">
+			<div>请选择机构到期时间</div>
+			<div class="org-form">
+				<input id="check_5" name="expireDate" ng-model="expireState" value="0" type="radio" ng-click='expireDateFn($event)'>
+				<label class="check check-label" for="check_5">
+					<i class="fa fa-check"></i>
+				</label>
+				<label for="check_5">永久有效</label>
+			</div>
+			<div class="org-form org-initDate">
+				<span></span>
+				<input id="check_6" name="expireDate" ng-model="expireState" value="1" type="radio" ng-click='expireDateFn($event)'>
+				<label class="check check-label" for="check_6">
+					<i class="fa fa-check"></i>
+				</label>
+				<label class="m-r-10" for="check_6">有效期至</label><input type="text" id="expireDate" ng-click="initialDate(expireStr)" readonly="readonly" ng-model="expireStr" ng-disabled="expireDate" name="expireDate" class="md-input input-datepicker">
+				<!--<div class="error">请选择有效期</div>-->
+			</div>
+			<div class="alertBtn">
+				<a href="javascript:;" ng-click='setRecoverTime()' class="btnyes">确定</a><a href="javascript:;" ng-click='closeIndex()' class="btncancel">取消</a>
+			</div>
+		</div>
+	</div>
+	<!--停用机构恢复时设置到期时间弹框end-->
+
+	<div id="alertOrg2" ng-show="alertCon2">
+		<div class="alertContent">
+			<div class="alertImg"><img src='{{layerImg}}'></div>
+			<p class="font14px acolor666 p-lr30">{{delVerifyMsg}}</p>
+			<div class="alertBtn p-lr30">
+				<a href="javascript:;" ng-click='closeIndex()' class="btnyes">确定</a>
+			</div>
+		</div>
+	</div>
+
+	<!--当前租户可添加模块列表-->
+	<div id="alertModel" ng-show="alertMod">
+		<div class="modelList">
+			<ul ng-hide="modeNull">
+				<li ng-repeat="item in models">
+					<input name="checkModel" data-mid="{{item.id}}" id="checkid{{$index}}" type="checkbox" ng-checked="all">
+					<label class="check check-label opcity checkbox" for="checkid{{$index}}">
+                    <i class="fa fa-check"></i></label>
+					<label for="checkid{{$index}}" class="acolor666 font13px">{{item.name}}</label>
+				</li>
+			</ul>
+			<div style="text-align: center;" ng-show="modeNull"><div style="padding-top:65px;padding-bottom:0px;" class="alertImg"><img src="../../../res/img/icon20.png"></div><div class="pad-fifty2">已经没有可添加的模块。</div></div>
+		</div>
+		<div style="padding-right:24px;text-align:right;" class="alertBtn">
+			<a href="javascript:;" ng-click='toChild()' class="btnyes">确定</a><a href="javascript:;" ng-click='closeIndex()' class="btncancel" style="margin-right:0px;">取消</a>
+		</div>
+	</div>
+
+	<!-- title -->
+	<div class="org-title acolor999">
+		<div ng-if="(data.tenant.id != 2)" class="title-right">
+			<a ng-if="(data.tenant.auditStatus==4||data.tenant.auditStatus==1)&&(userInfo.authoritiesStr.indexOf('SYS_SUPPLIER_TENANT_VERIFY') != -1)" href="javascript:;" class="orgPass font14px" ng-click='operateAudit(1)'>通过</a>
+			<a ng-if="(data.tenant.auditStatus==1)&&(userInfo.authoritiesStr.indexOf('SYS_SUPPLIER_TENANT_VERIFY') != -1)" href="javascript:;" class="orgReject font14px" ng-click='operateAudit(2)'>拒绝</a>
+			<a ng-if="(data.tenant.auditStatus!=4)&&(data.tenant.auditStatus!=1)&&(userInfo.authoritiesStr.indexOf('SYS_SUPERVISE_TENANT_MANAGE') != -1)" href="javascript:;" ng-click="orgSet()" class="orgSet font14px">编辑供应商</a>
+			<a ng-if="!data.tenant.enable&&(data.tenant.auditStatus!=4)&&(data.tenant.auditStatus!=1)&&(userInfo.authoritiesStr.indexOf('SYS_SUPERVISE_TENANT_MANAGE') != -1)" href="javascript:;" class="orgRecover font14px" ng-click='alertContent(2)'>恢复供应商</a>
+			<a ng-if="data.tenant.enable&&(data.tenant.auditStatus!=4)&&(data.tenant.auditStatus!=1)&&(userInfo.authoritiesStr.indexOf('SYS_SUPERVISE_TENANT_MANAGE') != -1)" href="javascript:;" class="orgStop font14px" ng-click='alertContent(1)'>停用供应商</a>
+			<a ng-if="(data.tenant.auditStatus!=4)&&(data.tenant.auditStatus!=1)&&(userInfo.authoritiesStr.indexOf('SYS_SUPERVISE_TENANT_MANAGE') != -1)" href="javascript:;" class="orgDel font14px" ng-click='alertContent(0)'>删除供应商</a>
+		</div>
+		<div class="title-left font15px">
+			<span class='acolor666'>供应商详情</span>
+		</div>
+	</div>
+	<!-- /title -->
+	<!-- body -->
+	<div class="org-body acolor666 supplierDetail">
+		<div class="headWrap supplierDetailHeadWrap">
+			<div class="supplierDetailHead">
+				<div class="supplierDetailHeadCon">
+					<div class="supplierDetailHeadImg">
+						<img ng-src="{{imgSrc}}">
+						<input type="file" onchange="angular.element(this).scope().setImagePreview(this)">
+					</div>
+					<div class="supplierDetailHeadBody">
+						<div class="supplierDetailHeadName">
+							<span class="font15px">{{data.tenant.name}}</span><em ng-if="data.tenant && data.tenant.enable && data.tenant.auditStatus!=4 && data.tenant.auditStatus!=1" class="font12px enable">启用中</em><em ng-if="data.tenant && !data.tenant.enable && data.tenant.auditStatus!=4 && data.tenant.auditStatus!=1" class="font12px">已停用</em><em ng-if="data.tenant && data.tenant.auditStatus==4" class="font12px reject">已拒绝</em><em ng-if="data.tenant && data.tenant.auditStatus==1" class="font12px">待审核</em>
+						</div>
+						<div class="supplierDetailHeadInfo">{{data.tenant.supplierTenant.address}}</div>
+						<div class="supplierDetailHeadInfo supplierDetailHeadInfoTel">{{data.tenant.supplierTenant.servicePhone}}</div>
+					</div>
+				</div>
+			</div>
+			<div class="supplierDetailTable">
+			<!-- table -->
+			<table class="font13px" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td class="tdHeader"></td>
+					<td class="tdDataer"></td>
+					<td class="tdHead"></td>
+					<td class="tdData"></td>
+				</tr>
+				<tr>
+					<td>ID</td>
+					<td id="nowId" data-nowId="{{data.tenant.id}}" class='acolor999'>{{data.tenant.id}}</td>
+					<td>原始管理员</td>
+					<td class='acolor999'><a target="_blank" ui-sref="usermain.detail.roleset({userId:data.tenant.adminId,tenantId:data.tenant.id})">{{data.tenantAdmin.realName}}</a></td>
+				</tr>
+				<tr>
+					<td>来源</td>
+					<td class='acolor999'>{{data.tenant.origin == 1 ? '后台创建' : '前台注册'}}</td>
+					<td>手机号</td>
+					<td class='acolor999'>{{data.tenantAdmin.mobile}}</td>
+				</tr>
+				<tr>
+					<td>审核状态</td>
+					<td class='acolor999'>
+						<span ng-if="data.tenant.auditStatus == 1">待审核</span>
+						<span ng-if="data.tenant.auditStatus == 2">自动通过</span>
+						<span ng-if="data.tenant.auditStatus == 3">人工通过</span>
+						<span ng-if="data.tenant.auditStatus == 4">已拒绝</span>
+					</td>
+					<td>邮箱</td>
+					<td class='acolor999'>{{data.tenantAdmin.email}}</td>
+				</tr>
+				<tr>
+					<td>创建人</td>
+					<td colspan="3" class='acolor999'>{{data.createName}}</td>
+				</tr>
+				<tr>
+					<td>创建时间</td>
+					<td colspan="3" class='acolor999'>{{data.tenant.createTime}}</td>
+				</tr>
+				<tr>
+					<td colspan="4"><div class="tdLine"></div></td>
+				</tr>
+				<tr>
+					<td>服务类型</td>
+					<td class='acolor999'>
+						<span ng-if="data.tenant.supplierTenant.serviceType == 1">维修商</span>
+						<span ng-if="data.tenant.supplierTenant.serviceType == 2">供货商</span>
+						<span ng-if="data.tenant.supplierTenant.serviceType == 3">配件供应商</span>
+						<span ng-if="data.tenant.supplierTenant.serviceType == 4">综合服务商</span>
+						<span ng-if="data.tenant.supplierTenant.serviceType == 5">其他</span>
+					</td>
+					<td>所在地区</td>
+					<td class='acolor999'>{{data.tenant.province}} - {{data.tenant.city}} -  {{data.tenant.county}}</td>
+				</tr>
+				<tr>
+					<td>详细地址</td>
+					<td class='acolor999'>{{data.tenant.supplierTenant.address}}</td>
+					<td>联系人</td>
+					<td class='acolor999'>{{data.tenant.supplierTenant.contact}}</td>
+				</tr>
+				<tr>
+					<td>联系电话</td>
+					<td class='acolor999'>{{data.tenant.supplierTenant.contactMobile}}</td>
+					<td>企业法人</td>
+					<td class='acolor999'>{{data.tenant.supplierTenant.enterpriseLegalPerson}}</td>
+				</tr>
+				<tr>
+					<td>开户名称</td>
+					<td class='acolor999'>{{data.tenant.supplierTenant.accountName}}</td>
+					<td>开户银行</td>
+					<td class='acolor999'>{{data.tenant.supplierTenant.accountBank}}</td>
+				</tr>
+				<tr>
+					<td>纳税号</td>
+					<td class='acolor999'>{{data.tenant.supplierTenant.taxNumber}}</td>
+					<td>发票抬头</td>
+					<td class='acolor999'>{{data.tenant.supplierTenant.invoiceHeader}}</td>
+				</tr>
+			</table>
+			<!-- /table -->
+			</div>
+		</div>
+		<!-- section -->
+		<div class="home-model-bottom sectionWrap">
+			<!-- head -->
+			<div class="section">
+				<div ng-if="data.tenant.id != 2" class="add-section" ng-show='sections.model'>
+					<a href="javascript:;" ng-click="alertModel()" class="font13px">添加系统模块</a><i class="verticalAlign"></i>
+				</div>
+				<div class="section-btn">
+					<a ui-sref='supplier.detail.model({tenantId:$stateParams.tenantId,isOp:false,supplierId:data.tenant.id})' class="font14px acolor666" ng-class="{'aActive': sections.model}">模块</a>
+					<a ui-sref='supplier.detail.user({tenantId:$stateParams.tenantId,supplierId:data.tenant.id})' class="font14px acolor666" ng-class="{'aActive': sections.user}">用户</a>
+					<a ui-sref='supplier.detail.seller({tenantId:$stateParams.tenantId,supplierId:data.tenant.id})' class="font14px acolor666" ng-class="{'aActive': sections.seller}">商家简介</a>
+					<a ui-sref='supplier.detail.credentials({tenantId:$stateParams.tenantId,supplierId:data.tenant.id})' class="font14px acolor666 lastMenu" ng-class="{'aActive': sections.credentials}">证件信息</a>
+					<div class="subline"></div>
+				</div>
+			</div>
+			<!-- /section -->
+			<div class="section_content" ui-view>
+				
+			</div>
+			<div class="fixdWrap" ng-show='fixdWrapShow' ng-click='menuHide()'></div>
+		</div>
+	</div>
+	<!-- /body -->
+</div>
+<!-- /detail

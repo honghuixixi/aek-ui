@@ -1,0 +1,226 @@
+<div class="operation-title">操作说明详情</div>
+<div class="operation-main">
+        <p style="font-weight: 700;">{{data.title[data.key]}}</p>
+    <div ng-if="data.key == 1">        
+        <p>角色权限管理，用于新增、编辑角色信息及角色权限分配，角色分自定义角色和预设角色，可以参考预设角色配置权限，进入【我的应用】→【角色管理】。</p>
+        <p>新增角色，点击【新建角色】，填写角色名称、选择角色对应权限。对于角色可以通过【查看】，查阅权限及编辑信息。</p>
+        <img src="/res/img/operation/role01-min.png">
+        <img src="/res/img/operation/role02-min.png">
+    </div>
+    <div ng-if="data.key == 2">
+        <p>用于系统科室部门维护、成员用户维护。进入【我的应用】→【成员用户管理】。</p>
+        <p>部门管理，选中上级科室，点击【新建部门】进行新增其子部门，填写部门名称。</p>
+        <img src="/res/img/operation/user02-min.png">
+        <p>用户管理，选中所属科室，点击【新建用户】进行新增用户，填写用户名称、手机号码等信息，此用户以手机号为账号登录。</p>
+        <img src="/res/img/operation/user02-min.png">
+        <p>新增用户成功之后，给予用户相应的角色权限。</p>
+        <p>点击新增用户【查看】可对新建用户进行账号停用以及密码管理。</p>
+        <img src="/res/img/operation/user03-min.png">
+        <p>同时给新增用户赋予角色：点击添加角色按钮，勾选次用户需要的赋予的角色，如果在列表中无法满足，那么请继续往下看，我们可以满足个性化的权限管理，即【新建角色】。</p>
+        <img src="/res/img/operation/user04-min.png">
+    </div>
+    <div ng-if="data.key == 3">
+        <p style="font-weight: 700;">3.1资产台账</p>
+        <p>用于资产台账登记、编辑、查询等业务管理。进入【我的应用】→【资产管理】→【资产台账】。</p>
+        <p>新建资产，点击【新建资产】按钮，输入资产相关基本信息，如果设备资产存在医院内部编码，则可以在院内编码中，输入其编码。</p>
+        <img src="/res/img/operation/assets01-min.png">
+        <p>注：可根据模版导入资产，也可导出资产信息</p>
+        <img src="/res/img/operation/assets02-min.png">
+        <p>基本信息创建成功后，查看资产台账列表，点击查看设备详情，允许对资产基本信息进行多次维护和补充。</p>
+        <img src="/res/img/operation/assets03-min.png">
+        <p style="font-weight: 700;">3.2转科管理</p>
+        <p>用于科室之间设备调拨管理【我的应用】→【资产管理】→【转科管理】。</p>
+        <p>1）	建立的资产进行转科处理，点击【新增转科单】按钮。</p>
+        <img src="/res/img/operation/assets04-min.png">
+        <p>2）	选择需要转科的资产，支持单个部门资产批量转科，只需选中相应待转资产，点击提交转科申请按钮。</p>
+        <img src="/res/img/operation/assets05-min.png">
+        <p>3）	选择需要转到的科室，以及部门负责人</p>
+        <img src="/res/img/operation/assets06-min.png">
+        <p>4）	转科申请提交之后，由审核人进行转科审批</p>
+        <img src="/res/img/operation/assets07-min.png">
+        <p>注：审核未通过，需要重新建立转科申请</p>
+        <p style="font-weight: 700;">3.3报损管理</p>
+        <p>用于科室之间设备调拨管理【我的应用】→【资产管理】→【报损管理】。</p>
+        <p>1）	建立的资产进行报损处理，点击【新增报损单】按钮。</p>
+        <img src="/res/img/operation/assets08-min.png">
+        <p>2）	选择需要报损的资产，支持单个部门资产批量报损，只需选中相应待报损资产，点击提交报损申请按钮。</p>
+        <img src="/res/img/operation/assets09-min.png">
+        <p>3）	选择填写报损类型、报损原因，点击【确认】提交。</p>
+        <img src="/res/img/operation/assets10-min.png">
+        <p>4）	报损申请提交之后，由审核人进行报损审批</p>
+        <img src="/res/img/operation/assets11-min.png">
+        <p>注：审核未通过，需要重新建立报损申请</p>
+    </div>
+    <div ng-if="data.key == 4">
+        <p>医疗设备维修管理，包括维修申请、维修接单、维修处理、完修验收业务流程。</p>
+        <p style="font-weight: 700;">4.1维修管理业务流</p>
+        <p>1）	新建维修申请</p>
+        <img src="/res/img/operation/repair01-min.png">
+        <p>2）	维护故障现象，提交申请</p>
+        <img src="/res/img/operation/repair02-min.png">
+        <p>3）	维修人员接单</p>
+        <img src="/res/img/operation/repair03-min.png">
+        <p>4）  填写具体维修内容：时间，故障原因，方式，费用等，提交生成维修报告；</p>
+        <img src="/res/img/operation/repair04-min.png">
+        <p>5）  点击验收按钮，进行维修验收。</p>
+        <img src="/res/img/operation/repair05-min.png">
+        <p style="font-weight: 700;">4.2维修配置</p>
+        <p>维修配置主要是可以预先按照科室，指定相应维修接单人的功能；配置完成后，相应科室的申请单直接推送给对应的人员，支持按照科室自动分配维修人的功能。</p>
+        <p>1）	其列表界面如下</p>
+        <img src="/res/img/operation/repair06-min.png">
+        <p>2）	点击【配置】，选择配置相应科室范围</p>
+        <img src="/res/img/operation/repair07-min.png">
+        <p style="font-weight: 700;">4.3工作流培训</p>
+        <p>工作流配置主要是满足在维修业务中，产生维修单据的申请及逐级审批功能，最多满足8级审批的配置需求。</p>
+        <img src="/res/img/operation/repair08-min.png">
+        <p style="font-weight: 700;">4.4单据申请与审批</p>
+        <p>对于维修中产生的审批单据，如维修价格需要申请等，可以在单据申请中，关联维修单号。</p>
+        <p>1）	新建单据申请</p>
+        <img src="/res/img/operation/repair09-min.png">
+        <p>2）	单据审批</p>
+        <img src="/res/img/operation/repair10-min.png">
+    </div>
+    <div ng-if="data.key == 5">
+        <p>巡检管理业务，主要是服务于医疗机构质控业务，包含巡检业务的报表查看、巡检计划的制定、巡检计划的实施、巡检模板的配置及巡检报告查询。</p>
+        <p style="font-weight: 700;">5.1巡检概览</p>
+        <p>主要是查看本机构下的巡检数据报表，可以查看年度机构的巡检实施设备台次、巡检计划总数、巡检执行率；同时可以进行年度数据对比。</p>
+        <img src="/res/img/operation/xj01-min.png">
+        <p style="font-weight: 700">5.2巡检计划</p>
+        <p>1）	巡检计划列表</p>
+        <img src="/res/img/operation/xj02-min.png">
+        <p>2）	点击右上角【新建巡检计划】</p>
+        <img src="/res/img/operation/xj03-min.png">
+        <p>3）	选择巡检的科室范围、巡检模板、周期、开始时间、指派实施人员等；</p>
+        <img src="/res/img/operation/xj04-min.png">
+        <p style="font-weight: 700;">5.3巡检实施</p>
+        <p>巡检实施列表，为分配给当前登录用户的巡检实施列表，用户只能看到分配给自己的实施数据。</p>
+        <img src="/res/img/operation/xj05-min.png">
+        <p>1）	巡检日期过期时，系统会给予提示与标记</p>
+        <img src="/res/img/operation/xj06-min.png">
+        <p>2）	点击右上角【登记】查看登记详情，登记巡检结果及巡检总结，提交巡检报告。</p>
+        <img src="/res/img/operation/xj07-min.png">
+        <p>3）	提交后查看巡检结果</p>
+        <img src="/res/img/operation/xj08-min.png">
+        <p style="font-weight: 700;">5.4巡检模板</p>
+        <p>机构可以根据自己的需要配置个性化的巡检模板，同时系统也提供相应标准模板供机构选择。</p>
+        <p>1）	模板列表，默认显示系统提供模板。</p>
+        <img src="/res/img/operation/xj09-min.png">
+        <p>2）	点击右上角【新建巡检模板】</p>
+        <img src="/res/img/operation/xj10-min.png">
+        <p>3）	给模板添加项目，或是可以停用，删除模板等。</p>
+        <p style="font-weight: 700;">5.4巡检报告</p>
+        <p>巡检报告查询主要是查询机构下所有的巡检历史数据</p>
+        <p>1）	巡检报告列表</p>
+        <img src="/res/img/operation/xj11-min.png">
+        <p>2）	查看巡检报告，支持打印</p>
+        <img src="/res/img/operation/xj12-min.png">
+    </div>
+    <div ng-if="data.key == 6">
+        <p>PM管理业务，主要是服务于医疗机构质控业务，包含PM业务的报表查看、PM计划的制定、PM计划的实施、PM模板的配置及PM报告查询。</p>
+        <p style="font-weight: 700;">6.1PM概览</p>
+        <p>主要是查看本机构下的PM数据报表，可以查看年度机构的实施设备台次、PM计划总数、PM执行率；同时可以进行年度数据对比。</p>
+        <img src="/res/img/operation/pm01-min.png">
+        <p style="font-weight: 700;">6.2PM计划</p>
+        <p>1）	PM计划列表</p>
+        <img src="/res/img/operation/pm02-min.png">
+        <p>2）	点击右上角，【新建PM计划】</p>
+        <img src="/res/img/operation/pm03-min.png">
+        <p>3）	选择PM模板、设定周期、等级、负责人等；</p>
+        <img src="/res/img/operation/pm04-min.png">
+        <p style="font-weight: 700;">6.3PM实施</p>
+        <p>1）	实施列表</p>
+        <img src="/res/img/operation/pm05-min.png">
+        <p>2）	点击右侧【实施】进入实施详情</p>
+        <img src="/res/img/operation/pm06-min.png">
+        <p style="font-weight: 700;">6.4PM模板</p>
+        <p>机构可以根据自己的需要配置个性化的PM模板，同时系统也提供相应标准模板供机构选择。</p>
+        <p>1）	模板列表，默认显示系统提供模板。</p>
+        <img src="/res/img/operation/pm07-min.png">
+        <p>2）	模板新建/编辑详情</p>
+        <img src="/res/img/operation/pm08-min.png">
+        <p style="font-weight: 700;">6.5PM报告查询</p>
+        <p>1）	报告列表</p>
+        <img src="/res/img/operation/pm09-min.png">
+        <p>2）	报告单查看</p>
+        <img src="/res/img/operation/pm10-min.png">
+    </div>
+    <div ng-if="data.key == 7">
+        <p>保养管理是医疗机构质控业务的一部分，主要是设备科制定计划，临床人员配合实施的设备日常保养与检查。</p>
+        <p style="font-weight: 700;">7.1保养计划</p>
+        <p>1）	保养计划列表</p>
+        <img src="/res/img/operation/by01-min.png">
+        <p>2）	点击右上角【新建保养计划】进入详情</p>
+        <img src="/res/img/operation/by02-min.png">
+        <p>3）	选择保养的设备、保养模板、保养频率、开始日期、专管人等。</p>
+        <img src="/res/img/operation/by03-min.png">
+        <p style="font-weight: 700;">7.2保养实施</p>
+        <p>保养实施列表数据，为用户所在科室的所有保养数据，科室下可以做保养得人员都可以看到。</p>
+        <p>1）	保养实施数据列表</p>
+        <img src="/res/img/operation/by04-min.png">
+        <p>2）	点击【实施】进入实施详情</p>
+        <img src="/res/img/operation/by05-min.png">
+        <p>3）	提交实施报告，查看实施结果，支持报告打印</p>
+        <img src="/res/img/operation/by06-min.png">
+        <p style="font-weight: 700;">7.3保养模板</p>
+        <p>机构可以根据自己的需要配置个性化的保养模板，同时系统也提供相应标准模板供机构选择。</p>
+        <p>1）	模板列表，默认显示系统提供模板。</p>
+        <img src="/res/img/operation/by07-min.png">
+        <p>2）	点击右上角【新建保养模板】</p>
+        <img src="/res/img/operation/by08-min.png">
+        <p>3）	管理模板内容、停用或删除模板</p>
+        <img src="/res/img/operation/by09-min.png">
+        <p style="font-weight: 700;">7.4保养报告查询</p>
+        <p>保养报告查询主要是查询机构下所有的保养历史数据。</p>
+        <p>1）	保养报告列表</p>
+        <img src="/res/img/operation/by10-min.png">
+        <p>2）	查看保养报告、支持打印</p>
+        <img src="/res/img/operation/by11-min.png">
+    </div>
+    <div ng-if="data.key == 8">
+        <p>计量管理主要是服务于医疗机构对机构内计量设备台账的管理、计量检测实施及计量档案查询等功能，同时计量台账和资产台账数据连通。</p>
+        <p style="font-weight: 700;">8.1计量台账</p>
+        <p>1）	计量台账数据来源为两种，其一为在资产台账管理中，将台账的基本信息中【计量设备】</p>
+        <img src="/res/img/operation/jl01-min.png">
+        <p>修改为【是】，则该资产台账数据会同步至【计量台账】中；</p>
+        <p>2）	如果该设备在【资产台账】中不存在，即为医院的非固定资产，则可以在【计量台账】中【新建非固定资产计量台账】</p>
+        <img src="/res/img/operation/jl02-min.png">
+        <p>3）	计量台账列表</p>
+        <img src="/res/img/operation/jl03-min.png">
+        <p>4）	新建【非固定资产计量台账】</p>
+        <p>点击右上角【新建非固定资产计量台账】按钮，即可新建。</p>
+        <img src="/res/img/operation/jl04-min.png">
+        <p>5）	点击列表右侧【编辑】按钮，可以修改计量台账详情，维护计量台账信息，如计量周期，计量类别等。</p>
+        <img src="/res/img/operation/jl05-min.png">
+        <img src="/res/img/operation/jl06-min.png">
+        <p style="font-weight: 700;">8.2计量检测</p>
+        <p>1）	计量检测列表，对已过期或距离30天需要实施检测的检测数据进行标记提示</p>
+        <img src="/res/img/operation/jl07-min.png">
+        <p>2）	计量检测详情，填写检测详情，提交检测报告</p>
+        <img src="/res/img/operation/jl08-min.png">
+        <p>3）	计量检测结束，查看检测详情，打印计量检测报告</p>
+        <img src="/res/img/operation/jl09-min.png">
+        <p style="font-weight: 700;">8.3计量档案</p>
+        <p>计量档案主要为机构内所有的计量检测信息记录，支持多维度查询及档案报告单打印</p>
+        <p>1）	计量档案列表</p>
+        <img src="/res/img/operation/jl10-min.png">
+        <p>2）	查看列表右侧【查看】按钮，查看每条检测记录的检测报告单</p>
+        <img src="/res/img/operation/jl11-min.png">
+    </div>
+    <div ng-if="data.key == 9">
+        <p>档案管理主要服务于医疗机构内，对资产台账全生命流程的信息记录，包含档案的基础信息、台账的设备信息、采购信息、合同信息、证件信息、文件管理、维修记录、转科记录、报损记录。其中【维修记录】【转科记录】【报损记录】同步设备相关业务操作，做到设备生命周期的全自动记录。</p>
+        <p style="font-weight: 700;">9.1档案管理</p>
+        <p>1）	档案管理列表</p>
+        <img src="/res/img/operation/da01-min.png">
+        <p>2）	点击【新增档案】，即可选择资产台账设备新增档案信息</p>
+        <img src="/res/img/operation/da02-min.png">
+        <p>选择设备，填写档案立卷信息后，即可生成档案。</p>
+        <p>3）	点击【编辑】可以修改已经新建的档案立卷信息</p>
+        <img src="/res/img/operation/da03-min.png">
+        <p style="font-weight: 700;">9.2档案查询</p>
+        <p>1）	档案查询列表，查看机构内所有的档案信息，支持多维度的筛选</p>
+        <img src="/res/img/operation/da04-min.png">
+        <p>2）	点击列表右边【查看】可以查看档案包含的设备信息等详情，并且可以编辑档案中【采购信息】【合同信息】【证件信息】【文件管理】，保存档案内容详情</p>
+        <img src="/res/img/operation/da05-min.png">
+    </div>
+</div>
+<br>

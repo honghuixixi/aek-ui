@@ -1,0 +1,46 @@
+<div class="fy_accessoryClassify">
+    <div class="fy_inspectionBtns"><a href="javascript:;" ng-if='modelSelect.type!=1&&modelSelect.status=="启用"&&userInfo.authoritiesStr.indexOf("QC_TEMPLATE_DISABLE_ENABLE") != -1' class="inspectionOperateBtn inspectionOperateBtnStop" ng-click='editModel(2)'>停用模板</a><a href="javascript:;" class="inspectionOperateBtn inspectionOperateBtnUse" ng-if='modelSelect.type!=1&&modelSelect.status=="停用"&&userInfo.authoritiesStr.indexOf("QC_TEMPLATE_DISABLE_ENABLE") != -1' ng-click='editModel(1)'>启用模板</a><a href="javascript:;" ng-if="modelSelect.type!=1&&userInfo.authoritiesStr.indexOf('QC_TEMPLATE_DELETE') != -1" class="inspectionOperateBtn inspectionOperateBtnDel" ng-click='editModel()'>删除模板</a></div>
+    <div class="fy_accessoryClassifyTitle"><a ui-sref="inspection.model.list({tenantId:$stateParams.tenantId||$localStorage.userInfo.tenantId})" class='fy_inspectionTitle999'>巡检模板</a><em class='fy_inspectionTitle999'>></em><span>巡检模板详情</span></div>
+    <model-detail is-edit-model='true' model-select='modelSelect' get-model-detail='getModelDetail' user-info='userInfo'></model-detail>
+</div>
+<!-- <div id="projectCon" ng-show='projectCon'>
+    <div class="projectInfo projectInfoName"><div class="projectInfoHead"><em>*</em>项目名称：</div><div class="projectInfoBody"><input ng-change='projectLimit()' ng-blur='projectAdjust()' ng-model='project.name' type="text" placeholder='40个字符以内'></div></div>
+    <div class="projectInfoErr"><span ng-if='projectErr'>请输入/已存在</span></div>
+    <div class="projectAttention">允许勾选设置默认选项</div>
+    <div class="projectInfo" ng-repeat='item in project.results'>
+        <div class="projectInfoHead"><span class='projectInfoHeadTxt'><span ng-if='$index<1'><em>*</em>选项：</span></span><div class="projectRadioWrap"><div class="projectRadio" ng-click='changeChecked(item)'><div class="projectRadioSel" ng-if='item.isDefault'></div></div></div></div>
+        <div class="projectInfoBody" ng-class='{projectInfoBodyPlus: $index>1}'><input ng-change='nameLimit(item)' ng-model='item.name' ng-blur='nameAdjust(item)' type="text" placeholder='选项{{$index==0?"一":($index==1?"二":($index==2?"三":($index==3?"四":"五")))}}，4个字符以内'><a href="javascript:;" ng-click='delProject($index)'></a></div>
+        <div class="projectInfoErr"><span ng-if='item.err'>请输入/已存在</span></div>
+    </div>
+    <div class="projectInfo" ng-if='project.results.length<5'><div class="projectInfoBody"><a href="javascript:;" class="fy_newProjectBtn" ng-click='addSelect()'>新增选项</a></div></div>
+</div> -->
+<div id="inspectionLayerD" class="inspectionLayer" style="display: none;">
+    <div class="inspectionLayerCon">
+        <div>
+            <div class="inspectionLayerImg m-t-lg m-b-md"><img src='../../res/img/icon20.png'></div>
+            <div>
+                <span>删除模板后不可恢复，确定要删除吗？</span>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="inspectionLayerS" class="inspectionLayer" style="display: none;">
+    <div class="inspectionLayerCon">
+        <div>
+            <div class="inspectionLayerImg m-t-lg m-b-md"><img src='../../res/img/wh.png'></div>
+            <div>
+                <span>停用后，该模板将无法使用，确定要停用吗？</span>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="inspectionLayerU" class="inspectionLayer" style="display: none;">
+    <div class="inspectionLayerCon">
+        <div>
+            <div class="inspectionLayerImg m-t-lg m-b-md"><img src='../../res/img/wh.png'></div>
+            <div>
+                <span>确定启用该模板？</span>
+            </div>
+        </div>
+    </div>
+</div>

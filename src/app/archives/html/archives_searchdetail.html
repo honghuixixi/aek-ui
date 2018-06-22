@@ -1,0 +1,69 @@
+<div class="archives-nav">
+    <span>档案查询</span> &gt;
+    <span>档案详情</span>
+    <span class="archives-btn archives-detail-btn" ng-show="data.local.showEdit && !data.local.isEdit" ng-click="methods.showEdit()">编辑</span>
+    <span class="archives-btn archives-detail-btn archives-cancle" ng-show="data.local.isEdit" ng-click="methods.cancle()">取消</span>
+    <span class="archives-btn archives-detail-btn" ng-show="data.local.isEdit && data.local.tabIndex == 3" ng-click="methods.cgSubmit()">提交</span>
+    <span class="archives-btn archives-detail-btn" ng-show="data.local.isEdit && data.local.tabIndex == 4" ng-click="methods.htSubmit()">提交</span>
+</div>
+<div class="archives-swrap archives-searchdetail">
+    <dl class="search-archives">
+        <dt>档案编号：</dt>
+        <dd>{{data.server.archiveNum}}&nbsp;</dd>
+        <dt>档案名称：</dt>
+        <dd>{{data.server.archiveName}}&nbsp;</dd>
+        <dt>立卷机构：</dt>
+        <dd>{{data.server.filingDepartment}}&nbsp;</dd>
+    </dl>
+    <div class="search-tab">
+        <span class="search-tab-item" ng-class="{'search-tab-current': data.local.tabIndex == 1}" ng-click="methods.changeTab(1, false, false)">档案信息</span>
+        <span class="search-tab-item" ng-class="{'search-tab-current': data.local.tabIndex == 2}" ng-click="methods.changeTab(2, false, false)">设备信息</span>
+        <span class="search-tab-item" ng-class="{'search-tab-current': data.local.tabIndex == 3}" ng-click="methods.changeTab(3, true, true)">采购信息</span>
+        <span class="search-tab-item" ng-class="{'search-tab-current': data.local.tabIndex == 4}" ng-click="methods.changeTab(4, true, true)">合同信息</span>
+        <span class="search-tab-item" ng-class="{'search-tab-current': data.local.tabIndex == 5}" ng-click="methods.changeTab(5, true, false)">证件信息</span>
+        <span class="search-tab-item" ng-class="{'search-tab-current': data.local.tabIndex == 6}" ng-click="methods.changeTab(6, false, false)">文件管理</span>
+        <span class="search-tab-item" ng-class="{'search-tab-current': data.local.tabIndex == 7}" ng-click="methods.changeTab(7, false, false)">维修记录</span>
+        <span class="search-tab-item" ng-class="{'search-tab-current': data.local.tabIndex == 8}" ng-click="methods.changeTab(8, false, false)">转科记录</span>
+        <span class="search-tab-item" ng-class="{'search-tab-current': data.local.tabIndex == 9}" ng-click="methods.changeTab(9, false, false)">报损记录</span>
+    </div>
+    <div ng-show="data.local.tabIndex == 1">
+        <table style="margin-top: 15px;">
+            <tr>
+                <td>
+                    <dl class="search-archives">
+                        <dt>保管期限：</dt>
+                        <dd>{{data.server.limitStorageTimeStr}}&nbsp;</dd>
+                        <dt>立卷人：</dt>
+                        <dd>{{data.server.filingUserName}}&nbsp;</dd>
+                        <dt>检查人：</dt>
+                        <dd>{{data.server.checkUserName}}&nbsp;</dd>
+                        <dt>起止日期：</dt>
+                        <dd>{{data.server.startEndDateStr}}&nbsp;</dd>
+                    </dl>
+                </td>
+                <td style="padding-left: 100px;vertical-align: top;">
+                    <dl class="search-archives">
+                        <dt>保密级：</dt>
+                        <dd>{{data.server.secretLevelStr}}&nbsp;</dd>
+                        <dt>立卷日期：</dt>
+                        <dd>{{data.server.filingTimeStr}}&nbsp;</dd>
+                        <dt>检查日期：</dt>
+                        <dd>{{data.server.checkTimeStr}}&nbsp;</dd>
+                    </dl>
+                </td>
+            </tr>
+        </table>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+    </div>
+    <tab-content2 isshow="data.local.tabIndex == 2" isedit="data.local.isEdit" id="data.server.assetsId"></tab-content2>
+    <tab-content3 isshow="data.local.tabIndex == 3" isedit="data.local.isEdit" id="data.local.archivesId" assetid="data.server.assetsId" record="data.local.cgObj" issubmit="data.local.isCgSubmit"></tab-content3>
+    <tab-content4 isshow="data.local.tabIndex == 4" isedit="data.local.isEdit" id="data.local.archivesId" assetid="data.server.assetsId" record="data.local.htObj" issubmit="data.local.isHtSubmit"></tab-content4>
+    <tab-content5 isshow="data.local.tabIndex == 5" isedit="data.local.isEdit" id="data.local.archivesId" assetid="data.server.assetsId"></tab-content5>
+    <tab-content6 isshow="data.local.tabIndex == 6" isedit="data.local.isEdit" id="data.local.archivesId" assetid="data.server.assetsId"></tab-content6>
+    <tab-content7 isshow="data.local.tabIndex == 7" isedit="data.local.isEdit" id="data.server.assetsId"></tab-content7>
+    <tab-content8 isshow="data.local.tabIndex == 8" isedit="data.local.isEdit" id="data.server.assetsId"></tab-content8>
+    <tab-content9 isshow="data.local.tabIndex == 9" isedit="data.local.isEdit" id="data.server.assetsId"></tab-content9>
+</div>

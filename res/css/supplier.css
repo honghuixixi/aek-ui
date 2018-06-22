@@ -1,0 +1,348 @@
+.supplier .con-left .org-form>span {
+	min-width: 120px;
+	width: 23%;
+	margin-right: 0px;
+	padding-right: 10px;
+}
+.b-t-d-dcdcdc {
+	border-top: 1px dashed #dcdcdc;
+}
+.p-t-md {
+	padding-top: 20px;
+}
+.supplierDetailHeadWrap tr td:first-child {
+	padding-left: 0px;
+}
+.supplierDetail .supplierDetailHeadWrap {
+	padding-left: 0px;
+	padding-right: 0px;
+	background-color: #eff3f6;
+}
+.supper_detail {
+	position: relative;
+}
+/* supplier detail */
+.supplierDetailHead {
+	height: 130px;
+	padding: 15px;
+	background-color: #fff;
+}
+.supplierDetailHeadCon {
+	height: 100px;
+}
+.supplierDetailHeadImg {
+	float: left;
+	height: 100px;
+	width: 128px;
+	position: relative;
+}
+.supplierDetailHeadImg img {
+	width: 128px;
+	height: 100px;
+}
+.supplierDetailHeadImg input {
+	width: 128px;
+	height: 100px;
+	cursor: pointer;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	opacity: 0;
+}
+.supplierDetailHeadBody {
+	padding-left: 145px;
+}
+.supplierDetailHeadName {
+	color: #4baaf6;
+	line-height: 40px;
+	font-size: 15px;
+}
+.supplierDetailHeadName em {
+	display: inline-block;
+    background-color: #F3756F;
+    color: #fff;
+    width: 56px;
+    line-height: 18px;
+    margin-left: 15px;
+    height: 18px;
+    text-align: center;
+    border-radius: 10px;
+}
+.supplierDetailHeadName .enable {
+	background-color: #f7931e;
+}
+.supplierDetailHeadInfo {
+	color: #666;
+	padding-left: 27px;
+	line-height: 30px;
+	height: 30px;
+	background-repeat: no-repeat;
+	min-width: 30px;
+	background-image: url(../../res/img/address.png);
+	background-position: 0px 7px;
+}
+.supplierDetailHeadInfoTel {
+	background-image: url(../../res/img/tel.png);
+}
+/* table */
+.supplierDetailTable {
+	padding: 6px 15px;
+	margin-top: 6px;
+	background-color: #fff;
+}
+/* supplier credentials */
+.supplierCredentialWrap {
+	padding: 20px;
+	position: relative;
+	margin-top: 20px;
+	border: 1px solid #dcdcdc;
+	width: 386px;
+	height: 128px;
+	display: inline-block;
+	vertical-align: top;
+	margin-right: 20px;
+}
+.supplierCredentialWrap:hover .supplierCredentialReupload {
+	display: block;
+}
+.supplierCredentialLabel {
+	width: 64px;
+	height: 26px;
+	line-height: 26px;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	color: #fff;
+	background-color: #f3756f;
+	font-size: 13px;
+	text-align: center;
+}
+.supplierCredentialReupload {
+	color: #fff;
+	display: none;
+	background-color: rgba(0,0,0,0.4);
+	text-align: center;
+	line-height: 36px;
+	height: 36px;
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+}
+.supplierCredentialReupload:hover {
+	color: #fff;
+}
+.supplierCredentialImg {
+	float: left;
+}
+.supplierCredentialImg img {
+	width: 86px;
+	height: 86px;
+}
+.supplierCredentialInfos {
+	padding-left: 100px;
+	line-height: 30px;
+}
+.supplierCredentialName {
+	font-size: 15px;
+	color: #666;
+}
+.supplierCredentialInfo {
+	line-height: 26px;
+	font-size: 14px;
+	color: #999;
+}
+.supplierCredentialInfoCodeHead {
+	float: left;
+}
+.supplierCredentialInfo .supplierCredentialInfoCodeBody {
+	/*padding-left: 70px;*/
+	min-height: 26px;
+	max-height: 52px;
+	overflow: hidden;
+	word-break: break-all;
+}
+.supplierCredentialInfoHead em {
+	visibility: hidden;
+}
+/* add */
+.supplierCredentialAdd {
+	vertical-align: top;
+}
+.supplierCredentialAddCon {
+	text-align: center;
+	line-height: 86px;
+}
+.supplierCredentialAddCon img {
+	margin-right: 10px;
+}
+.supplierCredentialAddBtn {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 386px;
+	bottom: 0px;
+	cursor: pointer;
+}
+.credentialsUpload {
+	padding-top: 30px;
+}
+.credentialsUpload input {
+	width: 330px;
+	line-height: 30px;
+	height: 32px;
+	border: 1px solid #dcdcdc;
+	border-radius: 3px;
+	text-indent: 10px;
+}
+.credentialsUpload input:focus {
+	border-color: #f7931e;
+}
+.credentialsUpload #datepickerUpload {
+	background: url(../img/date-icon.png) no-repeat 300px;
+}
+.credentialsUploadSpan {
+	display: inline-block;
+	vertical-align: middle;
+	text-align: right;
+	width: 156px;
+}
+.credentialsUploadDiv {
+	margin-top: 20px;
+}
+.credentialsUploadBtn a {
+	display: inline-block;
+	width: 90px;
+	height: 32px;
+	line-height: 32px;
+	text-align: center;
+	color: #fff;
+	background-color: #f7931e;
+	font-size: 13px;
+	border-radius: 3px;
+}
+.credentialsUploadBtn {
+	text-align: right;
+	padding-right: 30px;
+	margin-top: 58px;
+}
+.credentialsUploadBtn a:hover {
+	background-color: #ffac4a;
+}
+/* add upload */
+.credentialsUpload .picfile .picfileCon {
+	vertical-align: bottom;
+}
+.credentialsUpload .picfile {
+	vertical-align: middle;
+	display: inline-block;
+}
+.picfile .picfileCon{
+    display: inline-block;
+    position: relative;
+}
+.picfile .picfileCon .hd_imgDelet{
+    width: 100%;
+    height: 25px;
+    line-height: 25px;
+    color: #4baaf6;
+    background: #000;
+    opacity: .8;
+    position: absolute;
+    bottom: 0;
+}
+.picfile .picfileCon .hd_imgDelet i{
+    color: #4baaf6;;
+    display: inline-block;
+    float: left;
+    width:50%;
+    text-align: center;
+    cursor: pointer;
+}
+.picfile .file-i {
+    display: inline-block;
+    width: 70px;
+    height: 70px;
+    background: url(../img/file-pic.png) no-repeat center;
+    cursor: pointer;
+}
+.picfile .file-i:hover{
+    background: url(../img/tjzpdj.png) no-repeat center;
+}
+/* seller */
+.supplierSellerWrap {
+	width: 1056px;
+}
+.supplierSellerTitle {
+	padding: 15px 0px;
+	font-size: 14px;
+	color: #666;
+}
+.supplierSellerTitle span {
+	padding-left: 10px;
+	border-left: 2px solid #f7931e;
+}
+.supplierSellerCon {
+	line-height: 24px;
+	color: #999;
+}
+.supplierSellerConBody {
+	padding-left: 12px;
+	word-wrap:break-word;
+}
+.supplierSellerCon textarea {
+	width: 1056px;
+	height: 128px;
+	resize: none;
+	font-size: 13px;
+	border: 1px solid #dcdcdc;
+	padding-left: 11px;
+}
+.supplierSellerCon textarea:focus {
+	border-color: #f7931e;
+}
+.supplierSellerTitleBtn img {
+	margin-left: 10px;
+}
+.supplierSellerTitleBtn .supplierSellerTitleHover {
+	display: none;
+}
+.supplierSellerTitleBtn:hover img {
+	display: none;
+}
+.supplierSellerTitleBtn:hover .supplierSellerTitleHover {
+	display: inline-block;
+}
+.supplierSellerBtn {
+	text-align: right;
+	padding-top: 15px;
+	height: 60px;
+}
+.supplierSellerBtn a {
+	display: inline-block;
+	width: 90px;
+	height: 32px;
+	text-align: center;
+}
+.supplierSellerBtn .supplierSellerCancel {
+	line-height: 30px;
+	border: 1px solid #dcdcdc;
+	color: #666;
+}
+.supplierSellerCancel:hover {
+	color: #f7931e;
+	border-color: #f7931e;
+}
+.supplierSellerSave {
+	background-color: #f7931e;
+	line-height: 32px;
+	color: #fff;
+	margin-left: 15px;
+}
+.supplierSellerSave:hover {
+	color: #fff;
+	background-color: #ffac4a;
+}
+.supplier .org-detail .input-datepicker {
+	background: url(../img/date-icon.png) no-repeat 95%;
+}

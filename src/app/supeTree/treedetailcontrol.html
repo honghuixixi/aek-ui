@@ -1,0 +1,52 @@
+<!-- navbar -->
+<div data-ng-include=" 'src/tpl/header.html' " class="app-header navbar b-b-3x-orange">
+</div>
+<div class="hd_tdetailcont">
+    <div class="hd_treetitle">监管机构详情</div>
+    <div class="hd_tdetailtxt">
+        <div class="hd_tdetailtit" style="margin-top: 0;border-top: 0;">{{msg.tenant.name}}</div>
+        <div class="hd_tdetailul" style="height: 120px">
+            <ul>
+                <li><span>ID</span><span>{{msg.tenant.id}}</span></li>
+                <li><span>原始管理员</span><span>{{msg.tenantAdmin.realName}}</span></li>
+                <li><span>创建人</span><span>{{msg.createName}}</span></li>
+                <li><span>手机号</span><span>{{msg.tenantAdmin.mobile}}</span></li>
+                <li><span>创建时间</span><span>{{msg.tenant.createTime.slice(0, -3)}}</span></li>
+                <li><span>邮箱</span><span>{{msg.tenantAdmin.email}}</span></li>
+            </ul>
+        </div>
+        <div class="hd_tdetailul" style="height: 150px" >
+            <ul>
+                <li><span>机构类型</span>
+                    <span ng-if="msg.tenant.tenantType == 1">医疗机构</span>
+                    <span ng-if="msg.tenant.tenantType == 2">监管机构</span>
+                    <span ng-if="msg.tenant.tenantType == 3">设备供应商</span>
+                    <span ng-if="msg.tenant.tenantType == 4">设备维修商</span>
+                    <span ng-if="msg.tenant.tenantType == 5">配件供应商</span>
+                </li>
+                <li><span>账户类型</span>
+                    <span ng-if="msg.tenant.commercialUse">正式</span>
+                    <span ng-if="!msg.tenant.commercialUse">试用</span>
+                </li>
+                <li><span>所在地区</span><span>{{msg.tenant.province}}-{{msg.tenant.city}}-{{msg.tenant.county}}</span></li>
+                <li><span>上级行政单位</span><span>{{msg.tenant.manageTenantName}}</span></li>
+                <li><span>是否测试机构</span>
+                    <span ng-if="msg.tenant.trial==0">是</span>
+                    <span ng-if="msg.tenant.trial==1">否</span>
+                </li>
+                <li><span>子机构</span>
+                    <span ng-if="msg.tenant.subTenantLimit == 0 ">不可创建</span>
+                    <span ng-if="msg.tenant.subTenantLimit != 0">已创建{{msg.tenant.subTenant }}个/可创建{{msg.tenant.subTenantLimit}}个</span>
+                </li>
+                <li><span>到期时间</span>
+                    <span ng-if="msg.tenant.expireTime">{{msg.tenant.expireTime.slice(0, 10)}}</span>
+                    <span ng-if="!msg.tenant.expireTime">永久有效</span>
+                </li>
+            </ul>
+        </div>
+
+
+
+    </div>
+</div>
+<!-- / navbar -->

@@ -1,0 +1,194 @@
+.training {
+    min-width: 1360px;
+}
+
+/* menu */
+.training-menu {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    bottom: 0;
+    width: 160px;
+    padding-top: 20px;
+    background-color: #fff;
+}
+
+.training-menu-item {
+    padding-left: 30px;
+    font-size: 14px;
+    line-height: 36px;
+}
+
+.training-menu-item a {
+    padding-left: 22px;
+    text-decoration: none;
+    color: #333;
+    background-repeat: no-repeat;
+    background-position-y: 4px;
+}
+
+.training-menu .active {
+    background-color: #e1ece8;
+}
+
+.training-menu .active a {
+    color: #f7931e;
+}
+
+.training-menu .plan {
+    background-image: url('../../../../res/img/training_plan_default.png');
+}
+
+.training-menu .archives {
+    background-image: url('../../../../res/img/training_archives_default.png');
+}
+
+.training-menu .active .plan {
+    background-image: url('../../../../res/img/training_plan_check.png');
+}
+
+.training-menu .active .archives {
+    background-image: url('../../../../res/img/training_archives_check.png');
+}
+
+.training-content {
+    margin-left: 170px;
+}
+
+/* common */
+.training-content .training-btn {
+    display: inline-block;
+    font-size: 13px;
+    height: 32px;
+    padding: 0 15px;
+    color: #fff;
+    background-color: #f7931e;
+    cursor: pointer;
+}
+.training-content .training-btn-cancel {
+    background-color: transparent;
+    color: #000;
+    border: 1px solid #ccc;
+}
+.training-content .loading {
+    margin: 30px 0;
+    text-align: center;
+}
+
+.training-content .empty {
+    margin: 30px 0;
+    text-align: center;
+}
+
+.training-content .empty img {
+    margin-right: 10px;
+    vertical-align: middle;
+}
+/* nav */
+.training-nav {
+    margin: 10px 10px 10px 0;
+    line-height: 32px;
+    overflow: hidden;
+}
+.training-nav .training-btn-add {
+    float: right;
+    padding-left: 30px;
+    background-position: 10px 9px;
+    background-image: url('../../../../res/img/add.png');
+    background-repeat: no-repeat;
+}
+
+/* swrap */
+.training-swrap {
+    margin-right: 10px;
+    padding: 10px;
+    background-color: #fff;
+}
+/* list-search */
+.training-search {
+    margin-bottom: 10px;
+    line-height: 32px;
+}
+
+.training-search input[type="text"] {
+    height: 32px;
+    padding: 0 10px;
+    border: 1px solid #ccc;
+    outline: 0;
+}
+
+.training-search-keyword {
+    width: 350px;
+}
+
+.training-search-date {
+    width: 120px;
+    background-image: url(../../../../res/img/date-icon.png);
+    background-position: 96px 6px;
+    background-repeat: no-repeat;
+}
+
+/* list-table */
+.training-list-table {
+    width: 100%;
+    border: 1px solid #dcdcdc;
+    border-collapse: collapse;
+}
+.training-list-table td {
+    padding: 10px;
+    font-size: 13px;
+    border-bottom: 1px solid #dcdcdc;
+    color: #666;
+    vertical-align: middle;
+}
+.training-list-table thead td {
+    background-color: #e5e5e5;
+    white-space: nowrap;
+}
+.training-list-table tbody td {
+    word-break: break-all;
+}
+.training-list-table .training-img {
+    width: 70px;
+    height: 70px;
+}
+.training-list-table .training-dl {
+    margin: 0;
+    padding: 0;    
+    overflow: hidden;
+}
+.training-list-table .training-dl dt {
+    float: left;
+    width: 70px;
+    font-weight: 300;
+    color: #000;
+    text-align: right;
+}
+.training-list-table .training-dl dd {
+    margin-left: 70px;
+}
+.training-list-table .tip-type {
+    width: 50px;
+    height: 20px;
+    font-size: 12px;
+    line-height: 20px;
+    background-color: #F3756F;
+    color: #fff;
+    border-radius: 10px;
+}
+.training-list-table .tip-type + .tip-type {
+    margin-top: 5px;
+}
+.training-list-table .tip-date {
+    display: inline-block;
+    font-size: 12px;
+    background-color: #F3756F;
+    text-align: center;
+    color: #fff;
+    padding: 2px 6px;
+    border-radius: 15px;
+}
+.training-list-table .edit {
+    color: #4baaf6;
+    cursor: pointer;
+}

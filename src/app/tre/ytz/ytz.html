@@ -1,0 +1,271 @@
+<!-- toaster directive -->
+<toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container>
+<!-- / toaster directive -->
+<div class="assets-overlay ytz-overlay" ng-click='hideAll()' ng-show='devshow'></div>
+<!-- 导航条 -->
+<div class="bg-white ytz-crumb bread-crumb" style="z-index: 200;">
+	<ul class="breadcrumb lter b-b wrapper-md">
+		<li>
+			<a ui-sref="main.tre.ytz.list">
+				<!--<i class="fa fa-home"></i>-->预台账</a>
+		</li>
+		<!--<li class="active" ng-bind="title"></li>-->
+	</ul>
+
+	<div ng-if="userInfo.authoritiesStr.indexOf('ASS_PREASSETS_NEW') != -1" class="fix-btn">
+		<a ng-click="newTre()" class="pos-fix-r-md-t-60 pos-fix-btn">新建预台账</a>
+	</div>
+</div>
+
+<!-- 加载提醒 -->
+<div ng-show="loading" class="text-center m-t-md text-lg"><i class="fa fa-spin fa-spinner"></i> 数据加载中...</div>
+
+<!-- 内容区域 -->
+<div ng-hide="loading" class="wrapper-md content treContent content-m">
+	<!-- 数据显示 -->
+	<div class="wrapper-data ay-wrapdata">
+		<div ng-if="userInfo.authoritiesStr.indexOf('ASS_PREASSETS_LIST_VIEW') == -1" class="no-limits">
+			<img src="../../../../res/img/myqx.png" alt="没有权限">您没有该页面的权限
+		</div>
+		<div ng-if="userInfo.authoritiesStr.indexOf('ASS_PREASSETS_LIST_VIEW') != -1" class="panel panel-default ay-ytzpanel">
+			<!-- 头部 -->
+			<div class="wrap-head">
+				<div class="i-status">	
+					<div class="select-box" ng-click="showstateList()">
+						<input type="hidden" ng-model="stateN" />
+						<input class="currEnable acolor999" ng-model="stateName" readonly="readonly" />
+					</div>
+					<div class="select-options" ng-show="statenameList">
+						<ul>
+							<li class="acolor999" ng-repeat="statename in states" ng-click="changeState(statename.name,statename.id)">{{statename.name || '全部' }}</li>
+						</ul>
+					</div>	   	
+				</div>
+				<div class="i-which">
+					<div class="input-wrap">
+						<input type="text" class="depetName" ng-model="depetName" ng-click="showdeptList()" readonly="readonly"   placeholder="请输入科室名称" />
+						<div class="depetList" ng-show="depetshow">
+						  <div class="inputdetName">
+						    	<input class="detNameSearch" ng-trim="false" ng-model="keyword.nameSearch" type="text" ng-change="searchList()"/>
+						  </div>
+						    <label ng-repeat="dept in deptList" ng-click="setDeptValue(dept.id,dept.name)" id="{{dept.id}}">{{dept.name}}</label>
+						</div>
+					</div>
+				</div>
+				<div class="i-info">
+					<!--<input type="text" value="设备名称/编号"/>-->
+					<div class="input-wrap">
+						<input type="text" class="deciveName"  ng-model="keyword.deciveName" placeholder="设备名称/编号/院内编码/出厂编号" />
+					</div>
+				</div>
+				<div class="t-search">
+					<a href="javascript:;" ng-click="searchAssets()">搜索</a>
+				</div>
+				<div class="select-m">
+				   <!--<select name="sortname" ng-model="sortName" ng-change="changeAssetsList(sortName)" 
+				   	ng-options="sortname.id as sortname.name  for sortname in [{id:1,name:'默认排序'},{id:2,name:'状态排序'}]"
+				   	></select>	-->
+				   	<div class="select-box" ng-click="showsortList()">
+						<input type="hidden" ng-model="sortName" />
+						<input class="currEnable acolor999" ng-model="sortshowName" readonly="readonly" />
+					</div>
+					<div class="select-options" ng-show="sortList">
+						<ul>
+							<li class="acolor999" ng-repeat="sortname in sortstatus" ng-click="changesort(sortname.name,sortname.id)">{{sortname.name || '默认排序' }}</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<!-- 数据表格 -->
+			<div class="table-responsive">
+				<table class="table table-striped b-t b-light text-center min-width">
+					<thead>
+						<tr class="tr-th">
+							<th class="b-l-dcdcdc" style="text-align: left;white-space:nowrap;">设备信息</th>
+							<th style="width: 9.8%;white-space:nowrap;">规格型号</th>
+							<th style="width: 14.58%;white-space:nowrap;">供应商</th>
+							<th style="width: 9.4%;white-space:nowrap;">所在部门</th>
+							<th style="width: 8.6%;white-space:nowrap;">创建人</th>
+							<th style="width: 11.15%;white-space:nowrap;">创建时间</th>
+							<th style="width: 12%;white-space:nowrap;">状态</th>
+							<th class="b-r-dcdcdc" style="width: 6.7%;white-space:nowrap;">操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr  ng-repeat="item in assetslist" ng-class="{'b-b-tr':$index == assetslist.length-1}">
+							<td class="b-l-dcdcdc">
+								<dl>
+									<dt><a ng-click='hrefs($event,item.verfyStatus,item.id)'>
+										<img ng-if="item.assetsImg" src="../res/img/11.png" width="100" height="100" ng-src="{{fileUrlBase}}{{item.assetsImg}}"/>
+										<img ng-if="!item.assetsImg" src="../res/img/11.png" width="100" height="100" ng-src="{{item.assetsImg}}"/>
+									</a></dt>
+									<dd>
+										<a ng-click='hrefs($event,item.verfyStatus,item.id)'>设备名称: {{item.assetsName}}<span ng-if="item.repairStatus==2" class="assetsStatusStoped">维修中</span></a>
+									</dd>
+									<dd>设备编号: {{item.assetsNum}}</dd>
+									<dd>生产商: {{item.factoryName}}</dd>
+	
+								</dl>
+						   </td>
+						   <td>
+						   	<div>{{item.assetsSpec}}</div>
+						   </td>
+						   <td style="line-height: 20px;">
+						   	<div>{{item.splName}}</div>
+						   </td>
+						   <td>
+						   	<div>{{item.deptName}}</div>
+						   </td>
+						   <td>
+						   	<div>{{item.createByName}}</div>
+						   </td>
+							<td>
+								<div>{{item.createTime}}</div>
+							</td>
+						   <td>
+						   	<div>
+						   		<span ng-if="item.verfyStatus == 0">暂存</span>
+						   		<span ng-if="item.verfyStatus == 1">待验收</span>
+						   		<span ng-if="item.verfyStatus == 2">验收通过</span>
+						   		<span ng-if="item.verfyStatus == 3">验收未通过</span>
+						   	</div>
+						   </td>
+						   <td class="b-r-dcdcdc">
+						   	  <a ng-click='hrefs($event,item.verfyStatus,item.id)'><span ng-if="userInfo.authoritiesStr.indexOf('ASS_PREASSETS_DETAILED_VIEW') != -1 && item.verfyStatus!=0">查看</span><span ng-if="userInfo.authoritiesStr.indexOf('ASS_PREASSETS_EDIT') != -1 && item.verfyStatus==0" >编辑</span></a>
+						   </td>
+                        </tr>
+					</tbody>
+				</table>
+				<span ng-if="userInfo.authoritiesStr.indexOf('ASS_PREASSETS_LIST_VIEW') != -1" data-ng-include=" 'src/tpl/newPageInfo.html' "></span>
+				<div ng-if="assetslist.length==0" class="center ay-data-null">
+					<td colspan="12" class="noContent">
+						<img src="../../../res/img/nocontent.png" alt="">
+						<span class="m-l-lg">暂无数据</span>
+					</td>
+	          </div>
+			</div>
+			<!-- /.table-responsive -->
+			<!--<div class="pages-de"></div>-->
+
+		</div>
+		<!-- /.panel -->
+	</div>
+	<!-- /.wrapper-data -->
+	<!-- 底部分页 -->
+	<!--<span data-ng-include=" 'src/tpl/pageInfo.html' "></span>-->
+	
+</div>
+<!-- /.wrapper-md -->
+<div data-ng-include='src/app/tre/ytz/iframe.html' ng-hide=true id="addDev"></div>
+<!--弹框-->
+<div   data-ng-include=" 'src/tpl/alert.html' "></div>
+<div class="newTreList" ng-show='newTreListShow'>
+	<div class="alertBatchPosition" ng-show='batchSetDeptWrapShow' ng-click='hideAll()'></div>
+	<div class="newTreListInfo"><span class="newTreListInfoHead"><em>*</em>所在部门：</span><span class='newTreListInfoBody'>
+			<div class="batchSelecters">
+				<input type="text" class="batchSelectInput newTreListInfoInput newTreListInfoInput1" readonly="true" ng-model="newTreListOffice.name" ng-click="newTreList('newTreListDept')" />
+				<div class="batchSelectResWrap" ng-show='newTreListDept'>
+					<div class="batchSelectRes">
+						<div class="batchSelectSearch">
+							<input type="text" ng-trim="false" ng-change="batchSearchChange()" ng-model='batchSelectSearchWord'>
+						</div>
+						<ul class="batchSelectList" ng-class='{batchSelectListScroll: searchResult.length>5}'>
+							<li ng-repeat="l in searchResult track by $index" ng-click="batchSelectLiClick('newTreListOffice','newTreListDept',l)"><a>{{l.name}}</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</span>
+		<div class="newTreListInfoErr"><span ng-show='assetsOfficeNameErr'>请输入部门</span></div>
+	</div>
+	<!--<div class="newTreListInfo"><span class="newTreListInfoHead">状态：</span><span class='newTreListInfoBody'>-->
+			<!--<div class="batchSelecters">-->
+				<!--<input type="text" class="batchSelectInput newTreListInfoInput newTreListInfoInput1" placeholder='请选择' readonly="true" ng-model="newTreListState.status" ng-click="newTreList('newTreListStateShow')" />-->
+				<!--<div class="batchSelectResWrap" ng-show='newTreListStateShow'>-->
+					<!--<div class="batchSelectRes">-->
+						<!--<ul class="batchSelectList">-->
+							<!--<li ng-repeat="l in batchSetStateList track by $index" ng-click="newTreListStates('newTreListState','newTreListStateShow',l)"><a>{{l.status}}</a></li>-->
+						<!--</ul>-->
+					<!--</div>-->
+				<!--</div>-->
+			<!--</div>-->
+		<!--</span>-->
+		<!--<div class="newTreListInfoErr"><span></span></div>-->
+	<!--</div>-->
+	<div class="newTreListInfo"><span class="newTreListInfoHead"><em>*</em>设备名称：</span><span><input ng-change='limitLength("assetsName",40)' ng-model='newTreObj.assetsName' type="text" class="newTreListInfoInput"></span>
+		<div class="newTreListInfoErr"><span ng-show='assetsNameErr'>请输入设备名称</span></div>
+	</div>
+	<div class="newTreListInfo"><span class="newTreListInfoHead"><em>*</em>生产商：</span><span><input ng-change='limitLength("factoryName",40)' ng-model='newTreObj.factoryName' type="text" class="newTreListInfoInput"></span>
+		<div class="newTreListInfoErr"><span ng-show='factoryNameErr'>请输入生产商</span></div>
+	</div>
+	<div class="newTreListInfo"><span class="newTreListInfoHead"><em></em>院内编码：</span><span><input ng-trim='false' ng-keyup='limitLength("serialNum",40,"newTreObj")' ng-model='newTreObj.serialNum' type="text" class="newTreListInfoInput"></span>
+		<div class="newTreListInfoErr"></div>
+	</div>
+	<div class="newTreListInfo"><span class="newTreListInfoHead"><em></em>规格型号：</span><span><input ng-trim='false' ng-keyup='limitLength("assetsSpec",40,"newTreObj")' ng-model='newTreObj.assetsSpec' type="text" class="newTreListInfoInput"></span>
+		<div class="newTreListInfoErr"><span ng-show='1'></span></div>
+	</div>
+	<div class="newTreListMoreWrap" ng-show='newTreListMore'>
+		<div class="newTreListInfo"><span class="newTreListInfoHead"><em></em>注册证号：</span><span><input ng-change='limitLength("regNo",40)' ng-model='newTreObj.regNo' type="text" class="newTreListInfoInput"></span>
+			<div class="newTreListInfoErr"><span></span></div>
+		</div>
+		<div class="newTreListInfo"><span class="newTreListInfoHead"><em></em>出厂编号(SN)：</span><span><input ng-change='limitLength("factoryNum",40)' ng-model='newTreObj.factoryNum' type="text" class="newTreListInfoInput"></span>
+			<div class="newTreListInfoErr"><span></span></div>
+		</div>
+		<div class="newTreListInfo"><span class="newTreListInfoHead"><em></em>三级分类代码：</span><span><input ng-trim='false' onkeyup="this.value=this.value.match(/^6[0-9]*/)" ng-change='limitLength("threeLevelCode",40)' ng-model='newTreObj.threeLevelCode' type="text" class="newTreListInfoInput"></span>
+			<div class="newTreListInfoErr"><span ng-show="threeLevelCodeErr"></span></div>
+		</div>
+		<div class="newTreListInfo"><span class="newTreListInfoHead"><em></em>核算类别：</span><span class='newTreListInfoBody'>
+			<div class="batchSelecters">
+				<input type="text" class="batchSelectInput newTreListInfoInput newTreListInfoInput1" placeholder='请选择' readonly="true" ng-model="newTreListAccount.codeText" ng-click="newTreList('newTreListAccountShow')" />
+				<div class="batchSelectResWrap" ng-show='newTreListAccountShow'>
+					<div class="batchSelectRes">
+						<ul class="batchSelectList">
+							<li ng-repeat="l in batchSetStateList track by $index" ng-click="newTreListStates1('newTreListAccount','newTreListAccountShow',l)"><a>{{l.codeText}}</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			</span>
+			<div class="newTreListInfoErr"><span></span></div>
+		</div>
+		<div class="newTreListInfo"><span class="newTreListInfoHead"><em></em>管理级别：</span><span class='newTreListInfoBody'>
+			<div class="batchSelecters">
+				<input type="text" class="batchSelectInput newTreListInfoInput newTreListInfoInput1" placeholder='请选择' readonly="true" ng-model="newTreListManage.codeText" ng-click="newTreList('newTreListManageShow')" />
+				<div class="batchSelectResWrap" ng-show='newTreListManageShow'>
+					<div class="batchSelectRes">
+						<ul class="batchSelectList">
+							<li ng-repeat="l in hdmanageLevels track by $index" ng-click="newTreListStates2('newTreListManage','newTreListManageShow',l)"><a>{{l.codeText}}</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			</span>
+			<div class="newTreListInfoErr"><span></span></div>
+		</div>
+		<div class="newTreListInfo"><span class="newTreListInfoHead"><em></em>启用日期：</span><span><input readonly="true" ng-change='limitLength("startUseDate",40)' ng-model='newTreObj.startUseDate' type="text" class="newTreListInfoInput newTrelistDate"></span>
+			<div class="newTreListInfoErr"><span></span></div>
+		</div>
+		<div class="newTreListInfo"><span class="newTreListInfoHead"><em></em>供应商：</span><span><input ng-change='limitLength("splName",40)' ng-model='newTreObj.splName' type="text" class="newTreListInfoInput"></span>
+			<div class="newTreListInfoErr"><span></span></div>
+		</div>
+		<div class="newTreListInfo"><span class="newTreListInfoHead"><em></em>资金来源：</span><span class='newTreListInfoBody'>
+			<div class="batchSelecters">
+				<input type="text" class="batchSelectInput newTreListInfoInput newTreListInfoInput1" placeholder='请选择' readonly="true" ng-model="newTreListSource.codeText" ng-click="newTreList('newTreListSourceShow')" />
+				<div class="batchSelectResWrap m-b-10" ng-show='newTreListSourceShow'>
+					<div class="batchSelectRes">
+						<ul class="batchSelectList">
+							<li ng-repeat="l in hdfoundsources track by $index" ng-click="newTreListStates3('newTreListSource','newTreListSourceShow',l)"><a>{{l.codeText}}</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			</span>
+			<div class="newTreListInfoErr"><span></span></div>
+		</div>
+	</div>
+	<div class="newTreListMore"><a ng-click='newTreListChange()' class='newTreListUp' ng-class='{newTreListDown: newTreListMore}'>{{newTreListChangeTxt}}</a></div>
+	<div class="batchSetDeptBtn">
+		<a ng-click='newTreListYes()' class="batchSetDeptBtnYes">确定</a><a class="batchSetDeptBtnNo" ng-click='newTreListNo()'>取消</a>
+	</div>
+</div>
+<!--弹框end-->

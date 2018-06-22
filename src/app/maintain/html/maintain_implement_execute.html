@@ -1,0 +1,129 @@
+<div class="maintain-implement-execute">
+	<div class="maintain-top">
+        <a ui-sref="maintain.menu.implement" style="color: #999;">保养实施</a>&gt;<span>实施详情</span>
+        <span class="maintain-btn" ng-click="submit()">提交实施报告</span>
+    </div>
+    <maintain-plan-info obj="data.implement" show-state="false" show-tip="true"></maintain-plan-info>
+    <div class="maintain-info-main">
+	    <div class="maintain-info-main-tab">
+	    	<span class="maintain-btn">实施内容</span>
+	    	<span class="maintain-btn" ng-click="print()">打印</span>
+	    </div>
+	    <div class="maintain-info-main-dt">
+	    	<span>实际日期：</span>
+	    	<input id="startDt" type="text" placeholder="选择开始日期" ng-value="data.actualEndDate | date:'yyyy-MM-dd'" readonly="readonly">
+	    </div>
+	    <table class="maintain-info-main-table">
+	    	<thead>
+	    		<tr>
+	    			<td style="width: 80px;background-color: #f5f5f5;text-align: center;">序号</td>
+	    			<td style="background-color: #f5f5f5;">项目内容及说明</td>
+	    			<td style="background-color: #f5f5f5;">检查结果</td>
+	    			<td style="background-color: #f5f5f5;text-align: center;">备注</td>
+	    		</tr>
+	    	</thead>
+	    	<tbody>
+	    		<tr ng-repeat="v in data.implement.templateItems" >
+	    			<td style="width: 80px;text-align: center;">{{$index + 1}}</td>
+	    			<td>{{v.itemName}}</td>
+                    <td>
+                        <span style="float: left;" class="{{+v.answer === 1 ? 'radio2 check2': 'radio2'}}" ng-click="chooseAnswer(v, 1)"></span>
+                        <span style="float: left;margin-left: 5px;margin-right: 10px;">正常</span>
+                        <span style="float: left;" class="{{+v.answer === 2 ? 'radio2 check2': 'radio2'}}" ng-click="chooseAnswer(v, 2)"></span>
+                        <span style="float: left;margin-left: 5px;">不正常</span>
+                    </td>
+                    <td style="width:320px;"><input type="text" maxlength="40" ng-model="v.remarks" placeholder="请输入，40个字符以内"></td>
+	    		</tr>
+	    	</tbody>
+	    </table>
+	    <dl class="dl">
+	    	<dt><span class="require">*</span>设备现状：</dt>
+	    	<dd style="margin-bottom: 15px;">
+	    		<maintain-select list="data.lives" item="data.selectLive" change="changeLive"></maintain-select>
+	    	</dd>
+	    	<dt>附件：</dt>
+	    	<dd>
+	    		<div ng-repeat="v in data.implement.files" style="margin-bottom: 5px;">
+                    <a style="cursor: auto;">{{v.name}}</a>
+                    <span style="margin-left: 15px;color: #f3756f; cursor: pointer;" ng-click="removeFile($index)">删除</span>
+                </div>
+	    		<div>
+                    <span class="maintain-btn" ng-if="data.implement.files.length < 5" ng-click="uploadFile()">上传附件</span>
+                    <label style="color: #999;">单个文件5M以内，最多上传5个</label>
+                    <input id="uploadId" type="file" style="display: none;">
+                </div>
+	    	</dd>
+	    	<dt>备注：</dt>
+	    	<dd>
+	    		<textarea placeholder="请输入，300个字符以内" maxlength="300" ng-model="data.implement.remarks"></textarea>
+	    	</dd>
+	    </dl>
+	</div>
+</div>
+
+<!-- 提交实施报告 -->
+<div class="implement-submit" id="template_submit" style="display: none;">
+	<img src='../../../res/img/wh.png'>
+	<div style="margin-bottom: 15px;">提交后，保养实施报告将不能修改，确定提交吗？</div>
+	<div>下次实施日期：<input class="implement-dt" id="nextDt" type="text" placeholder="请选择下次实施日期" ng-value="data.nextDt | date:'yyyy-MM-dd'" readonly="readonly"> </div>
+</div>
+
+<!-- 打印实施内容 -->
+<div class="maintain-report-dialog" id="template_report" style="display: none;">
+    <div style="margin: 15px;font-size: 14px;">
+        <div style="text-align: center;margin: 10px 0;">{{data.implement.tenantName}}-保养实施报告单</div>
+        <table style="width: 100%;">
+            <tr>
+                <td>
+                    <dl class="dl-left">
+                        <dt>设备编号：</dt>
+                        <dd>{{data.implement.assetsNum}}</dd>
+                        <dt>设备名称：</dt>
+                        <dd>{{data.implement.assetsName}}</dd>
+                        <dt>所在部门：</dt>
+                        <dd>{{data.implement.assetsDeptName || "&nbsp;"}}</dd>
+                        <dt>规格型号：</dt>
+                        <dd>{{data.implement.assetsSpec || "&nbsp;"}}</dd>
+                    </dl>
+                </td>
+          
+                <td style="width: 300px;vertical-align: bottom;">
+                    <dl class="dl-right" style="float: right;">                        
+                        <dt>使用专管人：</dt>
+                        <dd>{{data.implement.administrator}}</dd>  
+                        <dt>保养频率：</dt>
+                        <dd>{{data.implement.rate > 1 ? '每周' : '每天'}}</dd>
+                        <dt>开始日期：</dt>
+                        <dd>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日</dd>
+                    </dl>
+                </td>
+            </tr>
+        </table>
+        <table class="table">
+            <thead>
+                <tr>
+                    <td style="vertical-align: middle;background-color: #f5f5f5;text-align: center;">序号</td>
+                    <td style="vertical-align: middle;background-color: #f5f5f5;">项目内容以及说明</td>
+                    <td style="vertical-align: middle;background-color: #f5f5f5;">检查维护结果</td>
+                    <td style="min-width: 200px;vertical-align: middle;background-color: #f5f5f5;text-align: center;">备注</td>
+                </tr>
+            </thead>
+            <tbody>
+            	<tr ng-repeat="v in data.implement.templateItems" >
+	    			<td style="width: 80px;text-align: center;vertical-align: middle;">{{$index + 1}}</td>
+	    			<td style="vertical-align: middle;">{{v.itemName}}</td>
+	    			<td style="width:120px;">正常&nbsp;&nbsp;&nbsp;&nbsp;不正常</td>
+                    <td style="width:120px;">&nbsp;</td>
+	    		</tr>
+                <tr>
+                    <td>备注</td>
+                    <td colspan="3">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>实施人</td>
+                    <td colspan="3">&nbsp;</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

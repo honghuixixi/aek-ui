@@ -1,0 +1,108 @@
+<div class="tab5" ng-show="isshow">
+    <div class="tab-file-item" ng-class="{'tab-file-edit': isedit}" ng-repeat="v in data.catalogs">
+        <dl>
+            <dt>
+                <img style="width:80px;height:70px;" src="/res/img/11.png" ng-if="!v.imageUrl">
+                <img style="width:80px;height:70px;" ng-src="/api/file{{v.imageUrl}}" ng-if="v.imageUrl">
+            </dt>
+            <dd>
+                <div class="tab-file-row">{{v.name}}</div>
+                <div class="tab-file-row tab5-txt" ng-if="v.certificateType == 4">生产日期：{{v.productDate ? (v.productDate | date:'yyyy-MM-dd') : ''}}&nbsp;</div>
+                <div class="tab-file-row tab5-txt" ng-if="v.certificateType == 2">注册号：{{v.certificateRegisterNum}}&nbsp;</div>
+                <div class="tab-file-row tab5-txt" ng-if="v.certificateType == 1 || v.certificateType == 3 || v.certificateType == 5">编号：{{v.certificateNum}}&nbsp;</div>
+                <div class="tab5-txt" ng-if="v.certificateType != 4">有效期至：{{v.validDate ? (v.validDate | date:'yyyy-MM-dd') : ''}}&nbsp;</div>
+                <div class="tab5-txt" ng-if="v.certificateType == 4">有效期：{{v.expireTime}}&nbsp;</div>
+            </dd>
+        </dl>
+        <div class="tab-file-edit-div" ng-if="!v.isSelf" ng-click="methods.editCatalog(v)">编辑</div>
+        <div class="tab-file-edit-div" ng-if="v.isSelf">
+            <span ng-click="methods.editCatalog(v)">编辑</span>
+            <span style="outline: 1px solid #fff;" ng-click="methods.removeCatalog(v)">删除</span>
+        </div>
+    </div>
+    <div class="tab-file-item" style="cursor: pointer;" ng-show="isedit && data.catalogs.length < 12" ng-click="methods.addCatalog()">
+        <div style="margin-top: 15px;text-align: center;">
+            <span style="display:inline-block;font-size: 24px;vertical-align: bottom;color: #999">+</span>
+            <span style="display: inline-block;line-height: 30px;">新增证件</span>
+        </div>
+    </div>
+    <!-- 新增或编辑证件 -->
+    <dl id="tab5_modal_content_form" class="modal_content_form" style="display: none;">
+        <dt>
+            <i>*</i>
+            <span>证件名称：</span>
+        </dt>
+        <dd>
+            <input type="text" maxlength="40" placeholder="请输入" ng-model="data.currentCatalog.name" ng-change="methods.removeErr('name')"
+                ng-if="data.currentCatalog.certificateType == 5">
+            <input style="background-color: #eee;" type="text" maxlength="40" placeholder="请输入" readonly ng-model="data.currentCatalog.name"
+                ng-change="methods.removeErr('name')" ng-if="data.currentCatalog.certificateType != 5">
+            <div style="height: 20px;line-height: 20px;color: #f00;">{{data.err.name}}</div>
+        </dd>
+        <dt>
+            <i>*</i>
+            <span>上传图片：</span>
+        </dt>
+        <dd>
+            <div style="position: relative;">
+                <div class="tab5-img" style="z-index:2;border: 1px dashed #fff;" ng-if="!data.currentCatalog.imageUrl" ng-click="methods.uploadFile()">
+                    <img class="img1" src="/res/img/tjtp.png">
+                    <img class="img2" src="/res//img/tjtpdj.png">
+                </div>
+                <div class="tab5-img" style="z-index:2;border: 1px dashed #dcdcdc;" ng-if="data.currentCatalog.imageUrl">
+                    <img ng-src="/api/file{{data.currentCatalog.imageUrl}}">
+                    <div class="tab5-img-edit">
+                        <span ng-click="methods.uploadFile()">更换</span>
+                        <span ng-click="methods.removeImg()">删除</span>
+                    </div>
+                </div>
+                <span style="position:absolute;left:85px;bottom:0;z-index:0;">* 证件图片仅支持png、jpg、jpeg格式，单张大小不可超过2M</span>
+                <input id="tab5-uploadId" type="file" style="display: none;">
+            </div>
+            <div style="height: 20px;line-height: 20px;color: #f00;">{{data.err.file}}</div>
+        </dd>
+        <dt ng-if="data.currentCatalog.certificateType != 2 && data.currentCatalog.certificateType != 4">
+            <span>编号：</span>
+        </dt>
+        <dd style="margin-bottom: 30px;" ng-if="data.currentCatalog.certificateType != 2 && data.currentCatalog.certificateType != 4">
+            <input type="text" maxlength="40" placeholder="请输入" ng-model="data.currentCatalog.certificateNum">
+        </dd>
+        <dt ng-if="data.currentCatalog.certificateType == 2">
+            <span>注册号：</span>
+        </dt>
+        <dd style="margin-bottom: 30px;" ng-if="data.currentCatalog.certificateType == 2">
+            <input type="text" maxlength="40" placeholder="请输入" ng-model="data.currentCatalog.certificateRegisterNum">
+        </dd>
+        <dt ng-if="data.currentCatalog.certificateType == 4">
+            <span>生产日期：</span>
+        </dt>
+        <dd style="margin-bottom: 30px;" ng-if="data.currentCatalog.certificateType == 4">
+            <input class="modal_content_form_date" id="tab5-file-date" type="text" maxlength="40" placeholder="请选择" readonly>
+        </dd>
+        <dt ng-if="data.currentCatalog.certificateType != 4">
+            <span>有效期至：</span>
+        </dt>
+        <dd style="margin-bottom: 30px;" ng-if="data.currentCatalog.certificateType != 4">
+            <input class="modal_content_form_date" id="tab5-file-date" type="text" maxlength="40" placeholder="请选择" readonly>
+        </dd>
+        <dt ng-if="data.currentCatalog.certificateType == 4">
+            <span>有效期：</span>
+        </dt>
+        <dd style="margin-bottom: 30px;" ng-if="data.currentCatalog.certificateType == 4">
+            <input type="text" maxlength="40" placeholder="请输入" ng-model="data.currentCatalog.expireTime">
+        </dd>
+    </dl>
+    <!-- 删除证件 -->
+    <div id="template_delete" class="inspectionLayer" style="display: none;">
+        <div style="text-align: center; color: #666;">
+            <div>
+                <div class="inspectionLayerImg m-t-lg m-b-md">
+                    <img src='../../res/img/icon20.png'>
+                </div>
+                <div>
+                    <span>删除后，证件信息将不可恢复，确定删除吗？</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+<div class="mySetWrap">
+	<div class="mySet">
+		<div class="toSet">
+			<div class="setTit">
+				<a href="javascript:;" class='setTitNow'>安全设置</a><a ui-sref="main.users.wdsz.mmsz">密码设置</a><a ui-sref="main.users.wdsz.csmmsz">初始密码设置</a>
+				<div class="setTitLine"></div>
+			</div>
+			<div class="userInfomation">
+				<dl>
+					<dt><img src="../../res/img/usertx.png" alt=""></dt>
+					<dd><span>姓名：</span><i>林夏</i></dd>
+					<dd class="marginTop12"><span>注册ID：</span><i>00001201607010007</i></dd>
+					<dd class="marginTop14"><span>注册时间：</span><i>2016-12-21     10：18</i></dd> 
+					<dd class="marginTop20"><span>您的安全等级为：</span><i class="iState">{{infomation.iState}}</i><img ng-src="{{infomation.iStateImg}}" alt=""></dd>
+				</dl>
+				<div class="infomationOperate infoPhone">
+					<i class="operateTit">手机绑定</i><span class="operateInfo">{{infomation.phoneInfo}}<i>{{infomation.phone}}</i></span><span class="operateState">您的手机为安全手机，可以找回密码</span><a ui-sref="main.users.wdsz.gbsj">{{infomation.phoneSet}}</a>
+				</div>
+				<div class="infomationOperate infoEmail">
+					<i class="operateTit">备用邮箱</i><span class="operateInfo">{{infomation.emailInfo}}<i>{{infomation.email}}</i></span><span class="operateState">您可以通过安全邮箱找回密码</span><a ui-sref="main.users.wdsz.gbyx">{{infomation.emailSet}}</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

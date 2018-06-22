@@ -1,0 +1,55 @@
+<div ng-show="isshow">
+    <div class="tab-search">
+        <input class="tab-search-keyword" type="text" placeholder="转科单号" ng-model="data.local.keyword">&nbsp;&nbsp;
+        <span>申请日期</span>
+        <input id="tab8-range-start" class="tab-search-date" type="text" placeholder="选择日期" readonly>
+        <span>&nbsp;至&nbsp;</span>
+        <input id="tab8-range-end" class="tab-search-date" type="text" placeholder="选择日期" readonly>
+        <span class="archives-btn" ng-click="methods.search()">搜索</span>
+    </div>
+    <table class="tab-table">
+        <thead>
+            <tr>
+                <td>转科单号</td>
+                <td>所在部门</td>
+                <td>转入部门</td>
+                <td>申请人</td>
+                <td>申请时间</td>
+                <td>审批人</td>
+                <td>审批时间</td>
+                <td>操作</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="v in data.server.list">
+                <td>{{v.transferNum}}</td>
+                <td>{{v.deptName}}</td>
+                <td>{{v.toDeptName}}</td>
+                <td>{{v.applyerName}}</td>
+                <td>{{v.creatTime | date:'yyyy-MM-dd'}}</td>
+                <td>{{v.auditerName}}</td>
+                <td>{{v.auditTime | date:'yyyy-MM-dd'}}</td>
+                <td>
+                    <a ng-click="methods.disPrint(v.id)">查看</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <!-- 分页 -->
+    <span ng-if="!data.loading && !data.empty" data-ng-include=" 'src/tpl/newPageInfo.html' "></span>
+    <!-- empty -->
+    <div class="empty" ng-if="data.empty && !data.loading">
+        <img src="../../../res/img/nocontent.png">暂无数据</div>
+    <!-- loading -->
+    <div class="loading" ng-if="data.loading">
+        <img src="../../../res/img/loading2.gif">
+    </div>
+    <!-- 打印报告 -->
+    <div class="template-print" id="template_print_archives" style="display: none;">
+        <archives-browse-print title="固定资产转科单" title2="转科单号" title3="转入部门" iszk="true" obj="data.print"></archives-browse-print>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+</div>

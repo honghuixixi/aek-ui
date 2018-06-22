@@ -1,0 +1,46 @@
+
+<!-- 导航条 -->
+<div class="bg-white bread-crumb">
+    <ul class="breadcrumb b-a m-b-n-xs lter b-b wrapper-md">
+        <li><a ui-sref="main.tre.bsgl.browse">报损管理</a></li>
+        <!-- <li><a ui-sref="main.tre.bsgl.detail" ui-sref-opts="{reload:true}">查看详情</a></li> -->
+        <li>查看详情</li>
+    </ul>
+    <div class="fix-btn">
+        <a ng-click="newTre()" class="fix-btn-sub pos-fix-btn" ng-if="userInfo.authoritiesStr.indexOf('ASS_ASSETS_DISCARD_CHECK') != -1">报损审核</a>
+    </div>
+</div>
+
+<!-- 内容区域 -->
+<div class="p-l p-r p-b zctz-con treContent content content-m">
+    <bill-detail bill-obj='billObj' type='1' asset-cancle='assetCancle' power="power"></bill-detail>
+</div>
+
+<!-- 审核 -->
+<div class="adjustWrap" style="display: none;">
+    <div class="adjustCon">
+        <div class="adjustConOne">
+            <div class="adjustConHead">审核结果：</div>
+            <div class="adjustConBody">
+                <div class="adjustConBodyRadio m-r" ng-click='adjust.adjusted=true'>
+                    <div class="adjustConBodyCheck">
+                        <div class="adjustConBodyChecked" ng-show='adjust.adjusted'></div>
+                    </div>
+                    <div class="adjustConBodyRadioTxt">审核通过</div>
+                </div><!-- 
+                 --><div class="adjustConBodyRadio" ng-click='adjust.adjusted=false'>
+                    <div class="adjustConBodyCheck">
+                        <div class="adjustConBodyChecked" ng-hide='adjust.adjusted'></div>
+                    </div>
+                    <div class="adjustConBodyRadioTxt">审核未通过</div>
+                </div>
+            </div>
+        </div>
+        <div class="adjustConOne">
+            <div class="adjustConHead">审核备注：</div>
+            <div class="adjustConBody">
+                <textarea ng-model='adjust.remarks' maxlength='300' placeholder='请输入，300字符以内'></textarea>
+            </div>
+        </div>
+    </div>
+</div>

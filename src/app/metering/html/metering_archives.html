@@ -1,0 +1,58 @@
+<div class="metering-nav">
+    <span>计量档案</span>
+</div>
+<div class="metering-swrap">
+    <div class="metering-search">
+        <aek-select list="data.local.typeOptions" change="methods.changeType" item="data.local.currentType" style="width: 150px;"></aek-select>
+        <aek-select list="data.local.departOptions" change="methods.changeDepart" item="data.local.currentDepart"></aek-select>
+        <input class="metering-search-keyword" style="width: 260px;" type="text" placeholder="设备名称/编号/院内编码/出厂编码" ng-model="data.local.keyword">
+        <span>&nbsp;&nbsp;&nbsp;&nbsp;检定日期</span>
+        <input class="metering-search-date" id="nextDateStart" type="text" readonly placeholder="选择日期"  ng-value="data.local.nextDateStart | date:'yyyy-MM-dd'">
+        <span>至</span>
+        <input class="metering-search-date" id="nextDateEnd" type="text" readonly placeholder="选择日期"  ng-value="data.local.nextDateEnd | date:'yyyy-MM-dd'">
+        <span class="metering-btn" ng-click="methods.search()">搜索</span>
+    </div>
+    <table class="metering-list-table">
+        <thead>
+            <tr>
+                <td>序号</td>
+                <td>计量编号</td>
+                <td>设备名称</td>
+                <td>规格型号</td>
+                <td>所在部门</td>
+                <td>计量管理类别</td>
+                <td>报告编号</td>
+                <td>负责人</td>
+                <td>操作</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="v in data.server.list">
+                <td>{{(pageInfo.current - 1) * pageInfo.size + $index + 1}}</td>
+                <td>{{v.measureNum}}</td>
+                <td>{{v.assetsName}}</td>
+                <td>{{v.assetsSpec}}</td>
+                <td>{{v.assetsDeptName}}</td>
+                <td>{{v.measureManageType | measureManageType}}</td>
+                <td>{{v.checkReportNo}}</td>
+                <td>{{v.chargeUserName}}</td>
+                <td>
+                    <span class="edit" ng-click="methods.getAndDisReport(v)">查看</span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <!-- 分页 -->
+    <span ng-if="!data.loading && !data.empty" data-ng-include=" 'src/tpl/newPageInfo.html' "></span>
+    <!-- empty -->
+    <div class="empty" ng-if="data.empty && !data.loading">
+        <img src="../../../res/img/nocontent.png">暂无数据</div>
+    <!-- loading -->
+    <div class="loading" ng-if="data.loading">
+        <img src="../../../res/img/loading2.gif">
+    </div>
+</div>
+<!-- 计量报告单 -->
+<div id="template_report" style="display: none;">
+    <metering-report report="data.server.report"></metering-report>
+</div>

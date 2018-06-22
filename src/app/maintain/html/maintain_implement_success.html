@@ -1,0 +1,49 @@
+<div class="maintain-implement-execute">
+	<div class="maintain-top">
+        <a ui-sref="maintain.menu.implement" style="color: #999;">保养实施</a>&gt;<span>实施详情</span>
+        <span class="maintain-btn" ng-click="print()">打印实施报告单</span>
+    </div>
+    <maintain-plan-info obj="data.implement" show-state="true" show-tip="true"></maintain-plan-info>
+    <div class="maintain-info-main">
+	    <div class="maintain-info-main-tab">
+	    	<span class="maintain-btn">实施内容</span>
+	    </div>
+	    <div class="maintain-info-main-dt">
+	    	<span>实际实施日期：</span>{{data.implement.endDate | date:'yyyy-MM-dd'}}
+	    </div>
+	    <table class="maintain-info-main-table">
+	    	<thead>
+	    		<tr>
+	    			<td style="width: 80px;background-color: #f5f5f5;text-align: center;">序号</td>
+	    			<td style="background-color: #f5f5f5;">项目内容及说明</td>
+	    			<td style="background-color: #f5f5f5;text-align: center;">检查结果</td>
+                    <td style="background-color: #f5f5f5;text-align: center;">备注</td>
+	    		</tr>
+	    	</thead>
+	    	<tbody>
+	    		<tr ng-repeat="v in data.implement.items" >
+	    			<td style="width: 80px;text-align: center;">{{$index + 1}}</td>
+	    			<td>{{v.planTemplateItemName}}</td>
+	    			<td style="text-align: center;">{{v.itemResult | pmplanresult}}</span></td>
+                    <td>{{v.itemRemarks}}</td>
+	    		</tr>
+	    	</tbody>
+	    </table>
+	    <dl class="maintain-implement-success-dl">
+	    	<dt><span class="require">*</span>设备现状：</dt>
+	    	<dd style="margin-left: 90px;">{{data.implement.assetsStatus | pmplanlive}}</dd>
+	    	<dt>附件：</dt>
+	    	<dd style="margin-left: 90px;">
+	    		<div ng-repeat="v in data.implement.files"><a target="_blank" href="{{v.filePath}}">{{v.fileName}}；</a></div>
+                <span ng-if="data.implement.files.length < 1">&nbsp;</span>
+            </dd>
+	    	<dt>备注：</dt>
+	    	<dd style="margin-left: 90px;">{{data.implement.remarks}}&nbsp;</dd>
+            <dt>实施人：</dt>
+            <dd style="margin-left: 90px;">{{data.implement.implementUserName}}</dd>
+	    </dl>
+	</div>
+</div>
+
+<!-- 查看实施报告 -->
+<div data-ng-include="'src/app/maintain/html/template_report.html'" class="maintain-report-dialog" id="template_report" style="display: none;"></div>

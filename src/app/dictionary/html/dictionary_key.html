@@ -1,0 +1,76 @@
+<!-- 字典值管理 -->
+<div class="dic-content-group">
+    <a ui-sref="dictionary.menu.table" style="color: #58666e;">字典表管理</a>&gt; <a style="color: #000;">字典值管理</a>
+</div>
+<div class="dic-content-body" id="dic-content-body">
+    <div ng-if="!data.limit.browse && !data.limit.manager" class="nolimit"><img src="../../../res/img/myqx.png">您没有该页面的权限</div>
+    <div ng-if="data.limit.browse || data.limit.manager">
+        <div class="top">
+            <span style="color: #000;">{{data.table.name}}</span>
+            <!-- <span>级联状态：允许级联（账簿类型&gt;固定资产核算类别）</span> -->
+            <span class="span" ng-if="data.table.type.length">管理类型：{{data.table.type}}</span>        
+            <span class="fr btn2 addKeys" ng-click="showAddKeys()" ng-if="data.limit.manager">批量新增</span>
+            <span class="fr btn2 addKey" ng-click="showAddKey()" ng-if="data.limit.manager">新增字典值</span>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <td style="width: 50px;">ID</td>
+                    <td>字典值</td>
+                    <td>是否默认值</td>
+                    <!-- <td>下级级联表</td> -->
+                    <td>添加时间</td>
+                    <td style="width: 90px;">操作</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="v in data.list">
+                    <td>{{v.id}}</td>
+                    <td>{{v.name}}</td>
+                    <td>
+                        <input type="radio" checked="checked" disabled="disabled" ng-if="v.defFlag">
+                        <input type="radio" disabled="disabled" ng-if="!v.defFlag">
+                    </td>
+                    <!-- <td>--</td> -->
+                    <td>{{v.createDate | date: 'yyyy-MM-dd HH:mm'}}</td>
+                    <td>
+                        <a ng-click="showAddKey(v)" ng-if="data.limit.manager">编辑</a>
+                        <a ng-click="delField(v)" ng-if="data.limit.manager">删除</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- empty -->
+        <div class="empty" ng-if="data.empty && !data.loading"><img src="../../../res/img/nocontent.png">暂无数据</div>
+        <!-- loading -->
+        <div class="loading" ng-if="data.loading"><img src="../../../res/img/loading2.gif"></div>
+    </div>
+</div>
+
+<!-- 新建、编辑字典值 -->
+<div id="template_add_key" style="display: none;">
+    <dl class="modal-table">
+        <dt>字典值<span class="require">*<span></dt>
+        <dd>
+            <input type="text" placeholder="最多40个字符" maxlength="40" ng-model="data.field.name" ng-change="removeErr()">
+            <div class="err">{{data.err}}&nbsp;</div>
+        </dd>
+        <dt>&nbsp;</dt>
+        <dd><input type="checkbox" ng-model="data.field.isDefault" style="float: left; width: 16px; height: 16px; margin-right: 5px; margin-top: 4px;">设为默认值</dd>
+    </dl>
+</div>
+
+<!-- 批量新建字典值 -->
+<div id="template_add_keys" style="display: none;">
+    <dl class="modal-table">
+        <dt>字典值<span class="require">*<span></dt>
+        <dd>
+            <!-- <input type="text" placeholder="最多40个字符" maxlength="40" ng-model="data.field.name" ng-change="removeErr()"> -->
+            <textarea class="fields" ng-model="data.fields" ng-keyup="calcFields()"></textarea>
+            <div class="fields-absc">字典值之间换行区分<span>已输入{{data.fieldCount}}个字典值</span></div>
+            <div class="err">{{data.err}}&nbsp;</div>
+        </dd>
+        <dt>&nbsp;</dt>
+    </dl>
+</div>

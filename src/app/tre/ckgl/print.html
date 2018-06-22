@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			body, div, h2, h3, ul, li, table, tr, th, td, strong, span, a {
+				margin: 0px;
+				padding: 0px;
+			}
+			ul, li {
+				list-style: none;
+			}
+			a {
+				text-decoration: none;
+				color: black;
+			}
+			.wrap {
+				position: relative;
+				width: 860px;
+				height: 297mm;
+				padding: 20px;
+				margin: 0px auto;
+				font-weight: bold;
+			}
+			.wrap .peo_info {
+				overflow: hidden;
+			}
+			.wrap .peo_info li {
+				float: left;
+				line-height: 48px;
+				font-size: 16px;
+				margin-right: 16px;
+				list-style: none;
+				min-width: 120px;
+			}
+			.wrap table {
+				width: 100%;
+				line-height: 48px;
+				text-align: center;
+				border-top: 1px solid black;
+			}
+			.wrap table th {
+				border-left: 1px solid black;
+				border-bottom: 1px solid black;
+			}
+			.wrap table td {
+				border-bottom: 1px solid black;
+				border-left: 1px solid black;
+				text-align: center;
+			}
+			.wrap table th:first-child {
+				border-left: none;
+			}
+			.wrap table td:first-child {
+				border-left: none;
+			}
+			.wrap table .td_money {
+				text-align: left;
+				padding-left: 20px;
+			}
+			.wrap .td_money span {
+				margin-right: 200px;
+			}
+			.wrap .tit span {
+				float: right;
+				margin-right: 130px;
+			}
+			.wrap h2 {
+				text-align: center;
+				font-size: 24px;
+			}
+			.tit .tit_name {
+				margin-right: 180px;
+			}
+			.wrap .tit div {
+				text-align: center;
+			}
+			.head {
+				overflow: hidden;
+			}
+			.head li {
+				line-height: 24px;
+				font-size: 16px;
+				height: 24px;
+			}
+			.head li strong {
+				display: inline-block;
+				width: 80px;
+				text-align: right;
+			}
+			.head ul {
+				float: left;
+				margin-right: 40px;
+				padding-bottom: 6px;
+			}
+			.wrap ._print {
+				width: 100px;
+				height: 25px;
+				line-height: 25px;
+				border: 1px solid #333333;
+				text-align: center;
+				background-color: #DCDCDC;
+				display: inline-block;
+				border-radius: 5px;
+				font-size: 13px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="wrap">
+			<h2>固定资产报损单——普通格式</h2>
+			<div class="tit">
+				<div class="tit_name">(医院名称)</div>
+				<div><strong>固定资产报损单</strong><span>[重打]</span></div>
+			</div>
+			<div class="head">
+					<ul class="headleft">
+						<li>[按核算类别大小计]</li>
+						<li><strong>报损方式:</strong>__________</li>
+						<li><span><strong>科室名称:</strong>__________</span><span><strong>日期:</strong>_______年____月____日</span></li>
+						<li></li>
+					</ul>
+					<ul class="headright">
+						<li>总计:￥__________</li>
+						<li></li>
+						<li>[核算名称]</li>
+						<li>No:单据号码&nbsp;&nbsp;&nbsp;页码</li>
+					</ul>
+			</div>
+			<table border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<th>物资名称</th>
+					<th>规格</th>
+					<th>产地</th>
+					<th>单位</th>
+					<th>数量</th>
+					<th>单价</th>
+					<th>金额</th>
+					<th>发票号</th>
+					<th>序列号</th>
+				</tr>
+				<tr>
+					<td>表格</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>合计</td>
+					<td colspan="8" class="td_money"><span>大写金额</span><span>小写金额</span></td>
+				</tr>
+				<tr>
+					<td>备注</td>
+					<td colspan="8"></td>
+				</tr>
+			</table>
+			<ul class="peo_info">
+				<li>负责：________</li>
+				<li>记账：________</li>
+				<li>复核：________</li>
+				<li>报损：________</li>
+				<li>制单：________</li>
+			</ul>
+			<a href="javascript:;" class="_print">打印</a>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,326 @@
+<!-- toaster directive -->
+<toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container>
+<!-- / toaster directive -->
+
+<!-- 加载提醒 -->
+<!--<div ng-show="loading" class="text-center m-t-md text-lg"><i class="fa fa-spin fa-spinner"></i> 数据加载中...</div>-->
+
+<!-- 内容区域 -->
+<div ng-hide="loading" class="org-content-index org-content-detail">
+	<!-- 数据显示 -->
+	<div class="wrapper-data og-pa">
+
+        <!-- 头部 -->
+        <div class="org-header org_new_header">
+            <div class="head-top">
+                <a ng-click="looklook()" href="javascript:;" style="cursor:context-menu;" ng-show="!addOrEdit">新建医疗机构</a>
+				<!--<a class="go" ng-click="toList()" style="margin-left:15px;" ng-show="!addOrEdit">返回机构列表</a>-->
+                <a class="detail-a go" href="javascript:;" ng-click="toDetail()" ng-show="addOrEdit">医疗机构详情</a><a ng-show="addOrEdit" href="javascript:;">>医疗机构设置</a>
+                <a ng-click="submit()" class="pos-fix-btn addBtn">提交</a>
+            </div>
+        </div>
+
+		<div class="org-panel panel-default org_new_content">
+			<!-- 数据表格 -->
+			<div class="org-content org-detail table-responsive">
+                <p>基本信息</p>
+				<div class="con-left">
+					<div class="org-form">
+						<span><i>*</i>机构名称</span>
+						<input type="text" ng-model="name" class="width480" ng-blur="nameVerify()">
+						<span class="error" ng-if="nameState" ng-show="nameState">名称不能为空，且长度不得超过40位</span>
+					</div>
+					<!--<div ng-show="userInfo.adminFlag" class="org-form">-->
+						<!--<span class="vertical-8"><i>*</i>机构类型</span>-->
+
+						<!--<div class="width6760">-->
+							<!--<ui-select on-select="isHpl($item, $model)" ng-model="userType" theme="" append-to-body="true">-->
+								<!--<ui-select-match placeholder="请选择">{{$select.selected.name}}</ui-select-match>-->
+								<!--<ui-select-choices repeat="userType in userTypeArr ">-->
+									<!--<span ng-bind-html="userType.name | highlight: $select.search"></span>-->
+									<!--&lt;!&ndash;<small ng-bind-html="orgType.id | highlight: $select.search"></small>&ndash;&gt;-->
+								<!--</ui-select-choices>-->
+							<!--</ui-select>-->
+						<!--</div>-->
+						<!--&lt;!&ndash;<select name="" id="userType" ng-change="isHpl()" ng-model='userType' class="width480" ng-options='item.id as item.name for item in userTypeArr'>&ndash;&gt;-->
+							<!--&lt;!&ndash;<option value="" disabled selected hidden>请选择</option>&ndash;&gt;-->
+						<!--&lt;!&ndash;</select>&ndash;&gt;-->
+
+						<!--<span class="error" ng-show="userTypeState">租户类型未选择</span>-->
+					<!--</div>-->
+					<div class="org-form">
+						<span class="vertical-8"><i>*</i>账户类型</span>
+
+						<div class="width6760">
+							<ui-select on-select="isAccount($item, $model)" ng-model="accountType" theme="" append-to-body="false">
+								<ui-select-match placeholder="请选择">{{$select.selected.name}}</ui-select-match>
+								<ui-select-choices repeat="accountType in accountTypeArr ">
+									<span ng-bind-html="accountType.name | highlight: $select.search"></span>
+									<!--<small ng-bind-html="orgType.id | highlight: $select.search"></small>-->
+								</ui-select-choices>
+							</ui-select>
+						</div>
+
+
+						<!--<select name="" id="accountType" ng-change="isAccount()" ng-model='accountType' class="width480" ng-options='item.id as item.name for item in accountTypeArr'>-->
+							<!--<option value="" disabled selected hidden>请选择</option>-->
+						<!--</select>-->
+
+						<span class="error" ng-if="accountTypeState" ng-show="accountTypeState">账户类型未选择</span>
+					</div>
+
+					<div class="org-form">
+						<span class="vertical-8"><i>*</i><em>所在地区</em></span>
+						<div class="threeState width480">
+							<div class="width148" style="position: relative;">
+								<ui-select style="" on-select="provChange($item, $model)" ng-model="proSel" theme="" append-to-body="false">
+									<ui-select-match placeholder="请选择"><div style="padding-right: 10px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">{{$select.selected.name}}</div></ui-select-match>
+									<ui-select-choices repeat="proSel in province | filter: $select.search">
+										<span ng-bind-html="proSel.name | highlight: $select.search"></span>
+										<!--<small ng-bind-html="orgType.id | highlight: $select.search"></small>-->
+									</ui-select-choices>
+								</ui-select>
+							</div><span class="ib-width"></span><div class="width148">
+								<ui-select class="selectTwo" style="" on-select="cityChange($item, $model)"  ng-model="selected.citySel" theme="" append-to-body="false">
+									<ui-select-match placeholder="请选择">
+										<div style="padding-right: 10px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">{{$select.selected.name}}</div>
+									</ui-select-match>
+									<ui-select-choices repeat="citySel in city | filter: $select.search">
+										<span ng-bind-html="citySel.name | highlight: $select.search"></span>
+										<!--<small ng-bind-html="orgType.id | highlight: $select.search"></small>-->
+									</ui-select-choices>
+								</ui-select>
+							</div><span class="ib-width"></span><div class="width148">
+								<ui-select class="selectThree" style="margin-right: 0" on-select="regionChange($item, $model)" ng-model="selected.regionSel" theme="" append-to-body="false">
+									<ui-select-match placeholder="请选择"><div style="padding-right: 10px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">{{$select.selected.name}}</div></ui-select-match>
+									<ui-select-choices repeat="regionSel in region | filter: $select.search">
+										<span ng-bind-html="regionSel.name | highlight: $select.search"></span>
+										<!--<small ng-bind-html="orgType.id | highlight: $select.search"></small>-->
+									</ui-select-choices>
+								</ui-select>
+							</div>
+						</div>
+						<span class="error" ng-if="areaState" ng-show="areaState">所在地区未选择</span>
+					</div>
+
+					<div class="org-form">
+						<span class="vertical-8"><i>*</i>上级行政机构</span>
+
+						<div ng-click="getSuperior()" class="width6760">
+							<ui-select on-select="isSuperiorUnit($item, $model)" ng-model="selected.superiorUnit" theme="" append-to-body="false">
+								<ui-select-match placeholder="请选择">{{$select.selected.name}}</ui-select-match>
+								<ui-select-choices repeat="superiorUnit in superiorUnitArr | filter: {name:$select.search}">
+									<span ng-bind-html="superiorUnit.name | highlight: $select.search"></span>
+									<!--<small ng-bind-html="orgType.id | highlight: $select.search"></small>-->
+								</ui-select-choices>
+							</ui-select>
+						</div>
+						<!--<span class="error" ng-show="superiorUnitState2">请先选择所在地区</span>-->
+						<span class="error" ng-if="superiorUnitState" ng-show="superiorUnitState">上级行政机构未选择</span>
+					</div>
+
+					<div class="org-form">
+						<span><i>*</i>医疗机构代码</span>
+						<input type="text" ng-model="hospCode" class="width480" ng-blur="hosVerify()">
+						<span class="error" ng-if="hosState" ng-show="hosState">医疗机构代码不能为空</span>
+					</div>
+
+					<div class="org-form">
+						<span>是否测试机构</span>
+							<input id="check_1" ng-model="isTest" name="isTest" value="0" type="radio">
+							<label class="check check-label" for="check_1">
+								<i class="fa fa-check"></i>
+							</label>
+							<label class="m-r-90" for="check_1">是</label>
+							<input id="check_2" ng-model="isTest" name="isTest" value="1" type="radio">
+							<label class="check check-label" for="check_2">
+								<i class="fa fa-check"></i>
+							</label>
+							<label for="check_2">否</label>
+					</div>
+
+					<div class="org-form">
+						<span>子机构限制</span>
+						<input id="check_3" ng-model="allowChild" name="child" value="0" type="radio" ng-click='childOrgFn($event)'>
+						<label class="check check-label" for="check_3">
+							<i class="fa fa-check"></i>
+						</label>
+						<label for="check_3">不可创建</label>
+					</div>
+					<div class="org-form">
+						<span></span>
+						<div class="inline-b width480">
+							<div class="inline-b">
+								<input id="check_4" ng-model="allowChild" name="child" value="1" type="radio" ng-click='childOrgFn($event)'>
+								<label class="check check-label" for="check_4">
+									<i class="fa fa-check"></i>
+								</label>
+								<label for="check_4">最多可创建</label><input class="sm-input" ng-class="childOrg && 'readonly'" ng-model="childStr" ng-change='childChange()' ng-readonly="childOrg" type="text">个
+							</div>
+							<div ng-if="false" class="org-hint"><img src="../../../res/img/atten.png" alt=""><span>空白为不限制</span></div>
+						</div>
+						<span class="error" ng-if="childError" ng-show="childError">只能为正整数！</span>
+					</div>
+					<!--<div ng-show="(userInfo.adminFlag && parentId==1) || (!addOrEdit && $stateParams.id == 1)" class="org-form">-->
+					<div   ng-show="userInfo.tenantId == 1" class="org-form">
+						<span>到期时间</span>
+						<input id="check_5" name="expireDate" ng-model="expireState" value="0" type="radio" ng-click='expireDateFn($event)'>
+						<label class="check check-label" for="check_5">
+							<i class="fa fa-check"></i>
+						</label>
+						<label for="check_5">永久有效</label>
+					</div>
+					<!--<div class="org-form org-initDate"  ng-show="(userInfo.adminFlag && parentId==1) || (!addOrEdit && $stateParams.id == 1)">-->
+					<div class="org-form org-initDate"  ng-show="userInfo.tenantId == 1">
+						<span></span>
+						<input id="check_6" name="expireDate" ng-model="expireState" value="1" type="radio" ng-click='expireDateFn($event)'>
+						<label class="check check-label" for="check_6">
+							<i class="fa fa-check"></i>
+						</label>
+						<label for="check_6">有效期至</label><input type="text" id="expireDate" ng-click="initialDate(expireStr)" readonly="readonly" ng-model="expireStr" ng-disabled="expireDate" name="expireDate" class="md-input input-datepicker"><a ng-class="expireDate && 'readonly'" class="runDate" ng-click="runDate(3)">3天</a><a ng-class="expireDate && 'readonly'" class="runDate" ng-click="runDate(7)">7天</a><a ng-class="expireDate && 'readonly'" class="runDate" ng-click="runDate(15)">15天</a><a ng-class="expireDate && 'readonly'" class="runDate" ng-click="runDate(30)">30天</a>
+					</div>
+
+					<p>扩展信息</p>
+					<div class="org-form">
+						<span>组织机构代码</span>
+						<input type="text" ng-model="license" class="width480" >
+					</div>
+					<div style="line-height: initial;" class="org-form">
+						<span style="vertical-align: top;margin-top: 37px">组织机构代码照片</span>
+						<div class="picfile">
+							<div  ng-mouseenter="imgChangeFn()" ng-mouseleave="imgChangeFn2()" class="picfileCon">
+								<input ng-hide="true" type="file" id="imgFile" onchange="angular.element(this).scope().setImagePreview(this.files)">
+								<i ng-if="!imgClick" ng-show="!imgClick" class="file-i" ng-click="fileImg()"></i>
+								<img ng-if="imgClick" ng-show="imgClick" class="file-i" src="{{imgSrc}}" ng-click="fileImg()" alt="">
+								<div ng-if="imgChange" ng-show="imgChange" class="hd_imgDelet"><i ng-click="fileImg()">更换</i><i ng-click="delect()">删除</i></div>
+							</div>
+							<!--<i class="file-i" ng-click="fileImg()"></i>-->
+							<span style="vertical-align: bottom;color: #999;">照片大小需≤2M</span>
+						</div>
+					</div>
+					<div ng-show="true" class="org-form">
+						<span class="vertical-8">医疗机构类别</span>
+						<div class="width6760">
+							<ui-select on-select="orgTypes($item, $model)" ng-model="orgType" theme="" append-to-body="false">
+								<ui-select-match placeholder="请选择">{{$select.selected.name}}</ui-select-match>
+								<ui-select-choices repeat="orgType in orgTypeArr ">
+									<span ng-bind-html="orgType.name | highlight: $select.search"></span>
+									<!--<small ng-bind-html="orgType.id | highlight: $select.search"></small>-->
+								</ui-select-choices>
+							</ui-select>
+						</div>
+
+						<!--<select name="" class="width480" id="orgType" ng-model='orgType' ng-options='item.id as item.name for item in orgTypeArr'>-->
+							<!--<option value="" disabled selected hidden>请选择</option>-->
+						<!--</select>-->
+					</div>
+					<div ng-show="true" class="org-form">
+						<span class="vertical-8">经济类型</span>
+
+						<div class="width6760">
+							<ui-select on-select="economyTypeSel($item, $model)" ng-model="economyType" theme="" append-to-body="false">
+								<ui-select-match placeholder="请选择">{{$select.selected.name}}</ui-select-match>
+								<ui-select-choices repeat="economyType in economyTypeArr ">
+									<span ng-bind-html="economyType.name | highlight: $select.search"></span>
+									<!--<small ng-bind-html="orgType.id | highlight: $select.search"></small>-->
+								</ui-select-choices>
+							</ui-select>
+						</div>
+						<!--<select name="" id="economyType" class="width480" ng-model='economyType' ng-options='item.id as item.name for item in economyTypeArr'>-->
+							<!--<option value="" disabled selected hidden>请选择</option>-->
+						<!--</select>-->
+					</div>
+					<div ng-show="true" class="org-form">
+						<span class="vertical-8">机构分类管理类型</span>
+
+						<div class="width6760">
+							<ui-select on-select="orgClassTypeSel($item, $model)" ng-model="orgClassType" theme="" append-to-body="false">
+								<ui-select-match placeholder="请选择">{{$select.selected.name}}</ui-select-match>
+								<ui-select-choices repeat="orgClassType in orgClassTypeArr">
+									<span ng-bind-html="orgClassType.name | highlight: $select.search"></span>
+									<!--<small ng-bind-html="orgType.id | highlight: $select.search"></small>-->
+								</ui-select-choices>
+							</ui-select>
+						</div>
+						<!--<select name="" id="orgClassType" class="width480" ng-model='orgClassType' ng-options='item.id as item.name for item in orgClassTypeArr'>-->
+							<!--<option value="" disabled selected hidden>请选择</option>-->
+						<!--</select>-->
+					</div>
+
+					<div ng-show="true" class="org-form">
+						<span class="vertical-8"><em>医院等级</em></span>
+						<div class="threeState width480">
+
+							<ui-select class="width148" on-select="gradeChange($item, $model)" ng-model="grade" theme="" append-to-body="false">
+								<ui-select-match placeholder="级别">{{$select.selected.name}}</ui-select-match>
+								<ui-select-choices repeat="grade in gradeArr | filter: $select.search">
+									<span ng-bind-html="grade.name | highlight: $select.search"></span>
+									<!--<small ng-bind-html="orgType.id | highlight: $select.search"></small>-->
+								</ui-select-choices>
+							</ui-select><span class="ib-width"></span><ui-select class="width148" on-select="levelChange($item, $model)" ng-model="level" theme="" append-to-body="false">
+								<ui-select-match placeholder="等次">{{$select.selected.name}}</ui-select-match>
+								<ui-select-choices repeat="level in levelArr | filter: $select.search">
+									<span ng-bind-html="level.name | highlight: $select.search"></span>
+									<!--<small ng-bind-html="orgType.id | highlight: $select.search"></small>-->
+								</ui-select-choices>
+							</ui-select>
+
+							<!--<select class="sm-select width148" ng-model='grade' ng-options='item.id as item.name for item in gradeArr'>-->
+								<!--<option value="" disabled selected hidden>级别</option>-->
+							<!--</select><select class="sm-select width148" ng-model='level' ng-options='item.id as item.name for item in levelArr'>-->
+								<!--<option value="" disabled selected hidden>等次</option>-->
+							<!--</select>-->
+						</div>
+					</div>
+				</div>
+				<div class="con-right" style="width:33.48%;margin-left:10.05%">
+					<div ng-hide="editState" class="org-form" style="margin-top:0;">
+						<div class="checkboxFive">
+							<input style="display: none;" type="checkbox" value="1" class="width480 child-checkbox" id="checkboxFiveInput1" name="" ng-model="showRightCon">
+							<label for="checkboxFiveInput1" class="checked"></label>
+						</div>
+						<label for="checkboxFiveInput1">同时创建机构管理员</label>
+					</div>
+					<div ng-show="showRightCon" class="right_con">
+						<div class="org-form">
+							<span><i>*</i>用户姓名</span>
+							<input type="text" ng-readonly="editState" ng-model="realName" class="width480" ng-blur='adminNameVerify()'>
+							<span class="error" ng-if="adminNameStatus" ng-show="adminNameStatus">姓名不能为空，且长度为40位之内</span>
+						</div>
+						<div class="org-form">
+							<span><i>*</i>手机号码</span>
+							<input type="text" ng-readonly="editState" class="width480" ng-model='adminTel' ng-blur='adminTelVerify()' >
+							<span class="error" ng-if="adminTelStatus" ng-show="adminTelStatus">手机格式错误</span>
+						</div>
+						<div class="org-form">
+							<span><i style="visibility: hidden;">*</i>邮箱地址</span>
+							<input type="text" ng-readonly="editState" ng-model="adminMail" ng-blur='adminMailVerify()' class="width480" >
+							<span class="error" ng-if="adminMailStatus" ng-show="adminMailStatus">邮箱格式错误</span>
+						</div>
+						<div ng-hide="editState" class="org-form">
+							<span><i>*</i>登录密码</span>
+							<div class="pwd-d posiRela inline-b width-815">
+								<input ng-show="pwdState" type="password" ng-model="adminPwd" ng-blur="adminPwdVerify()" placeholder="8-16位字符" >
+								<i ng-show="pwdState" ng-click="changePwd(1)" class="openEye"></i>
+
+								<input ng-show="!pwdState" type="text" ng-model="adminPwd" ng-blur="adminPwdVerify()" placeholder="8-16位字符" >
+								<i ng-show="!pwdState" ng-click="changePwd(0)" class="closeEye"></i>
+							</div>
+							<span class="error" ng-if="adminPwdStatus" ng-show="adminPwdStatus">密码长度需为8-16位,只能由数字与字母组成</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /.table-responsive -->
+			<div class="pages-de"></div>
+
+		</div>
+		<!-- /.panel -->
+	</div>
+	<!-- /.wrapper-data -->
+	<!-- 底部分页 -->
+	<!--<span data-ng-include=" 'src/tpl/pageInfo.html' "></span>-->
+	<!--<span data-ng-include=" 'src/tpl/newPageInfo.html' "></span>-->
+</div>
+<!-- /.wrapper-md -->
+<!--<div data-ng-include='src/app/tre/ytz/iframe.html' ng-hide=true id="addDev"></div>-->

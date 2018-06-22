@@ -1,0 +1,111 @@
+<div class="training-nav">
+    <span>{{data.local.type == 1 ? '培训记录' : '培训档案'}}</span> &gt;
+    <span>查看详情</span>
+    <span class="training-btn training-detail-btn" ng-click="methods.disPrint()">打印培训单</span>
+    <span class="training-btn training-detail-btn" ng-click="methods.del()" ng-if="data.local.type == 1">删除</span>
+    <span class="training-btn training-detail-btn" ng-click="methods.edit()" ng-if="data.local.type == 1">编辑</span>
+</div>
+<div class="training-swrap">
+    <dl class="training-info">
+        <dt>培训编号</dt>
+        <dd>
+            <span>{{data.server.num}}</span>
+            <div style="display: inline;margin-left: 400px;" ng-if="data.local.type == 1">
+                <span style="margin-right:10px;color: #333;">新建时间</span>
+                <span>{{data.server.updateTime | date:'yyyy-MM-dd HH:mm'}}</span>
+            </div>
+        </dd>
+        <dt ng-if="data.local.type == 2">新建时间</dt>
+        <dd ng-if="data.local.type == 2">
+            <span>{{data.server.updateTime | date:'yyyy-MM-dd HH:mm'}}</span>
+            <div style="display: inline;margin-left: 400px;">
+                <span style="margin-right:10px;color: #333;">新建人</span>
+                <span>{{data.server.createName}}</span>
+            </div>
+        </dd>
+        <dt>培训主题</dt>
+        <dd>{{data.server.subject}}&nbsp;</dd>
+        <dt>培训类型</dt>
+        <dd>{{data.server.type | trainType}}&nbsp;</dd>
+        <dt>培训时间</dt>
+        <dd>{{data.server.trainTime | date:'yyyy-MM-dd HH:mm'}}&nbsp;</dd>
+        <dt>培训讲师</dt>
+        <dd>{{data.server.lecturer}}&nbsp;</dd>
+        <dt>培训地点</dt>
+        <dd>{{data.server.locale}}&nbsp;</dd>
+        <dt>培训对象</dt>
+        <dd>{{data.server.target}}&nbsp;</dd>
+        <dt>培训内容</dt>
+        <dd>{{data.server.content}}&nbsp;</dd>
+        <dt>附件</dt>
+        <dd>
+            <div ng-repeat="v in data.server.files">
+                <a href="{{v.fileUrl | downloadUrlFilter}}">{{v.fileName}}；</a>
+            </div>
+        </dd>
+    </dl>
+</div>
+
+<!-- 培训单  -->
+<div class="training-report" id="training-plan-print" style="display: none;">
+    <div class="training-report-title">{{data.server.teantName}}-培训单</div>
+    <div class="training-report-no">培训编号：{{data.server.num}}</div>
+    <div class="meeting-report-no" style="margin-bottom:10px;overflow: hidden;">
+        <span style="color: #333;">新建时间：</span>
+        <span>{{data.server.createTime | date:'yyyy-MM-dd HH:mm'}}</span>
+        <div style="display: inline;float: right;">
+            <span style="color: #333;">新建人：</span>
+            <span>{{data.server.createName}}</span>
+        </div>
+    </div>
+    <table class="training-report-table">
+        <tr>
+            <td style="width: 100px;text-align: center;">培训主题</td>
+            <td colspan="3">{{data.server.subject}}</td>
+        </tr>
+        <tr>
+            <td style="width: 100px;text-align: center;">培训类型</td>
+            <td style="width: 37%;">{{data.server.type | trainType}}</td>
+            <td style="width: 100px;text-align: center;">培训时间</td>
+            <td>{{data.server.trainTime | date:'yyyy-MM-dd HH:mm'}}</td>
+        </tr>
+        <tr>
+            <td style="width: 100px;text-align: center;">培训讲师</td>
+            <td colspan="3">{{data.server.lecturer}}</td>
+        </tr>
+        <tr>
+            <td style="width: 100px;text-align: center;">培训地点</td>
+            <td colspan="3">{{data.server.locale}}</td>
+        </tr>
+        <tr>
+            <td style="width: 100px;text-align: center;">培训对象</td>
+            <td colspan="3">{{data.server.target}}</td>
+        </tr>
+        <tr>
+            <td style="width: 100px;text-align: center;">培训内容</td>
+            <td colspan="3">{{data.server.content}}&nbsp;</td>
+        </tr>
+        <tr>
+            <td style="width: 100px;text-align: center;">附件</td>
+            <td colspan="3">
+                <div ng-repeat="v in data.server.files">
+                    <a href="{{v.fileUrl | downloadUrlFilter}}" ng-if="data.server.showDownload">{{v.fileName}}；</a>
+                    <a ng-if="!data.server.showDownload">{{v.fileName}}；</a>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+<!-- 删除模板 -->
+<div id="trainDelTpl" class="inspectionLayer" style="display: none;">
+    <div style="text-align: center; color: #666;">
+        <div>
+            <div class="inspectionLayerImg m-t-lg m-b-md">
+                <img src='../../res/img/icon20.png'>
+            </div>
+            <div>
+                <span>删除记录后不可恢复，确定要删除吗？</span>
+            </div>
+        </div>
+    </div>
+</div>

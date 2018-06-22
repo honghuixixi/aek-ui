@@ -1,0 +1,86 @@
+.audit-list {
+    margin: 10px 10px 10px 170px;
+}
+.audit-list .hd_applytop {
+    margin-bottom: 10px;
+    line-height: 32px;
+    overflow: hidden;
+}
+.audit-list .hd_applytop span {
+    font-size: 14px;
+    color: #666;
+}
+.audit-list .content {
+    min-height: 823px;
+    margin: 0;
+    background-color: #fff;
+    padding: 20px;
+}
+.content .list{
+    margin-bottom: 30px;
+}
+.content .list>span{
+    float: left;
+    width: 100px;
+    text-align: right;
+}
+.content .list .mast{
+    color: red;
+    margin-right: 10px;
+}
+.hd_addIcon{
+    margin-left: 30px;
+    width: 90px;
+    display: inline-block;
+    height: 32px;
+    line-height: 30px;
+    border: 1px solid #d6d6d6;
+    color: #666;
+    padding-left: 25px;
+    font-size: 13px;
+    background-image: url(../../../../res/img/addbill.png);
+    background-repeat: no-repeat;
+    background-position: 8px 8px;
+    cursor: pointer;
+}
+.hd_addIcon:hover{
+    border-color: #f7931e;
+    background-image: url(../../../../res/img/add0.png);
+    color: #f7931e;
+}
+.hd_treetr{
+    border-bottom: 1px solid #dedede;
+}
+.hd_applyAddContent input{
+    border: 1px solid #dedede;
+    padding-left: 10px;
+    height: 30px;
+    line-height: 32px;
+}
+.hd_applyAddContent textarea{
+    width: 560px;
+    height: 140px;
+    font-size: 13px;
+    border: 1px solid #dcdcdc;
+    resize: none;
+    border-radius: 2px;
+}
+.audit-list .hd_applytop .repair20-btn {
+    display: inline-block;
+    font-size: 13px;
+    height: 32px;
+    line-height: 32px;
+    color: #fff;
+    background-color: #f7931e;
+    padding: 0 20px;
+    cursor: pointer;
+    margin-right: 20px;
+}
+.audit-list .hd_applytop .repair20-btn:hover{
+    background:#ffac4a !important
+}
+.list .hd_applyError{
+    margin-left: 130px;
+    line-height: 30px;
+    color: red;
+}

@@ -1,0 +1,53 @@
+<div class="assetListData">
+    <table class="tableList" border="1">
+        <thead>
+            <tr>
+                <th><div class="checkAllTh"><a class='checkAllA' href="javascript:void(0);" ng-click='checkAll()'><span class='input-span m-r' ng-class='{"input-span-checked": all}'></span><span>全选</span></a>设备信息</div></th>
+                <th>规格型号</th>
+                <th>供应商</th>
+                <th>所在部门</th>
+                <th ng-if='type==1'>启用日期</th>
+                <th>单位</th>
+                <th>状态</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat='tr in trData track by $index'>
+                <td>
+                    <dl>
+                        <dt>
+							<div class="checkboxFive">
+								<input type="checkbox" value="1" class="child-checkbox" ng-click="checked($event,tr)" data-json='{{tr.assetsId}}' id="checkboxFiveInput{{tr.assetsId}}" />
+								<label for="checkboxFiveInput{{tr.assetsId}}" class="checked"  ></label>
+							</div>
+                        	<img ng-src="{{tr.assetsImg?('/api/file'+tr.assetsImg):'../res/img/11.png'}}" />
+                        </dt>
+                        <dd>设备名称：{{tr.assetsName}}</dd>
+                        <dd>设备编号：{{tr.assetsNum}}</dd>
+                        <dd>生产商：{{tr.factoryName}}</dd>
+                    </dl>
+                </td>
+                <td>
+                    <div>{{tr.assetsSpec}}</div>
+                </td>
+                <td>
+                    <div>{{tr.splName}}</div>
+                </td>
+                <td>{{tr.deptName}}</td>
+                <td ng-if='type==1'>{{tr.startUseDate | date : 'yyyy-MM-dd'}}</td>
+                <td>
+                    <div>{{tr.unitName }}</div>
+                </td>
+                <td>
+                    <div>{{tr.status}}</div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div ng-if="!trData.length" class="center ay-data-null">
+	    <div class="noContent">
+	        <img src="../../../res/img/nocontent.png" alt="">
+	        <span class="m-l-lg">暂无数据</span>
+	    </div>
+    </div>
+</div>

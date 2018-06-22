@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<div class="repairCheckAccpet" ng-show='repairCheckShow'>
+    <div class="repairCheckInfo">
+        <div class="repairCheckTitle">
+            <span>验收情况</span><i class="acceptWorn" ng-show="acceptTop">请选择验收情况</i>
+        </div>
+        <div class="repairCheckInfoCon m-b-md">
+            <span class='repairCheckInfoConSpan m-r-sm'>验收结果：</span>
+            <span ng-show='repairCheckAccpetType' class='color999'>验收通过</span>
+            <span ng-show='!repairCheckAccpetType'>
+                <div class="radioCopy"><input ng-click='repairCheckHadSelected(1)' type="radio" name='checkAccept' id="checkAccepted" class="acceptClear"><em></em></div>
+                <label for="checkAccepted">验收通过</label><span class='m-l-xxl' ng-show='!repairCheckAccpetType'>
+                <div class="radioCopy"><input ng-click='repairCheckHadSelected(0)' type="radio" name='checkAccept' id="checkAcceptNot" class="acceptClear"><em></em></div>
+                <label for="checkAcceptNot">验收未通过</label></span>
+            </span>
+        </div>
+        <div class="repairCheckInfoCon" ng-show="repairCheckSelected"><span class='repairCheckInfoConSpan m-r-sm'>设备现状：</span><span ng-show='repairCheckAccpetType' class='color999'>正常工作</span><div class="selectWrap" ng-show='!repairCheckAccpetType'>
+            <div class="selector" ng-click='listShow("checkList")'><input type="text" ng-model='checkModel' readonly="true"><a href='javascript:;'></a></div>
+            <div class="options" ng-show='checkList'>
+                <ul>
+                    <li ng-repeat='item in optionCheck' ng-click='option("checkList","checkModel",item)'>{{item.name}}</li>
+                </ul>
+            </div>
+        </div></div>
+    </div>
+    <div class="repairServer" ng-show="repairCheckSelected">
+        <div class="repairCheckTitle"><span>服务评价</span><i class="acceptWorn" ng-show="acceptBtn">请完善服务评价</i></div>
+        <ul>
+            <li class="m-b-sm"><span class='repairCheckInfoConSpan m-r-sm'>服务态度：</span><span class='repairStar'>
+			<a ng-class='{"repairStarOn":repairAttitude.star1}' ng-click='repairServerStar("repairAttitude",1,"attitude")'></a>
+			<a ng-class='{"repairStarOn":repairAttitude.star2}' ng-click='repairServerStar("repairAttitude",2,"attitude")'></a>
+			<a ng-class='{"repairStarOn":repairAttitude.star3}' ng-click='repairServerStar("repairAttitude",3,"attitude")'></a>
+			<a ng-class='{"repairStarOn":repairAttitude.star4}' ng-click='repairServerStar("repairAttitude",4,"attitude")'></a>
+			<a ng-class='{"repairStarOn":repairAttitude.star5}' ng-click='repairServerStar("repairAttitude",5,"attitude")'></a>
+			</span><span class='repairTextRight'>{{repairAttitude.txt}}</span><span class='repairTextLeft m-l'>{{repairAttitude.score}}</span></li>
+            <li class="m-b-sm"><span class='repairCheckInfoConSpan m-r-sm'>响应时间：</span><span class='repairStar'>
+			<a ng-class='{"repairStarOn":repairRespond.star1}' ng-click='repairServerStar("repairRespond",1,"respond")'></a>
+			<a ng-class='{"repairStarOn":repairRespond.star2}' ng-click='repairServerStar("repairRespond",2,"respond")'></a>
+			<a ng-class='{"repairStarOn":repairRespond.star3}' ng-click='repairServerStar("repairRespond",3,"respond")'></a>
+			<a ng-class='{"repairStarOn":repairRespond.star4}' ng-click='repairServerStar("repairRespond",4,"respond")'></a>
+			<a ng-class='{"repairStarOn":repairRespond.star5}' ng-click='repairServerStar("repairRespond",5,"respond")'></a>
+			</span><span class='repairTextRight'>{{repairRespond.txt}}</span><span class='repairTextLeft m-l'>{{repairRespond.score}}</span></li>
+            <li class="m-b"><span class='repairCheckInfoConSpan m-r-sm'>维修质量：</span><span class='repairStar'>
+			<a ng-class='{"repairStarOn":repairMass.star1}' ng-click='repairServerStar("repairMass",1,"quality")'></a>
+			<a ng-class='{"repairStarOn":repairMass.star2}' ng-click='repairServerStar("repairMass",2,"quality")'></a>
+			<a ng-class='{"repairStarOn":repairMass.star3}' ng-click='repairServerStar("repairMass",3,"quality")'></a>
+			<a ng-class='{"repairStarOn":repairMass.star4}' ng-click='repairServerStar("repairMass",4,"quality")'></a>
+			<a ng-class='{"repairStarOn":repairMass.star5}' ng-click='repairServerStar("repairMass",5,"quality")'></a>
+			</span><span class='repairTextRight'>{{repairMass.txt}}</span><span class='repairTextLeft m-l'>{{repairMass.score}}</span></li>
+            <li class="repairCheckRemark"><span class='repairCheckInfoConSpan m-r-sm'>备注：</span><div class="repairCheckRemarkCon"><div ng-show='repairCheckAccpetType'></div><textarea ng-show='!repairCheckAccpetType' placeholder='请输入备注说明(非必填)' ng-model="assessComent" style="color: #999" ng-change="sumAccept()" ng-disabled="overDis"></textarea><span ng-show='!repairCheckAccpetType'><i>{{currentAccept}}</i>/300</span></div></li>
+        </ul>
+    </div>
+    <div class="alertRepairCheckBtn alertRepairBtn">
+        <a href="javascript:;" class="btnyes" ng-click="acceptyes()">确定</a><a href="javascript:;" class="btncancel" ng-click="acceptno()">取消</a>
+    </div>
+</div>
+</body>
+</html>

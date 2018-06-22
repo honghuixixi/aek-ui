@@ -1,0 +1,132 @@
+<style type="text/css">
+.main-table {
+    width: 100%;
+}
+
+.main-table-item {
+    float: left;
+    display: inline-block;
+    width: 20%;
+    margin-left: 10px;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 5px 0 #4DC0D4;
+}
+
+.main-table-item-txt {
+    margin-left: 10px;
+    margin-top: 10px;
+    font-size: 12px;
+    color: #666;
+}
+
+.main-table-item-num {
+    margin-bottom: 10px;
+    margin-left: 10px;
+    font-size: 36px;
+    color: #4AB29B;
+}
+
+.main-tab {
+    float: left;
+}
+
+.main-tab-item {
+    float: left;
+    display: inline-block;
+    width: 200px;
+    font-size: 14px;
+    line-height: 40px;
+    text-align: center;
+    border-bottom: 1px solid #fff;
+    cursor: pointer;
+}
+
+.main-tab-item-check {
+    color: #4AB29B;
+    border-bottom: 1px solid #4AB29B;
+}
+
+.main-type {
+    float: right;
+    margin-top: 8px;
+    margin-right: 10px;
+    border: 1px solid #4AB29B;
+    border-radius: 3px;
+}
+
+.main-type-item {
+    float: left;
+    display: inline-block;
+    width: 60px;
+    font-size: 14px;
+    line-height: 24px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.main-type-item-check {
+    background-color: #4AB29B;
+    color: #fff;
+}
+
+.fy_generalChartHead {
+    font-size: 14px;
+}
+</style>
+<div class="fy_generalWrap" style="margin-left: -20px;overflow: auto;">
+    <div class="fy_general">
+        <div class="fy_generalTitle" style="margin-left: 10px;">概览<span style="font-size: 12px;color: #999;"> （数据截止日期：{{data.local.endDate}}）</span></div>
+        <table class="main-table">
+            <tr>
+                <td>
+                    <div style="padding-bottom: 5px;overflow: hidden;">
+                        <div class="main-table-item">
+                            <div class="main-table-item-txt">年度PM实施总数（台/次）</div>
+                            <div class="main-table-item-num">{{data.server.pmImplementTotalYear || 0}}</div>
+                        </div>
+                        <div class="main-table-item">
+                            <div class="main-table-item-txt">年度PM计划总数</div>
+                            <div class="main-table-item-num">{{data.server.pmPlanTotalYear || 0}}</div>
+                        </div>
+                        <div class="main-table-item">
+                            <div class="main-table-item-txt">年度PM执行率</div>
+                            <div class="main-table-item-num">{{data.server.pmRateYear == null ? 100 : data.server.pmRateYear}}%</div>
+                        </div>
+                    </div>
+                    <div style="margin-left: 10px;margin-top: 15px;background-color: #fff;border-radius: 4px;">
+                            <div style="margin-bottom: 10px;overflow: hidden;box-shadow:2px 0 9px rgba(0,0,0,0.07);">
+                                <div class="main-tab">
+                                    <div class="main-tab-item main-tab-item-check">PM执行设备总数（台/次）</div>
+                                </div>
+                                <div class="main-type">
+                                    <div class="main-type-item" ng-class='{"main-type-item-check": data.local.type==1}' ng-click='methods.changeType(1)'>季度</div>
+                                    <div class="main-type-item" ng-class='{"main-type-item-check": data.local.type==2}' ng-click='methods.changeType(2)'>年度</div>
+                                </div>
+                            </div>
+                            <div class="fy_generalChartHead">
+                                <div class="selector" style="margin-left: 10px;">
+                                    <input type="text" ng-click='methods.showOption("yearOptionShow")' value='{{data.local.yearOption[data.local.year]}}年' readonly="true">
+                                    <div class="options" ng-show='data.local.yearOptionShow'>
+                                        <ul>
+                                            <li ng-repeat='item in data.local.yearOption' ng-click='methods.chooseOption("year", "yearOptionShow", $index)'>{{item}}年</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="selector">
+                                    <input type="text" ng-click='methods.showOption("compareOptionShow")' value='{{data.local.compareOption[data.local.compare]}}' readonly="true">
+                                    <div class="options" ng-show='data.local.compareOptionShow'>
+                                        <ul>
+                                            <li ng-repeat='item in data.local.compareOption' ng-click='methods.chooseOption("compare", "compareOptionShow", $index)'>{{item}}</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="fy_generalChart" style="height:{{data.local.height - 330}}px;"></div>
+                        </div>
+                </td>
+            </tr>
+        </table>
+        <div class="generalFixWrap" ng-show='fixWrapShow' ng-click='methods.hideAllOption()'></div>
+    </div>
+</div>

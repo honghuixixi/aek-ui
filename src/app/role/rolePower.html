@@ -1,0 +1,57 @@
+		<!-- con section -->
+		<div class="conSection minwidth1306">
+			<!-- con head -->
+			<div class="sectionConHead height64">
+				<div class="setRoleName" ng-if='defineNew'>
+					<span class='vetically'>角色名称：</span><input type="text" class='vetically'>
+				</div>
+				<div class="setDataScope font12px acolor999" ng-class='{"fontItalic":lookOrEdit}'>
+					<span class='vetically'>数据范围：</span><div class="selectWrap vetically" ng-show='!lookOrEdit'>
+						<div class="selector" ng-click='listShow("stateList")'><input type="text" ng-model='stateModel.name' readonly="true"><a href='javascript:;'></a></div>
+						<div class="options" ng-show='stateList'>
+							<ul>
+								<li ng-repeat='item in optionState' ng-click='option("stateList","stateModel",item)'>{{item.name}}</li>
+							</ul>
+						</div>
+					</div><div class="vetically" ng-show='lookOrEdit'>{{stateModel.id==4?depts:stateModel.name}}</div>
+				</div>
+				<div class="scopeSelfDept" ng-if='stateModel.id==4&&!lookOrEdit'>
+					<i></i><span class='scopeSelfDeptWrap' title='{{depts}}'><span class='m-r'>{{depts}}</span></span><a ng-show='depts' href="javascript:;" ng-click='addSelfDept()' class="editSelfDept"></a>
+				</div>
+			</div>
+			<!-- content -->
+			<div class="roleDetailSectionContent">
+				<ul class="b-l-d5 b-t-d5">
+					<li ng-repeat='first in role.moduleMenus' ng-if="!first.delFlag" ng-show='!lookOrEdit||moduleShow(first)' class="b-b-d5 b-r-d5 p-v-15"><strong class='powerListHead vetically'>{{first.moduleName}}</strong><div class='powerListRight vetically'>
+					<div ng-repeat='second in first.menus'>
+						<div class="fontItalic menuList" ng-show='!lookOrEdit||menuShow(second)'><span ng-show='!lookOrEdit' class='m-r-sm vetically'><input name="checkModel" ng-click='inputAllSelect(second)'  data-mid="{{second.menuId}}" id="check{{second.menuId}}" ng-checked='menuShow(second)' type="checkbox">
+								<label class="check check-label opcity checkbox" for="check{{second.menuId}}">
+			                    <i class="fa fa-check"></i></label></span><label for="check{{second.menuId}}" class="acolor666 font13px vetically">{{second.menuName}}</label></div>
+						<ul class="powerParent">
+							<li class="powerChild" ng-repeat='third in second.permissions' ng-show='!lookOrEdit||third.enable'>
+								<span ng-click='inputSelect(second,$event)' ng-show='!lookOrEdit' data- class='m-r-sm vetically'><input name="checkModel" data-mid="{{third.id}}" id="check{{third.id}}" type="checkbox" ng-checked='third.enable'>
+								<label class="check check-label opcity checkbox" for="check{{third.id}}">
+			                    <i class="fa fa-check"></i></label></span><label for="check{{third.id}}" class="acolor666 font13px vetically">{{third.name}}</label><span class='m-l-sm positionRelative' ng-show='third.description'><img src="../../res/img/infoInstrction.png"><div class="selfDefineTitle">{{third.description}}<div class="theTitleTail"></div></div></span>
+							</li>
+							<li class="clearFloat"></li>
+						</ul>
+					</div><div>
+						<ul class="powerParent">
+							<li class="powerChild" ng-repeat='third in first.permissions' ng-show='!lookOrEdit||third.enable'>
+								<span ng-show='!lookOrEdit' class='m-r-sm vetically'><input name="checkModel" data-mid="{{third.id}}" id="check{{third.id}}" type="checkbox" ng-checked='third.enable'>
+								<label class="check check-label opcity checkbox" for="check{{third.id}}">
+			                    <i class="fa fa-check"></i></label></span><label for="check{{third.id}}" class="acolor666 font13px vetically">{{third.name}}</label><span class='m-l-sm positionRelative' ng-show='third.description'><img src="../../res/img/infoInstrction.png"><div class="selfDefineTitle">{{third.description}}<div class="theTitleTail"></div></div></span>
+							</li>
+							<li class="clearFloat"></li>
+						</ul>
+					</div>
+					</div></li>
+				</ul>
+				<div class="noContent" ng-show='nocontent'>
+					<img src="../../../res/img/nocontent.png" alt="">
+					<span class="m-l-lg">暂无权限</span>
+				</div>
+			</div>
+		</div>
+		<div id="treeDemo" class="ztree ztreeLayerHidden"></div>
+		<div class="roleFixWrap" ng-show='fixWrapShow' ng-click='menuHide()'></div>

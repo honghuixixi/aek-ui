@@ -1,0 +1,51 @@
+<div class="repair29">
+    <div class="repair29-top">
+        单据申请
+        <span class="repair29-btn" ng-if="data.limit.edit" ng-click="addPlan()">新建申请</span>
+    </div>
+    <div class="repair29-main" style="min-height: {{data.height}}px;">
+        <div class="repair29-main-search">
+            <pm-select list="data.menuTypes" change="changeMenuType" item="data.selectMenuType"></pm-select>
+            <pm-select list="data.applyStatus" change="changeApplyStatus" item="data.selectApplyStatus"></pm-select>
+            <pm-select list="data.applyTypes" change="changeApplyType" item="data.selectApplyType"></pm-select>
+            <input type="text" placeholder="设备名称/申请单号" ng-model="data.condition.keyword">
+            <span class="repair29-btn" ng-click="search()">搜索</span>
+        </div>
+        <table class="repair29-main-list">
+            <thead>
+                <tr>
+                    <td>申请单号</td>
+                    <td style="width: 100px;">类型</td>
+                    <td>维修单号</td>
+                    <td>维修设备名称</td>
+                    <td>设备所在部门</td>
+                    <!-- <td>审批人</td> -->
+                    <td style="width: 140px;">申请时间</td>
+                    <td style="width: 100px;">状态</td>
+                    <td style="width: 60px;">操作</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat=" v in data.list track by $index">
+                    <td>{{v.billNo}}</td>
+                    <td style="width: 100px;">{{v.typeText}}</td>
+                    <td>{{v.applyNo}}</td>
+                    <td>{{v.assetsName}}</td>
+                    <td>{{v.assetsDeptName}}</td>
+                   <!--  <td>{{v.checkUserName}}</td> -->
+                    <td style="width: 140px;">{{v.applyTime ? (v.applyTime  | date:'yyyy-MM-dd HH:mm') : ''}}</td>
+                    <td style="width: 100px;">{{v.statusText}}</td>
+                    <td style="width: 60px;">
+                    	<a ui-sref="repair.apply.detail({tenantId: ($stateParams.tenantId||$localStorage.userInfo.tenantId),billApplyId: v.id})">查看</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- 分页 -->
+        <span ng-if="!data.loading && !data.empty" data-ng-include=" 'src/tpl/newPageInfo.html' "></span>
+        <!-- empty -->
+        <div class="empty" ng-if="data.empty && !data.loading"><img src="../../../res/img/nocontent.png">暂无数据</div>
+        <!-- loading -->
+        <div class="loading" ng-if="data.loading"><img src="../../../res/img/loading2.gif"></div>
+	</div>
+</div>

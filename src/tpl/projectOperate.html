@@ -1,0 +1,11 @@
+<div id="projectCon">
+    <div class="projectInfo projectInfoName"><div class="projectInfoHead"><em>*</em>项目名称：</div><div class="projectInfoBody"><input ng-change='projectLimit()' ng-blur='projectAdjust()' ng-model='project.name' type="text" placeholder='40个字符以内'></div></div>
+    <div class="projectInfoErr"><span ng-if='projectErr'>{{projectErrTxt}}</span></div>
+    <div class="projectAttention">允许勾选设置默认选项</div>
+    <div class="projectInfo" ng-repeat='item in project.results'>
+        <div class="projectInfoHead"><span class='projectInfoHeadTxt'><span ng-if='$index<1'><em>*</em>选项：</span></span><div class="projectRadioWrap"><div class="projectRadio" ng-click='changeChecked(item)'><div class="projectRadioSel" ng-if='item.isDefault'></div></div></div></div>
+        <div class="projectInfoBody" ng-class='{projectInfoBodyPlus: $index>1}'><input ng-change='nameLimit(item)' ng-model='item.name' ng-blur='nameAdjust(item)' type="text" placeholder='选项{{$index==0?"一":($index==1?"二":($index==2?"三":($index==3?"四":"五")))}}，4个字符以内'><a href="javascript:;" ng-click='delProject($index)'></a></div>
+        <div class="projectInfoErr"><span ng-if='item.err'>{{item.name.length ? '已存在' : '请输入'}}</span></div>
+    </div>
+    <div class="projectInfo" ng-if='project.results.length<5'><div class="projectInfoBody"><a href="javascript:;" class="fy_newProjectBtn" ng-click='addSelect()'>新增选项</a></div></div>
+</div>

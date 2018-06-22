@@ -1,0 +1,90 @@
+<!-- toaster directive -->
+<toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container>
+<!-- / toaster directive -->
+
+<!-- 导航条 -->
+<div class="assets-overlay" ng-click='hideAll()' ng-show='devshow'></div>
+<div class="bg-white bread-crumb">
+    <ul class="breadcrumb lter b-b wrapper-md">
+        <li><a ui-sref="main.tre.zkgl.list"><!--<i class="fa fa-home"></i>-->转科管理</a></li>
+        <!--<li class="active" ng-bind="title"></li>-->
+    </ul>
+    
+    <div class="fix-btn">
+        <a ui-sref='main.tre.zkgl.asset' class="pos-fix-btn pos-fix-r-md-t-60" ng-if="userInfo.authoritiesStr.indexOf('ASS_ASSETS_ZK_APPLY') != -1">新增转科单</a>
+    </div>
+</div>
+
+<!-- 加载提醒 -->
+<!--<div ng-show="loading" class="text-center m-t-md text-lg"><i class="fa fa-spin fa-spinner"></i> 数据加载中...</div>-->
+
+<!-- 内容区域 -->
+<div ng-hide="loading" class="wrapper-md content content-m">
+    <!-- 数据显示 -->
+    <div class="wrapper-data">
+        <div ng-if="userInfo.authoritiesStr.indexOf('ASS_ASSETS_ZK_LIST') == -1" class="no-limits">
+            <img src="../../../../res/img/myqx.png" alt="没有权限">您没有该页面的权限
+        </div>
+        <div class="panel panel-default" ng-if="userInfo.authoritiesStr.indexOf('ASS_ASSETS_ZK_LIST') != -1">
+            <!-- 头部 -->
+            <div class="wrap-head">
+                <div class="i-info">
+                    <div class="input-wrap cur-ponit">
+                        <input type="text" class="depetName" readonly="true" ng-model="searchTwo" ng-click="focus2()" />
+                        <div class="depetList" ng-show="devshow2">
+                            <label ng-repeat="l in searchTwol track by $index" data-para="{{l.status}}" ng-click="click2($event)">{{l.statusName}}</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="i-info">
+                    <div class="input-wrap cur-ponit">
+                        <input type="text" class="depetName" readonly="true" ng-model="searchThree" ng-click="focus3()" />
+                        <div class="depetList" ng-show="devshow3">
+                            <label ng-repeat="l in searchThreel track by $index" data-para="{{l.id}}" ng-click="click3($event)">{{l.name}}</label>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <input type="text" ng-model='$parent.searchCon' ng-trim='false' maxlength="40" style="width: 200px" placeholder="转科单号/设备名称/院内编码" />
+                </div>
+                <div class="t-search">
+                    <a href="javascript:;" ng-click="getList(1,16)">搜索</a>
+                </div>
+                <div class="select-m">
+                    <div class="input-wrap cur-ponit">
+                        <input type="text" style="width: 200px;" class="depetName" readonly="true" ng-model="searchFour" ng-click="focus4()" />
+                        <div class="depetList" ng-show="devshow4">
+                            <label ng-repeat="l in searchFourl track by $index" data-para="{{l.status}}" ng-click="click4($event)">{{l.statusName}}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 数据表格 -->
+            <div class="browse">
+                <browse-list col="转入部门" header='转科' list="data.list" link="main.tre.zkgl"></browse-list>
+                <!-- 分页 -->
+                <span ng-if="!data.loading && !data.empty" data-ng-include=" 'src/tpl/newPageInfo.html' "></span>
+                <!-- empty -->
+                <div class="empty" ng-if="data.empty && !data.loading"><img src="../../../res/img/nocontent.png">暂无数据</div>
+                <!-- loading -->
+                <div class="loading" ng-if="data.loading"><img src="../../../res/img/loading2.gif"></div>
+            </div>
+           
+			<div class="pages-de">
+				
+			</div>
+            
+        </div><!-- /.panel -->
+    </div><!-- /.wrapper-data -->
+</div><!-- /.wrapper-md -->
+
+<!-- 打印报告 -->
+<div class="template-print" id="template_print" style="display: none;">
+    <browse-print
+      title="固定资产转科单"
+      title2="转科单号"
+      title3="转入部门"
+      iszk="true"
+      obj="data.print"></browse-print>
+</div>
+

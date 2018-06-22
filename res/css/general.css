@@ -1,0 +1,307 @@
+/* padding */
+.p-l-none {
+	padding-left: 0px !important;
+}
+/* border */
+.b-l-none {
+	border-left: none !important;
+}
+.b-r-none {
+	border-right: none !important;
+}
+/* color */
+.color999 {
+	color: #999;
+}
+.color666 {
+	color: #666;
+}
+/* daterangepicker */
+.daterangepicker .btn-success:hover {
+	background-color: #ffac4a;
+	color: #fff;
+}
+.daterangepicker .btn-default:hover {
+	border-color: #f7931e;
+	background-color: #fff !important;
+	color: #f7931e !important;
+}
+.daterangepicker .ranges .input-mini {
+	padding: 0px 3px;
+}
+.daterangepicker .btn-success {
+	position: absolute;
+	bottom: 10px;
+	background-color: #f7931e;
+	right: 100px;
+}
+.daterangepicker .btn-default {
+	position: absolute;
+	bottom: 10px;
+	border: 1px solid #dcdcdc;
+	right: 10px;
+}
+/* general */
+.generalFixWrap {
+	position: fixed;
+	top: 0px;
+	bottom: 0px;
+	right: 0px;
+	left: 0px;
+}
+/**/
+@media (max-width: 1365px) {
+	.fy_generalWrap {
+		overflow-x: scroll;
+	}
+}
+@media (max-width: 1366px) {
+	.fy_homeApplyLeft {
+		width: 1177px;
+	}
+}
+.fy_general {
+	min-width: 1205px;
+	padding-left: 15px;
+	padding-right: 15px;
+	padding-bottom: 15px;
+}
+.fy_generalTitle {
+	line-height: 56px;
+	height: 56px;
+	font-size: 15px;
+	color: #666;
+}
+.fy_generalTitle span {
+	font-size: 12px;
+}
+.fy_gegeralBaseInfo {
+	height: 166px;
+}
+.fy_gegeralBaseInfoOneWrap {
+	width: 33.3%;
+	float: left;
+	padding-left: 15px;
+}
+.fy_gegeralBaseInfoOne {
+	height: 166px;
+	position: relative;
+	text-align: center;
+	background-color: #fff;
+}
+.fy_gegeralBaseInfoOne a {
+	position: absolute;
+	top: 15px;
+	right: 15px;
+	width: 18px; 
+	height: 16px;
+	background-image: url(../img/SXFH.png);
+}
+.fy_gegeralBaseInfoNum {
+	font-size: 30px;
+	padding-top: 45px;
+	color: #f7931e;
+	line-height: 36px;
+}
+.fy_gegeralBaseInfoNumErr {
+	color: #bebebe;
+	font-size: 13px;
+}
+.fy_gegeralBaseInfoTxt {
+	font-size: 13px;
+	color: #666;
+	line-height: 26px;
+}
+/* general chart select */
+.fy_generalChartHead .selectWrap {
+	float: none;
+	z-index: 2;
+	vertical-align: middle;
+	display: inline-block;
+	color: #666;
+}
+.fy_generalChartHead .selector span {
+	padding-left: 10px;
+}
+.fy_generalChartHead .selector input {
+	width: 150px;
+	font-size: 12px;
+	background-image: url(../img/down.png);
+	background-repeat: no-repeat;
+	background-position: 130px 12px;
+}
+.fy_generalChartHead input {
+	border: 1px solid #dcdcdc;
+	width: 120px;
+	text-indent: 10px;
+	color: #999;
+	line-height: 32px;
+	height: 32px;
+}
+.fy_generalChartHead ul {
+	padding-left: 0px;
+	list-style: none;
+	margin-bottom: 0px;
+}
+.fy_generalChartHead .selectWrap .options ul {
+	padding-top: 2px;
+	list-style: none;
+	background-color: #fff;
+}
+.fy_generalChartHead .options{
+	position: absolute;
+	width: 150px;
+	z-index: 10;
+	box-shadow: 0 5px 15px 0px #cfcfcf;
+}
+.fy_generalChartHead .options li {
+	line-height: 26px;
+	text-indent: 10px;
+	cursor: pointer;
+	background-color: #fff;
+}
+.fy_generalChartHead .options li:hover {
+	background-color: #F7931E;
+	color: #ffffff;
+}
+.fy_generalChartHead .selector {
+	position: relative;
+	display: inline-block;
+}
+/* select end */
+/* general chart */
+.fy_generalChartWrap {
+	margin-top: 10px;
+	padding: 15px;
+	background-color: #fff;
+}
+/* general chart head */
+.fy_generalChartHead {
+	position: relative;
+	margin-bottom: 10px;
+}
+.fy_generalChartWhat {
+	display: inline-block;
+	margin-left: 10px;
+	vertical-align: middle;
+	margin-right: 15px;
+}
+.fy_generalChartWhat a {
+	display: inline-block;
+	width: 18px;
+	height: 18px;
+	background-image: url(../img/WHHE.png);
+}
+.fy_generalChartSesstion {
+	display: inline-block;
+	height: 32px;
+	margin-right: 15px;
+}
+.fy_generalChartSesstion a {
+	display: inline-block;
+	width: 90px;
+	text-align: center;
+	line-height: 30px;
+	color: #666;
+	border: 1px solid #d6d6d6;
+}
+.fy_generalChartSesstion a:hover {
+	color: #f7931e;
+}
+.fy_generalChartSesstion .fy_generalChartSesstionNow:hover {
+	background-color: #ffac4a;
+	border-color: #ffac4a;
+	color: #fff;
+}
+.fy_generalChartSesstion .fy_generalChartSesstionNow {
+	border-color: #f7931e;
+	background-color: #f7931e;
+	color: #fff;
+}
+.generalChartDate {
+	display: inline-block;
+}
+.generalChartDate input {
+	width: 220px;
+	background-image: url(../img/12.png);
+	background-position: 193px 6px;
+	background-repeat: no-repeat;
+}
+.fy_generalChartFreshen {
+	position: absolute;
+	top: 8px;
+	width: 18px;
+	height: 16px;
+	background-image: url(../img/SXFH.png);
+	right: 0px;
+}
+/* home optimize */
+.fy_homeApplyTitle {
+	font-size: 13px;
+	color: #666;
+	line-height: 60px;
+}
+.fy_homeApplyOneShadow:hover {
+	box-shadow: -5px 5px 5px #ececec;
+}
+.fy_homeApplyOneShadow:hover .fy_homeApplyOneWrapShadow {
+	box-shadow: 5px 5px 5px #ececec;
+}
+.fy_homeApplyOneWrapShadow {
+	padding-top: 20px;
+	padding-left: 15px;
+	padding-right: 12px;
+	height: 90px;
+	width: 252px;
+	border: 1px solid #dcdcdc;
+}
+.fy_homeApplyLeft {
+	margin-left: -41px;
+}
+.fy_homeApplyOneBottomWrap {
+	margin-left: 41px;
+}
+.fy_homeApplyOneWrap {
+	float: left;
+	position: relative;
+}
+.fy_homeApplyOneRight {
+	display: inline-block;
+}
+.fy_homeApplyOne {
+	line-height: 23px;
+	float: left;
+	font-size: 13px;
+}
+.fy_homeApplyOne dl {
+	margin-bottom: 0px;
+}
+.fy_homeApplyAdd, .fy_homeApplyDel {
+	position: absolute;
+	left: 252px;
+	top: 0px;
+	width: 16px;
+	height: 16px;
+	background-image: url(../img/tj.png);
+}
+.fy_homeApplyDel {
+	background-image: url(../img/jd.png);
+}
+.fy_homeApplyOne dt img {
+	width: 46px;
+	height: 46px;
+}
+.fy_homeApplyOne dd {
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+.fy_homeApplyOne dt {
+	float: left;
+	margin-right: 10px;
+}
+
+/* personal account */
+.fy-app-content {
+	padding-top: 60px;
+}

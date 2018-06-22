@@ -1,0 +1,29 @@
+<toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container>
+<!-- 导航条 -->
+<div class="assets-overlay" ng-click='hideAll()' ng-show='devshow'></div>
+<div class="bg-white" >
+    <ul class="breadcrumb lter b-b wrapper-md" style="width: 100%;margin-bottom: 0">
+        <li>
+            <a><span><i ui-sref="home.notice">系统公告</i>><i style="color: #000">公告详情</i></span><span class="wrong"><img src="../../../res/img/syt.png" alt="" ng-show="prev" ng-click="prevmess()"><img src="../../../res/img/sytdj.png" alt="" ng-show="!prev"><img src="../../../res/img/xit.png" alt="" ng-show="next" ng-click="nextmess()"><img src="../../../res/img/xitdj.png" alt="" ng-show="!next"></span></a>
+        </li>
+    </ul>
+</div>
+<div ng-hide="loading" class="wrapper-md content content-m">
+    <div class="wrapper-data">
+        <div class="panel panel-default">
+            <div class="wrap-head message" style="padding: 0;">
+                <p><span>安全警告安全警告安全警告安全警告安全警告</span><span>2017-04-23 12:20</span></p>
+                <div class="wrap-head card" >
+                    <p>尊敬的用户您好：<br>您好，腾讯云已经升级完成您好，腾讯云已经升级完成您好，腾讯云已经升级完成您好，腾讯云已经升级完成您好，腾讯云已经升级完成您好，腾讯云已经升级完成您好，腾讯云已经升级完成您好，腾讯云已经升级完成您好</p>
+                    <ul>
+                        <li><img src="../../../res/img/one.png" alt=""></li>
+                        <li><img src="../../../res/img/one.png" alt=""></li>
+                        <li><img src="../../../res/img/one.png" alt=""></li>
+                    </ul>
+                    <p>尊敬的用户您好：<br>您好，腾讯云已经升级完成您好，腾讯云已经升级完成您好，腾讯云已经升级完成您好，腾讯云已经升级完成您好，腾讯云已经升级完成您好，腾讯云已经升级完成您好，腾讯云已经升级完成您好，腾讯云已经升级完成您好</p>
+                    <p class="name">爱医康<br>2015-02-10</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

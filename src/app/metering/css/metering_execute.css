@@ -1,0 +1,100 @@
+.metering-execute-nav .metering-btn {
+    float: right;
+}
+.metering-execute-nav .metering-btn-temp {
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    background-color: transparent;
+    color: #333;
+}
+.metering-execute {
+    font-size: 13px;
+    word-break: break-all;
+}
+.metering-execute .tip {
+    display: inline-block;
+    font-size: 12px;
+    background-color: #F3756F;
+    text-align: center;
+    color: #fff;
+    padding: 2px 10px;
+    border-radius: 15px;
+}
+.metering-execute table {
+    width: 100%;
+}
+.metering-execute dl {
+    margin: 0;
+    padding: 0;
+    font-size: 13px;
+    overflow: hidden;
+}
+.metering-execute dt {
+    float: left;
+    width: 100px;
+    font-weight: 300;
+    color: #000;
+    text-align: right;
+}
+.metering-execute dd {
+    margin-left: 100px;
+}
+.metering-execute dd a {
+    display: block;
+    line-height: 26px;
+}
+.metering-execute input[type="text"] {
+    width: 200px;
+    height: 32px;
+    padding: 0 10px;
+    border: 1px solid #dcdcdc;
+    outline: 0;
+}
+.metering-execute .metering-info {
+    margin-bottom: 10px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #dcdcdc;
+}
+.metering-execute .metering-info td {
+    vertical-align: top;
+}
+.metering-execute .metering-info dd {
+    margin-bottom: 5px;
+}
+.metering-form-row .div{
+    display: inline-block;
+    width: 450px;
+    margin-bottom: 10px;
+}
+.metering-form-row .div-span {
+    display: inline-block;
+    width: 100px;
+    margin-right: 5px;
+    text-align: right;
+}
+.metering-form-row .div-span i {
+    color: #f00;
+}
+.metering-form-row .div-label {
+    margin-left: 5px;
+    font-size: 12px;
+    color: #f00;
+}
+.metering-form-dl dt {
+    line-height: 32px;
+}
+.metering-form-dl dd {
+    margin-left: 110px;
+}
+.metering-form-dl textarea {
+    width: 652px;
+    height: 140px;
+    padding: 10px;
+    font-size: 13px;
+    line-height: 26px;
+    border: 1px solid #dcdcdc;
+    resize: none;
+}
+.metering-form-result dd {
+    margin-bottom: 10px;
+}

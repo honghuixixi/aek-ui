@@ -1,0 +1,35 @@
+<table>
+	<thead>
+		<tr>
+			<td style="width: 600px;border-right: 0; text-align: left; padding-left: 10px;">设备信息</td>
+			<td style="border-right: 0; border-left: 0;">规格型号</td>
+			<td style="border-right: 0; border-left: 0;">所在部门</td>
+			<td style="border-right: 0; border-left: 0;">{{col}}</td>
+			<td style="border-right: 0; border-left: 0; text-align: center;">状态</td>
+			<td style="border-left: 0; text-align: center;">操作</td>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="v in list">
+			<td ng-if="v.first" colspan="6" style="padding: 0; border: 0;">
+				<div class="item-info">{{header}}单号：{{v.num}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;申请人：{{v.name}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;申请时间：{{v.time | date:'yyyy-MM-dd HH:mm'}}</div>
+			</td>
+			<td ng-if="!v.first" style="border-right: 0; width: 600px; padding-left: 0;">
+				<img class="eq-img" src="../res/img/11.png" ng-src="{{v.assetsImg?('/api/file' + v.assetsImg) : ''}}" />
+				<div class="eq-info">
+					<div><a>设备名称：{{v.assetsName}}</a></div>
+					<div>设备编号：{{v.assetsNum}}</div>
+					<div>生产商：{{v.factoryName}}</div>
+				</div>
+			</td>
+			<td ng-if="!v.first" style="border-left: 0; border-right: 0;">{{v.assetsSpec}}</td>
+			<td ng-if="!v.first" style="border-left: 0; border-right: 0;">{{v.deptFrom}}</td>
+			<td ng-if="!v.first" style="border-left: 0;">{{v.deptTo}}</td>
+			<td ng-if="!v.first && v.rowSpan > 0" rowspan="{{v.rowSpan}}" style="border-right: 0; text-align: center;white-space: nowrap;">{{v.status}}</td>
+			<td ng-if="!v.first && v.rowSpan > 0" rowspan="{{v.rowSpan}}" style="border-left: 0; text-align: center;">
+				<a ng-if="v.status === '待审核'" ui-sref="{{link}}.detail({billId: v.id})">查看</a>
+				<a ng-if="v.status !== '待审核'" ui-sref="{{link}}.result({billId: v.id})">查看</a>
+			</td>
+		</tr>
+	</tbody>
+</table>

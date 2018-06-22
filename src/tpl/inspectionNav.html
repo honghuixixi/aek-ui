@@ -1,0 +1,42 @@
+<!-- list -->
+<ul class="nav" ng-controller="navCtrl">
+	<li ng-class="{active: $state.includes('**.inspection.**')}" class="ng-scope parent-nav">
+		<ul class="nav nav-sub dk ng-scope repairNavList">
+			<li ng-class="{active: $state.includes('**.inspection.dashbord.**')}" class="ng-scope">
+				<a ui-sref="inspection.dashbord" ui-sref-opts="{reload:true}">
+					<span class="spanLeftImg repairDashbord">巡检概览</span>
+				</a>
+			</li>
+			<li ng-class="{active: $state.includes('**.inspection.plan.**')}" class="ng-scope">
+				<a ui-sref="inspection.plan.list({tenantId:($stateParams.tenantId||$localStorage.userInfo.tenantId)})" ng-if="userInfo.authoritiesStr.indexOf('QC_PLAN_VIEW') != -1"
+				 ui-sref-opts="{reload:true}">
+					<span class="spanLeftImg inspectionPlan">巡检计划</span>
+				</a>
+			</li>
+			<li ng-class="{active: $state.includes('**.inspection.implement.**')}" class="ng-scope">
+				<a ui-sref="inspection.implement.list({tenantId:$stateParams.tenantId||$localStorage.userInfo.tenantId})" ng-if="userInfo.authoritiesStr.indexOf('QC_PLAN_IMPLEMENT') != -1"
+				 ui-sref-opts="{reload:true}">
+					<span class="spanLeftImg inspectionImplement">巡检实施</span>
+				</a>
+			</li>
+			<li ng-class="{active: $state.includes('**.inspection.model.**')}" class="ng-scope">
+				<a ui-sref="inspection.model.list({tenantId:$stateParams.tenantId||$localStorage.userInfo.tenantId})" ng-if="userInfo.authoritiesStr.indexOf('QC_TEMPLATE_VIEW') != -1"
+				 ui-sref-opts="{reload:true}">
+					<span class="spanLeftImg inspectionModel">巡检模板</span>
+				</a>
+			</li>
+			<li ng-class="{active: $state.includes('**.inspection.acceptance.**')}" class="ng-scope">
+				<a ui-sref="inspection.acceptance({status: 0, tenantId:$stateParams.tenantId||$localStorage.userInfo.tenantId})" ng-if="userInfo.authoritiesStr.indexOf('QC_CHECK_MANAGE') != -1"
+				 ui-sref-opts="{reload:true}">
+					<span class="spanLeftImg inspectionAccept">巡检验收</span>
+				</a>
+			</li>
+			<li ng-class="{active: $state.includes('**.inspection.report.**')}" class="ng-scope">
+				<a ui-sref="inspection.report({tenantId:$stateParams.tenantId||$localStorage.userInfo.tenantId})" ng-if="userInfo.authoritiesStr.indexOf('QC_REPORT_VIEW') != -1"
+				 ui-sref-opts="{reload:true}">
+					<span class="spanLeftImg inspectionReport">巡检查询</span>
+				</a>
+			</li>
+		</ul>
+	</li>
+</ul>

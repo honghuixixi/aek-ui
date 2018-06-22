@@ -1,0 +1,50 @@
+<div style="margin: 15px;font-size: 14px;">
+    <div style="text-align: center;margin: 10px 0;">{{data.reportMuilty.tenantName}}-保养实施报告单</div>
+    <table style="width: 100%;">
+        <tr>
+            <td>
+                <dl class="dl-left">
+                    <dt>设备编号：</dt>
+                    <dd>{{data.reportMuilty.assetsNum}}</dd>
+                    <dt>设备名称：</dt>
+                    <dd>{{data.reportMuilty.assetsName}}</dd>  
+                    <dt>所在部门：</dt>
+                    <dd>{{data.reportMuilty.deptName || "&nbsp;"}}</dd>                  
+                </dl>
+            </td>
+            <td style="vertical-align: bottom;">
+                <dl class="dl-right" style="float: right;">
+                    <dt>规格型号：</dt>
+                    <dd>{{data.reportMuilty.assetsSpec || "&nbsp;"}}</dd>
+                    <dt>保养频率：</dt>
+                    <dd>{{data.reportMuilty.rate}}</dd>                   
+                    <dt>保养日期：</dt>
+                    <dd>{{data.condition.startDt | date:'yyyy-MM-dd'}} 至 {{data.condition.endDt | date:'yyyy-MM-dd'}}</dd>
+                </dl>
+            </td>
+        </tr>
+    </table>
+    <div style="width: 960px;overflow-x: auto;">
+        <table class="table">
+            <thead>
+                <tr>
+                    <td style="width: 80px;vertical-align: middle;background-color: #f5f5f5;text-align: center;">日期</td>
+                    <td style="vertical-align: middle;background-color: #f5f5f5;white-space: normal;" ng-repeat="v in data.reportMuilty.mtImplementResultVos[0].mtImplementResultItemsVo">{{v.planTemplateItemName}}</td>
+                    <td style="vertical-align: middle;background-color: #f5f5f5;">设备现状</td>
+                    <td style="vertical-align: middle;background-color: #f5f5f5;">实施人</td>
+                    <td style="vertical-align: middle;background-color: #f5f5f5;">使用专管人</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="v in data.reportMuilty.mtImplementResultVos track by $index">
+                    <td style="width: 80px;text-align: center;vertical-align: middle;white-space: nowrap;">{{v.endDate | date:'MM-dd'}}</td>
+                    <td style="text-align: center;vertical-align: middle;" ng-repeat="w in v.mtImplementResultItemsVo track by $index">{{w.itemResult | pmplanresult}}</td>
+                    <td style="vertical-align: middle;">{{v.assetsStatus | pmplanlive}}</td>
+                    <td style="vertical-align: middle;">{{v.implementUserName}}</td>
+                    <td style="vertical-align: middle;">{{v.administrator}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+</div>

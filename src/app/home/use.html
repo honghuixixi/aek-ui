@@ -1,0 +1,69 @@
+<div style="position: absolute;right: 0;left: 160px">
+<toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container>
+<!-- 导航条 -->
+<div class="assets-overlay" ng-click='hideAll()' ng-show='devshow'></div>
+<div class="bg-white " ng-show="chahao">
+    <ul class="breadcrumb  b-b wrapper-md delect"  style="width: 100%;margin-bottom: 0">
+        <li>
+            <a  style="color: #fff">完善机构信息，可获得更多后续服务支撑，<span style="color: #52a4e8" ng-click="go()">立即前往>>></span><span class="wrong chahao" ng-click="hidden()">
+            </span></a>
+        </li>
+    </ul>
+</div>
+<div class="bg-white" >
+    <ul class="breadcrumb lter b-b wrapper-md" style="width: 100%;margin-bottom: 0;padding-top:20px;" ng-show="modules">
+        <li >
+            <a><span ><i style="font-size: 15px">我的应用</i><i style="font-size: 12px">（/{{userInfo.tenantName}}）</i></span><span class="wrong  useSet" ng-click="addclick()" ng-show="toggle"><img src="../../../res/img/yysz.png" alt="">应用设置</span><span class="wrong  useSet" ng-click="save()" ng-show="!toggle">保存</span></a>
+        </li>
+    </ul>
+</div>
+<div ng-hide="loading" class="wrapper-md  usecomment bottomNone">
+    <div class="wrapper-data">
+        <div class="panel panel-default">
+            <div class="wrap-head home-use" style="height: 800px;margin-top: -70px" ng-show="modules">
+                <div class="cell first" >
+                    <div class="fy_homeApplyTitle">置顶应用</div>
+                    <div class="addUse" ng-show="hint" style="width: 100%;font-size: 13px">暂无置顶应用</div>
+                    <div class="fy_homeApplyLeft">
+                        <div class="fy_homeApplyOneWrap fy_homeApplyOneBottomWrap m-b" ng-repeat=" l in userInfo.modules" ng-class='{useshow:l.moduleGroup==1}' ng-if="l.moduleGroup==1">
+                            <a class="fy_homeApplyOne fy_homeApplyOneShadow" ng-click="goModule(l.url)">
+                                <div class="fy_homeApplyOneWrapShadow">
+                                    <dl>
+                                        <dt><img ng-src="../../res/img/apply{{l.moduleId}}.png"></dt>
+                                        <dd class='color666'>{{l.name}}</dd>
+                                        <dd class='color999'>{{l.description}}</dd>
+                                    </dl>
+                                </div>
+                            </a>
+                            <a class="fy_homeApplyDel" ng-show="top" ng-click="down($event,l.moduleId)"></a>
+                            <div class="fy_homeApplyOneRight"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="cell last">
+                    <div class="fy_homeApplyTitle">系统应用</div>
+                    <div class="fy_homeApplyLeft">
+                        <div class="fy_homeApplyOneWrap fy_homeApplyOneBottomWrap m-b" ng-repeat=" l in userInfo.modules" ng-class='{usehide:l.moduleGroup==1}' ng-if="!l.moduleGroup || l.moduleGroup==2">
+                            <a class="fy_homeApplyOne fy_homeApplyOneBottom fy_homeApplyOneShadow" ng-click="goModule(l.url)">
+                                <div class="fy_homeApplyOneWrapShadow">
+                                    <dl>
+                                        <dt><img ng-src="../../res/img/apply{{l.moduleId}}.png"></dt>
+                                        <dd class='color666'>{{l.name}}</dd>
+                                        <dd class='color999'>{{l.description}}</dd>
+                                    </dl>
+                                </div>
+                            </a>
+                            <div ng-class="{fy_homeApplyOneRight: 1}"></div>
+                            <a class="fy_homeApplyAdd" ng-show="nottop" ng-click="remove($event,l.moduleId,$index)"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="wrap-head  nomodules" style="height: 79%;margin-top: -40px" ng-show="!modules">
+                <img src="../../../res/img/nodata.png" alt="">
+                <span>您暂时还没有应用哦！</span>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

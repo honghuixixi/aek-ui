@@ -1,0 +1,26 @@
+
+<!-- 导航条 -->
+<div class="bg-white bread-crumb">
+    <ul class="breadcrumb b-a m-b-n-xs lter b-b wrapper-md">
+        <li><a ui-sref="main.tre.zkgl.list">转科管理</a></li>
+        <!-- <li><a ui-sref="main.tre.zkgl.result" ui-sref-opts="{reload:true}">查看详情</a></li> -->
+        <li>查看详情</li>
+    </ul>
+    <div class="fix-btn">
+        <a ng-click="toAssets()" class="fix-btn-sub pos-fix-btn">打印转科单</a>
+    </div>
+</div>
+
+<!-- 内容区域 -->
+<div class="p-l p-r p-b zctz-con treContent content content-m">
+    <bill-detail bill-obj='billObj' type='2' asset-cancle='assetCancle'></bill-detail>
+</div>
+<!-- 打印报告 -->
+<div class="template-print" id="template_print" style="display: none;">
+    <browse-print
+      title="固定资产转科单"
+      title2="转科单号"
+      title3="转入部门"
+      iszk="true"
+      obj="data.print"></browse-print>
+</div>

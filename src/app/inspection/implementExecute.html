@@ -1,0 +1,93 @@
+<div class="implement">
+	<div class="implement-nav">
+		<span><a class="c9" ui-sref="inspection.implement.list({tenantId:$stateParams.tenantId||$localStorage.userInfo.tenantId})" ui-sref-opts="{reload:true}">巡检实施</a>&gt;<i class="c6">查看详情</i></span>		
+		<span class="btn" ng-click="save()">提交巡检单</span>
+		<span class="btn" style="width: 90px;margin-right: 10px;background-color: transparent;border:1px solid #ccc;color: #333;" ng-click="saveTemp()">暂存</span>
+	</div>
+	<implement-detail obj="data.plan" type="data.type"></implement-detail>
+	<div class="main">
+		<div class="title2">
+			<div class="tab">
+				<div class="{{data.conType === 1 ? 'tab-item tab-active' : 'tab-item'}}" ng-click="changeConType(1)">巡检内容</div>
+				<div class="{{data.conType === 2 ? 'tab-item tab-active' : 'tab-item'}}" ng-click="changeConType(2)">巡检总结</div>
+			</div>
+			<div class="print" ng-if="data.conType === 1" ng-click="showPrint()">打印</div>
+		</div>
+		<div class="main-content" ng-if="data.conType === 1">
+			<table style="margin-bottom: 10px;">
+				<tr>
+					<td class="c6">巡检范围：</td>
+					<td class="c9">{{data.plan.scope}}</td>
+				</tr>
+			</table>
+			<table style="margin-bottom: 10px;">
+				<tr>
+					<td class="c6" style="width:400px;">
+						<span>实际开始日期：</span>
+						<input class="implement-dt" id="startDt" type="text" readonly="readonly" placeholder="请选择开始日期" ng-value="data.plan.actualStartDate | date:'yyyy-MM-dd'">
+					</td>
+					<td class="c6">
+						<span>实际结束日期：</span>
+						<input class="implement-dt" id="endDt" type="text" readonly="readonly" placeholder="请选择结束日期" ng-value="data.plan.actualEndDate | date:'yyyy-MM-dd'">
+					</td>
+				</tr>
+			</table>
+			<div style="min-width: 800px;overflow-x: auto;">
+				<implement-template-q
+					type1="2" 
+					type2="2"
+					page="pageInfo.current"
+					page-size="pageInfo.size" 
+					equipments="data.equipments" 
+					templates="data.templates"></implement-template-q>
+			</div>			
+			<!-- 分页 -->
+        	<span ng-if="!data.loading && !data.empty" data-ng-include=" 'src/tpl/newPageInfo.html' "></span>
+        	<!-- empty -->
+	        <div class="empty" ng-if="data.empty && !data.loading"><img src="../../../res/img/nocontent.png">暂无数据</div>
+	        <!-- loading -->
+	        <div class="loading" ng-if="data.loading"><img src="../../../res/img/loading2.gif"></div>
+		</div>
+		<div class="main-summary" ng-if="data.conType === 2">
+			<implement-summary type="data.type" obj="data.plan"></implement-summary>
+		</div>
+	</div>	
+</div>
+
+<!-- 打印巡检记录单 -->
+<div data-ng-include=" 'src/tpl/implementPrint.html' "></div>
+
+<!-- 提交巡检单 -->
+<div class="implement-submit" id="template_submit" style="display: none;">
+	<img src='../../../res/img/wh.png'>
+	<div style="margin-bottom: 15px;">提交后，巡检单将不能修改，确定提交吗？</div>
+	<div style="margin-left: 80px;text-align: left;">下次计划日期：<input class="implement-dt" id="nextDt" type="text" style="width:310px;" placeholder="请选择下次计划日期" ng-value="data.nextDt | date:'yyyy-MM-dd'"> </div>
+	<div style="margin-top: 10px;margin-left: 80px;text-align: left;">
+		<span style="display:inline-block;width: 95px;text-align: right;">下次实施人：</span>
+		<aek-select class="inspection-execute" list="data.nextUserList" change="changeNextUser" item="data.currentNextUser" style="width: 310px;"></aek-select>
+	</div>
+	<div style="margin-left: 90px;margin-top: -5px;overflow: hidden;">
+		<span style="float: left;margin-top:5px;display: inline-block;">实际验收人：</span>
+		<div class="implement-accept">
+			<span ng-repeat="v in data.chooseUserList">{{v.realName}}<em ng-if="$index < (data.chooseUserList.length - 1)">； </em></span>
+		</div>
+	</div>
+	<div style="margin-left: 180px;text-align: left;color: #4baaf6;">
+		<span style="cursor: pointer;" ng-show="!data.showAccept" ng-click="data.showAccept=true">选择验收人</span>
+		<span style="cursor: pointer;" ng-show="data.showAccept" ng-click="data.showAccept=false">收起验收人</span>
+		<span style="cursor: pointer;" ng-click="clearAcceptUsers()">清空验收人</span>
+	</div>
+	<div style="height: 50px;" ng-show="!data.showAccept"></div>
+	<div style="width:400px;height:200px;margin-left: 180px;border:1px solid #dcdcdc;overflow-y: auto;" ng-show="data.showAccept">
+		<table class="implement-swrap">
+			<tr ng-repeat="v in data.acceptUserList" ng-click="chooseUserFun(v)">
+				<td>
+					<input type="checkbox" ng-if="v.checked" checked>
+					<input type="checkbox" ng-if="!v.checked">
+				</td>
+				<td>{{v.realName}}</td>
+				<td style="white-space: nowrap;">{{v.mobile}}</td>
+			</tr>
+		</table>
+	</div>
+</div>

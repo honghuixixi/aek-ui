@@ -1,0 +1,8 @@
+<div class="meeting">
+    <div class="meeting-menu">
+        <div class="meeting-menu-item" ng-class="{'active': data.menu == item.cls}" ng-repeat="item in data.menus" ng-if="item.right">
+            <a class="{{item.cls}}" ui-sref="meeting.menu.{{item.cls}}">{{item.name}}</a>
+        </div>
+    </div>
+    <div class="meeting-content" ui-view></div>
+</div>

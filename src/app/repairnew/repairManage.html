@@ -1,0 +1,174 @@
+<div class="fy_repairNewBill">
+  <div class="fy_repairNewBillHead">
+    <a class="fy_repairNewBillHeadBtn"  ui-sref="repair.manage({tenantId:($stateParams.tenantId||$localStorage.userInfo.tenantId)})" ui-sref-opts="{reload:true}" href='javascript:;'>取消</a>
+    <a class="fy_repairNewBillHeadTitle"  ui-sref="repair.manage({tenantId:($stateParams.tenantId||$localStorage.userInfo.tenantId)})" ui-sref-opts="{reload:true}" href='javascript:;'><span style="color: #999;">维修管理</span></a><span style="color: #666">>新建维修申请</span><a ui-sref="repair.applyDetail({tenantId:1,billApplyId:38})"></a>
+  </div>
+  <div class="fy_repairNewBillBody">
+    <div class="assetsDesc">
+      <a href="javascript:;" ng-class='{assetsDescCur:assetsDesc==1}' ng-click='assetsDescCg(1)'>固定资产报修</a><a href="javascript:;" ng-class='{assetsDescCur:assetsDesc==2}' ng-click='assetsDescCg(2)'>非固定资产报修</a>
+    </div>
+    <div ng-if='assetsDesc==1'>
+      <div class="repairAddDevHead">
+        <div class="repairAddDevInput m-r-sm">
+              <input type="text" placeholder="设备名称/编号" ng-model='$parent.searchDeptCon' />
+        </div><div class="repairAddDevSearch">
+              <a href="javascript:;" class="repairBTN" ng-click='searchDeptAndOffice()'>搜索</a>
+        </div><i class="verticalAdjust"></i>
+      </div>
+      <table border="0" cellspacing="0" cellpadding="0" class="repairSelectTable">
+          <tbody>
+          <tr>
+              <th class="b-l-d5d5d5">设备编号</th>
+              <th>设备名称</th>
+              <th>规格型号</th>
+              <th>院内编码</th>
+              <th>生产厂家</th>
+              <th>所在部门</th>
+              <th>启用日期</th>
+              <th>保修期至</th>
+              <th class="b-r-d5d5d5">操作</th>
+          </tr>
+          <tr ng-repeat="tr in addData" class="repairAddDevTableTr" ng-click="checkClick($event,tr)">
+              <td style="width: 11.8%;max-width:80px;" class="repairTdF">{{tr.assetsNum}}</td>
+              <td style="width: 14.2%;max-width:240px;">{{tr.assetsName}}</td>
+              <td style="width: 10%;max-width:170px;">{{tr.assetsSpec}}</td>
+              <td style="width: 10%;max-width:170px;">{{tr.serialNum}}</td>
+              <td style="width: 14.8%;max-width:250px;">{{tr.factoryName}}</td>
+              <td style="width: 11.8%;max-width:200px;">{{tr.deptName}}</td>
+              <td style="width: 8.2%;max-width:100px;"><div>{{tr.startUseDate}}</div></td>
+              <td style="width: 8.2%;max-width:100px;"><div>{{tr.warrantyDate}}</div></td>
+              <td style="width: 10.3%;max-width:50px;" class="repairTdE"><a href="javascript:;" ui-sref='repair.newweixiu({status:0,assetsId:tr.id,tenantId:($stateParams.tenantId||$localStorage.userInfo.tenantId)})'>维修</a></td>
+          </tr>
+          <tr ng-hide='onloading||nocontent'><td colspan="9"></td></tr>
+          <tr class="repairAddDevNoTr" ng-show="nocontent">
+              <td colspan="9" class="">
+                  <img src="../../res/img/nocontent.png" alt=""><span class="m-l-lg">暂无数据</span>
+              </td>
+          </tr>
+          <tr class="repairAddDevNoTr" ng-show="onloading">
+              <td colspan="9" class="">
+                  <img src="../../res/img/loading2.gif" alt=""><span class="verticalAlignMiddle"></span>
+              </td>
+          </tr>
+          </tbody>
+      </table>
+      <span ng-hide='onloading||nocontent' data-ng-include=" 'src/tpl/newPageInfo.html' "></span>
+    </div>
+    <div ng-if='assetsDesc==2'>
+      <form class="assets2Info">
+        <div class="assets2InfoOne">
+          <div class="assets2InfoOneHead"><em>*</em><span>设备名称</span></div>
+          <div class="assets2InfoOneBody">
+            <div class="assets2InfoOneShow"><input type="text" ng-model='asset2.assetsName' maxlength="40" ng-change='assetInfoCg("assetsName")' placeholder='请输入，40字符以内'></div>
+            <div class="assets2InfoOneErr"><span ng-if='asset2.assetsNameErr'>该项为必填项</span></div>
+          </div>
+        </div>
+        <div class="assets2InfoOne">
+          <div class="assets2InfoOneHead"><em>*</em><span>所在位置</span></div>
+          <div class="assets2InfoOneBody">
+            <div class="assets2InfoOneShow"><input type="text" ng-model='asset2.assetsLocal' maxlength="40" ng-change='assetInfoCg("assetsLocal")' placeholder='请输入，40字符以内'></div>
+            <div class="assets2InfoOneErr"><span ng-if='asset2.assetsLocalErr'>该项为必填项</span></div>
+          </div>
+        </div>
+        <div class="assets2InfoOne">
+          <div class="assets2InfoOneHead"><em>*</em><span>所在部门</span></div>
+          <div class="assets2InfoOneBody">
+            <div class="assets2InfoOneShowList">
+              <input type="text" class=" dropdown-toggle" data-toggle="dropdown" readonly="true" placeholder='请选择' ng-model='asset2.assetsDeptName'>
+              <ul class="dropdown-menu assets2InfoOneList">
+                <li ng-repeat='item in orgList' ng-click='setDeptName(item)'>{{item.name}}</li>
+              </ul>
+            </div>
+            <div class="assets2InfoOneErr"><span ng-if='asset2.deptErr'>该项为必填项</span></div>
+          </div>
+        </div>
+        <div class="assets2InfoOne">
+          <div class="assets2InfoOneHead"><span>设备编号</span></div>
+          <div class="assets2InfoOneBody">
+            <div class="assets2InfoOneShow"><input type="text" ng-model='asset2.assetsNum' maxlength="40" placeholder='请输入，40字符以内'></div>
+            <div class="assets2InfoOneErr"></div>
+          </div>
+        </div>
+        <div class="assets2InfoOne">
+          <div class="assets2InfoOneHead"><span>规格型号</span></div>
+          <div class="assets2InfoOneBody">
+            <div class="assets2InfoOneShow"><input type="text" ng-model='asset2.assetsSpec' maxlength="40" placeholder='请输入，40字符以内'></div>
+            <div class="assets2InfoOneErr"></div>
+          </div>
+        </div>
+        <div class="repairProgress0 fy_repairTypeRadio1">
+        <div class="fy_repaiTypeRadios m-b" ng-if='!lookRepairReportConShow'>
+        <span class='fy_repaiTypeRadioHead'>接单类型：</span><div class="fy_repairTypeRadio" ng-click='radioC(1)'>
+          <div class="box1">
+            <input type="radio" id="type-0" name="repairKind" class="input" ng-model='radioT' ng-value='1' /><span></span>
+          </div><label for="type-0">送修</label>
+        </div><div class="fy_repairTypeRadio" ng-click='radioC(2)'>
+          <div class="box1">
+            <input type="radio" id="type-1" name="repairKind" class="input" ng-model='radioT' ng-value='2' /><span></span>
+          </div><label for="type-1">现场维修</label>
+        </div>
+      </div>
+      <div class="editRepairReportContentOne repairType3ContentOne m-t-sm" ng-if='radioT==1'>
+          <span class='editRepairReportContentHead'>送修人：</span><input type="text" ng-model='sendInfo.sendPerson' maxlength="40" placeholder='请输入，40字符以内'>
+      </div>
+      <div class="editRepairReportContentOne repairType3ContentOne m-t-sm" ng-if='radioT==1'>
+          <span class='editRepairReportContentHead'>联系方式：</span><input type="text" ng-model='sendInfo.sendPhone' maxlength="40" placeholder='请输入，40字符以内'>
+      </div>
+      <div style="margin: 10px;overflow: hidden;">
+        <div class="fy_repairTitle" style="float: left;margin-right: 6px;">故障现象</div>
+        <textarea class="fy_repairTextarea" ng-model='$parent.faultDesc' maxlength="300" cols="30" rows="10"></textarea>
+        <div class="assets2InfoOneErr" ng-if='faultDescErr'>请填写故障现象</div>
+      </div>
+      <div class="fy_repairErrDes"><span>常见故障现象：</span><div class="fy_repairErrDesCon"><a href="javascript:;" ng-click='repairDesAdd("故障停机；")'>故障停机</a><a href="javascript:;" ng-click='repairDesAdd("部分功能失效；")'>部分功能失效</a><a href="javascript:;" ng-click='repairDesAdd("附件损坏；")'>附件损坏</a><a href="javascript:;" ng-click='repairDesAdd("不规则或偶发事件；")'>不规则或偶发事件</a><a href="javascript:;" ng-click='repairDesAdd("性能偏离指标；")'>性能偏离指标</a><a href="javascript:;" ng-click='repairDesAdd("开机后死机；")'>开机后死机</a><a href="javascript:;" ng-click='repairDesAdd("其他；")'>其他</a></div></div>
+      <div class="fy_repairTitle">故障图片</div>
+      <div class="hd_msgImg">
+              <input  type="file" multiple class="muchinput" ng-disabled="!delactInput">
+              <input  type="file" multiple class="muchinput" ng-disabled="delactInput">
+              <input  type="file" onchange="angular.element(this).scope().replaceImg()" class="oneinput">
+              <span ng-repeat="l in url" class="hd_images" ng-mouseenter="change=!change" ng-mouseleave="change=!change"><img src="{{l}}"><div ng-show="change" class="hd_imgDelet"><i ng-click="replace($index)">更换</i><i ng-click="delect($index)">删除</i></div></span>
+              <span class="hd_upload" ng-click="upload()" ng-show="clickAdd" ></span><span class="hd_alert">图片仅支持png、jpg、jpeg格式，<br>单张大小不超过2M，最多可添加5张图片。</span>
+          </div>
+          <div class="fy_repairTitle">附件</div>
+          <div>
+            <tre-upload-file file-list='repairFiles' state='0' input-id='repairFiles'></tre-upload-file>
+          </div>
+          <div class="fy_repairTitle m-t">选择接单人：</div>
+              <div class="fy_repairOrderTaker">
+            <span>{{orderTaker.realName}}</span><!-- <span class="m-l">{{orderTaker.mobile}}</span> -->
+            <a href="javascript:;" ng-click="choosePeople(1)">选择人员</a>
+          </div>
+          <div class="assets2InfoOneErr" ng-if='orderTakerErr'>请选择接单人</div>
+        </div>
+        <div class="assets2InfoBtn"><a href="javascript:;" ng-click='submitAsset()'>提交申请</a></div>
+      </form>
+    </div>
+  </div>
+</div>
+<!--待接单时的选择维修人-->
+<div class='repairAlertConfirm' style="display: none" id="namemanAlert">
+  <div class="repairAlertConfirmCon ">
+    <div  style="margin-top: 30px">
+      <div style="height: 300px;overflow-y: auto">
+        <div class="hd_newTlt" >
+          <span>姓名</span>
+          <span>手机号</span>
+        </div>
+        <ul class="hd_newTltul" >
+          <li ng-click="choosemanPeople(l,$index)" ng-repeat="l in peopleListman track by $index">
+            <span>{{l.realName}}</span>
+            <span>{{l.mobile}}</span>
+            <span >
+          <img src="../../res/img/pass1.png" alt="" ng-if="_indexId == l.id">
+        </span>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+    <div class="repairAlertConfirmBtn" style="margin-top: 25px">
+      <div style="color: red;text-align: left;padding-left: 30px" ng-if="newmanError">请选择接单人</div>
+      <a href="javascript:;" ng-click='choosePeopleYesman()' class="repairAlertConfirmBtnY">确定</a><a href="javascript:;" ng-click='peopleCancle()'>取消</a>
+    </div>
+  </div>
+</div>
+</div>

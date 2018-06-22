@@ -1,0 +1,36 @@
+<div class="quality-nav">
+    <span>质控填报</span>
+    <a class="quality-btn quality-btn-add" ui-sref="quality.menu.add">新增填报</a>
+</div>
+<quality-list search="getApplyMdReportPage" list="data.server.list" status-options="data.local.typeOptions" status="0" placeholder="质控单号/设备编号/设备名称">
+    <table class="quality-list-table">
+        <thead>
+            <tr>
+                <td>质控检测单号</td>
+                <td>设备编号</td>
+                <td>设备名称</td>
+                <td>规格型号</td>
+                <td>所在部门</td>
+                <td>检测日期</td>
+                <td>状态</td>
+                <td>操作</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="v in data.server.list">
+                <td style="white-space: nowrap;">{{v.mdNum}}</td>
+                <td>{{v.assetsNum}}</td>
+                <td>{{v.assetsName}}</td>
+                <td>{{v.assetsSpec}}</td>
+                <td>{{v.deptName}}</td>
+                <td>{{v.checkTime | date:'yyyy-MM-dd'}}</td>
+                <!-- <td>{{v.checkTime | date:'yyyy-MM-dd HH:mm'}}</td> -->
+                <td>{{data.local.STATUS[v.status]}}</td>
+                <td style="white-space: nowrap;">
+                    <a ui-sref="quality.menu.add({id: v.id})" ng-if="v.status == 1">查看</a>
+                    <a ui-sref="quality.menu.applyinfo({id: v.id})" ng-if="v.status != 1">查看</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</quality-list>

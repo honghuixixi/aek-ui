@@ -1,0 +1,181 @@
+<!-- detail -->
+<div class="org-content-body">
+    <!-- alert -->
+    <div id="alertOrg" ng-show="alertCon">
+        <div class="alertContent">
+            <div class="alertImg"><img src='{{layerImg}}'></div>
+            <p ng-class="orgOperate == '恢复' && 'mb-58'" class="font14px acolor666">确定{{orgOperate}}机构 ({{orgId}}){{orgName}}吗？</p>
+            <div ng-if="orgOperate != '恢复'" class="alertTip font13px acolorred">
+                <span ng-class="orgOperate == '删除' && 'ali-cen'">{{orgTip}}</span>
+            </div>
+            <div class="alertBtn">
+                <a href="javascript:;" ng-click='operateOrg()' class="btnyes">确定</a><a href="javascript:;" ng-click='closeIndex()' class="btncancel">取消</a>
+            </div>
+        </div>
+    </div>
+
+    <!--当前租户可添加模块列表-->
+    <div id="alertModel" ng-show="alertMod">
+        <div class="modelList">
+            <ul ng-hide="modeNull">
+                <li ng-repeat="item in models">
+                    <input name="checkModel" data-mid="{{item.id}}" id="checkid{{$index}}" type="checkbox" ng-checked="all">
+                    <label class="check check-label opcity checkbox" for="checkid{{$index}}">
+                        <i class="fa fa-check"></i></label>
+                    <label for="checkid{{$index}}" class="acolor666 font13px">{{item.name}}</label>
+                </li>
+            </ul>
+            <div style="text-align: center;" ng-show="modeNull"><div style="padding-top:65px;padding-bottom:0px;" class="alertImg"><img src="../../../res/img/icon20.png"></div><div class="pad-fifty2">已经没有可添加的模块。</div></div>
+        </div>
+        <div style="padding-right:24px;text-align:right;" class="alertBtn">
+            <a href="javascript:;" ng-click='toChild()' class="btnyes">确定</a><a href="javascript:;" ng-click='closeIndex()' class="btncancel" style="margin-right:0px;">取消</a>
+        </div>
+    </div>
+
+    <!-- title -->
+    <div class="org-title acolor999">
+        <!--<div class="title-right">-->
+            <!--<div class="selectWrap">-->
+                <!--<div class="selector" ng-click='listShow("typeList")'><span class="font14px">{{delayModel}}</span><a href='javascript:;'></a></div>-->
+                <!--<div class="options" ng-show='delayList'>-->
+                    <!--<ul class="font12px">-->
+                        <!--<li ng-repeat='item in optionDelay' ng-click='optionIt(item)'>{{item.name}}</li>-->
+                    <!--</ul>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<a href="javascript:;" ng-click="orgSet()" class="orgSet font14px">机构设置</a>-->
+            <!--<a ng-if="!data.tenant.enable" href="javascript:;" class="orgRecover font14px" ng-click='alertContent(2)'>恢复机构</a>-->
+            <!--<a ng-if="data.tenant.enable" href="javascript:;" class="orgStop font14px" ng-click='alertContent(1)'>停用机构</a>-->
+            <!--<a href="javascript:;" class="orgDel font14px" ng-click='alertContent(0)'>删除机构</a>-->
+        <!--</div>-->
+        <div class="title-left font15px">
+            <!-- <a ui-sref='org.index' class="acolor666">机构管理</a><em>></em> --><span class='acolor666'>机构信息</span>
+        </div>
+    </div>
+    <!-- /title -->
+    <!-- body -->
+    <div class="org-body acolor666">
+        <div class="headWrap">
+            <div class="body-head">
+                <!--<div class="head-right">-->
+                    <!--<a ng-click="toOrgList()" class="font13px acolorblue ahoverblue">前往此机构首页</a>-->
+                <!--</div>-->
+                <div class="head-left">
+                    <span class="font15px">{{data.tenant.name}}</span><em ng-if="data.tenant.enable" class="font12px enable">启用中</em><em ng-if="data.tenant && !data.tenant.enable" class="font12px">已停用</em>
+                </div>
+            </div>
+            <!-- table -->
+            <table class="font13px" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td class="tdHeader"></td>
+                    <td class="tdDataer"></td>
+                    <td class="tdHead"></td>
+                    <td class="tdData"></td>
+                </tr>
+                <tr>
+                    <td>ID</td>
+                    <td id="nowId" data-nowId="{{data.tenant.id}}" class='acolor999'>{{data.tenant.id}}</td>
+                    <td>原始管理员</td>
+                    <td class='acolor999'><a target="_blank" ui-sref="usermain.detail.roleset({userId:data.tenant.adminId,tenantId:data.tenant.id})">{{data.tenantAdmin.realName}}</a></td>
+                </tr>
+                <tr>
+                    <td>创建人</td>
+                    <td class='acolor999'>{{data.createName}}</td>
+                    <!--<td>来源</td>-->
+                    <!--<td class='acolor999'>{{data.tenant.origin == 1 ? '后台创建' : '前台注册'}}</td>-->
+                    <td>手机号</td>
+                    <td class='acolor999'>{{data.tenantAdmin.mobile}}</td>
+                </tr>
+                <tr>
+                    <td>创建时间</td>
+                    <td class='acolor999'>{{data.tenant.createTime}}</td>
+                    <!--<td>审核状态</td>-->
+                    <!--<td class='acolor999'>-->
+                    <!--<span ng-if="data.tenant.auditStatus == 1">待审核</span>-->
+                    <!--<span ng-if="data.tenant.auditStatus == 2">自动通过</span>-->
+                    <!--<span ng-if="data.tenant.auditStatus == 3">人工通过</span>-->
+                    <!--<span ng-if="data.tenant.auditStatus == 4">已拒绝</span>-->
+                    <!--</td>-->
+                    <td>邮箱</td>
+                    <td class='acolor999'>{{data.tenantAdmin.email}}</td>
+                </tr>
+                <!--<tr>-->
+                <!--<td>创始人</td>-->
+                <!--<td class='acolor999'>{{data.createName}}</td>-->
+                <!--<td></td>-->
+                <!--<td class='acolor999'></td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                <!--<td>创始时间</td>-->
+                <!--<td class='acolor999'>{{data.tenant.createTime}}</td>-->
+                <!--<td></td>-->
+                <!--<td class='acolor999'></td>-->
+                <!--</tr>-->
+                <tr>
+                    <td colspan="4"><div class="tdLine"></div></td>
+                </tr>
+                <tr>
+                    <td>机构类型</td>
+                    <td class='acolor999'>
+                        <span ng-if="data.tenant.tenantType == 1">医疗机构</span>
+                        <span ng-if="data.tenant.tenantType == 2">监管机构</span>
+                        <span ng-if="data.tenant.tenantType == 3">设备供应商</span>
+                        <span ng-if="data.tenant.tenantType == 4">设备维修商</span>
+                        <span ng-if="data.tenant.tenantType == 5">配件供应商</span>
+                    </td>
+                    <td>账户类型</td>
+                    <td class='acolor999'>
+                        <span ng-if="data.tenant.commercialUse == 0">试用</span>
+                        <span ng-if="data.tenant.commercialUse == 1">正式</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>所在地区</td>
+                    <td class='acolor999'>{{data.tenant.province}} - {{data.tenant.city}} -  {{data.tenant.county}}</td>
+                    <td>上级行政机构</td>
+                    <td class='acolor999'>{{data.tenant.manageTenantName}}</td>
+                </tr>
+                <tr>
+                    <td>是否测试机构</td>
+                    <td class='acolor999'>
+                        <span ng-if="data.tenant.trial == 0">是</span>
+                        <span ng-if="data.tenant.trial == 1">否</span>
+                    </td>
+                    <td>子机构限制</td>
+                    <td class='acolor999'>
+                        <span ng-if="data.tenant.subTenantLimit == 0 ">不可创建</span>
+                        <span ng-if="data.tenant.subTenantLimit != 0">已创建{{data.tenant.subTenant }}个/可创建{{data.tenant.subTenantLimit}}个</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>到期时间</td>
+                    <td class='acolor999'>{{data.tenant.expireTime}}</td>
+                </tr>
+            </table>
+            <!-- /table -->
+            <span data-ng-include=" 'src/tpl/newPageInfo.html' "></span>
+        </div>
+        <!-- section -->
+        <div class="home-model-bottom" style="padding: 0px 15px;background-color: #fff;min-height: 365px">
+            <!-- head -->
+            <div class="section">
+                <!--<div class="add-section" ng-show='sections.model'>-->
+                    <!--<a href="javascript:;" ng-click="alertModel()" class="font13px">添加系统模块</a><i class="verticalAlign"></i>-->
+                <!--</div>-->
+                <div class="section-btn">
+                    <a ui-sref='home.superviseOrg.model({id:data.tenant.id})' class="font14px acolor666" ng-class="{'aActive': sections.model}">模块</a>
+                    <a ng-if="userInfo.authoritiesStr.indexOf('SYS_USER_DEPT_VIEW') != -1" ui-sref='home.superviseOrg.user({id:data.tenant.id})' class="font14px acolor666" ng-class="{'aActive': sections.user,'lastMenu':userInfo.authoritiesStr.indexOf('SYS_SUPERVISE_TENANT_LIST_VIEW') == -1}">用户</a>
+                    <a ng-if="userInfo.authoritiesStr.indexOf('SYS_SUPERVISE_TENANT_LIST_VIEW') != -1" ui-sref='home.superviseOrg.child({id:data.tenant.id})' class="font14px acolor666 lastMenu" ng-class="{'aActive': sections.child}">子机构</a>
+                    <!--<a ui-sref='home.organization.operate({id:data.tenant.id})' class="font14px acolor666 lastMenu" ng-class="{'aActive': sections.operate}">操作记录</a>-->
+                    <div class="subline"></div>
+                </div>
+            </div>
+            <!-- /section -->
+            <div class="section_content" style="padding-bottom:20px ;" ui-view></div>
+            <div class="fixdWrap" ng-show='fixdWrapShow' ng-click='menuHide()'></div>
+        </div>
+    </div>
+    <!-- /body -->
+</div>
+<!-- /detail

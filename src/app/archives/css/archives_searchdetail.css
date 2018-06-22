@@ -1,0 +1,320 @@
+.archives-content .archives-detail-btn {
+    float: right;
+    width: 80px;
+    margin-left: 10px;
+    text-align: center;
+}
+.archives-content .archives-cancle {
+    border: 1px solid #ccc;
+    background-color: transparent;
+    color: #333;
+}
+.archives-searchdetail .search-archives {
+    margin: 0;
+    padding: 0;
+    font-size: 13px;   
+}
+.archives-searchdetail .search-archives dt {
+    float: left;
+    width: 80px;
+    font-weight: 300;
+    color: #000;
+    text-align: right;
+}
+.archives-searchdetail .search-archives dd {
+    margin-left: 85px;
+    margin-bottom: 5px;
+    color: #999;
+}
+.archives-searchdetail .search-tab{
+    margin-top: 20px;
+    border-bottom: 1px solid #eee;
+    overflow: hidden;
+}
+.archives-searchdetail .search-tab .search-tab-item {
+    float: left;
+    display: inline-block;
+    width: 110px;
+    height: 40px;
+    font-size: 13px;
+    line-height: 40px;
+    text-align: center;
+    cursor: pointer;
+}
+.archives-searchdetail .search-tab-item:hover,
+.archives-searchdetail .search-tab-current {
+    color: #F8931F;
+    border-bottom: 2px solid #F8931F;
+}
+.archives-searchdetail .tab2-group {
+    border-left: 2px solid #F7931E;
+    line-height: 14px;
+    margin: 5px 0px 5px 10px;
+    padding-left: 10px;
+    font-size: 14px;
+    font-weight: bold;
+}
+.archives-searchdetail .tab-form dt {
+    line-height: 32px;
+}
+.archives-searchdetail .tab-form dd {
+    margin-bottom: 10px;
+}
+.archives-searchdetail .tab-form .aek-select {
+    width: 400px;
+}
+.archives-searchdetail .tab-form .aek-select input {
+    background-position-x: 97%;
+}
+.archives-searchdetail .tab-form input[type="text"] {
+    width: 400px;
+    height: 32px;
+    padding: 0 10px;
+    font-size: 13px;
+    border: 1px solid #dcdcdc;
+    outline: 0;
+}
+.archives-searchdetail .tab-form textarea {
+    width: 400px;
+    height: 100px;
+    padding: 10px;
+    font-size: 13px;
+    line-height: 24px;
+    border: 1px solid #dcdcdc;
+    outline: 0;
+    resize: none;
+}
+.archives-searchdetail .tab-form-date {
+    background-image: url(../../../../res/img/date-icon.png);
+    background-position: 376px 6px;
+    background-repeat: no-repeat;
+}
+.archives-searchdetail .tab2 dt {
+    width: 150px;
+}
+.archives-searchdetail .tab2 dd {
+    margin-left: 155px;
+    word-break: break-all;
+}
+.archives-searchdetail .tab3 dt {
+    width: 110px;
+}
+.archives-searchdetail .tab3 dd {
+    margin-left: 110px;
+}
+.archives-searchdetail .tab5 {
+    margin-top: 20px;
+    overflow: hidden;
+}
+.archives-searchdetail .tab5-txt {
+    color: #999;
+}
+.archives-searchdetail .tab5 .tab5-img {
+    position: relative;
+    display: inline-block;
+    width: 80px;
+    height: 80px;;
+}
+.archives-searchdetail .tab5 .tab5-img img {
+    width: 80px;
+    height: 80px;
+    cursor: pointer;
+}
+.archives-searchdetail .tab5 .tab5-img .img1 {
+    display: block;
+}
+.archives-searchdetail .tab5 .tab5-img .img2 {
+    display: none;
+}
+.archives-searchdetail .tab5 .tab5-img:hover .img1 {
+    display: none;
+}
+.archives-searchdetail .tab5 .tab5-img:hover .img2 {
+    display: block;
+}
+.archives-searchdetail .tab5 .tab5-img .tab5-img-edit {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: none;
+    font-size: 13px;
+    line-height: 30px;
+    text-align: center;
+    background-color: rgba(0,0,0,.5);
+    color: #fff;
+    overflow: hidden;
+}
+.archives-searchdetail .tab5 .tab5-img:hover .tab5-img-edit {
+    display: block;
+}
+.tab5-img-edit span {
+    display: block;
+    float: left;
+    width: 50%;
+    cursor: pointer;
+}
+.archives-searchdetail .tab5 .tab-file-item {
+    width: 410px;
+    height: 110px;;
+}
+.archives-searchdetail .tab5 .tab-file-item dd {
+    margin-left: 90px;
+}
+.archives-searchdetail .tab-file {
+    margin-top: 20px;
+    overflow: hidden;
+}
+.archives-searchdetail .tab-file-item {
+    position: relative;
+    float: left;
+    width: 400px;
+    height: 138px;
+    margin: 0 0 20px 20px;
+    padding: 20px;
+    border: 1px solid #dcdcdc;
+}
+.archives-searchdetail .tab-file-item dl {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+.archives-searchdetail .tab-file-item dt {
+    float: left;
+    width: 80px;
+    font-weight: 300;
+    color: #000;
+    text-align: right;
+}
+.archives-searchdetail .tab-file-item dd {
+    margin-left: 80px;
+}
+.archives-searchdetail .tab-file-row {
+    width: 278px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.archives-searchdetail .tab-file-edit-div {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+    display: none;
+    line-height: 30px;
+    background-color: rgba(0,0,0,.5);
+    color: #fff;
+    text-align: center;
+    overflow: hidden;
+    cursor: pointer;
+}
+.archives-searchdetail .tab-file-edit:hover .tab-file-edit-div {
+    display: block;
+}
+.archives-searchdetail .tab-file-edit span {
+    display: inline-block;
+    float: left;
+    width: 50%;
+    height: 30px;
+}
+.modal_content_form {
+    margin: 20px 40px 0 20px;;
+    padding: 0;
+    font-size: 13px;
+    overflow: hidden;
+}
+.modal_content_form dt {
+    float: left;
+    width: 80px;
+    line-height: 32px;
+    font-weight: 300;
+    text-align: right;
+}
+.modal_content_form dt i {
+    color: #f00;
+}
+.modal_content_form dd {
+    margin-left: 80px;
+    margin-bottom: 10px;
+    font-size: 13px;
+    line-height: 32px;
+}
+.modal_content_form input[type="text"] {
+    width: 300px;
+    height: 32px;
+    padding: 0 10px;
+    font-size: 13px;
+    line-height: 32px;
+    border: 1px solid #dcdcdc;
+    outline: 0;
+}
+.modal_content_form_remove {
+    margin-left: 5px;
+    color: #f00;
+    cursor: pointer;
+}
+.modal_content_form_date {
+    background-image: url(../../../../res/img/date-icon.png);
+    background-position: 276px 6px;
+    background-repeat: no-repeat;
+}
+.archives-searchdetail .tab-table {
+    width: 100%;
+    margin-top: 15px;
+    border-collapse: collapse;
+    border: 1px solid #edf1f2;
+}
+.archives-searchdetail .tab-table td {
+    padding: 10px;
+    font-size: 13px;
+    border-bottom: 1px solid #edf1f2;
+}
+.archives-searchdetail .tab-table thead td {
+    background-color: #e5e5e5;
+}
+
+/* 维修记录 */
+.archives-searchdetail .tab-search {
+    margin-top: 15px;
+    font-size: 13px;
+    line-height: 32px;
+}
+.archives-searchdetail .tab-search-keyword {
+    width: 300px;
+    height: 32px;
+    padding: 0 10px;
+    border: 1px solid #dcdc;
+    outline: 0;
+}
+.archives-searchdetail .tab-search-date {
+    width: 150px;
+    height: 32px;
+    padding: 0 10px;
+    border: 1px solid #dcdc;
+    outline: 0;
+    background-image: url(../../../../res/img/date-icon.png);
+    background-position: 126px 6px;
+    background-repeat: no-repeat;
+}
+
+/* 报损报告 */
+.template-print {
+	padding: 10px 15px;
+}
+
+.template-print table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.template-print td {
+	padding: 8px 10px;
+	font-size: 14px;
+	border: 1px solid #ccc;
+}
+
+.template-print thead td {
+	background-color: #f5f5f5;
+	white-space: nowrap;
+}

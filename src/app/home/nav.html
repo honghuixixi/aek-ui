@@ -1,0 +1,61 @@
+<!-- list -->
+<ul class="nav" ng-controller="navCtrl">
+    <li ng-class="{active: $state.includes('**.tre.**')}" class="ng-scope parent-nav" ng-cloak>
+        <ul class="nav  dk ng-scope">
+            <li ng-if='userInfo.nowOrgType!=3' ng-class="{active: $state.includes('**.home.general')}" class="ng-scope" ng-cloak>
+                <a ui-sref="home.general({id:$stateParams.id||$stateParams.tenantId||$localStorage.userInfo.tenantId})" ng-cloak>
+                    <span class="ng-binding homenav">
+                        <img class="first" src="../../../res/img/gl.png" alt="">
+                        <img class="second" src="../../../res/img/gldj.png" alt="" ng-show="false">
+                        <span>概览</span>
+                    </span>
+                </a>
+            </li>
+            <li ng-class="{active: $state.includes('**.home.use')}" class="ng-scope" ng-cloak>
+                <a ui-sref="home.use({id:$stateParams.id||$stateParams.tenantId||$localStorage.userInfo.tenantId})" ng-cloak>
+                    <span class="ng-binding homenav">
+                        <img class="first" src="../../../res/img/wdyy.png" alt="">
+                        <img class="second" src="../../../res/img/wdyydj.png" alt="" ng-show="false">
+                        <span>我的应用</span>
+                    </span>
+                </a>
+            </li>
+            <li ng-if="userInfo.nowOrgType == 0 || userInfo.nowOrgType == 1" ng-class="{active: $state.includes('**.home.organization.**')}"
+                class="ng-scope" ng-cloak>
+                <a ui-sref="home.organization.model({id:$stateParams.id||$stateParams.tenantId||$localStorage.userInfo.tenantId})" ui-sref-opts="{reload:true}"
+                    ng-cloak>
+                    <span class="ng-binding homenav">
+                        <img class="first" src="../../../res/img/jgxxdj.png" alt="">
+                        <img class="second" src="../../../res/img/jgxxyd.png" alt="" ng-show="false">
+                        <span>机构信息</span>
+                    </span>
+                </a>
+            </li>
+            <li ng-if="userInfo.nowOrgType == 2" ng-class="{active: $state.includes('**.home.superviseOrg.**')}" class="ng-scope" ng-cloak>
+                <a ui-sref="home.superviseOrg({id:$stateParams.id||$stateParams.tenantId||$localStorage.userInfo.tenantId})" ui-sref-opts="{reload:true}"
+                    ng-cloak>
+                    <span class="ng-binding homenav">
+                        <img class="first" src="../../../res/img/jgxxdj.png" alt="">
+                        <img class="second" src="../../../res/img/jgxxyd.png" alt="" ng-show="false">
+                        <span>机构信息</span>
+                    </span>
+                </a>
+            </li>
+            <li ng-if='userInfo.nowOrgType!=3' ng-class="{active: $state.includes('**.home.operation.**') || $state.includes('**.home.operationinfo.**')}" class="ng-scope" ng-cloak>
+                <a ui-sref="home.operation" ui-sref-opts="{reload:true}" ng-cloak>
+                    <span class="ng-binding homenav">
+                        <img class="first" src="../../../res/img/operation.png" alt="">
+                        <img class="second" src="../../../res/img/operation_check.png" alt="" ng-show="false">
+                        <span>操作说明</span>
+                    </span>
+                </a>
+            </li>
+            <!--<li ng-class="{active: $state.includes('**.home.notice')}" class="ng-scope">-->
+            <!--<a ui-sref="home.notice" ui-sref-opts="{reload:true}"  style="height: 36px">-->
+            <!--<span class="ng-binding homenav" ><img class="first" src="../../../res/img/ggxx.png" alt=""><img class="second" src="../../../res/img/ggxxdj.png" alt=""  ng-show="false"><span>系统公告</span><i class="number">26</i></span>-->
+            <!--</a>-->
+            <!--</li>-->
+        </ul>
+    </li>
+
+</ul>

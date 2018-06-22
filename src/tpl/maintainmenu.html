@@ -1,0 +1,17 @@
+<div class="maintain">
+	<div class="maintain-menu" ng-if="data.menu.length">
+		<div ng-class="data.menu === 'plan' ? 'maintain-menu-item active' : 'maintain-menu-item'" ng-if="data.limit.plan.hasView">
+			<a class="plan" ui-sref="maintain.menu.plan">保养计划</a>
+		</div>
+		<div ng-class="data.menu === 'implement' ? 'maintain-menu-item active' : 'maintain-menu-item'" ng-if="data.limit.implement.hasView">
+			<a class="implement2" ui-sref="maintain.menu.implement">保养实施</a>
+		</div>
+		<div ng-class="data.menu === 'template' ? 'maintain-menu-item active' : 'maintain-menu-item'" ng-if="data.limit.template.hasView">
+			<a class="template" ui-sref="maintain.menu.template">保养模板</a>
+		</div>
+		<div ng-class="data.menu === 'report' ? 'maintain-menu-item active' : 'maintain-menu-item'" ng-if="data.limit.report.hasView">
+			<a class="report" ui-sref="maintain.menu.report">保养报告查询</a>
+		</div>
+	</div>
+	<div class="maintain-content" ui-view></div>
+</div>

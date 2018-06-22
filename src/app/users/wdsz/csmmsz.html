@@ -1,0 +1,36 @@
+<div class="mySetWrap">
+	<div class="mySet">
+		<div class="toSet">
+			<div class="setTit">
+				<a ui-sref="main.users.wdsz.aqsz">安全设置</a><a ui-sref="main.users.wdsz.mmsz">密码设置</a><a ui-sref="main.users.wdsz.csmmsz" class='setTitNow'>初始密码设置</a>
+				<div class="setTitLine"></div>
+			</div>
+			<div class="pswSet">
+				<div class="firstPsw" ng-if='firstPsw.hadCode'><span>初始密码：</span><div><input type="password" ng-model='firstPsw.first' id="primary"><input type="text" ng-model='firstPsw.first' class="firstShow" ng-show='firstPsw.firstShow'>
+				<a href="javascript:;" ng-show='firstPsw.firstShow' ng-click='firstPsw.firstShow=!firstPsw.firstShow'><img ng-src="../../res/img/by2.png" class="hoverImg"><img ng-src="../../res/img/by1.png" alt=""></a>
+				<a href="javascript:;" ng-hide='firstPsw.firstShow' ng-click='firstPsw.firstShow=!firstPsw.firstShow'><img ng-src="../../res/img/zy2.png" class="hoverImg"><img ng-src="../../res/img/zy1.png" alt=""></a></div></div>
+				<!-- <div class="firstPsw" ng-if='!firstPsw.hadCode'><span>初始密码：</span><div><input type="password" ng-model='firstPsw.first' id="primary"><img ng-src="{{firstPsw.src}}" alt=""></div></div> -->
+			</div>
+			<div class="cspswBtn"><input type="submit" ng-value='firstPsw.pswctr' ng-click='firstPsw.resetCode=!firstPsw.resetCode'></div>
+			<div class="pswLeft" ng-class='{"pstLeft": firstPsw.resetCode}'>
+				<div class="leftTit">{{firstPsw.pswctr}}</div>
+				<form class="pswSet" id="pswSetL"><!--  ng-if='firstPsw.hadCode' -->
+				<div><span>原密码：</span><input type="password" ng-model='firstPsw.primary' name="primary" id="primary" required minlength='8'></div>
+					<label for="primary"></label>
+					<div><span>新密码：</span><input type="password" ng-model='firstPsw.newCode' id="newCode"></div>
+					<label for="newCode"><i>8-20位字符，可使用字母、数字或符号的组合</i></label>
+					<div><span>确认新密码：</span><input type="password" ng-model='firstPsw.repeatCode' id="repeatCode"></div>
+					<label for="repeatCode"><em ng-show='firstPsw.repeatCode!=firstPsw.newCode'>{{firstPsw.notRepeat}}</em></label>
+					<div class="pswBtn txtcenter"><a ng-click='firstPsw.resetCode=!firstPsw.resetCode'>确定</a><a ng-click='firstPsw.resetCode=!firstPsw.resetCode' class="pswCancel">取消</a></div>
+				</form>
+				<!-- <form class="pswSet" id="pswSetL" ng-if='!firstPsw.hadCode'>
+					<div><span>密码：</span><input type="password" ng-model='firstPsw.newCode' id="newCode"></div>
+					<label for="newCode"><i>8-20位字符，可使用字母、数字或符号的组合</i></label>
+					<div><span>确认密码：</span><input type="password" ng-model='firstPsw.repeatCode' id="repeatCode"></div>
+					<label for="repeatCode"><em ng-show='firstPsw.repeatCode!=firstPsw.newCode'>{{firstPsw.notRepeat}}</em></label>
+					<div class="pswBtn"><a ng-click='nextState()'>确定</a><a ng-click='cancel()' class="pswCancel">取消</a></div>
+				</form> -->
+			</div>
+		</div>
+	</div>
+</div>

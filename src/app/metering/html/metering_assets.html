@@ -1,0 +1,234 @@
+<div class="metering-nav">
+    <span>计量台账</span>
+    <span class="metering-btn metering-btn-add" ng-click="methods.addAssets()">新建非固定资产计量台账</span>
+</div>
+<div class="metering-swrap">
+    <div class="metering-search">
+        <aek-select list="data.local.statusOptions" change="methods.changeStatu" item="data.local.currentStatu" style="width: 110px;"></aek-select>
+        <aek-select list="data.local.typeOptions" change="methods.changeType" item="data.local.currentType" style="width: 150px;"></aek-select>
+        <aek-select list="data.local.departOptions" change="methods.changeDepart" item="data.local.currentDepart"></aek-select>
+        <input class="metering-search-keyword" type="text" placeholder="设备名称/计量编号" maxlength="40" ng-model="data.local.keyword">
+        <span>&nbsp;&nbsp;&nbsp;&nbsp;下次检定日期</span>
+        <input class="metering-search-date" id="nextDateStart" type="text" readonly placeholder="选择日期" ng-value="data.local.nextDateStart | date:'yyyy-MM-dd'">
+        <span>至</span>
+        <input class="metering-search-date" id="nextDateEnd" type="text" readonly placeholder="选择日期" ng-value="data.local.nextDateEnd | date:'yyyy-MM-dd'">
+        <span class="metering-btn" ng-click="methods.search()">搜索</span>
+    </div>
+    <table class="metering-list-table">
+        <thead>
+            <tr>
+                <td colspan="2">设备信息</td>
+                <td>规格型号</td>
+                <td>供应商</td>
+                <td>所在部门</td>
+                <td>计量分类</td>
+                <td>计量周期（月）</td>
+                <td>下次检定日期</td>
+                <td>状态</td>
+                <td>操作</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="v in data.server.list">
+                <td style="width: 70px;">
+                    <img src="../res/img/11.png" ng-if="!(v.imgUrl && v.imgUrl.length)">
+                    <img class="metering-img" ng-src="/api/file{{v.imgUrl}}" ng-if="v.imgUrl && v.imgUrl.length">
+                </td>
+                <td style="padding-left: 0;">
+                    <dl class="metering-dl">
+                        <dt>设备名称：</dt>
+                        <dd>
+                            <span>{{v.assetsName}}</span>
+                            <div class="tip-type" ng-if="v.measureManageType == 2">{{v.measureManageType | measureManageType}}</div>
+                            <div class="tip-type" ng-if="v.status == 1">{{v.status | jlAssetsStatus}}</div>
+                        </dd>
+                        <dt>计量编号：</dt>
+                        <dd>{{v.measureNum }}</dd>
+                        <dt>生产商：</dt>
+                        <dd>{{v.factoryName }}</dd>
+                    </dl>
+                </td>
+                <td>{{v.assetsSpec }}</td>
+                <td>{{v.splName }}</td>
+                <td>{{v.assetsDeptName }}</td>
+                <td>{{v.measureCategory | measureCategory}}</td>
+                <td style="text-align: center;">{{v.measureCycle}}</td>
+                <td>
+                    <div>{{v.nextCheckTime | date:'yyyy-MM-dd'}}</div>
+                    <div class="tip-date" ng-if="v.attention && v.attention.length > 0">{{v.attention}}</div>
+                </td>
+                <td>{{v.assetsStatus | assetsStatus}}</td>
+                <td>
+                    <span class="edit" ng-click="methods.editAssets(v)">编辑</span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <!-- 分页 -->
+    <span ng-if="!data.loading && !data.empty" data-ng-include=" 'src/tpl/newPageInfo.html' "></span>
+    <!-- empty -->
+    <div class="empty" ng-if="data.empty && !data.loading">
+        <img src="../../../res/img/nocontent.png">暂无数据</div>
+    <!-- loading -->
+    <div class="loading" ng-if="data.loading">
+        <img src="../../../res/img/loading2.gif">
+    </div>
+</div>
+
+<!-- 新建计量台账对话框 -->
+<div id="template_add_assets" style="display: none;">
+    <table class="metering-modal-table">
+        <tr>
+            <td>
+                <div class="metering-row">
+                    <span>
+                        <i class="require">*</i>所在部门</span>
+                    <aek-select list="data.local.departOptions" change="methods.changeModalDept" item="data.local.newAssets.currentDepart" style="width: 260px;"></aek-select>
+                </div>
+                <div class="metering-row">
+                    <span>
+                        <i class="require">*</i>设备名称</span>
+                    <input type="text" maxlength="40" placeholder="请输入" ng-model="data.local.newAssets.assetsName" ng-change="methods.removeAddErr()">
+                </div>
+                <div class="metering-row">
+                    <span>规格型号</span>
+                    <input type="text" maxlength="40" placeholder="请输入" ng-model="data.local.newAssets.model">
+                </div>
+                <div class="metering-row">
+                    <span>出厂编号(SN)</span>
+                    <input type="text" maxlength="40" placeholder="请输入" ng-model="data.local.newAssets.sn">
+                </div>
+                <div class="metering-row">
+                    <span>供应商</span>
+                    <input type="text" maxlength="40" placeholder="请输入" ng-model="data.local.newAssets.gys">
+                </div>
+                <div class="metering-row">
+                    <span>
+                        <i class="require">*</i>计量类别</span>
+                    <aek-select list="data.local.leibieOptions" change="methods.changeModalLeibie" item="data.local.newAssets.currentLeibie"
+                        style="width: 260px;"></aek-select>
+                </div>
+                <div class="metering-row">
+                    <span>
+                        <i class="require">*</i>计量周期</span>
+                    <input type="text" style="width: 220px;" maxlength="4" placeholder="请输入" oninput="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"
+                        ng-model="data.local.newAssets.cycle" ng-change="methods.removeAddErr()">
+                    <label>月</label>
+                </div>
+                <div class="metering-row">
+                    <span>
+                        <i class="require">*</i>检定方式</span>
+                    <aek-select list="data.local.methodOptions" change="methods.changeModalMethod" item="data.local.newAssets.currentMethod"
+                        style="width: 260px;"></aek-select>
+                </div>
+            </td>
+            <td>
+                <div class="metering-row">
+                    <span>状态</span>
+                    <aek-select list="data.local.assetsStatusOptions" change="methods.changeModalStatus" item="data.local.newAssets.currentStatus"
+                        style="width: 260px;"></aek-select>
+                </div>
+                <div class="metering-row">
+                    <span>
+                        <i class="require">*</i>生产商</span>
+                    <input type="text" maxlength="40" placeholder="请输入" ng-model="data.local.newAssets.scs" ng-change="methods.removeAddErr()">
+                </div>
+                <div class="metering-row">
+                    <span>院内编码</span>
+                    <input type="text" maxlength="40" placeholder="请输入" ng-model="data.local.newAssets.num">
+                </div>
+                <div class="metering-row">
+                    <span>启用日期</span>
+                    <input id="modalStartDate" class="metering-row-date" type="text" readonly placeholder="选择日期">
+                </div>
+                <div class="metering-row">
+                    <span>计量管理</span>
+                    <input type="radio" name="radioAdd" value="1" ng-model="data.local.newAssets.jlgl">
+                    <label>非强检</label>
+                    <input type="radio" name="radioAdd" value="2" ng-model="data.local.newAssets.jlgl">
+                    <label>强检</label>
+                </div>
+                <div class="metering-row">
+                    <span>
+                        <i class="require">*</i>计量分类</span>
+                    <aek-select list="data.local.fenleiOptions" change="methods.changeModalFenlei" item="data.local.newAssets.currentFenlei"
+                        style="width: 260px;"></aek-select>
+                </div>
+                <div class="metering-row">
+                    <span>
+                        <i class="require">*</i>下次检定日期</span>
+                    <input id="modalNextDate" class="metering-row-date" type="text" readonly placeholder="选择日期">
+                </div>
+                <div class="metering-row">
+                    <span>
+                        <i class="require">*</i>负责人</span>
+                    <aek-select list="data.local.userOptions" change="methods.changeModalUser" item="data.local.newAssets.currentUser" style="width: 260px;"></aek-select>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="padding-top: 10px;">
+                <span style="float: left;width: 100px;font-size: 14px;text-align: right;">备注</span>
+                <textarea class="textarea" maxlength="300" placeholder="请输入" ng-model="data.local.newAssets.remark"></textarea>
+                <div style="margin-top: 5px;margin-left: 110px;font-size: 14px;color: #f00;">{{data.local.newAssets.err}}</div>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<!-- 编辑计量台账对话框 -->
+<div id="template_edit_assets" style="display: none;">
+    <table class="metering-modal-table">
+        <tr>
+            <td>
+                <div class="metering-row">
+                    <span>计量管理</span>
+                    <input type="radio" name="radioEdit" value="1" ng-model="data.local.editAssets.jlgl">
+                    <label>非强检</label>
+                    <input type="radio" name="radioEdit" value="2" ng-model="data.local.editAssets.jlgl">
+                    <label>强检</label>
+                </div>
+                <div class="metering-row">
+                    <span>
+                        <i class="require">*</i>计量分类</span>
+                    <aek-select list="data.local.fenleiOptions" change="methods.changeModalFenleiEdit" item="data.local.editAssets.currentFenlei"
+                        style="width: 260px;"></aek-select>
+                </div>
+                <div class="metering-row">
+                    <span><i class="require">*</i>下次检定日期</span>
+                    <input id="modalNextDateEdit" class="metering-row-date" type="text" readonly placeholder="选择日期" ng-value="data.local.editAssets.nextDate | date:'yyyy-MM-dd'">
+                </div>
+                <div class="metering-row">
+                    <span><i class="require">*</i>负责人</span>
+                    <aek-select list="data.local.userOptions" change="methods.changeModalUserEdit" item="data.local.editAssets.currentUser" style="width: 260px;"></aek-select>
+                </div>
+            </td>
+            <td style="vertical-align: top;">
+                <div class="metering-row">
+                    <span>
+                        <i class="require">*</i>计量类别</span>
+                    <aek-select list="data.local.leibieOptions" change="methods.changeModalLeibieEdit" item="data.local.editAssets.currentLeibie"
+                        style="width: 260px;"></aek-select>
+                </div>
+                <div class="metering-row">
+                    <span><i class="require">*</i>计量周期</span>
+                    <input type="text" style="width: 220px;" maxlength="4" placeholder="请输入" oninput="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"
+                        ng-model="data.local.editAssets.cycle" ng-change="methods.removeEditErr()">
+                    <label>月</label>
+                </div>
+                <div class="metering-row">
+                    <span><i class="require">*</i>检定方式</span>
+                    <aek-select list="data.local.methodOptions" change="methods.changeModalMethodEdit" item="data.local.editAssets.currentMethod"
+                        style="width: 260px;"></aek-select>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="padding-top: 10px;">
+                <span style="float: left;width: 100px;font-size: 14px;text-align: right;">备注</span>
+                <textarea class="textarea" maxlength="300" placeholder="请输入" ng-model="data.local.editAssets.remark"></textarea>
+                <div style="margin-top: 5px;margin-left: 110px;font-size: 14px;color: #f00;">{{data.local.editAssets.err}}</div>
+            </td>
+        </tr>
+    </table>
+</div>

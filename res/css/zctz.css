@@ -1,0 +1,1284 @@
+.app-content-body-tre {
+    overflow: inherit;
+}
+
+.b-b-2-999 {
+    border-bottom: 2px solid #999 !important;
+}
+::-moz-placeholder { color: #bebebe; }
+::-webkit-input-placeholder { color:#bebebe; }
+:-ms-input-placeholder { color:#bebebe; }
+/*台账详情*/
+#tre_repair {
+    padding: 15px;
+    margin-top: 0px !important;
+}
+.assetsTitleInput {
+    width: 530px;
+    border: 1px solid #c5c5c5;
+    height: 32px;
+    line-height: 30px;
+    color: #666;
+}
+.form-group .fy_formlabelleft {
+    box-sizing: content-box;
+    width: 105px;
+    text-align: left;
+    padding-left:13px;
+    padding-right:0 !important;
+}
+.zctz-pur .form-group .fy_formlabelleft{
+    max-width:95px;
+}
+
+.fy_formlabelmargin {
+    margin-left: 10%;
+}
+.fontweightbold {
+    font-weight: bold;
+}
+.detailAssetsImgWrap {
+    position: relative;
+}
+.detailAssetsImgWrap img {
+    width: 70px;
+    height: 70px;
+}
+.assetDetailImgBtn {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    background-color: rgba(0,0,0,0.6);
+}
+.detailAssetsImgWrap .assetDetailImgBtn a:hover {
+    color: #fff;
+}
+.detailAssetsImgWrap .assetDetailImgBtn a {
+    display: inline-block;
+    width: 35px;
+    height: 25px;
+    line-height: 25px;
+    font-size: 12px;
+    overflow: hidden;
+    position: relative;
+    vertical-align: middle;
+    text-align: center;
+    color: #fff;
+}
+.detailAssetsImgWrap input {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    cursor: pointer;
+    font-size: 0px;
+    width: 70px;
+    bottom: 0px;
+}
+.assetsTitleInput:focus {
+    border-color: #f7931e;
+}
+.layerTipTopClass {
+    position: relative;
+}
+.layerTipTopClass input {
+    position: absolute;
+    top: -6px;
+    left: 0px;
+    text-indent: 10px;
+}
+.detail-top .assetsStatusName {
+    margin-left: 30px;
+    color: #f7931e;;
+}
+.detail-top .assetsStatusNameE {
+    margin-left: 550px;
+}
+.layerTipTop {
+    position: absolute;
+    left: 50%;
+    color: #fff;
+    font-size: 12px;
+    white-space: nowrap;
+    bottom: 32px;
+    transform: translateX(-50%);
+    padding: 6px;
+    z-index: 21;
+    background-color: rgba(0,0,0,0.6);
+}
+.layerTipTop em {
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    margin-left: -6px;
+    border-width: 6px;
+    border-color: transparent;
+    border-style: dashed;
+    border-top-color: rgba(0,0,0,0.6);
+    border-top-style: solid;
+}
+
+
+.detail-top{
+    height: 130px;
+    background-color: #fff;
+    padding:30px 15px;
+    position: relative;
+}
+.detail-top>span{
+    float: left;
+    display: inline-block;
+}
+.detail-top>span:first-child{
+    margin-right: 20px;
+}
+.detail-top>span:last-child{
+    width: 80%;
+}
+.detail-top>span:last-child>div{
+   margin-bottom: 7px;
+}
+.data{
+    line-height: 30px;
+    color: #999;
+}
+::-webkit-input-placeholder {
+    color:#999;
+}
+:-moz-placeholder {
+    color:#999;
+}
+::-moz-placeholder {
+    color:#999;
+}
+:-ms-input-placeholder {
+    color:#999;
+}
+/* 打印new */
+.b-t-d6d6d6 {
+    border-top: 1px solid #d6d6d6;
+}
+.b-b-d6d6d6 {
+    border-bottom: 1px solid #d6d6d6;
+}
+.b-l-d6d6d6 {
+    border-left: 1px solid #d6d6d6;
+}
+.b-r-d6d6d6 {
+    border-right: 1px solid #d6d6d6;
+}
+#printIn, #JQPrintWrap {
+    text-align: center;
+}
+.printTableCenter {
+    text-align: center;
+    font-weight: bold;
+}
+.printTableLeft {
+    text-align: left;
+    text-indent: 10px;
+}
+.printTableThis {
+    margin-left: 97px;
+}
+.printTable {
+    line-height: 45px;
+    font-size: 13px;
+    width: 450px;
+    height: 280px;
+    border: 2px solid #999;
+}
+.printTableImg {
+    width: 140px;
+}
+.printTableImg img {
+    width: 100%;
+}
+.printWrap {
+    text-align: center;
+}
+.detailPrint {
+    padding-top: 42px;
+}
+.printBtn {
+    padding-top: 60px;
+    text-align: center;
+}
+/* 批量打印 */
+.batchPrint {
+    font-size: 13px;
+    line-height: 32px;
+    color: #666;
+    padding-top: 12px;
+    padding-bottom: 10px;
+    text-align: left;
+}
+.batchPrint span {
+    display: inline-block;
+    text-align: right;
+    width: 100px;
+}
+.batchPrint em {
+    color: #999;
+    margin-left: 15px;
+}
+/*print*/
+.prePrintTable {
+    
+}
+.printDiv {
+    display: inline-block;
+    font-size: 13px;
+    width: 455px;
+    text-align: left;
+    line-height: 38px;
+    border: 1px solid #000;
+    position: relative;
+    /*height:250px;*/
+   height:274px;
+  }
+  .margintop40 {
+    margin-top: 40px;
+  }
+  .printcenter {
+    text-align: center;
+  }
+  .bordertop {
+    border-top: 1px solid #000;
+    /*min-height: 45px;*/
+  }
+  .printscale2 {
+    padding-right: 150px;
+  }
+  .printinline {
+    padding-left: 10px;
+    border-left: 1px solid #000;
+    width:80% ;
+  }
+  .printthreedivimg {
+    position: absolute;
+    min-width: 135px;
+    background-color: #fff;
+    bottom: 0px;
+    overflow: hidden;
+    right: 0px;
+    width: 135px;
+    top: 156px;
+    z-index: 20000;
+    border-top:none;
+    border-left: 1px solid #000;
+    text-align: center;
+  }
+  .printthreedivimg img{
+    position: absolute;
+    left:0 ;
+  }
+  .printthreedivimg .QrcodeImg{
+     left: 50%;
+     margin-left:-52px;
+     top:50%;
+     margin-top:-48px;
+  }
+  
+  
+  .printlineheight {
+    line-height: 22px;
+  }
+  .printinlinehead {
+    width: 20%;
+    text-align: center;
+  }
+/*@media print {
+    .printDiv {
+    margin-top: 0px;
+    display: inline-block;
+    text-align: left;
+    width: 100%;
+    line-height: 30px;
+    border: 1px solid #000;
+    position: relative;
+    font-size: 9pt;
+  }
+  .printDiv .printscale2 {
+    padding-right: 0px;
+  }
+  .printinline {
+    padding-left: 10px;
+  }
+  .printcenter {
+    text-align: center;
+  }
+  .bordertop {
+    border-top: 1px solid #000;
+    min-height: 30px;
+  }
+  .printthreedivimg {
+    background-color: #fff;
+    text-align: right;
+    width: auto;
+    float: right;
+    position: absolute;
+    bottom: 0px;
+    overflow: hidden;
+    right: 0px;
+    top: 50%;
+    border-top: 1px solid #000;
+    border-left: 0px solid #000;
+  }
+  .printlineheight {
+    line-height: 15px;
+  }
+  .printinlinehead {
+    margin-right: 3px;
+    float: left;
+    min-width: 60px;
+    padding: 0px 3px;
+    border-right: 1px solid #000;
+    text-align: center;
+  }
+  .printthreedivimg img {
+    height: 100%;
+    border-left: 1px solid #000;
+  }
+}*/
+/* 打印new END */
+#printIt .print {
+    height: 32px;
+    color: #fff;
+}
+#printIn .printMoreTable {
+    page-break-after: always;
+}
+.print{
+    background-color: #f7931e;
+    color: #fff;
+    display: inline-block;
+    padding: 5px 10px;
+    width: 90px;
+    text-align: center;
+    font-size: 13px;
+    border-radius: 2px;
+    cursor: pointer;
+}
+.print:hover{
+    background-color:#ffac4a;
+}
+
+.treAssestBtn {
+    position: absolute;
+    top: -34px;
+    z-index: 21;
+    right: 15px;
+    text-align: center;
+}
+.treAssestBtn .submit{
+    color: #fff;
+    display: inline-block;
+    padding: 8px 10px;
+    background: #f7931e;
+    margin-top: -10px;
+    font-size: 13px;
+    border-radius: 2px;
+    width: 90px;
+}
+.treAssestBtn #treEditBtnCancle:hover {
+    color: #f7931e;
+    border-color: #f7931e;
+}
+#treEditBtnCancle {
+    margin-right: 0px;
+}
+.treAssestBtn .treAssestBtnCancle {
+    display: inline-block;
+    color: #666;
+    padding: 8px 10px;
+    border: 1px solid #dcdcdc;
+    margin-top: -10px;
+    font-size: 13px;
+    border-radius: 2px;
+    width: 90px;
+}
+.treAssestBtn .submit:hover{
+    color: #fff;
+    background-color: #ffac4a;
+}
+.import-export {
+    margin-top: -10px;
+}
+.import-export>span{
+    cursor: pointer;
+}
+.import {
+    background:url(../img/icon29.png) no-repeat 20px center;
+    padding-left:43px;
+}
+.import-export .newTreObj:hover {
+    color: #fff;
+    background-color: #ffac4a;
+    border-color: #ffac4a;
+}
+.import-export .import-export-span {
+    display: inline-block;
+    line-height: 30px;
+    height: 32px;
+}
+.import-export .import-exportBtn {
+    width: 90px;
+    border: 1px solid #bebebe;
+    text-align: left;
+}
+.import-export .newTreObj {
+    background-color: #f7931e;
+    color: #fff;
+    width: 124px;
+    text-align: left;
+    border-color: #f7931e;
+    padding-left: 28px;
+    background-image: url(../img/add.png);
+    background-repeat: no-repeat;
+    background-position: 10px 9px;
+}
+.import:hover{
+    background-image:url(../img/icon30.png);
+    color:#f7931e;
+    border-color: #f7931e;
+}
+.export{
+    background:url(../img/icon27.png) no-repeat 20px center;
+    padding-left:43px;
+}
+
+.export:hover{
+    background-image: url(../img/icon28.png);
+    color:#f7931e;
+    border-color: #f7931e;
+}
+
+
+.import-alert>div{
+    line-height: 28px;
+    font-size: 13px;
+}
+.formDiv .choose{
+    display: inline-block;
+    margin-left: 20px;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 2px;
+    padding: 0 10px;
+    color: #fff !important;
+    text-align: center;
+    background-color: #f7931e !important;
+    cursor: pointer;
+    position: relative;
+    width: 90px;
+}
+.formDiv .choose:hover{
+    background-color:#ffac4a !important;
+    cursor: pointer;
+}
+.choose .filebtn {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100% !important;
+    right: 0px;
+    bottom: 0px;
+    margin: 0px;
+    opacity: 0;
+}
+
+
+
+.formDiv form {
+    margin-bottom: 0px;
+}
+.height57 {
+    height: 57px;
+}
+.begin{
+    text-align: center;
+    width: 90px;
+    display: inline-block;
+    float: right;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 2px;
+    padding: 0 10px;
+    font-size: 13px;
+    color: #fff;
+    background-color: #f7931e;
+    cursor: pointer;
+    margin-right: 30px;
+}
+.begin:hover{
+    background-color:#ffac4a;
+}
+
+.progressDiv {
+    display: inline-block;
+}
+/*progress*/
+.progressModel {
+    position: relative;
+}
+.progressWrap {
+    width: 240px;
+    height: 8px;
+    border: 1px solid #d6d6d6;
+    border-radius: 4px;
+}
+#progress {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 0px;
+    height: 8px;
+    background-color: #f7931e;
+    border-radius: 4px;
+}
+.import-alert input{
+    height: 30px;
+    width: 448px;
+    padding-left: 16px;
+    border: none;
+    border: 1px solid #d6d6d6;
+    margin-top: 5px;
+}
+.export-alert{
+    font-size: 15px;
+}
+.export-alert>div{
+    color: #666;
+    margin-bottom: 10px;
+}
+.box{
+    margin-top: 10px;
+    width: 590px;
+    overflow: hidden;
+    padding-left: 30px;
+}
+#outputAlert {
+    padding-left: 30px;
+    padding-top: 20px;
+    padding-bottom: 24px;
+}
+
+.box>span{
+    /*display: inline-block;*/
+    float: left;
+    width: 125px;
+    font-size: 13px;
+    height: 30px;
+    border: 1px solid #d6d6d6;
+    margin-right: 15px;
+    padding:0 7px;
+    line-height: 30px;
+    color: #999;
+    margin-bottom: 18px;
+    cursor: pointer;
+}
+.canSelectSpan .box span.spanDel:hover{
+    color:#f7931e;
+    border: 1px solid #f7931e;
+}
+.box span.baseSpan:hover{
+    color:#999;
+    border: 1px solid #d6d6d6;
+}
+
+
+.box .boxSpan {
+    border-color: #f7931e;
+    color: #f7931e;
+}
+.box>span>i{
+    float: right;
+    margin-top: 8px;
+}
+.form1 {
+    display: inline-block;
+    }
+.form1>div{
+    float: left;
+    margin-right: 80px;
+}
+.box1 {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-right: 10px;
+    position: relative;
+    background: #fff;
+    vertical-align: middle;
+    border:1px solid #d6d6d6;
+    border-radius: 100%;}
+.box1 input {
+    opacity: 0;
+    position: absolute;
+    top:-3px;
+    left:-4px;
+    width: 100%;
+    height:100%;
+    z-index:100;/*使input按钮在span的上一层，不加点击区域会出现不灵敏*/}
+.input+span {
+    display: block;
+    width: 6px;
+    height: 6px;
+    border-radius:50%;
+    position: absolute;
+    background: #f7931e;
+    top: 50%;
+    left:50%;
+    margin: -3px 0  0 -3px;
+    z-index:1;}
+input[type="radio"] + span {
+    opacity: 0;}
+input[type="radio"]:checked + span {
+    opacity: 1;}
+.layui-layer-dialog .layui-layer-content{
+    padding-right: 0;
+}
+/*修改复选框*/
+.checkboxFive {
+     width: 16px;
+     height: 16px;
+     margin-right: 15px;
+     position: relative;
+     display: inline-block;
+
+ }
+.checkboxFive:hover label {
+    border-color: #f7931e;
+}
+.checkboxFive label {
+    cursor: pointer;
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 0;
+    left: 0;
+    background: #fff;
+    border: 1px solid #d6d6d6;
+    border-radius: 2px;
+}
+.checkboxFive label:hover{
+    border: 1px solid #f7931e;
+}
+.checkboxFive label:after {
+    opacity: 0;
+    content: '';
+    position: absolute;
+    width: 9px;
+    height: 5px;
+    top: 3px;
+    left: 3px;
+    border: 2px solid #fff;
+    border-top: none;
+    border-right: none;
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+.checkboxFive input[type=checkbox]:checked + label:after {
+    opacity: 1;
+}
+.checkboxFive input[type=checkbox]:checked + label{
+    border:1px solid #f7931e;
+    background: #f7931e;
+}
+.checkboxFive  label.active{
+    border:1px solid #f7931e;
+    background: #f7931e;
+}
+.allcheck{
+    float: left;
+    height: 50px;
+    /*position: absolute;*/
+    /*margin-top: 17px;*/
+    /*margin-left: 15px;*/
+}
+.allcheck .batch {
+    display: inline-block;
+    vertical-align: middle;
+}
+.batch input {
+    line-height: 32px;
+    height: 32px;
+    text-indent: 10px;
+    border: 1px solid #d6d6d6;
+    color: #999999;
+    box-sizing: border-box;
+}
+.allcheck .middle {
+    vertical-align: middle;
+    height: 50px;
+    line-height: 50px;
+    display: inline-block;
+}
+.all{
+    z-index: 200;
+    margin-left: 31px;
+    vertical-align: middle;
+}
+.current{
+    border:1px solid #f7931e;
+    background: #f7931e;
+}
+.i-which input, .t-search input, .i-info input{
+    width:200px;
+    font-size: 12px;
+}
+.input-wrap {
+    width: 200px!important;
+}
+.depetList label{
+    cursor: pointer;
+    color: #666;
+    font-size: 12px;
+    /*margin:0;*/
+}
+.depetList label:hover{
+    background: #f7931e;
+    color: #fff;
+}
+/*搜索科室*/
+.searchWrap {
+    padding: 8px 10px;
+}
+.inputDiv .searchWrap input {
+    width: 230px;
+    height: 26px;
+}
+.deptList {
+    position: absolute;
+    top: 32px;
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0 5px 15px 0px #cfcfcf;
+}
+.deptListOverFlow {
+    overflow-y: scroll;
+    height: 160px;
+}
+.searchWrap {
+    position: relative;
+}
+.inputDiv .searchWrap a {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    width: 21px;
+    height: 26px;
+    background-color: transparent;
+    background-image: url(../img/search.png);
+    background-repeat: no-repeat;
+    background-position: 0px 7px;
+}
+.inputDiv {
+    position: relative;
+    z-index: 100;
+}
+.inputDiv .deptName {
+    width: 250px;
+}
+.resultWrap ul li {
+    line-height: 26px;
+    font-size: 12px;
+    list-style: none;
+    padding-left: 8px;
+    cursor: pointer;
+}
+.resultWrap ul li:hover {
+    /*background-color: #ebebeb;*/
+    /*color: #4baaf6;*/
+    background: #f7931e;
+    color: #fff;
+}
+.resultWrap ul {
+    padding: 0px;
+    margin: 0px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    max-height: 130px;
+}
+/*排序*/
+.sort-wrap {
+    width: 109px;
+}
+.sort-wrap input {
+    width: 109px;
+}
+.sort-wrap .depetList {
+    width: 109px;
+}
+/*alert*/
+.alertContent {
+    text-align: center;
+}
+.alertImg {
+    padding-top: 29px;
+    padding-bottom: 25px;
+}
+.alertContent p {
+    line-height: 14px;
+    font-size: 14px;
+    margin-bottom: 19px;
+}
+.alertDes {
+    font-size: 13px;
+    line-height: 13px;
+    height: 13px;
+}
+.failDownload {
+    margin-top: 9px;
+    margin-bottom: 57px;
+}
+.alertBtn a {
+    line-height: 30px;
+    border: 1px solid #fff;
+    font-size: 13px;
+    width: 118px;
+    text-align: center;
+    display: inline-block;
+}
+.failDownload a {
+    color: #4baaf6;
+    font-size: 13px;
+    line-height: 13px;
+}
+
+.alertBtn {
+    text-align: right;
+}
+.alertContent .mb-80{
+    margin-bottom:80px;
+}
+.alertBtn .btncancel {
+    color: #666;
+    margin-left: 15px;
+    margin-right: 24px;
+    border-color: #c5c5c5;
+}
+.alertBtn .btnyes {
+    color: #fff;
+    border-color: #f7931e;
+    background-color: #f7931e;
+}
+/*batch set stats*/
+#alertSetState {
+    padding-right: 10px;
+}
+/*batch set dept*/
+.batchSetTilte {
+    padding-bottom: 4px;
+    line-height: 60px;
+}
+#alertSetDept {
+    padding-right: 10px;
+}
+.batchSetHead {
+    width: 120px;
+    padding-right: 10px;
+    display: inline-block;
+    text-align: right;
+}
+.batchSetBody {
+    display: inline-block;
+}
+.batchSetErr {
+    font-size: 13px;
+    line-height: 18px;
+    height: 18px;
+    color: #ff2a2a;
+    padding-left: 120px;
+}
+.batchSetDeptBtn {
+    margin-top: 30px;
+    text-align: right;
+    padding-right: 10px;
+}
+.batchSetDeptBtn a {
+    width: 90px;
+    display: inline-block;
+    line-height: 30px;
+    border: 1px solid #dcdcdc;
+    text-align: center;
+    color: #666;
+    border-radius: 2px;
+}
+.batchSetDeptBtn .batchSetDeptBtnYes:hover {
+    background-color: #ffac4a;
+    border-color: #ffac4a;
+}
+.batchSetDeptBtn .batchSetDeptBtnNo:hover {
+    color: #f7931e;
+    border-color: #f7931e;
+}
+.batchSetDeptBtn .batchSetDeptBtnYes {
+    color: #fff;
+    margin-right: 15px;
+    background-color: #f7931e;
+    border-color: #f7931e;
+}
+#alertBatchSetDeptLayer {
+    overflow: inherit;
+}
+/* set dept search */
+.alertBatchPosition {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    z-index: 100;
+}
+.batchSelecters {
+    position: relative;
+}
+.batchSelectInput {
+    width: 480px;
+    text-indent: 10px;
+    background-image: url(../img/down.png);
+    background-repeat: no-repeat;
+    background-position: 457px 12px;
+    height: 32px;
+    color: #999;
+    line-height: 30px;
+    border: 1px solid #d6d6d6;
+}
+.batchSelectSearch {
+    padding: 10px;
+    background-color: #fff;
+}
+.batchSelectSearch input:focus {
+    border-color: #f7931e;
+    color: #666;
+}
+.batchSelectSearch input {
+    border: 1px solid #d6d6d6;
+    background-image: url(../img/search.png);
+    background-repeat: no-repeat;
+    background-position: 98% 9px;
+    line-height: 30px;
+    height: 32px;
+    color: #999;
+    width: 460px;
+    text-indent: 10px;
+}
+.batchSelectRes {
+    box-shadow: 4px 4px 4px #dfdfdf;
+}
+.batchSelectResWrap {
+    position: absolute;
+    z-index: 100;
+    top: 32px;
+    left: 0px;
+    right: 0px;
+    box-shadow: -4px 4px 4px #dfdfdf;
+}
+.batchSelectList {
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+    max-height: 160px;
+    overflow: auto;
+    line-height: 32px;
+    background-color: #fff;
+}
+.batchSelectListScroll {
+    overflow-y: scroll;
+}
+.batchSelectList a {
+    color: #666;
+    text-indent: 10px;
+    display: block;
+}
+.batchSelectList a:hover {
+    background-color: #f7931e;
+    color: #fff;
+}
+/*导入*/
+.color999 {
+    color: #999;
+}
+#inputWrap {
+    padding-left: 30px;
+    padding-top: 24px;
+}
+#inputWrap .inputInfoBtning {
+    background-color: #bebebe !important;
+}
+.wranColor {
+    color: #ff2a2a;
+}
+.visibilityHide {
+    visibility: hidden;
+}
+/*暂无数据*/
+.height100 {
+    height: 100px;
+}
+/*导出*/
+.spanAdd .spanHover {
+    display: none;
+}
+.spanAdd:hover img {
+    display: none;
+}
+.spanAdd:hover .spanHover {
+    display: inline-block;
+}
+.spanDel .spanHover {
+    display: none;
+}
+.spanDel:hover img {
+    display: none;
+}
+.spanDel:hover .spanHover {
+    display: inline-block;
+}
+.paddingbottom57 {
+    padding-bottom: 30px;
+}
+.clearFloat {
+    clear: both;
+}
+.canSelectSpan .box>span:hover {
+    color: #f7931e;
+    border-color: #f7931e;
+}
+.font13 {
+    font-size: 13px;
+}
+/*height auto*/
+.minHeightAuto {
+    min-height: calc(100% - 135px);
+    background-color: #fff;
+}
+.panel {
+    margin-bottom: 0px;
+    border: none;
+}
+.spanDel:hover{
+    border-color: #f7931e;
+    color: #f7931e;
+}
+
+/* 新建资产台账 */
+.newTreList {
+    padding-top: 25px;
+    padding-bottom: 25px;
+    position: relative;
+}
+.newTreListInfo .newTreListInfoHead em {
+    color: #ff2a2a;
+    margin-right: 3px;
+}
+.newTreListInfo .batchSelectSearch input {
+    width: 436px;
+}
+.newTreListInfo .newTreListInfoInput {
+    width: 456px;
+    border: 1px solid #dcdcdc;
+    color: #999;
+    height: 32px;
+    line-height: 30px;
+    text-indent: 10px;
+}
+.newTrelistDate {
+    background-image: url(../img/date-icon.png);
+    background-repeat: no-repeat;
+    background-position: 430px 10px;
+}
+.newTreListInfo .newTreListInfoInput1 {
+    background-image: url(../img/down.png);
+    background-repeat: no-repeat;
+    background-position: 433px 12px;
+}
+.newTreListInfo .newTreListInfoInput:focus {
+    color: #666;
+    border-color: #f7931e;
+}
+.newTreListInfo .newTreListInfoHead {
+    display: inline-block;
+    width: 124px;
+    margin-right: 3px;
+    text-align: right;
+}
+.newTreListInfo .newTreListInfoBody {
+    display: inline-block;
+}
+.newTreListInfo .newTreListInfoErr {
+    padding-left: 128px;
+    color: #ff2a2a;
+}
+.newTreListMore {
+    text-align: center;
+}
+.newTreListMore a {
+    padding-right: 20px;
+    background-position: 35px 6px;
+    background-repeat: no-repeat;
+}
+.newTreListMore .newTreListUp {
+    background-image: url(../img/ssjt.png);
+}
+.newTreListMore .newTreListDown {
+    background-image: url(../img/xsjt.png);
+}
+
+.newTreListInfoErr {
+    height: 18px;
+    line-height: 18px;
+    font-size: 13px;
+}
+/*#alertNewTreLayer {*/
+    /*height: 100%;*/
+/*}*/
+/* 新建资产台账 END */
+
+.table-b-print{
+    margin-left:10px;padding-top:10px;width:290px;height:180px;
+}
+.table-b-print table td{border:1px solid black !important;font-size:xx-small;}
+
+.table-b-show{
+    margin-left:10px;padding-top:10px;width:400px;height:248px;margin:auto;
+}
+.table-b-show table td{border:1px solid black !important;font-size:12px;}
+
+/* tre file upload */
+.treFileUploadDiv {
+    line-height: 32px;
+    color: #666;
+}
+.uploadFileDel {
+    color: #ff2a2a;
+}
+.uploadFileDel:hover {
+    color: #ff2a2a;
+}
+.treFileUploadDiv .fileUploadBtn a {
+    display: inline-block;
+    width: 96px;
+    color: #666;
+    height: 32px;
+    text-align: center;
+    border: 1px solid #dcdcdc;
+    border-radius: 3px;
+}
+.treFileUploadDiv .fileUploadBtn a:hover {
+    background-color: #f7931e;
+    color: #fff;
+}
+/* tre file upload end */
+.deptListLimit {
+    max-height: 140px;
+    overflow-y: auto;
+}
+/* tre credential */
+.treCredentialOpe {
+    display: none;
+    position: absolute;
+    left: 0px;
+    height: 32px;
+    line-height: 32px;
+    right: 0px;
+    bottom: 0px;
+    background-color: rgba(0,0,0,0.4);
+}
+.supplierCredentialWrap:hover .treCredentialOpe {
+    display: block;
+}
+.treCredentialDel {
+    border-left: 1px solid #fff;
+}
+.treCredentialOpe .treCredentialEdit {
+    width: 100%;
+}
+.treCredentialOpe a {
+    color: #fff;
+    height: 32px;
+    display: inline-block;
+    width: 50%;
+    text-align: center;
+}
+.certificateNameDiv {
+    position: relative;
+}
+.certificateNameDiv .credentialsUploadSpan em {
+    color: #ff2a2a;
+}
+.certificateNameErr {
+    position: absolute;
+    top: 100%;
+    padding-left: 159px;
+    left: 0px;
+    line-height: 20px;
+    font-size: 14px;
+    color: #ff2a2a;
+    right: 0px;
+}
+.credentialsBigImgWrap {
+    background-color: rgba(0,0,0,0.4);
+    position: fixed;
+    z-index: 999999;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    min-height: 481px;
+    min-width: 677px;
+}
+.credentialsBigImgWrap .credentialsBigImg {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-top: -240px;
+    margin-left: -338px;
+}
+.credentialsBigImg img {
+    width: 677px;
+    height: 481px;
+}
+.credentialsBigImgWrap a {
+    background-image: url(../../res/img/ckdtgb.png);
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    left: 100%;
+    margin-left: -12px;
+    margin-top: -12px;
+}
+.treCredentialsEdit .treCredentialsEditDiv input {
+    text-indent: 0px;
+}
+.treCredentialsEditDiv .treCredentialsEditSpan {
+    width: 240px;
+    display: inline-block;
+}
+/* alert */
+.inspectionLayer {
+    text-align: center;
+    color: #666;
+}
+.attention {
+    display: inline-block;
+    background: #f60;
+    height: 20px;
+    line-height: 20px;
+    padding: 0 10px;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 12px;
+    margin-left: 5px;
+}
+.hd_sad li{
+    width: 430px;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap
+}

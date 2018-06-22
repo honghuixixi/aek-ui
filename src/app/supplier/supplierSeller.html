@@ -1,0 +1,18 @@
+<div class="supplierSellerWrap">
+	<div class="supplierSellerTitle"><span>商家简介</span><a href="javascript:;" class="supplierSellerTitleBtn" ng-click='editIntroduce=true'><img class="supplierSellerTitleHover" src="../../res/img/bj.png" alt=""><img src="../../res/img/bianji.png" alt=""></a></div>
+	<div class="supplierSellerCon">
+		<div class="supplierSellerConBody" ng-show='!editIntroduce'>{{supplierTenant.introduce}}</div>
+		<textarea ng-show='editIntroduce' ng-model='supplierTenant.introduce' cols="30" rows="10"></textarea>
+	</div>
+	<div class="supplierSellerTitle"><span>服务范围</span><a href="javascript:;" class="supplierSellerTitleBtn" ng-click='editScope=true'><img class="supplierSellerTitleHover" src="../../res/img/bj.png" alt=""><img src="../../res/img/bianji.png" alt=""></a></div>
+	<div class="supplierSellerCon">
+		<div class="supplierSellerConBody" ng-show='!editScope'>{{supplierTenant.serviceScope}}</div>
+		<textarea ng-show='editScope' ng-model='supplierTenant.serviceScope' cols="30" rows="10"></textarea>
+	</div>
+	<div class="supplierSellerBtn">
+		<div ng-show='editIntroduce||editScope'>
+			<a class="supplierSellerCancel" href='javascript:;' ng-click='cancelEdit()'>取消</a>
+			<a class="supplierSellerSave" href='javascript:;' ng-click='saveEdit()'>保存</a>
+		</div>
+	</div>
+</div>

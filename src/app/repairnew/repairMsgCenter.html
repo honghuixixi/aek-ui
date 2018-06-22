@@ -1,0 +1,72 @@
+<toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container>
+<!-- <div class="mf_publicNav"> -->
+	<span  data-ng-include=" 'src/tpl/header.html' " class="app-header navbar b-b-3x-orange"></span>
+<!-- </div> -->
+<div class="mf_msgbuju">
+	<div class="mf_repairMsgTitle">
+		<span class="mf_repairMsgCenterTitle">消息中心</span><a class="mf_allMarkRead" ng-click="readAllMsg()" ng-if='$stateParams.status==1'><img src="../../res/img/allRead.png">全部标记为已读</a>
+	</div>
+	<div class="mf_repairMsgCon">
+<!-- 维修消息头部分 -->
+		<div class="fy_repairMsgConHead fy_repairNewMsgConHead">
+			<div class="fy_repairMsgScope fy_repairMsgManageHead">
+				<div class="repairMsgHeadLine"></div>
+				<div class="fy_repairMsgManageHeadCon">
+				<a class="mf_waitBan" ng-click='repairMsgStatus(0)' ng-class='{"fy_repairMsgScopeNow":$stateParams.status==0}'>待办</a><a class="mf_tongzhi" ng-click='repairMsgStatus(1)' ng-class='{"fy_repairMsgScopeNow":$stateParams.status==1}'>通知</a><a class="mf_gonggao" ng-click='repairMsgStatus(2)' ng-class='{"fy_repairMsgScopeNow":$stateParams.status==2}'>公告</a>
+				</div>
+			</div>
+			<div class="selectWrap" ng-if="$stateParams.status==1">
+				<div class="selector" ng-click='listShow("typeList")'><input type="text" ng-model='timeModel.name' readonly="true"><a href='javascript:;'></a></div>
+				<div class="options" ng-show='typeList'>
+					<ul>
+						<li ng-repeat='item in statusType' ng-click='option("typeList","timeModel",item)'>{{item.name}}</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+<!-- TAB表格部分 -->
+<div class="repairFixWrap" ng-click='menuHide( )' ng-if='$stateParams.status==1' ng-show='fixWrapShow'></div>
+<!-- tab1 -->
+    <ul class="repairNewMsgWait" ng-if="$stateParams.status==0">
+        <li class="msgManageConSessionLi" ng-repeat='item in waitDoList track by $index'>
+          <a href="javascript:;" ng-click='adjustMsg(1,item)'>
+            <div class="msgManageConSessionBigImg"><img src="../../res/img/repairbig.png"><span class='verticalMiddle'></span></div>
+            <div class="msgManageConSessionLiBody">
+              <div class="msgManageConSessionLiHead">{{item.title}}</div>
+              <div class="msgManageConSessionLiBodyCon">你有{{item.total}}{{item.des}}</div>
+              <div class="msgManageConSessionLiBodyModule"><img ng-src="../../res/img/apply{{item.moduleId}}.png"><span>{{item.module}}</span></div>
+            </div>
+            <div class="msgEnterDiv"><span>{{item.total}}</span><img src="../../res/img/msgenterimg.png"></div>
+          </a>
+        </li>
+      </ul>
+        
+ <!-- tab1END -->
+ <!-- tab2 -->
+    <div class="minHeightAuto" ng-if="$stateParams.status==1">
+	    <ul class="msgManageConSession1" ng-class='{msgManageConSessionConScroll: msgData.length>5}'>
+	        <li class="msgManageConSessionLi" ng-repeat='item in msgData'>
+	          <a href="javascript:;" ng-click='adjustMsg(2,item)'>
+	            <div class="msgManageConSessionLiHead"><em class='unreadMarkEM' ng-if='item.messageStatus==0'></em><span>{{item.messageContent}}</span></div>
+	            <div class='msgManageConSessionLiCon'><span class='msgManageConSessionLiDept'>{{item.remarks}}</span></div>
+	            <div class="msgEnterImg"><span class='msgManageConSessionLiTime m-r-md'>{{item.messageTime | date:'yyyy-MM-dd HH:mm'}}</span><img src="../../res/img/msgenterimg.png"></div>
+	          </a>
+	        </li>
+	      </ul>
+    </div>
+    <div style="border:none;width: 100%;height：200px;margin-top: 60px;" ng-if="$stateParams.status==1"> 
+    	<span  data-ng-include=" 'src/tpl/newPageInfo.html' "></span>
+   </div> 
+        
+ <!-- tab2END -->
+ <!-- tab3 -->
+    <div ng-if="$stateParams.status==2" class="repairNoticeCon">
+        <img src="../../res/img/noticeimg.png">
+    	<p>暂无公告</p>
+    </div>
+ <!-- tab3END -->
+ 
+   
+	</div>
+	
+</div>

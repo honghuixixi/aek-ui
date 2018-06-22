@@ -1,0 +1,148 @@
+<!-- list -->
+<ul class="nav"  ng-controller="navCtrl" >
+		<!--<li ng-class="{active: $state.includes('**.all.**')}" class="ng-scope">
+				<a href="" class="auto ng-scope just-a">
+					<span class="pull-right text-muted">
+					</span>
+					<i class="glyphicon nav-fixd"><img src="../../res/img/1.png"/><img src="../../res/img/ks1.png" class="active-img"/></i></i><span class="ng-binding">概览</span>
+				</a>
+		</li>-->
+		<li ng-class="{active: $state.includes('**.tre.**')}" class="ng-scope parent-nav">
+				<!--<a href="" class="auto ng-scope just-a">
+					<span class="pull-right text-muted">
+						<i class="fa fa-fw fa-angle-up text"></i>
+						<i class="fa fa-fw fa-angle-down text-active"></i>
+					</span>
+					<i class="glyphicon nav-fixd">
+						<img src="../../res/img/2.png" />
+						<img src="../../res/img/2_1.png" class="active-img"/>
+					</i><span class="ng-binding">资产管理</span>
+				</a>-->
+				<ul class="nav nav-sub dk ng-scope treNavList">
+					<li ng-class="{active: $state.includes('**.tre.dashbord.**')}" class="ng-scope">
+							<a ui-sref="main.tre.dashbord" ui-sref-opts="{reload:true}">
+								<span class="spanLeftImg spanDashbord">资产概览</span>
+							</a>
+				</li>
+	
+					<li ng-class="{active: $state.includes('**.tre.zctz.**')}" class="ng-scope">
+							<a ui-sref="main.tre.zctz.list({id:$stateParams.id, isOp:false, isOpMsg:''})" ui-sref-opts="{reload:true}">
+								<span class="spanLeftImg spanZCTZ">资产台账</span>
+							</a>
+				</li>
+				<!-- <li ng-class="{active: $state.includes('**.tre.ytz.**')}" class="ng-scope">
+							<a ui-sref="main.tre.ytz.list({id:$stateParams.id,isOp:false})" ui-sref-opts="{reload:true}">
+								<span class="spanLeftImg spanYTZ">预台账</span>
+							</a>
+				</li> -->
+				<!--<li ng-class="{active: $state.includes('**.tre.rkgl.**')}" class="ng-scope">
+					<a ui-sref="main.tre.rkgl.rkgl">
+						<i class="glyphicon glyphicon-user"></i>
+						<span class="ng-binding">入库管理</span>
+					</a>
+				</li>-->
+				<!--<li ng-class="{active: $state.includes('**.tre.ckgl.**')}" class="ng-scope">
+					<a ui-sref="main.tre.ckgl.list">
+						<i class="glyphicon glyphicon-user"></i>
+						<span class="ng-binding">出库管理</span>
+					</a>
+				</li>-->
+				<li ng-class="{active: $state.includes('**.tre.zkgl.**')}" class="ng-scope" ng-if="userInfo.authoritiesStr.indexOf('ASS_ASSETS_ZK_LIST') != -1">
+					<a ui-sref="main.tre.zkgl.list" ui-sref-opts="{reload:true}">
+						<span class="spanLeftImg spanZKGl">转科管理</span>
+					</a>
+				</li>
+				<li ng-class="{active: $state.includes('**.tre.bsgl.**')}" class="ng-scope" ng-if="userInfo.authoritiesStr.indexOf('ASS_ASSETS_DISCARD_LIST') != -1">
+					<a ui-sref="main.tre.bsgl.browse" ui-sref-opts="{reload:true}">
+								<span class="spanLeftImg spanBSGl">报损管理</span>
+							</a>
+				</li>
+				<!-- <li ng-class="{active: $state.includes('**.tre.bfgl.**')}" class="ng-scope">
+					<a ui-sref="main.tre.bfgl.list">
+						<i class="glyphicon glyphicon-user"></i>
+						<span class="ng-binding">报废管理</span>
+					</a>
+				</li>
+				<li ng-class="{active: $state.includes('**.tre.chgl.**')}" class="ng-scope">
+					<a ui-sref="main.tre.chgl.list">
+						<i class="glyphicon glyphicon-user"></i>
+						<span class="ng-binding">冲红管理</span>
+					</a>
+				</li> -->
+				<!-- <li ng-class="{active: $state.includes('**.tre.cwgl.**')}" class="ng-scope">
+					<a ui-sref="main.tre.cwgl.list">
+						<i class="glyphicon glyphicon-user"></i>
+						<span class="ng-binding">财务管理</span>
+					</a>
+				</li> -->
+				</ul>
+		</li>
+		<!--<li ng-class="{active: $state.includes('**.lcks.kstz.**')}" class="just-it">
+			<a class="auto just-a"  ui-sref="main.lcks.kstz.list">
+				<span class="pull-right text-muted"></span>
+				<i class="glyphicon nav-fixd"><img src="../../res/img/ks.png"/><img src="../../res/img/ks1.png" class="active-img"/></i></i><span class="ng-binding just-one">科室台账</span>
+			</a>
+		</li>
+		<li ng-class="{active: $state.includes('**.lcks.zkgl.**')}" class="just-it">
+			<a class="auto just-a"  ui-sref="main.lcks.zkgl.zkgl">
+				<span class="pull-right text-muted"></span>
+				<i class="glyphicon nav-fixd"><img src="../../res/img/zk.png"/><img src="../../res/img/zk1.png" class="active-img"/></i></i><span class="ng-binding just-one">转科管理</span>
+			</a>
+		</li>
+		<li ng-class="{active: $state.includes('**.lcks.bfgl.**')}" class="just-it">
+			<a class="auto just-a"  ui-sref="main.lcks.bfgl.bfgl">
+				<span class="pull-right text-muted"></span>
+				<i class="glyphicon nav-fixd"><img src="../../res/img/bf.png"/><img src="../../res/img/bf1.png" class="active-img"/></i></i><span class="ng-binding just-one">报废管理</span>
+			</a>
+		</li>-->
+		<!--数据获取 后台交互获取数据-->
+		
+		<!--<li ng-repeat="menu in menuList " ng-class="{active: $state.includes('**.{{menu.permission}}.**')}">
+				<a ng-if="menu.leaf==0" href class="auto">
+					<span class="pull-right text-muted">
+						<i class="fa fa-fw fa-angle-up text"></i>
+						<i class="fa fa-fw fa-angle-down text-active"></i>
+					</span>
+					<i class="{{menu.iconcls}}"></i>
+				<span>{{menu.menuName}}</span>
+				</a>
+				<ul ng-if="menu.leaf==0" class="nav nav-sub dk">
+						<li ng-repeat="rm in menu.menuBeans" ng-class="{active: $state.includes('**.{{rm.permission}}.**')}">
+							<a ui-sref="{{rm.request}}">
+								<i class="{{rm.iconcls}}"></i>
+								<span>{{rm.menuName}}</span>
+							</a>
+						</li>
+				 </ul>
+				 <a ng-if="menu.leaf==1" ui-sref="{{menu.request}}">
+				<i class="{{menu.iconcls}}"></i>
+				<span>{{menu.menuName}}</span>
+			</a>
+		</li>
+		<li ng-class="{active: $state.includes('**.chart.**')}">
+			<a href="" class="auto ng-scope">
+					<span class="pull-right text-muted">
+						<i class="fa fa-fw fa-angle-up text"></i>
+						<i class="fa fa-fw fa-angle-down text-active"></i>
+					</span>
+					<i class="glyphicon nav-fixd"><img src="../../res/img/3.png"/></i></i><span class="ng-binding">数据分析</span>
+				</a>-->
+			<!--<a class="auto">
+				<span class="pull-right text-muted">
+					<i class="fa fa-fw fa-angle-right text"></i>
+					<i class="fa fa-fw fa-angle-down text-active"></i>
+						</span>
+				<i class="glyphicon glyphicon-cog"></i>
+				<span>可视化</span>
+			</a>-->
+			<!--<ul class="nav nav-sub dk">
+				<li ng-class="{active: $state.includes('**.chart.look.**')}">
+					<a ui-sref="main.chart.look.list">
+						<i class="glyphicon glyphicon-list"></i>
+						<span>数据展示</span>
+					</a>
+				</li>
+			</ul>-->
+		<!--</li>-->
+	</ul>
+	

@@ -1,0 +1,122 @@
+<div class="pm-implement-execute">
+	<div class="pm-top">
+        <a ui-sref="pm.menu.plan" style="color: #999;">PM计划</a>&gt;<span>查看详情</span>
+        <span ng-if="data.limit.disable && data.plan.status === 2" class="pm-top-btn pm-top-enable" ng-click="enablePlan()">启用PM计划</span>
+        <span ng-if="data.limit.disable && data.plan.status === 1" class="pm-top-btn pm-top-disable" ng-click="disablePlan()">停用PM计划</span>
+        <span ng-if="data.limit.edit && data.plan.status === 1" class="pm-top-btn pm-top-edit" ng-click="editPlan()">编辑PM计划</span>
+    </div>
+    <div class="pm-info">
+    	<div class="pm-info-name" style="color: #666;">设备名称：{{data.plan.name}}<span class="{{+data.plan.status > 1 ? 'tag disable-tag' : 'tag enable-tag'}}">{{data.plan.status | pmplanstatus}}</span></div>
+    	<table class="pm-info-table">
+    		<tbody>
+    			<tr>
+    				<td style="width: 100px; color: #666;">设备编号</td>
+    				<td style="color: #999;">{{data.plan.no}}</td>
+    				<td style="width: 120px; color: #666;">上次实施日期</td>
+    				<td style="color: #999;">{{data.plan.prevDate ? (data.plan.prevDate | date:'yyyy-MM-dd') : '无'}}</td>
+    			</tr>
+    			<tr>
+    				<td style="width: 100px; color: #666;">规格型号</td>
+    				<td style="color: #999;">{{data.plan.model}}</td>
+    				<td style="width: 120px; color: #666;">下次实施日期</td>
+    				<td style="color: #999;">{{data.plan.status > 1 ? '无' : (data.plan.nextDate | date:'yyyy-MM-dd')}}</td>
+    			</tr>
+    			<tr>
+    				<td style="width: 100px; color: #666;">所在部门</td>
+    				<td style="color: #999;">{{data.plan.departmentName}}</td>
+    				<td style="width: 120px; color: #666;">负责人</td>
+    				<td style="color: #999;">{{data.plan.directorName}}</td>
+    			</tr>
+    			<tr>
+    				<td style="width: 100px; color: #666;">PM周期</td>
+    				<td style="color: #999;">{{data.plan.cycle}}个月</td>
+    				<td style="width: 120px;">创建时间</td>
+    				<td style="color: #999;">{{data.plan.createTime | date:'yyyy-MM-dd HH:mm'}}</td>
+    			</tr>
+    			<tr>
+    				<td style="width: 100px; color: #666;">PM等级</td>
+    				<td style="color: #999;">{{data.plan.level | pmlevel}}</td>
+    				<td style="width: 120px;">报告验收人</td>
+    				<td style="color: #999;">{{data.plan.checkName}}</td>
+    			</tr>
+    		</tbody>
+    	</table>
+    </div>
+    <div class="pm-info-main">
+	    <div class="pm-info-main-tab">
+	    	<span class="{{data.tabIndex === 1 ? 'tab-item checked' : 'tab-item'}}" ng-click="changeTab(1)">PM模板</span>
+            <span class="{{data.tabIndex === 2 ? 'tab-item checked' : 'tab-item'}}" ng-click="changeTab(2)">PM记录</span>
+	    </div>
+	    <table class="pm-info-main-table" ng-if="data.tabIndex === 1">
+	    	<thead>
+	    		<tr>
+	    			<td rowspan="2" style="width: 80px;background-color: #f5f5f5;text-align: center;">序号</td>
+	    			<td rowspan="2" style="background-color: #f5f5f5;">项目名称</td>
+	    			<td rowspan="2" style="background-color: #f5f5f5;">项目内容及说明</td>
+	    		</tr>
+	    	</thead>
+	    	<tbody>
+	    		<tr ng-repeat="v in data.plan.table" >
+	    			<td ng-if="v.hasRowSpan"  rowspan="{{v.rowSpan}}" style="width: 80px;text-align: center;">{{v.index}}</td>
+	    			<td ng-if="v.hasRowSpan"  rowspan="{{v.rowSpan}}">{{v.itemName}}</td>
+	    			<td>{{v.name}}</td>
+	    		</tr>
+	    	</tbody>
+	    </table>
+        <div ng-if="data.tabIndex === 2">
+            <table class="pm-info-main-table">
+                <thead>
+                    <tr>
+                        <td style="background-color: #f5f5f5; text-align: center;">序号</td>
+                        <td style="background-color: #f5f5f5; text-align: center;">计划PM日期</td>
+                        <td style="background-color: #f5f5f5; text-align: center;">实际开始日期</td>
+                        <td style="background-color: #f5f5f5; text-align: center;">实际结束日期</td>
+                        <td style="background-color: #f5f5f5; text-align: center;">操作</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="v in data.list">
+                        <td style="text-align: center;">{{(pageInfo.current - 1) * pageInfo.size + $index + 1}}</td>
+                        <td style="text-align: center;">{{v.planDate | date:'yyyy-MM-dd'}}</td>
+                        <td style="text-align: center;">{{v.actualStartDate | date:'yyyy-MM-dd'}}</td>
+                        <td style="text-align: center;">{{v.actualEndDate | date:'yyyy-MM-dd'}}</td>
+                        <td style="text-align: center;"><a ng-click="print(v.id)">查看PM实施报告</a></td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- 分页 -->
+            <span ng-if="!data.loading && !data.empty" data-ng-include=" 'src/tpl/newPageInfo.html' "></span>
+            <!-- empty -->
+            <div class="empty" ng-if="data.empty && !data.loading"><img src="../../../res/img/nocontent.png">暂无数据</div>
+            <!-- loading -->
+            <div class="loading" ng-if="data.loading"><img src="../../../res/img/loading2.gif"></div>
+        </div>
+	</div>
+</div>
+
+<!-- 查看实施报告 -->
+<div data-ng-include="'src/app/pm/html/template_report.html'" class="pm-report-dialog" id="template_report" style="display: none;"></div>
+<!-- 停用计划 -->
+<div id="template_disable" class="inspectionLayer" style="display: none;">
+    <div style="text-align: center; color: #666;">
+        <div>
+            <div class="inspectionLayerImg m-t-lg m-b-md"><img src='../../res/img/wh.png'></div>
+            <div>
+                <span>PM计划停用后不可实施，确定要停用吗？</span>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 启用计划 -->
+<div id="template_enable" class="implement-submit" style="display: none;">
+    <div style="text-align: center; color: #666;">
+        <div>
+            <div class="inspectionLayerImg m-t-lg m-b-md"><img src='../../res/img/wh.png' style="margin: 0;"></div>
+            <div style="margin: 10px 0;">
+                <span>确定要启用该PM计划吗？</span>
+            </div>
+            <div><span class="require" style="color: #f3756f;">*</span>下次实施日期：<input class="implement-dt" id="nextDt" type="text" placeholder="请选择" ng-value="data.nextDt | date:'yyyy-MM-dd'" readonly="readonly"> </div>
+            <div class="err" style="margin-top: 8px; margin-left: 36px;color: #f3756f;">{{data.err}}</div>
+        </div>
+    </div>
+</div>

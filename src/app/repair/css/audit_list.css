@@ -1,0 +1,58 @@
+.audit-list {
+	margin: 10px 10px 10px 170px;
+}
+.audit-list .hd_applytop {
+	margin-bottom: 10px;
+	line-height: 32px;
+	height: 30px;
+	overflow: hidden;
+}
+.audit-list .hd_applytop span {
+	font-size: 14px;
+	color: #666;
+}
+.audit-list .hd_applytop .btn {
+	float: right;
+	width: 110px;
+	height: 34px;
+    padding: 0 0 0 30px;
+    font-size: 14px;
+    line-height: 32px;
+	background-color: #f7931e;
+	border: 1px solid #f7931e;
+	color: #fff;
+    background-position: 10px 9px;
+    background-image: url(../../../../res/img/add.png);
+    background-repeat: no-repeat;
+    text-align: left;
+}
+.audit-list .content {
+	min-height: 500px;
+	margin: 0;
+	background-color: #fff;
+	padding: 20px;
+}
+.tabParent{
+	border-bottom: 1px solid #dedede;
+	height: 32px;
+}
+.tab span{
+	padding: 5px 15px;
+	color: #333;
+	cursor: pointer;
+	border: 1px solid #dedede;
+	float: left;
+}
+.content span.tabActive {
+	color: #fff;
+	background: #f7931e;
+	border: 1px solid #f7931e;
+}
+.hd_depetName{
+	height: 30px;
+	border:1px solid #dedede;
+}
+#hdi-info{
+	width: 235px !important;
+}
+

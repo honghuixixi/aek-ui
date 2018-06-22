@@ -1,0 +1,280 @@
+.btn2{
+	width: 114px;
+	height: 32px;
+	padding: 0 0 0 20px;
+	font-size: 14px;
+	line-height: 32px;
+	background-color: #f7931e;;
+	color: #fff;
+	border-radius: 3px;
+	text-align: center;
+	cursor: pointer;
+	background-image: url('../../../../res/img/add.png');
+    background-repeat: no-repeat;
+    background-position: 10px 9px;
+}
+.btn2:hover {
+	background-color: #ffac4a;
+    border-color: #ffac4a;
+}
+.nolimit {
+	margin-top: 20px;
+	text-align: center;
+}
+.nolimit img {
+	margin-right: 5px;
+}
+.dictionary{
+	overflow: hidden;
+}
+.dictonary .fl {
+	float: left;
+}
+.dictionary .fr {
+	float: right;
+}
+.dic-menu{
+	position: fixed;
+	top: 60px;
+	left: 0;
+	bottom: 0;
+	width: 160px;
+	padding-top: 20px;
+	background-color: #fff;
+}
+.dic-menu-item {
+	padding-left: 30px;
+	font-size: 14px;
+	line-height: 36px;
+}
+.dic-menu-item a{
+	padding-left: 22px;
+	text-decoration: none;
+	color: #333;	
+	background-repeat: no-repeat;
+	background-position-y: 4px;
+}
+.dic-menu-item .dic {
+	background-image: url('../../../../res/img/dic_default.png');
+}
+.dic-menu .active {
+	background-color: #e1ece8;
+}
+.dic-menu .active a {
+	color: #f7931e;
+}
+.dic-menu .active .dic {
+	background-image: url('../../../../res/img/dic_active.png');
+}
+.dic-content{
+	margin-left: 170px;
+}
+.dic-content-group{
+	margin-right: 20px;
+	font-size: 14px;
+	line-height: 50px;
+	overflow: hidden;
+}
+.dic-content-group .btn2 {
+	margin-top: 9px;
+}
+.dic-content-body{
+	margin: 0 10px 10px 0;
+	padding: 10px;	
+	font-size: 14px;
+	background-color: #fff;
+}
+.dic-content-body .top {
+	height: 32px;
+	margin-top: 0;
+	margin-bottom: 10px;
+	line-height: 32px;
+}
+.dic-content-body .top select {
+	margin-right: 10px;
+}
+.dic-content-body .top input[type="text"]{
+	width:300px;
+	height: 32px;
+	padding-left: 5px;
+	margin-right: 10px;
+	line-height: 32px;
+	border: 1px solid #ccc;
+}
+.dic-content-body .top input:focus {
+	border: 1px solid #f7931e;
+}
+.dic-content-body .top .searchbtn{
+	background-image: inherit;
+    width: 70px;
+    padding: 0;
+}
+.dic-content-body .top .addKey{
+	margin-right: 10px;
+}
+.dic-content-body .top .addKeys{
+	width: 100px;
+}
+.dic-content-body .top .span {
+	position: relative;
+	margin-left: 10px;
+	padding-left: 10px;
+}
+.dic-content-body .top .span:before {
+	content: '';
+	position: absolute;
+	top: 2px;
+	left: 0;
+	width: 0;
+	height: 12px;
+	border-left: 1px solid #ccc;
+}
+.dic-content-body table{
+	width: 100%;	
+	font-size: 14px;
+	border-collapse: collapse;
+}
+
+.dic-content-body td {
+	border: 1px solid #ccc;
+	line-height: 40px;
+	text-align: center;
+	word-break: break-all;
+}
+
+.dic-content-body thead td{
+	background-color: #f2f2f2;
+}
+/* modal */
+.modal-table {
+	margin: 30px 0 0 10px;
+	font-size: 14px;
+	overflow: hidden;
+}
+.modal-table dt{
+	float: left;
+	width: 80px;
+	text-align: right;
+	font-weight: 300;
+}
+.modal-table dt .require{
+    float: right;
+    display: inline-block;
+    margin-top: 3px;
+    margin-left: 2px;
+    color: #f00;
+}
+.modal-table dd {
+	margin-left: 90px;
+	overflow: hidden;
+}
+.modal-table input[type="text"] {
+	width: 455px;
+	height: 30px;
+	padding-left: 10px;
+	border: 1px solid #ccc;
+	border-radius: 2px;
+}
+.modal-table input:focus {
+	border: 1px solid #f7931e;
+}
+.modal-table select {
+	width: 455px;
+	border-radius: 2px;
+}
+.modal-table .absc {
+	position: relative;
+	width: 456px;
+}
+.modal-table .absc textarea {
+	width: 455px;
+	height: 120px;
+	font-size: 14px;
+	border: 1px solid #ccc;
+	border-radius: 2px;
+	resize: none;
+}
+.modal-table textarea:focus {
+	border: 1px solid #f7931e;
+}
+.modal-table .fields{
+	width: 470px;
+	height: 220px;
+	font-size: 14px;
+	resize: none;
+}
+.modal-table .fields-absc {
+	line-height: 30px;
+	color: #aaa;
+	overflow: hidden;
+}
+.modal-table .fields-absc span {
+	float: right;
+	margin-right: 40px;
+}
+.modal-table .absc div{
+	position: absolute;
+	right: 8px;
+	bottom: 5px;
+	width: 80px;
+	font-size: 12px;
+	color: #666;
+	text-align: right;
+}
+.modal-table .bottom {
+	margin-top: 60px;
+	margin-bottom: 30px;
+	overflow: hidden;
+}
+.modal-table .bottom .btn2 {
+	float: right;
+	margin-right: 33px;
+}
+.modal-table .err {
+	font-size: 14px;
+	line-height: 24px;
+	color: #f00;
+}
+.empty{
+	margin-top: 20px;
+	line-height: 36px;
+	text-align: center;
+}
+.empty img {
+	margin-right: 15px;
+}
+.loading {
+	margin-top: 20px;
+	text-align: center;
+}
+
+.my-select {
+	position: relative;
+	float: left;
+	margin-right: 10px;
+	width: 100px;
+}
+.my-select input {
+	background-image: url('../../../../res/img/down.png');
+	background-repeat: no-repeat;
+    background-position: 95% 50%;
+}
+.my-select .options{
+	position: absolute;
+	top: 32px;
+	right: 0;
+	left: 0;
+	background-color: #fff;
+	box-shadow: 0 5px 15px 0px #cfcfcf;
+}
+.my-select .options div{
+	margin-bottom: 5px;
+	padding-left: 10px;
+	font-size: 12px;
+	line-height: 27px;
+}
+.my-select .options div:hover{
+	background-color: #f7931e;
+	color: #fff;
+	cursor: pointer;
+}

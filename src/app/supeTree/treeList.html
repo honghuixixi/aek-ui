@@ -1,0 +1,164 @@
+<!-- navbar -->
+<div data-ng-include=" 'src/tpl/header.html' " class="app-header navbar b-b-3x-orange">
+</div>
+<!-- / navbar -->
+<div class="hd_treetitle" ng-if="proShow||cityShow||couShow" style="position: fixed">{{userInfo.tenantName}}</div>
+<!-- menu -->
+<div ng-if="super" style="min-width: 1366px;height:100%;padding-top: 300px;text-align: center" >
+    请在头部切换相应的监管机构
+</div>
+<!--本身是县级-->
+<div style="min-width: 1366px;height:100%" ng-if="!super">
+<div class="users-aside  hidden-xs hd_zindex  hd_app-aside" ng-class="{'hd_bigNav':countyShow}" ng-if="proShow" style="overflow-y: auto">
+    <span class="hd_treenav">
+        <ul>
+            <li ng-click="provinceClick()" ng-class="{'active':provinceIndex}">
+                <img src="../../../res/img/treehosep.png" alt="">
+                <span>省级医疗机构</span>
+            </li>
+            <li class="nohover">
+                <img src="../../../res/img/treehose.png" alt="" >
+                <span>市级监管机构</span>
+            </li>
+            <li ng-click="cityClick($index,l.name,l.id,l.placeName)" ng-class="{'active':treeIndex==$index}" ng-repeat="l in prolist track by $index" ng-if="prolist[0].name">
+                <img src="../../../res/img/tree.png" alt="" class="hd_treeunit" ng-if="$index!=prolist.length -1">
+                <img src="../../../res/img/treeend.png" alt="" class="hd_treeunith" ng-if="$index==prolist.length -1">
+               <span class="hd_overspan">{{l.name}}</span>
+            </li>
+        </ul>
+    </span>
+    <span class="hd_treenav" ng-show="countyShow">
+        <ul>
+            <li class="nohover">
+                <span class="hd_overspan">{{county}}</span>
+                <span class="hd_treelook">
+                    <a ui-sref="treeDetailcontrol({tenantId:cityId})" target="_blank">查看</a></span>
+            </li>
+            <li ng-click="spali()" ng-class="{'active':spaliTndex}">
+                <img src="../../../res/img/treehosep.png" alt="">
+                <span>市级医疗机构</span>
+            </li>
+            <li class="nohover">
+                <img src="../../../res/img/treehose.png" alt="" >
+                <span>区/县级监管机构</span>
+            </li>
+            <li ng-click="countyClick($index,l.name,l.id,l.placeName)" ng-class="{'active':countyIndex==$index}" ng-repeat="l in coulist track by $index" ng-if="coulist[0].name">
+                <img src="../../../res/img/tree.png" alt="" class="hd_treeunit" ng-if="$index!=coulist.length -1">
+                <img src="../../../res/img/treeend.png" alt="" class="hd_treeunith" ng-if="$index==coulist.length -1">
+                <span class="hd_overspan">{{l.name}}</span>
+            </li>
+        </ul>
+        <!--<div class="hd_display" ng-click="dispaly()"></div>-->
+    </span>
+</div>
+<!--本身是市级-->
+<div class="users-aside  hidden-xs hd_zindex  hd_app-aside" ng-if="cityShow">
+   <span class="hd_treenav" >
+        <ul>
+            <li  ng-click="cityClicks()" ng-class="{'active':countyIndex==-1}">
+                <img src="../../../res/img/treehosep.png" alt="">
+                <span>市级医疗机构</span>
+            </li>
+            <li class="nohover">
+                <img src="../../../res/img/treehose.png" alt="" >
+                <span>区/县级监管机构</span>
+            </li>
+            <li ng-click="countyClick($index,l.name,l.id,l.placeName)" ng-class="{'active':countyIndex==$index}" ng-repeat="l in coulist track by $index" ng-if="coulist[0].name">
+                <img src="../../../res/img/tree.png" alt="" class="hd_treeunit" ng-if="$index!=coulist.length -1">
+                <img src="../../../res/img/treeend.png" alt="" class="hd_treeunith" ng-if="$index==coulist.length -1">
+                <span class="hd_overspan">{{l.name}}</span>
+            </li>
+        </ul>
+    </span>
+</div>
+
+<!-- / menu -->
+
+<!-- content -->
+<div class="repair-content" style="height: 100%">
+    <div class="assets-overlay" ng-click='hideAll()' ng-show='devshow'></div>
+    <div class="app-content-body hd_treecont" ng-class="{'hd_treeover':countyShow,'isCounty':couShow}">
+        <div class="hd_treelisttitle" ng-if="countyIndex!=-1">{{countyName}} <i style="margin-left: 20px">
+                    <a ui-sref="treeDetailcontrol({tenantId: countyId})" target="_blank">查看</a></i></div>
+
+       <div class="hd_treelisttitle org-panel">
+           <span ng-if="treeIndex==-1 && countyIndex==-1 && proShow">省级医疗机构</span>
+           <span ng-if="treeIndex==-1 && countyIndex==-1 && cityShow">市级医疗机构</span>
+            <span ng-if="treeIndex!=-1 && countyIndex==-1">市级医疗机构</span>
+           <span ng-if="countyIndex!=-1">区/县级医疗机构</span>
+           <span ng-if="!proShow &&!cityShow ">区/县级医疗机构</span>
+           <div class="org-header">
+               <div class="org-sel hd_org-sel">
+                   <div class="i-info">
+                       <div class="input-wrap ">
+                           <input class="depetName hd_depetName" type="text" readonly="true" placeholder="选择机构类别" ng-model="orgType" ng-focus="focus()"/>
+                           <div class="depetList" ng-show="devshow1" >
+                               <label ng-repeat="l in tenantType track by $index" data-id="{{l.id}}" ng-click="click($event)">{{l.name}}</label>
+                           </div>
+                       </div>
+                   </div>
+                   <input id="keywords" class="hd_keywords"  type="text"  placeholder="请输入机构名称/ID" ng-model="$parent.keywords">
+                   <div class="t-search">
+                       <b ng-click="search()" id="search" style="height: 30px">搜索</b>
+                   </div>
+               </div>
+
+    </div>
+       </div>
+        <div class="org-content " style="width: 100%;padding: 0;margin-top: 20px;">
+            <table style="border:none;border-collapse:collapse;" class="table  b-t b-light text-center ">
+                <thead>
+                <tr class="tr-th hd_tr-th">
+                    <th style="width: 6%;white-space:nowrap;">ID</th>
+                    <th style="width: 20%;white-space:nowrap;">机构名称</th>
+                    <th style="width: 15%;white-space:nowrap;">所在地区</th>
+                    <th style="width: 15%;white-space:nowrap;">机构类别</th>
+                    <th style="width: 12%;white-space:nowrap;">设备数</th>
+                    <th style="width:12% ;white-space:nowrap;">管理员</th>
+                    <th style="width:10% ;white-space:nowrap;">联系电话</th>
+                    <th style="width: 10%;white-space:nowrap;">操作</th>
+                </tr>
+                </thead>
+                <tbody class="hd_treetbpdy">
+                <tr ng-if="loading">
+                    <td colspan="12" class="noContent">
+                        <img src="../../../res/img/loading2.gif" alt="">
+                    </td>
+                </tr>
+                <tr ng-if="noData" style="border: 0">
+                    <td colspan="12" class="noContent">
+                        <img src="../../../res/img/nocontent.png" alt="">
+                        <span class="m-l-lg">暂无数据</span>
+                    </td>
+                </tr>
+                <!--<tr ng-if="res.length" ng-repeat='item in res'>-->
+                <tr class="hd_treetr" ng-repeat="l in hospitalArr track by $index">
+                    <td class="hd_treeleft"  style="vertical-align:middle">{{l.id}}</td>
+                    <td  style="vertical-align:middle">{{l.name }} <span ng-if='!l.enable' class='dis-span'>已停用</span></td>
+                    <td  style="vertical-align:middle">{{l.province}}-{{l.city}}-{{l.county}}</td>
+                    <td  style="vertical-align:middle">
+                        <span ng-if="l.tenantCatogory == 1">医疗机构</span>
+                        <span ng-if="l.tenantCatogory == 2">基层医疗卫生机构</span>
+                        <span ng-if="l.tenantCatogory == 3">疾病预防控制中心</span>
+                    </td>
+                    <td  style="vertical-align:middle">{{l.deviceCount}}</td>
+                    <td  style="vertical-align:middle">{{l.adminName}}</td>
+                    <td  style="vertical-align:middle">{{l.adminMobile}}</td>
+                    <td class="b-r-og last-td hd_treeright"  style="vertical-align:middle">
+                        <a ui-sref="treeDetail({tenantId:l.id})" target="_blank" >查看</a>
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+        <!-- /.table-responsive -->
+        <div class="pages-de"></div>
+        <!-- 底部分页 -->
+        <span data-ng-include=" 'src/tpl/newPageInfo.html' "></span>
+</div>
+    <!--列表-->
+
+    </div>
+</div>
+<!--/ content-->

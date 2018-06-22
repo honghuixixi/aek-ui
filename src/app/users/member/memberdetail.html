@@ -1,0 +1,192 @@
+<!-- detail -->
+<div class="org-content-body">	
+	<!-- title -->
+	<div class="org-title acolor999">
+		<div class="title-right">
+			<a href="javascript:;" ng-if="userInfo.authoritiesStr.indexOf('SYS_USER_MANAGE') != -1" ng-click="editBaseInfoDialog()" class="orgSet font14px memberset">编辑基本信息</a>
+			<a href="javascript:;" ng-if="userInfo.authoritiesStr.indexOf('SYS_USER_MANAGE') != -1" ng-click="updataPassDialog()"  class="orgSet font14px setpassword">修改密码</a>
+			<a href="javascript:;" ng-if="currentUserInfo.enable && (currentUserInfo.id != userInfo.id)&&(userInfo.authoritiesStr.indexOf('SYS_USER_MANAGE') != -1)" ng-click='setAccnumDialog("stop")' class="orgStop font14px" >停用账号</a>
+			<a href="javascript:;" ng-if="!currentUserInfo.enable&&(userInfo.authoritiesStr.indexOf('SYS_USER_MANAGE') != -1)" ng-click='setAccnumDialog("start")' class="orgRecover font14px" >启用账号</a>
+			<!--<a href="javascript:;" ng-if="currentUserInfo.id != userInfo.id" ng-click='delAccnumDialog()' class="orgDel font14px" >删除账号</a>-->
+		</div>
+		<div class="title-left font15px">
+			<!-- <a ui-sref='org.index' class="acolor666">机构管理</a><em>></em> --><span class='acolor666'>用户详情</span>
+		</div>
+	</div>
+	<!-- /title -->
+	<!-- body -->
+	<div class="org-body acolor666">
+		<div class="headWrap">
+			<div class="body-head">
+				<div class="head-left">
+					<span class="font15px">{{currentUserInfo.realName}}</span>
+					<em ng-if="currentUserInfo.enable" class="enable font12px">启用中</em>
+					<em ng-if="!currentUserInfo.enable" class="font12px">已停用</em>
+				</div>
+			</div>
+			<!-- table -->
+			<table class="font12px" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td class="tdHeader"></td>
+					<td class="tdDataer"></td>
+					<td class="tdHead"></td>
+					<td class="tdData"></td>
+				</tr>
+				<tr>
+					<td>ID</td>
+					<td class='acolor999'>{{currentUserInfo.id}}</td>
+					<td>创建人</td>
+					<td class='acolor999'>{{currentUserInfo.creatorName}}</td>
+				</tr>
+				<tr>
+					<td>手机号</td>
+					<td class='acolor999'>{{currentUserInfo.mobile}}</td>
+					<td>创建时间</td>
+					<td class='acolor999'>{{currentUserInfo.createTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+				</tr>
+				<tr>
+					<td>邮箱</td>
+					<td class='acolor999'>{{currentUserInfo.email}}</td>
+					<td>最后登录时间</td>
+					<td class='acolor999'>{{currentUserInfo.lastLoginTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+				</tr>
+				<tr>
+					<td>所属机构</td>
+					<td class='acolor999' data-id="{{currentUserInfo.tenantId}}">{{currentUserInfo.tenantName}}</td>
+					<td>最后登录平台</td>
+					<td class='acolor999'>{{currentUserInfo.lastClientType}}</td>
+					
+				</tr>
+				<tr>
+					<td>所属部门</td>
+					<td class='acolor999' data-id="{{currentUserInfo.deptId}}" >{{currentUserInfo.deptName}}</td>
+					<td>最后登录ip</td>
+					<td class='acolor999'>{{currentUserInfo.lastLoginIp}}</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>职务</td>
+					<td class='acolor999' data-id="{{currentUserInfo.jobId}}">{{currentUserInfo.jobName}}</td>
+					<td></td>
+					<td class='acolor999'></td>
+				</tr>
+				
+			</table>
+			<!-- /table -->
+		</div>
+		<!-- section -->
+		<div class="sectionWrap" style="min-height: 58%">
+			<!-- head -->
+			<div class="section">
+				<div class="add-section" ng-show='sections.model'>
+					<a href="javascript:;" ng-click="alertModel()" class="font13px">添加系统模块</a><i class="verticalAlign"></i>
+				</div>
+				<div class="section-btn">
+					<a  class="font14px acolor666 ahoveryellow aActive ay-aActive" ng-class="aActive">角色设置</a>
+					<a ng-if="userInfo.authoritiesStr.indexOf('SYS_ROLE_MANAGE') != -1" ng-click="addroleDialog()" class="font14px fr acolor666 ahoveryellow aActive ay-aActive add-role" ng-class="aActive"><i></i>添加角色</a>
+					<div class="subline"></div>
+				</div>
+			</div>
+			<!-- /section -->
+			<div class="section_content member_contnet" ui-view></div>
+			<div class="fixdWrap" ng-show='fixdWrapShow' ng-click='menuHide()'></div>
+		</div>
+	</div>
+	<!-- /body -->
+</div>
+<style>
+	.layui-layer-page .layui-layer-content{
+		/*overflow:auto ;*/
+	}
+</style>
+<!--弹框-->
+<div id="memberform" style="padding-top:6px;" class="editMember" ng-show="isEditBaseInfo">
+		<div class="overlayer-alert" ng-show="searchListShow" ng-click="hideSearchlist()" ></div>
+		<form class="form-horizontal" id="addmember" name="addmember" novalidate>
+			<div class="form-group">
+				<label class="col-lg-2 col-sm-2 control-label" for="membername">所属机构</label>
+				<div class="col-sm-9">
+					<span class="deptMsg">{{currentOrgName}}</span>
+					<span class="deptMsg">{{updataUser.tenantName}}</span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-lg-2 col-sm-2 control-label" for="realName"><i>*</i>用户姓名</label>
+				<div class="col-sm-9">
+					<input type="text" ng-maxlength="40" class="form-control" ng-model="updataUser.realName" name="realName" id="realName" required/>
+				</div>
+				<div ng-show="!addmember.realName.$error.required && addmember.realName.$dirty && addmember.realName.$error.maxlength" class="errWrap"><span class="error">最多输入40个字符</span></div>
+				<div ng-show="addmember.realName.$dirty && addmember.realName.$error.required" class="errWrap"><span class="error">用户姓名必填</span> </div>
+
+			</div>
+
+			<div class="form-group">
+				<label class="col-lg-2 col-sm-2 control-label" for="mobile"><i>*</i>手机号</label>
+				<div class="col-sm-9">
+					<input class="form-control" ng-pattern="/^(1[3-8][0-9])\d{8}$/" ng-model="updataUser.mobile" name="mobile" id="mobile" required/>
+				</div>
+				<div ng-show="!addmember.mobile.$error.required && addmember.mobile.$dirty && addmember.mobile.$invalid" class="errWrap"><span class="error">手机格式错误</span></div>
+				<div ng-show="addmember.mobile.$dirty && addmember.mobile.$error.required" class="errWrap"><span class="error">手机号必填</span> </div>
+			</div>
+			<div class="form-group">
+				<label class="col-lg-2 col-sm-2 control-label" for="memberemail">邮箱</label>
+				<div class="col-sm-9">
+					<input class="form-control" type="email" ng-model="updataUser.email" name="email" id="email" />
+				</div>
+				<div ng-show="addmember.email.$dirty && addmember.email.$error.email" class="errWrap"><span class="error">邮箱格式错误</span></div>
+			</div>
+			<div class="form-group">
+				<label class="col-lg-2 col-sm-2 control-label" for="deptId"><i>*</i>部门</label>
+				<div class="col-sm-9 alert-select">
+					<div class="member-searchdept">
+						<input type="hidden" name="deptId" ng-model="updataUser.deptId" />
+						<input type="text" class="depetName" ng-model="depetName" ng-click="showdeptList()" readonly="readonly" placeholder="请输入科室名称" />
+						<div class="depetList" ng-show="depetshow">
+							<div class="inputdetName">
+								<input class="detNameSearch member-deptnameSearch" ng-trim="false" ng-model="keyword.nameSearch" type="text" ng-change="searchList()" />
+							</div>
+							<div class="member-deptWrap"></div>
+						</div>
+					</div>
+				</div>
+				<div ng-show="addmember.deptId.$dirty && addmember.deptId.$error.required" class="errWrap"><span class="error">部门必选</span> </div>
+			</div>
+			<div class="form-group">
+				<label class="col-lg-2 col-sm-2 control-label" for="memberjob">职务</label>
+				<div class="col-sm-9">
+					<input class="form-control" ng-model="updataUser.jobName" name="memberjob" id="memberjob" />
+				</div>
+			</div>
+		</form>
+	</div>
+<!-- /detail--->
+<div id="addrole" class="addRoles" ng-show="isAddRoles">
+		<form name="form_role" class="form-horizontal">
+			<div class="form-group">
+				<label class="col-lg-2 col-sm-2 control-label" for="fromdept">所属机构</label>
+				<div class="col-sm-9">
+					<span ng-if="editRole">{{roleOrg}}</span>
+					<!--<input ng-if="!editRole" type="text" ng-model="roleOrg" class="form-control fromdept" id="fromdept" />-->
+				    <select name="rolename" ng-change="changeList(roleOrg)"  ng-model="roleOrg" ng-options="rolename.tenantId as rolename.tenantName  for rolename in orgRolesList"></select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-lg-2 col-sm-2 control-label" for="rolelist">角色</label>
+				<div class="col-sm-9 rolelist">			
+					<div class="role-item fl" ng-repeat="role in roleList" ng-class="{even: !$even, odd: !$odd}">
+						<div class="checkboxFive" ng-mouseover="ishover6=true" ng-mouseleave="ishover6=false">
+							<!--用户已经添加的角色不显示-->
+							<input type="checkbox"  ng-checked="{{role.check}}"  value="{{role.id}}" class="child-checkbox addRoleInModel" id="checkboxFiveInput" />
+							<label ng-class="{'labelhover':ishover6}" class="checked" ng-click="checked($event)"></label>
+						</div>
+						<span class="mem-roleName">{{role.name}}</span>
+
+					</div>
+				</div>
+
+			</div>
+
+		</form>
+
+	</div>
+	

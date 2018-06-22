@@ -1,0 +1,175 @@
+<!-- toaster directive -->
+<toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container>
+<!-- / toaster directive -->
+
+<!-- 加载提醒 -->
+<!--<div ng-show="loading" class="text-center m-t-md text-lg"><i class="fa fa-spin fa-spinner"></i> 数据加载中...</div>-->
+
+<!-- 内容区域 -->
+<div ng-hide="loading" class="org-content-index">
+	<div class="assets-overlay" ng-click='hideAll()' ng-show='devshow'></div>
+	<!-- 数据显示 -->
+	<div class="wrapper-data og-pa">
+		<!-- 头部 -->
+		<div class='head-top'>
+			<span>监管机构管理&nbsp;&nbsp;<span class="font12px">({{userInfo.nowOrgName}})</span></span>
+			<!--<a ng-if="userInfo.authoritiesStr.indexOf('SYS_TENANT_NEW') != -1" ng-click="toAssets()" class="pos-fix-r-md-t-60 pos-fix-btn">新建机构</a>-->
+			<div class="add-section">
+				<a ng-if="userInfo.authoritiesStr.indexOf('SYS_SUPERVISE_TENANT_NEW') != -1" href="javascript:;" ng-click="toAssets()" class="font13px">新建监管机构</a><i class="verticalAlign"></i>
+			</div>
+		</div>
+		<div class="org-panel panel-default" style="overflow-y: scroll;">
+			<div ng-if="userInfo.authoritiesStr.indexOf('SYS_SUPERVISE_TENANT_LIST_VIEW') == -1" class="no-limits">
+				<img src="../../../res/img/myqx.png" alt="没有权限">您没有该页面的权限
+			</div>
+			<div ng-if="userInfo.authoritiesStr.indexOf('SYS_SUPERVISE_TENANT_LIST_VIEW') != -1">
+				<!--<div class="section">-->
+					<!--<div class="add-section">-->
+						<!--<a href="javascript:;" ng-click="toAssets()" class="font13px">新建监管机构</a><i class="verticalAlign"></i>-->
+					<!--</div>-->
+					<!--<div class="section-btn">-->
+						<!--<a ng-if="userInfo.adminFlag || (!userInfo.adminFlag && userInfo.tenantType == 1)" ui-sref="org.index({id:$stateParams.id})" class="font14px acolor666" >医疗机构</a>-->
+						<!--<a ng-if="userInfo.adminFlag || (!userInfo.adminFlag && userInfo.tenantType == 2)" ui-sref="org.supervise({id:$stateParams.id})" class="font14px acolor666 aActive">监管机构</a>-->
+						<!--<div class="subline"></div>-->
+					<!--</div>-->
+				<!--</div>-->
+				<div class="org-header">
+					<div class="org-sel">
+						<div class="i-info">
+							<div class="input-wrap">
+								<input class="depetName" type="text" readonly="true" ng-model="accountType" ng-focus="focus(4)"/>
+								<div class="depetList" ng-show="devshow4" >
+									<label data-id="" ng-click="click($event,4,'accountType')">账户类型</label>
+									<label ng-repeat="l in accountTypeArr track by $index" data-id="{{l.id}}" ng-click="click($event,4,'accountType')">{{l.name}}</label>
+								</div>
+							</div>
+						</div>
+						<div class="i-info">
+							<div class="input-wrap">
+								<input class="depetName" type="text" readonly="true" ng-model="open" ng-focus="focus(5)"/>
+								<div class="depetList" ng-show="devshow5" >
+									<label data-id="" ng-click="click($event,5,'open')">开通状态</label>
+									<label ng-repeat="l in openArr track by $index" data-id="{{l.id}}" ng-click="click($event,5,'open')">{{l.name}}</label>
+								</div>
+							</div>
+						</div>
+						<div class="i-info">
+							<div class="input-wrap">
+								<input class="depetName" type="text" readonly="true" ng-model="test" ng-focus="focus(6)"/>
+								<div class="depetList" ng-show="devshow6" >
+									<label data-id="" ng-click="click($event,6,'test')">是否测试</label>
+									<label ng-repeat="l in testArr track by $index" data-id="{{l.id}}" ng-click="click($event,6,'test')">{{l.name}}</label>
+								</div>
+							</div>
+						</div>
+						<input id="keywords" ng-model="$parent.keywords" type="text" class="" ng-focus="clearKey()" ng-blur="addKey()" ng-keypress="($event.which === 13)?search():0">
+						<b ng-click="search('search')" id="search">搜索</b>
+					</div>
+				</div>
+				<!-- 数据表格 -->
+				<div class="org-content table-responsive">
+					<table style="border:none;border-collapse:collapse;" class="table table-striped b-t b-light text-center min-width">
+						<thead>
+						<tr class="tr-th">
+							<th style="width: 55px;white-space:nowrap;">ID</th>
+							<th style="width: 20%;white-space:nowrap;">机构名称</th>
+							<th style="width: 140px;white-space:nowrap;">账户类型</th>
+							<th style="width: 15%;white-space:nowrap;">所在地区</th>
+							<th style="width: 15%;white-space:nowrap;">上级行政单位</th>
+							<th style="width: 139px;white-space:nowrap;">是否测试</th>
+							<th style="width: 218px;white-space:nowrap;">子机构</th>
+							<th style="width: 140px;white-space:nowrap;">到期时间</th>
+							<th style="width: 176px;white-space:nowrap;">操作</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr ng-if="loading2">
+							<td colspan="12" class="noContent">
+								<img src="../../../res/img/loading2.gif" alt="">
+							</td>
+						</tr>
+						<tr ng-if="noData">
+							<td colspan="12" class="noContent">
+								<img src="../../../res/img/nocontent.png" alt="">
+								<span class="m-l-lg">暂无数据</span>
+							</td>
+						</tr>
+						<tr ng-if="res.length" ng-repeat='item in res' ng-class="!item.enable && 'disabled'">
+							<td class="fir-td">{{item.id}}</td>
+							<td class="text-lf p-l-15">
+								{{item.name}}
+								<span ng-if='!item.enable' class='dis-span'>已停用</span>
+							</td>
+							<td>
+								<span ng-if="item.commercialUse  == 0">试用</span>
+								<span ng-if="item.commercialUse  == 1">正式</span>
+							</td>
+							<td>{{item.areaMsg}}</td>
+							<td>{{item.manageTenantName}}</td>
+							<td>
+								<span ng-if="item.trial == 0">是</span>
+								<span ng-if="item.trial == 1">否</span>
+							</td>
+							<td>
+                                <span ng-if="item.subTenantLimit == 0 ">不可创建</span>
+                                <span ng-if="item.subTenantLimit != 0">已创建{{item.subTenant }}个/可创建{{item.subTenantLimit}}个</span>
+                            </td>
+							<td>{{item.expireTime}}</td>
+							<td class="b-r-og last-td">
+								<a href="javascript:;" ng-click='operateTenant(1,item)' ng-if="item.auditStatus == 1||item.auditStatus == 4">通过</a>
+								<a href="javascript:;" ng-click='operateTenant(2,item)' ng-if="item.auditStatus == 1">拒绝</a>
+								<!--ng-click="goDetail(item.id)"-->
+								<a ng-if="userInfo.authoritiesStr.indexOf('SYS_SUPERVISE_TENANT_DETAILED_VIEW') != -1" ui-sref="org.superviseDetail({id: item.id,loginId:$stateParams.id})" target="_blank">查看</a>
+								<div ng-show="false" ng-if="userInfo.authoritiesStr.indexOf('SYS_SUPERVISE_TENANT_MANAGE') != -1" class="selectWrap m-l-md">
+									<div class="selectors"><a href="javascript:;" ng-click='showMoreOpt($index)'>···</a></div>
+									<div class="options width64" ng-show='operateList{{$index}}'>
+										<ul>
+											<li ng-if="item.enable"><a href="javascript:;" ng-click='alertLayer($index,item,1)'>停用机构</a></li>
+											<li ng-if="!item.enable"><a href="javascript:;" ng-click='alertLayer($index,item,2)'>恢复机构</a></li>
+											<li><a href="javascript:;" ng-click='alertLayer($index,item,0)'>删除机构</a></li>
+										</ul>
+									</div>
+								</div>
+							</td>
+						</tr>
+						<tr ng-if="res.length" class="no-p">
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						</tbody>
+					</table>
+				</div>
+				<!-- /.table-responsive -->
+				<div class="pages-de"></div>
+				<!-- 底部分页 -->
+				<span data-ng-include=" 'src/tpl/newPageInfo.html' "></span>
+			</div>
+		</div>
+		<!-- /.panel -->
+	</div>
+	<!-- /.wrapper-data -->
+
+	<div id="alertOrgChild" ng-show="alertChildCon">
+		<div class="alertContent">
+			<div class="alertImg"><img src='{{layerImg}}'></div>
+			<p class="font14px acolor666">确定{{orgOperate}}机构 ({{orgId}}){{orgName}}吗？</p>
+			<div class="alertTip font13px acolorred">
+				<span ng-class="orgOperate == '删除' && 'ali-cen'">{{orgTip}}</span>
+			</div>
+			<div class="alertBtn">
+				<a href="javascript:;" ng-click='operateOrg()' class="btnyes">确定</a><a href="javascript:;" ng-click='closeIndex()' class="btncancel">取消</a>
+			</div>
+		</div>
+	</div>
+
+	<div class="fixWrap" ng-show='fixWrapShow' ng-click='menuHide()'></div>
+</div>
+<!-- /.wrapper-md -->
+<!--<div data-ng-include='src/app/tre/ytz/iframe.html' ng-hide=true id="addDev"></div>-->

@@ -1,0 +1,47 @@
+.btn-add {
+	padding-left: 30px;
+	padding-right: 10px;
+	background-image: url('../../../../res/img/add.png');
+	background-position: 10px 9px;
+	background-repeat: no-repeat;
+}
+.add-swrap {
+	margin-top: 20px;
+	border: 1px solid #ddd;
+}
+.sys-item {
+	margin-bottom: 10px;
+	overflow: hidden;
+}
+.sys-item .div {
+	float: left;
+	min-width: 140px;
+	margin: 10px 0 0 10px;
+	padding: 6px 10px;
+	border: 1px solid #4baaf6;
+	border-radius: 3px;
+	text-align: center;
+	cursor: pointer;
+}
+.add-item {
+	padding: 10px ;
+	border-bottom: 1px solid #ddd;
+	overflow: hidden;
+}
+.add-item-input {
+	width: 400px;
+	height: 36px;
+	padding: 0 10px;
+	line-height: 36px;
+	border: 1px solid #ddd;
+}
+.add-item-btn {
+	padding: 0;
+	margin-left: 10px;
+	color: #4baaf6;
+	cursor: pointer;
+}
+.add-item-err {
+	margin-left: 10px;
+	color: #f00;
+}

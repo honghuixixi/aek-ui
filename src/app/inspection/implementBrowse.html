@@ -1,0 +1,45 @@
+<div class="implement">
+	<div class="implement-nav">
+		<span><a class="c9" ui-sref="inspection.implement.list({tenantId:$stateParams.tenantId||$localStorage.userInfo.tenantId})" ui-sref-opts="{reload:true}">巡检实施</a>&gt;<i class="c6">查看详情</i></span>	
+		<span class="btn" ng-click="doImplement()">开始巡检</span>
+	</div>
+	<implement-detail obj="data.plan" type="data.type"></implement-detail>
+	<div class="main">
+		<div class="title2">
+			<div class="tab">
+				<div class="{{data.conType === 1 ? 'tab-item tab-active' : 'tab-item'}}" ng-click="changeConType(1)">巡检内容</div>
+				<div class="{{data.conType === 2 ? 'tab-item tab-active' : 'tab-item'}}" ng-click="changeConType(2)">巡检总结</div>
+			</div>
+			<!-- <div class="print" ng-if="data.conType === 1" ng-click="showPrint()">打印</div> -->
+		</div>
+		<div class="main-content" ng-if="data.conType === 1">
+			<table style="margin-bottom: 10px;">
+				<tr>
+					<td class="c6">巡检范围：</td>
+					<td class="c9">{{data.plan.scope}}</td>
+				</tr>
+			</table>
+			<div style="min-width: 800px;overflow-x: auto;" ng-if="!data.empty && !data.loading">
+				<implement-template-q 
+					type1="1" 
+					type2="1"
+					page="pageInfo.current"
+					page-size="pageInfo.size"
+					equipments="data.equipments" 
+					templates="data.templates"></implement-template-q>
+			</div>			
+			<!-- 分页 -->
+        	<span ng-if="!data.loading && !data.empty" data-ng-include=" 'src/tpl/newPageInfo.html' "></span>
+        	<!-- empty -->
+	        <!-- <div class="empty" ng-if="data.empty && !data.loading"><img src="../../../res/img/nocontent.png">暂无数据</div> -->
+	        <!-- loading -->
+	        <!-- <div class="loading" ng-if="data.loading"><img src="../../../res/img/loading2.gif"></div> -->
+		</div>
+		<div class="main-summary" ng-if="data.conType === 2">
+			<implement-summary type="data.type" obj="data.plan"></implement-summary>
+		</div>
+	</div>	
+</div>
+
+<!-- 打印巡检记录单 -->
+<div data-ng-include=" 'src/tpl/implementPrint.html' "></div>

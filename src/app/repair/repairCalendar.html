@@ -1,0 +1,459 @@
+<div class="fy_repairCalendar">
+	<div class="fy_repairCalendarTable">
+		<div class="fy_repairCalendarHead">
+			<div class='color999'>周日</div>
+			<div>周一</div>
+			<div>周二</div>
+			<div>周三</div>
+			<div>周四</div>
+			<div>周五</div>
+			<div class='color999'>周六</div>
+		</div>
+		<div class="fy_repairCalendarBody">
+			<div class="fy_repairCalendarOne" ng-repeat='one in repairTablePre'>
+				<div class="fy_repairCalendarOneDay">{{one.day}}</div>
+				<ul>
+					<!-- <li ng-mouseover='layerTip($event)' ng-mouseleave='layerTipClose()'><span>血液透析机</span><span>【待维修】</span></li>
+					<li><span>血液透析机</span><span>【待维修】</span></li>
+					<li><span>血液透析机</span><span>【待维修】</span></li>
+					<li><span>血液透析机血液透析机血液透析机</span><span>【待维修】</span></li> -->
+				</ul>
+			</div>
+			<div class="fy_repairCalendarOne" ng-repeat='one in repairTable'>
+				<div class="fy_repairCalendarOneDay">{{one.day}}</div>
+				<ul>
+					<li ng-repeat='event in one.events'>
+						<a ng-click='repairIndentify(event)' ng-mouseenter='layerTip($event,event)' ng-mouseleave='layerTipClose()'><span>{{event.assetsName}}</span><span>【{{repairCalendarStatus(event.status)}}】</span></a>
+						<div class="fy_layerTipWrap">
+							<ul class="fy_layerTip">
+								<li><span>设备名称：{{event.assetsName}}</span><span class='m-l-lg colorYellow'>{{repairCalendarStatus(event.status)}}</span></li>
+								<li><span>设备编号：{{event.assetsNum}}</span></li>
+								<li><span>申请时间：{{event.reportRepairDate | date:'yyyy-MM-dd HH:mm'}}</span></li>
+							</ul>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div class="fy_repairCalendarOne" ng-repeat='one in repairTableNext'>
+				<div class="fy_repairCalendarOneDay">{{one.day}}</div>
+				<ul>
+					<!-- <li ng-mouseover='layerTip($event)' ng-mouseleave='layerTipClose()'><span>血液透析机</span><span>【待维修】</span></li>
+					<li><span>血液透析机</span><span>【待维修】</span></li>
+					<li><span>血液透析机</span><span>【待维修】</span></li>
+					<li><span>血液透析机血液透析机血液透析机</span><span>【待维修】</span></li> -->
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- print repair report bill -->
+<div class="fy_repairReportBill">
+	<div class="fy_repairReportHead">浙江省第一人民医院医疗器械维修申请单</div>
+	<div class="fy_repairReportBillHead">
+		<div class="fy_repairReportBillHeadLeft">维修工作单号:WX20170413123456</div>
+		<div class="fy_repairReportBillHeadRight">日期：2017-01-01  12:00</div>
+	</div>
+	<div class="fy_repairReportPortHead">一、设备基本信息</div>
+	<table border="0" cellspacing="0" cellpadding="0" class="fy_repairReportPortTable">
+		<tr>
+			<td class="fy_repairReportPortTableHead fy_repairReportPortTableBL">设备名称</td>
+			<td>asdfasdf</td>
+			<td class="fy_repairReportPortTableHead">设备编号</td>
+			<td class="fy_repairReportPortTableBR">asdfasdf</td>
+		</tr>
+		<tr>
+			<td class="fy_repairReportPortTableHead fy_repairReportPortTableBL">规格型号</td>
+			<td>asdfasdf</td>
+			<td class="fy_repairReportPortTableHead">出厂编号</td>
+			<td class="fy_repairReportPortTableBR">asdfasdf</td>
+		</tr>
+		<tr>
+			<td class="fy_repairReportPortTableHead fy_repairReportPortTableBL">品牌</td>
+			<td>asdfasdf</td>
+			<td class="fy_repairReportPortTableHead">生产厂家</td>
+			<td class="fy_repairReportPortTableBR">asdfasdf</td>
+		</tr>
+		<tr>
+			<td class="fy_repairReportPortTableHead fy_repairReportPortTableBL">使用科室</td>
+			<td>asdfasdf</td>
+			<td class="fy_repairReportPortTableHead">电话</td>
+			<td class="fy_repairReportPortTableBR">asdfasdf</td>
+		</tr>
+		<tr>
+			<td class="fy_repairReportPortTableHead fy_repairReportPortTableBL">启用日期</td>
+			<td>asdfasdf</td>
+			<td class="fy_repairReportPortTableHead">报修时间</td>
+			<td class="fy_repairReportPortTableBR">asdfasdf</td>
+		</tr>
+	</table>
+	<div class="fy_repairReportPortHead">二、维修内容</div>
+	<table border="0" cellspacing="0" cellpadding="0" class="fy_repairReportPortTable">
+		<tr>
+			<td rowspan="3" class="fy_repairReportPortTableHead fy_repairReportPortTableBL">工作性质</td>
+			<td class="fy_repairReportPortTableBR">自助维修自主维修；故障维修</td>
+		</tr>
+		<tr>
+			<td class="fy_repairReportPortTableBR">外修单位：无</td>
+		</tr>
+		<tr>
+			<td class="fy_repairReportPortTableBR">联系电话：无</td>
+		</tr>
+		<tr>
+			<td class="fy_repairReportPortTableHead fy_repairReportPortTableBL">故障现象</td>
+			<td class="fy_repairReportPortTableBR">故障停机；部分功能失效</td>
+		</tr>
+		<tr>
+			<td class="fy_repairReportPortTableHead fy_repairReportPortTableBL">故障原因</td>
+			<td class="fy_repairReportPortTableBR">设备故障：电源损坏</td>
+		</tr>
+		<tr>
+			<td class="fy_repairReportPortTableHead fy_repairReportPortTableBL">维修工作内容</td>
+			<td class="fy_repairReportPortTableBR">更换部件</td>
+		</tr>
+	</table>
+	<div class="fy_repairReportPortHead">三、维修配件信息</div>
+	<table border="0" cellspacing="0" cellpadding="0" class="fy_repairReportPortTable">
+		<tr>
+			<td class="fy_repairReportPortTableHead fy_repairReportPortTableBL">维修配件名称</td>
+			<td class="fy_repairReportPortTableHead">型号规格(备件号)</td>
+			<td class="fy_repairReportPortTableHead">数量</td>
+			<td class="fy_repairReportPortTableHead">单价</td>
+			<td class="fy_repairReportPortTableHead fy_repairReportPortTableBR">合计</td>
+		</tr>
+		<tr>
+			<td class="fy_repairReportPortTableBL">工作性质</td>
+			<td>工作性质</td>
+			<td>工作性质</td>
+			<td>工作性质</td>
+			<td class="fy_repairReportPortTableBR">工作性质</td>
+		</tr>
+	</table>
+	<div class="fy_repairReportPortHead">四、维修结果</div>
+	<table border="0" cellspacing="0" cellpadding="0" class="fy_repairReportPortTable">
+		<tr>
+			<td class="fy_repairReportPortTableHead fy_repairReportPortTableBL">维修后状态</td>
+			<td colspan="6" class="fy_repairReportPortTableBR fy_repairReportPortTableHead">基本功能正常</td>
+		</tr>
+		<tr>
+			<td rowspan="2" class="fy_repairReportPortTableHead fy_repairReportPortTableBL">维修时间周期</td>
+			<td class="fy_repairReportPortTableHead">开始时间</td>
+			<td>2017-01-01</td>
+			<td class="fy_repairReportPortTableHead" rowspan="2" >配件等待时间</td>
+			<td rowspan="2" >1天2小时</td>
+			<td class="fy_repairReportPortTableHead" rowspan="2" >实际维修时间</td>
+			<td rowspan="2" class="fy_repairReportPortTableBR">1天2小时</td>
+		</tr>
+		<tr>
+			<td class="fy_repairReportPortTableHead">结束时间</td>
+			<td class="fy_repairReportPortTableBR">2017-01-01</td>
+		</tr>
+		<tr>
+			<td class="fy_repairReportPortTableHead fy_repairReportPortTableBL">维修时间周期</td>
+			<td class="fy_repairReportPortTableHead">开始时间</td>
+			<td>2017-01-01</td>
+			<td class="fy_repairReportPortTableHead">配件等待时间</td>
+			<td>1天2小时</td>
+			<td class="fy_repairReportPortTableHead">实际维修时间</td>
+			<td class="fy_repairReportPortTableBR">1天2小时</td>
+		</tr>
+		<tr>
+			<td class="fy_repairReportPortTableHead fy_repairReportPortTableDb fy_repairReportPortTableBL">备注</td>
+			<td colspan="6" class="fy_repairReportPortTableBR fy_repairReportPortTableDb">设备故障；电源损坏</td>
+		</tr>
+		<tr>
+			<td class="fy_repairReportPortTableHead fy_repairReportPortTableBL">维修人签字</td>
+			<td colspan="3"></td>
+			<td class="fy_repairReportPortTableHead">验收人签字</td>
+			<td colspan="2" class="fy_repairReportPortTableBR"></td>
+		</tr>
+	</table>
+	<div class="fy_repairReportBillBtn">
+		<a href="javascript:;">关闭</a>
+	</div>
+</div>
+<!-- repair detail  -->
+<div class="fy_repairDetail">
+	<div class="fy_repairDetailTitle">设备信息</div>
+	<div class="fy_repairDetailContent">
+		<table border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<th class="fy_repairDetailContentBL">设备编号</th>
+				<th>设备名称</th>
+				<th>规格型号</th>
+				<th>出厂编号</th>
+				<th>生产商</th>
+				<th>所在部门</th>
+				<th>启用日期</th>
+				<th class="fy_repairDetailContentBR">保修期至</th>
+			</tr>
+			<tr>
+				<td>设备编号</td>
+				<td>设备名称</td>
+				<td>规格型号</td>
+				<td>出厂编号</td>
+				<td>生产商</td>
+				<td>所在部门</td>
+				<td>2017-01-01</td>
+				<td>2017-01-01</td>
+			</tr>
+		</table>
+	</div>
+	<div class="fy_repairDetailTitle">故障描述</div>
+	<div class="fy_repairDetailContent">
+		<div class="fy_repairDetailContentDes">故障描述故障描述故障描述</div>
+	</div>
+	<div class="fy_repairDetailTitle">故障图片</div>
+	<div class="fy_repairDetailContent">
+		<img src="" class="m-r-md">
+	</div>
+	<div class="fy_repairDetailBtn">
+		<a href="javascript:;">关闭</a>
+	</div>
+</div>
+<!-- 日历全屏 -->
+<div class="fy_repaircalendarFullSrc" ng-show='calendarFullShow'>
+	<div class="fy_repairCalendarFullHead fy_repairCalendarFullHeader">
+		<div class="fy_repairCalendarFullHeadTime"><a ng-click='repairIndexFullOut()'><span>退出全屏</span><em></em></a></div>
+		<div class="fy_repairCalendarFullHeadTitle"><div class="fy_repairTitleTime" ng-show="$state.includes('**.repair.index.calendar')"><a href="javascript:;" class="fy_timeLeft" ng-click="repairDateChange(-1)"></a><a href="javascript:;" class="fy_timeRight" ng-click="repairDateChange(1)"></a><span class="ng-binding">{{repairDate.year}}年{{repairDate.month<10?('0'+repairDate.month):repairDate.month}}月</span></div></div>
+		<div class="fy_repairCalendarFullHeadMonth">{{repairDate.month<10?('0'+repairDate.month):repairDate.month}}月维修单</div>
+	</div>
+	<div class="fy_repairCalendarFullWrap">
+		<div class="fy_repairCalendar fy_repairCalendarFull">
+			<div class="fy_repairCalendarTable" ng-class='{fy_repairCalendarTableBig: calendarFullShow}'>
+				<div class="fy_repairCalendarHead">
+					<div class='color999'>周日</div>
+					<div>周一</div>
+					<div>周二</div>
+					<div>周三</div>
+					<div>周四</div>
+					<div>周五</div>
+					<div class='color999'>周六</div>
+				</div>
+				<div class="fy_repairCalendarBody">
+					<div class="fy_repairCalendarOne" ng-repeat='one in repairTablePre'>
+						<div class="fy_repairCalendarOneDay">{{one.day}}</div>
+					</div>
+					<div class="fy_repairCalendarOne" ng-repeat='one in repairTable'>
+						<div class="fy_repairCalendarOneDay">{{one.day}}</div>
+						<ul>
+							<li ng-repeat='event in one.events' ng-mouseover='layerTip($event,event)' ng-mouseleave='layerTipClose()'>
+								<a ng-click='repairIndentify(event)'><span>{{event.assetsName}}</span><span>【{{repairCalendarStatus(event.status)}}】</span></a>
+								<div class="fy_layerTipWrap">
+									<ul class="fy_layerTip">
+										<li><span class='fy_layerTipSpan'>设备名称：{{event.assetsName}}</span><span class='m-l-lg colorYellow'>{{repairCalendarStatus(event.status)}}</span><span class='m-l-lg' ng-class='{"colorYellow":event.urgentLevel==3,"colorRed":event.urgentLevel==4}'>{{msgLevel(event.urgentLevel)}}</span></li>
+										<li><span>设备编号：{{event.assetsNum}}</span></li>
+										<li><span>鉴定时间：{{event.reportRepairDate | date:'yyyy-MM-dd HH:mm'}}</span></li>
+									</ul>
+								</div>
+							</li>
+						</ul>
+					</div>
+					<div class="fy_repairCalendarOne" ng-repeat='one in repairTableNext'>
+						<div class="fy_repairCalendarOneDay">{{one.day}}</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 日历全屏 END -->
+<div data-ng-include=" 'src/tpl/alert.html' "></div>
+
+<!-- 验收 -->
+<div class="repairCheckAccpet" ng-show='repairCheckShow'>
+	<div class="repairCheckInfo">
+		<div class="repairCheckTitle"><span>验收情况</span></div>
+		<div class="repairCheckInfoCon m-b-md"><span class='repairCheckInfoConSpan m-r-sm'>验收结果：</span><span ng-show='repairCheckAccpetType' class='color999'>验收通过</span><span ng-show='!repairCheckAccpetType'><div class="radioCopy"><input ng-click='repairCheckHadSelected(1)' type="radio" name='checkAccept' id="checkAccepted"><em></em></div><label for="checkAccepted">验收通过</label><span class='m-l-xxl' ng-show='!repairCheckAccpetType'><div class="radioCopy"><input ng-click='repairCheckHadSelected(0)' type="radio" name='checkAccept' id="checkAcceptNot"><em></em></div><label for="checkAcceptNot">验收未通过</label></span></div>
+		<div class="repairCheckInfoCon" ng-show="repairCheckSelected"><span class='repairCheckInfoConSpan m-r-sm'>验收结果：</span><span ng-show='repairCheckAccpetType' class='color999'>正常工作</span><div class="selectWrap" ng-show='!repairCheckAccpetType'>
+					<div class="selector" ng-click='listShow("checkList")'><input type="text" ng-model='checkModel' readonly="true"><a href='javascript:;'></a></div>
+					<div class="options" ng-show='checkList'>
+						<ul>
+							<li ng-repeat='item in optionCheck' ng-click='option("checkList","checkModel",item)'>{{item.name}}</li>
+						</ul>
+					</div>
+				</div></div>
+	</div>
+	<div class="repairServer" ng-show="repairCheckSelected">
+		<div class="repairCheckTitle"><span>服务评价</span></div>
+		<ul>
+			<li class="m-b-sm"><span class='repairCheckInfoConSpan m-r-sm'>服务态度：</span><span class='repairStar'>
+			<a ng-class='{"repairStarOn":repairAttitude.star1}' ng-click='repairServerStar("repairAttitude",1)'></a>
+			<a ng-class='{"repairStarOn":repairAttitude.star2}' ng-click='repairServerStar("repairAttitude",2)'></a>
+			<a ng-class='{"repairStarOn":repairAttitude.star3}' ng-click='repairServerStar("repairAttitude",3)'></a>
+			<a ng-class='{"repairStarOn":repairAttitude.star4}' ng-click='repairServerStar("repairAttitude",4)'></a>
+			<a ng-class='{"repairStarOn":repairAttitude.star5}' ng-click='repairServerStar("repairAttitude",5)'></a>
+			</span><span class='repairTextRight'>{{repairAttitude.txt}}</span><span class='repairTextLeft m-l'>{{repairAttitude.score}}</span></li>
+			<li class="m-b-sm"><span class='repairCheckInfoConSpan m-r-sm'>响应时间：</span><span class='repairStar'>
+			<a ng-class='{"repairStarOn":repairRespond.star1}' ng-click='repairServerStar("repairRespond",1)'></a>
+			<a ng-class='{"repairStarOn":repairRespond.star2}' ng-click='repairServerStar("repairRespond",2)'></a>
+			<a ng-class='{"repairStarOn":repairRespond.star3}' ng-click='repairServerStar("repairRespond",3)'></a>
+			<a ng-class='{"repairStarOn":repairRespond.star4}' ng-click='repairServerStar("repairRespond",4)'></a>
+			<a ng-class='{"repairStarOn":repairRespond.star5}' ng-click='repairServerStar("repairRespond",5)'></a>
+			</span><span class='repairTextRight'>{{repairRespond.txt}}</span><span class='repairTextLeft m-l'>{{repairRespond.score}}</span></li>
+			<li class="m-b"><span class='repairCheckInfoConSpan m-r-sm'>维修质量：</span><span class='repairStar'>
+			<a ng-class='{"repairStarOn":repairMass.star1}' ng-click='repairServerStar("repairMass",1)'></a>
+			<a ng-class='{"repairStarOn":repairMass.star2}' ng-click='repairServerStar("repairMass",2)'></a>
+			<a ng-class='{"repairStarOn":repairMass.star3}' ng-click='repairServerStar("repairMass",3)'></a>
+			<a ng-class='{"repairStarOn":repairMass.star4}' ng-click='repairServerStar("repairMass",4)'></a>
+			<a ng-class='{"repairStarOn":repairMass.star5}' ng-click='repairServerStar("repairMass",5)'></a>
+			</span><span class='repairTextRight'>{{repairMass.txt}}</span><span class='repairTextLeft m-l'>{{repairMass.score}}</span></li>
+			<li class="repairCheckRemark"><span class='repairCheckInfoConSpan m-r-sm'>备注：</span><div class="repairCheckRemarkCon"><div ng-show='repairCheckAccpetType'></div><textarea ng-show='!repairCheckAccpetType' placeholder='请输入备注说明(非必填)'></textarea><span ng-show='!repairCheckAccpetType'>0/300</span></div></li>
+		</ul>
+	</div>
+	<div class="alertRepairCheckBtn alertRepairBtn">
+		<a href="javascript:;" class="btnyes">确定</a><a href="javascript:;" class="btncancel">取消</a>
+	</div>
+	<div class="fixWrap" ng-show='fixWrapShow' ng-click='menuHide()'></div>
+</div>
+<!-- 验收 END -->
+<!-- 查看验收 -->
+<div class="lookRepairCheckAccpet" ng-show='lookRepairCheckShow'>
+	<div class="repairCheckInfo">
+		<div class="repairCheckTitle"><span>验收情况</span></div>
+		<div class="repairCheckInfoCon m-b-md"><span class='repairCheckInfoConSpan m-r-sm'>验收结果：</span><span class='color999'>正常工作</span></div>
+		<div class="repairCheckInfoCon" ng-class='{"m-b-md":!lookRepairCheckPassShow}'><span class='repairCheckInfoConSpan m-r-sm'>验收结果：</span><span class='color999'>正常工作</span></div>
+	</div>
+	<div class="repairServer">
+		<div class="repairCheckTitle" ng-show='lookRepairCheckPassShow'><span>服务评价</span></div>
+		<ul>
+			<li class="m-b-sm" ng-show='lookRepairCheckPassShow'><span class='repairCheckInfoConSpan m-r-sm'>服务态度：</span><span class='repairStar'>
+			<span ng-class='{"repairStarOn":repairAttitude.star1}'></span>
+			<span ng-class='{"repairStarOn":repairAttitude.star2}'></span>
+			<span ng-class='{"repairStarOn":repairAttitude.star3}'></span>
+			<span ng-class='{"repairStarOn":repairAttitude.star4}'></span>
+			<span ng-class='{"repairStarOn":repairAttitude.star5}'></span>
+			</span><span class='repairTextRight'>{{repairAttitude.txt}}</span><span class='repairTextLeft m-l'>{{repairAttitude.score}}</span></li>
+			<li class="m-b-sm" ng-show='lookRepairCheckPassShow'><span class='repairCheckInfoConSpan m-r-sm'>响应时间：</span><span class='repairStar'>
+			<span ng-class='{"repairStarOn":repairRespond.star1}'></span>
+			<span ng-class='{"repairStarOn":repairRespond.star2}'></span>
+			<span ng-class='{"repairStarOn":repairRespond.star3}'></span>
+			<span ng-class='{"repairStarOn":repairRespond.star4}'></span>
+			<span ng-class='{"repairStarOn":repairRespond.star5}'></span>
+			</span><span class='repairTextRight'>{{repairRespond.txt}}</span><span class='repairTextLeft m-l'>{{repairRespond.score}}</span></li>
+			<li class="m-b" ng-show='lookRepairCheckPassShow'><span class='repairCheckInfoConSpan m-r-sm'>维修质量：</span><span class='repairStar'>
+			<span ng-class='{"repairStarOn":repairMass.star1}'></span>
+			<span ng-class='{"repairStarOn":repairMass.star2}'></span>
+			<span ng-class='{"repairStarOn":repairMass.star3}'></span>
+			<span ng-class='{"repairStarOn":repairMass.star4}'></span>
+			<span ng-class='{"repairStarOn":repairMass.star5}'></span>
+			</span><span class='repairTextRight'>{{repairMass.txt}}</span><span class='repairTextLeft m-l'>{{repairMass.score}}</span></li>
+			<li class="repairCheckRemark"><span class='repairCheckInfoConSpan m-r-sm'>备注：</span><div class="repairCheckRemarkSpan460"></div></li>
+		</ul>
+	</div>
+	<div class="alertRepairCheckBtn alertRepairBtn">
+		<a href="javascript:;" class="btnyes">确定</a><a href="javascript:;" class="btncancel">取消</a>
+	</div>
+</div>
+<!-- 查看验收 END -->
+<!-- 故障鉴定详情 -->
+<div class="repairIdentifyDetail" ng-show='repairIndetifyShow'>
+	<div class="repairIdentifyDetailOne">
+		<span>现场解决：</span><div ng-show='repairIdentifyDetailType'>是</div><span ng-show='!repairIdentifyDetailType'><div class="radioCopy"><input type="radio" name='repairIdentifyDetail' id="repairIdentifyDetailYes"><em></em></div><label for="repairIdentifyDetailYes">是</label></span><span class='m-l-xxl' ng-show='!repairIdentifyDetailType'><div class="radioCopy"><input type="radio" name='repairIdentifyDetail' id="repairIdentifyDetailNo"><em></em></div><label for="repairIdentifyDetailNo">否</label></span>
+	</div>
+	<div class="repairIdentifyDetailOne">
+		<span>维修方式：</span><div>自主维修</div>
+	</div>
+	<div class="repairIdentifyDetailRemark">
+		<span>备注：</span><div ng-show='repairIdentifyDetailType'>请输入故障说明请输入故障说明请输入故障说明请输入故障说明请输入故障说明请输入故障说明请输入故障说明请输入故障说明</div><div ng-show='!repairIdentifyDetailType'><textarea placeholder='请输入备注说明(非必填)'></textarea><span>0/300</span></div>
+	</div>
+	<div class="alertRepairBtn repairIndentifyDetailBTN">
+		<a href="javascript:;" class="btnyes" ng-show='repairIdentifyDetailType'>关闭</a><a href="javascript:;" class="btnyes" ng-show='!repairIdentifyDetailType'>确定</a><a href="javascript:;" class="btncancel" ng-show='!repairIdentifyDetailType'>取消</a>
+	</div>
+</div>
+<!-- 故障鉴定详情 END -->
+<!-- 查看维修报告单 -->
+<div class="lookRepairReport" ng-show='lookRepairReportShow'>
+	<div class="lookRepairReportCon lookRepairReportConTitle"><span>维修内容</span><a href="javascript:;" ng-click='lookRepairReportMenuShow("lookRepairReportConShow")' ng-class='{"lookRepairReportConShow":lookRepairReportConShow}'></a></div>
+	<div class="lookRepairReportContent" ng-show='!lookRepairReportConShow'>
+		<div class="lookRepairReportContentOne"><span class='lookRepairReportContentHead'>工作性质：</span><span class='m-l-sm'>自主维修</span></div>
+		<div class="lookRepairReportContentOne"><span class='lookRepairReportContentHead'>类型：</span><span class='m-l-sm'>故障维修</span></div>
+		<div class="lookRepairReportContentOne lookRepairReportContentBorder"><span class='lookRepairReportContentHead'>故障现象：</span><span class='spanBorder'>故障停机</span><span class='spanBorder'>附件损坏</span></div>
+		<div class="lookRepairReportContentOne lookRepairReportContentBorder"><span class='lookRepairReportContentHead'>故障原因：</span><span class='spanBorder'>故障停机</span><span class='spanBorder'>附件损坏</span></div>
+		<div class="lookRepairReportContentOne lookRepairReportContentBorder"><span class='lookRepairReportContentHead'>工作内容：</span><span class='spanBorder'>故障停机</span><span class='spanBorder'>附件损坏</span></div>
+	</div>
+	<div class="editRepairReportContent">
+		<div class="editRepairReportContentOne"><span class='editRepairReportContentHead'>工作性质：</span><span class='m-l-sm'>自主维修</span></div>
+		<div class="editRepairReportContentOne"><span class='editRepairReportContentHead'>验收结果：</span><div class="selectWrap m-l-sm">
+					<div class="selector" ng-click='listShow("typeList")'><input type="text" ng-model='typeModel' readonly="true"><a href='javascript:;'></a></div>
+					<div class="options" ng-show='typeList'>
+						<ul>
+							<li ng-repeat='item in optionType' ng-click='option("typeList","typeModel",item)'>{{item.name}}</li>
+						</ul>
+					</div>
+				</div></div>
+		<div class="editRepairReportContentOne"><span class='editRepairReportContentHead'>故障现象：</span><span class='editRepairReportContentOneBody'><a class='spanButton'><span>故障停机</span><em></em></a><a class='spanButton'><span>附件损坏</span><em></em></a></span><a class='editRepairReportContentOneAdd'></a></div>
+		<div class="editRepairReportContentOne"><span class='editRepairReportContentHead'>故障原因：</span><span class='editRepairReportContentOneBody'><a class='spanButton'><span>故障停机</span><em></em></a><a class='spanButton'><span>附件损坏</span><em></em></a></span><a class='editRepairReportContentOneAdd'></a></div>
+		<div class="editRepairReportContentOne"><span class='editRepairReportContentHead'>工作内容：</span><span class='editRepairReportContentOneBody'><a class='spanButton'><span>故障停机</span><em></em></a><a class='spanButton'><span>附件损坏</span><em></em></a></span><a class='editRepairReportContentOneAdd'></a></div>
+	</div>
+	<div class="lookRepairReportCon lookRepairReportConTitle editRepairPartsTitle"><span>配件信息</span><a href="javascript:;" ng-click='lookRepairReportMenuShow("lookRepairReportPartsShow")' ng-class='{"lookRepairReportConShow":lookRepairReportPartsShow}'></a><a href="javascript:;" class='eidtRepairAddPart'>添加配件</a></div>
+	<div class="lookRepairReportParts" ng-show='!lookRepairReportPartsShow'>
+		<table border="0" cellspacing="0" cellpadding="0">
+			<tr><th class='b-l-dcdcdc'>配件名称</th><th>规格型号</th><th class="textOverEllipsis">生产商</th><th>数量</th><th>单位</th><th>单价</th><th ng-class='{"b-r-dcdcdc":false}'>合计</th><th class='b-r-dcdcdc'>操作</th></tr>
+			<tr>
+				<td>供应寿力计时器</td>
+				<td>HYC-360</td>
+				<td>杭州爱怡康科技有限公司</td>
+				<td>6</td>
+				<td>支</td>
+				<td>200.00</td>
+				<td>400.00</td>
+				<td><a href="javascript:;">删除</a></td>
+			</tr>
+			<tr>
+				<td>供应寿力计时器</td>
+				<td>HYC-360</td>
+				<td>杭州爱怡康科技有限公司</td>
+				<td>6</td>
+				<td>支</td>
+				<td>200.00</td>
+				<td>400.00</td>
+				<td><a href="javascript:;">删除</a></td>
+			</tr>
+		</table>
+	</div>
+	<div class="lookRepairResultTitle lookRepairReportConTitle"><span>维修结果</span><a href="javascript:;" ng-click='lookRepairReportMenuShow("lookRepairReportResultShow")' ng-class='{"lookRepairReportConShow":lookRepairReportResultShow}'></a></div>
+	<div class="lookRepairResult" ng-show='!lookRepairReportResultShow'>
+		<div class="lookRepairResultOne"><span class="lookRepairResultOneHead">维修后状态：</span><span>工作正常</span></div>
+		<div class="lookRepairResultOne"><span class="lookRepairResultOneHead">维修时间：</span><span class='m-r-25'>2017-03-21</span><span>到</span><span  class='m-l-25'>2017-06-21</span><span  class='m-l-70'>共<span class='spanMinWidth20'>5</span>天</span><span><span class='spanMinWidth20'>5</span>小时</span></div>
+		<div class="lookRepairResultOne"><span class="lookRepairResultOneHead">配件等待时间：</span><span class='m-r-25'>2017-03-21</span><span>到</span><span  class='m-l-25'>2017-06-21</span><span  class='m-l-70'>共<span class='spanMinWidth20'>5</span>天</span><span><span class='spanMinWidth20'>5</span>小时</span></div>
+		<div class="lookRepairResultOne"><span class="lookRepairResultOneHead">实际维修时间：</span><span class='m-r-25'>2017-03-21</span><span>到</span><span  class='m-l-25'>2017-06-21</span><span  class='m-l-70'>共<span class='spanMinWidth20'>5</span>天</span><span><span class='spanMinWidth20'>5</span>小时</span></div>
+		<div class="lookRepairResultOne"><span class="lookRepairResultOneHead">维修费：</span><span>工作正常</span></div>
+		<div class="lookRepairResultOne"><span class="lookRepairResultOneHead">材料费：</span><span>工作正常</span></div>
+		<div class="lookRepairResultOne lookRepairResultTotal"><span class="lookRepairResultOneHead">合计：</span><span>工作正常</span></div>
+		<div class="lookRepairResultOne lookRepairResultRemark"><span class="lookRepairResultOneHead">备注：</span><span class='spanMaxWidth635'>工作正常</span></div>
+	</div>
+	<div class="editRepairResult" ng-show='!lookRepairReportResultShow'>
+		<div class="editRepairResultOne"><span class="editRepairResultOneHead">维修后状态：</span><div class="selectWrap">
+					<div class="selector" ng-click='listShow("typeList")'><input type="text" ng-model='typeModel' readonly="true"><a href='javascript:;'></a></div>
+					<div class="options" ng-show='typeList'>
+						<ul>
+							<li ng-repeat='item in optionType' ng-click='option("typeList","typeModel",item)'>{{item.name}}</li>
+						</ul>
+					</div>
+				</div></div>
+		<div class="editRepairResultOne"><span class="editRepairResultOneHead">维修时间：</span><input attrVar='repairDate1' type="text" class='m-r-xl input-datepicker editRepairResultInputLong'><input attrVar='repairDate2' type="text" class='m-r-xl editRepairResultInputLong input-datepicker'><span><span>共</span><input ng-model='repairTime.day' type="text" class='editRepairResultInputShort' readonly="true"><span>天</span><input ng-model='repairTime.hour' readonly="true" type="text" class='editRepairResultInputShort'><span>小时</span></span></div>
+		<div class="editRepairResultOne"><span class="editRepairResultOneHead">配件等待时间：</span><input attrVar='repairWait1' type="text" class='m-r-xl input-datepicker editRepairResultInputLong'><input attrVar='repairWait2' type="text" class='m-r-xl editRepairResultInputLong input-datepicker'><span><span>共</span><input type="text" class='editRepairResultInputShort' readonly="true" ng-model='repairWait.day'><span>天</span><input readonly="true" ng-model='repairWait.hour' type="text" class='editRepairResultInputShort'><span>小时</span></span></div>
+		<div class="editRepairResultOne"><span class="editRepairResultOneHead">实际维修时间：</span><input attrVar='repairTrue1' type="text" class='m-r-xl input-datepicker editRepairResultInputLong'><input attrVar='repairTrue2' type="text" class='m-r-xl editRepairResultInputLong input-datepicker'><span><span>共</span><input type="text" class='editRepairResultInputShort' ng-model='repairTrue.day' readonly="true"><span>天</span><input type="text" ng-model='repairTrue.hour' readonly="true" class='editRepairResultInputShort'><span>小时</span></span></div>
+		<div class="editRepairResultOne"><span class="editRepairResultOneHead">维修费：</span><input type="text" ng-model='repairCost' ng-change='totalCostChange()'></div>
+		<div class="editRepairResultOne"><span class="editRepairResultOneHead">材料费：</span><input type="text" ng-model='materiaCost' ng-change='totalCostChange()'></div>
+		<div class="editRepairResultOne"><span class="editRepairResultOneHead">合计：</span><input type="text" ng-model='totalCost'></div>
+		<div class="editRepairResultOne editRepairResultOneRemark"><span class="editRepairResultOneHead">备注：</span><div class="editRepairResultOneRemarkCon"><div></div><textarea placeholder='请输入备注说明(非必填)'></textarea><span>0/300</span></div></div>
+	</div>
+	<div class="alertRepairBtn lookRepairReportBTN">
+		<a href="javascript:;" class="btnyes">关闭</a><a href="javascript:;" class="btnyes">确定</a><a href="javascript:;" class="btncancel">取消</a>
+	</div>
+</div>
+<!-- 查看维修报告单 END -->
+<!-- 查看大图 -->
+<div class="fy_repairPicsWrap" ng-show='repairPicsShow'>
+	<div class="fy_repairPicWrap">
+		<img src="{{currentImg.src}}" alt="">
+		<a href="javascript:;" class='fy_repairPicsClose' ng-click='repairPicsShow=!repairPicsShow'></a>
+		<a href="javascript:;" class='fy_repairPicsleft' ng-click='repairPicChange(-1)'></a>
+		<a href="javascript:;" class='fy_repairPicsRight' ng-click='repairPicChange(1)'></a>
+		<div class="fy_repairPics">
+			<div class="fy_repairPic" ng-repeat='ele in imgArr' ng-class='{"fy_repairPicSelect":currentImg.index==$index}'><a ng-click='repairPicChange(2,$index)'><img ng-src="{{ele.src}}"></a></div>
+		</div>
+	</div>
+</div>
+<!-- 查看大图 END -->

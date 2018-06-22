@@ -1,0 +1,1151 @@
+<!-- 分成三部分 -->
+<div class="fy_newRepairDetailTitle">
+	<div class="fy_repairProgressTitle">
+		<div class="fy_repairTitleRightBtn" ng-if='$stateParams.status==0'>
+			<a ng-click="repairAlertLayer()" class="fy_repairTitleRightBtn1" ng-if="userInfo.authoritiesStr.indexOf('REP_APPLY_NEW') != -1">提交申请</a><a href="" ui-sref="repair.newmanage({tenantId:($stateParams.tenantId||$localStorage.userInfo.tenantId)})" ng-if="userInfo.authoritiesStr.indexOf('REP_APPLY_NEW') != -1">取消</a>
+	    </div>
+	    <div class="fy_repairTitleRightBtn" ng-if='$stateParams.status==1||$stateParams.status==6'>
+			<a ng-click="repairAlertLayer(true)" class="fy_repairTitleRightBtn1" ng-if="(userInfo.authoritiesStr.indexOf('REP_APPLY_TAKE_NEW') != -1)&&($stateParams.status==1)">接单</a>
+			<a ng-click='preLookRepairRequest()' ng-if="(userInfo.authoritiesStr.indexOf('REP_APPLY_PRINT_NEW') != -1)&&($stateParams.status==6)" class="fy_repairTitleRightBtn1">打印申请单</a>
+	    </div>
+	    <div class="fy_repairTitleRightBtn" ng-if='$stateParams.status==2'>
+			<a ng-click="repairReportSave(1)" class="fy_repairTitleRightBtn1" ng-if="(userInfo.authoritiesStr.indexOf('REP_APPLY_REPAIR') != -1)&&(radio.radioV!=3) && flag">暂存</a><a ng-click='preLookRepairReport()' ng-if="userInfo.authoritiesStr.indexOf('REP_APPLY_PUT') != -1">预览</a><a ng-click='repairAlertLayer()' ng-if="userInfo.authoritiesStr.indexOf('REP_APPLY_REPAIR') != -1 && flag">完修</a>
+	    </div>
+	    <div class="fy_repairTitleRightBtn" ng-if='$stateParams.status==3||$stateParams.status==5'>
+			<a ng-click="repairAlertLayer()" class="fy_repairTitleRightBtn1" ng-if="(userInfo.authoritiesStr.indexOf('REP_APPLY_CHECK') != -1)&&($stateParams.status==3)">验收</a><a ng-click='preLookRepairReport(1)' ng-if="(userInfo.authoritiesStr.indexOf('REP_APPLY_PUT') != -1)&&($stateParams.status==5)" class="fy_repairTitleRightBtn1">打印报告单</a>
+	    </div>
+	    <span><a ui-sref="repair.manage({tenantId:($stateParams.tenantId||$localStorage.userInfo.tenantId)})" class='fy_repairTitleLeftA'>维修管理</a>><span class='fy_repairTitleLeftSpan'>{{$stateParams.status==0?'新建维修申请':'维修单详情'}}</span></span>
+	</div>
+</div>
+<!--中间内容布局左、上、下-->
+
+<div class="mf_content" id='repairContent'>
+<!-- 内容左边部分-->
+	<div class="mf_contentleft">
+		<div class="fy_repairInfoImg">
+			<div class="fy_repairInfoImgCon">
+				<img src="../../res/img/dt.png" ng-src='{{currentImg.src?currentImg.src:"../../res/img/dt.png"}}'>
+				<div class="fy_repairInfoImgB"></div>
+				<a class="fy_repairInfoImgBtn" ng-click='repairPicsShow=true' href='javascript:;'>点击查看</a>
+			</div>
+		</div>
+		<div class="fy_repairInfoDevName">{{assetsInfo.assetsName}}</div>
+		<ul class="fy_repairInfoDev">
+			<li><span class='fy_repairInfoHead'>规格型号：</span><div>{{assetsInfo.assetsSpec}}</div></li>
+			<li><span class='fy_repairInfoHead'>设备编号：</span><div>{{assetsInfo.assetsNum}}</div></li>
+			<li><span class='fy_repairInfoHead'>所在部门：</span><div>{{assetsInfo.assetsDeptName}}</div></li>
+			<li ng-if='assetsInfo.assetsDesc==2'><span class='fy_repairInfoHead'>所在位置：</span><div>{{assetsInfo.assetsLocal}}</div></li>
+			<li ng-if='assetsInfo.assetsDesc==1'><span class='fy_repairInfoHead'>启用日期：</span><div>{{assetsInfo.startUseDate | date:'yyyy-MM-dd'}}</div></li>
+			<li ng-if='assetsInfo.assetsDesc==1'><span class='fy_repairInfoHead'>保修期至：</span><div>{{assetsInfo.warrantyDate | date:'yyyy-MM-dd'}}</div></li>
+		</ul>
+		<ul class="fy_repairInfoState">
+			<li ng-if='repairInfo.num'><span class='fy_repairInfoHead'>维修单号：</span><div>{{repairInfo.num}}</div></li>
+			<li><span class='fy_repairInfoHead'>申请人：</span><div>{{repairInfo.name}}</div></li>
+			<li><span class='fy_repairInfoHead'>联系电话：</span><div>{{repairInfo.tel}}</div></li>
+			<li ng-if='repairInfo.time'><span class='fy_repairInfoHead'>申请时间：</span><div>{{repairInfo.time | date:'yyyy-MM-dd HH:mm'}}</div></li>
+		</ul>
+		<div ng-if='$stateParams.status==2' class="hd_newBtn">
+			<div ng-click="showPeople()" ng-if="flag">维修转单</div>
+			<div ng-click="showRecode()">转单记录</div>
+		</div>
+	</div>
+<!-- 内容右边部分-->
+<div class="mf_contentRight" >
+<!-- 内容右上部分-->
+	<div class="mf_contentRightUp">
+		<!-- 流程图部分 -->
+		<div class="fy_repairProgress">
+	      <div class="fy_repairProgressImg">
+	        <img src="../../res/img/shenqing.png">
+	        <div class="fy_repairProgressLine"></div>
+	      </div>
+	      <div ng-if='$stateParams.status==0' class="fy_repairProgressOperate">
+			<div class="fy_repairProgressName"><span>{{repairInfo.name}}</span></div>
+		      <div class="fy_repairProgressOperate">申请</div>
+	      </div>
+	      <div ng-if='$stateParams.status>0'>
+		      <div class="fy_repairProgressName"><span>{{repairList.reportRepairName}}</span></div>
+		      <div class="fy_repairProgressOperate">申请</div>
+		      <div class="fy_repairProgressTime">{{repairList.reportRepairDate | date:'yyyy-MM-dd HH:mm'}}</div>
+		      <div class="fy_repairProgressBtn"><a href="javascript:;" ng-click='lookProgress1()' ng-if="userInfo.authoritiesStr.indexOf('REP_APPLY_TAKE_CHECK_VIEW') != -1">查看</a></div>
+	      </div>
+	    </div>
+	    <div class="fy_repairProgress">
+	      <div class="fy_repairProgressImg">
+	        <img  ng-if='$stateParams.status>0' src="../../res/img/daijiedan.png"><img  ng-if='$stateParams.status==0' src="../../res/img/daijiedan2.png">
+	        <div class="fy_repairProgressLine"></div>
+	      </div>
+	      <div ng-if='$stateParams.status<2||$stateParams.status==6' class="fy_repairProgressOperate">待接单</div>
+	      <div ng-if='($stateParams.status>1)&&($stateParams.status!=6)'>
+		      <div class="fy_repairProgressName"><span>{{repairList.takeOrderName}}</span></div>
+		      <div class="fy_repairProgressOperate">接单</div>
+		      <div class="fy_repairProgressTime">{{repairList.takeOrderTime | date:'yyyy-MM-dd HH:mm'}}</div>
+		      <div class="fy_repairProgressBtn"><a href="javascript:;" ng-click='lookProgress2()' ng-if="userInfo.authoritiesStr.indexOf('REP_APPLY_TAKE_CHECK_VIEW') != -1">查看</a></div>
+	      </div>
+	    </div>
+	    <div class="fy_repairProgress">
+	      <div class="fy_repairProgressImg">
+	        <img  ng-if='($stateParams.status>1)&&($stateParams.status!=6)' src="../../res/img/weixiu.png"><img  ng-if='$stateParams.status<2||$stateParams.status==6' src="../../res/img/weixiu2.png">
+	        <div class="fy_repairProgressLine"></div>
+	      </div>
+	      <div ng-if='$stateParams.status<3||$stateParams.status==6' class="fy_repairProgressOperate">维修中</div>
+	      <div ng-if='($stateParams.status>2)&&($stateParams.status!=6)'>
+		      <div class="fy_repairProgressName"><span>{{repairList.repairName}}</span></div>
+		      <div class="fy_repairProgressOperate">维修报告单</div>
+		      <div class="fy_repairProgressTime">{{repairList.repairDate | date:'yyyy-MM-dd HH:mm'}}</div>
+		      <div class="fy_repairProgressBtn"><a href="javascript:;" ng-click='methods.disPrint()' ng-if="userInfo.authoritiesStr.indexOf('REP_APPLY_REPORT_VIEW') != -1">查看</a></div>
+	      </div>
+	    </div>
+	    <div class="fy_repairProgress">
+	      <div class="fy_repairProgressImg">
+	        <img  ng-if='($stateParams.status>2)&&($stateParams.status!=6)' src="../../res/img/daiyanshou.png"><img  ng-if='$stateParams.status<3||$stateParams.status==6' src="../../res/img/daiyanshou2.png">
+	        <div class="fy_repairProgressLine"></div>
+	      </div>
+	      <div ng-if='$stateParams.status<4||$stateParams.status==5||$stateParams.status==6' class="fy_repairProgressOperate">待验收</div>
+	      <div ng-if='$stateParams.status==4'>
+	      <div class="fy_repairProgressName"><span>{{repairList.repairCheckName}}</span></div>
+	      <div class="fy_repairProgressOperate">验收</div>
+	      <div class="fy_repairProgressTime">{{repairList.repairCheckTime | date:'yyyy-MM-dd HH:mm'}}</div>
+	      <div class="fy_repairProgressBtn"><a href="javascript:;" ng-click='lookCheckOut()' ng-if="userInfo.authoritiesStr.indexOf('REP_APPLY_TAKE_CHECK_VIEW') != -1">查看</a></div>
+	      </div>
+	    </div>
+	    <div class="fy_repairProgress">
+	      <div class="fy_repairProgressImg">
+	        <img  ng-if='$stateParams.status==4' src="../../res/img/wancheng.png"><img  ng-if='$stateParams.status<4||$stateParams.status==5||$stateParams.status==6' src="../../res/img/wancheng2.png">
+	      </div>
+	      <div class="fy_repairProgressName">已完成</div>
+	      <!-- <div class="fy_repairProgressOperate">已完成</div> -->
+	      <!-- <div class="fy_repairProgressTime">2017-01-01 12:00</div> -->
+	      <!-- <div class="fy_repairProgressBtn"><a href="javascript:;">查看</a></div> -->
+	    </div>
+	</div>
+<!-- 内容右下部分-->
+    <div class="mf_contentRightDown" id='repairContentBody'>
+    	<!-- 新建维修申请 -->
+    	<div class="repairProgress0 fy_repairTypeRadio1" ng-if='$stateParams.status==0'>
+    		<div class="fy_repaiTypeRadios m-b" ng-if='!lookRepairReportConShow'>
+				<span class='fy_repaiTypeRadioHead'>接单类型：</span><div class="fy_repairTypeRadio" ng-click='radioC(1)'>
+					<div class="box1">
+						<input type="radio" id="type-0" name="repairKind" class="input" ng-model='radio.radioT' ng-value='1' /><span></span>
+					</div><label for="type-0">送修</label>
+				</div><div class="fy_repairTypeRadio" ng-click='radioC(2)'>
+					<div class="box1">
+						<input type="radio" id="type-1" name="repairKind" class="input" ng-model='radio.radioT' ng-value='2' /><span></span>
+					</div><label for="type-1">现场维修</label>
+				</div>
+			</div>
+			<div class="editRepairReportContentOne repairType3ContentOne m-t-sm" ng-if='radio.radioT==1'>
+		    	<span class='editRepairReportContentHead'>送修人：</span><input type="text" ng-model='sendInfo.sendPerson' maxlength="40" placeholder='请输入，40字符以内'>
+			</div>
+			<div class="editRepairReportContentOne repairType3ContentOne m-t-sm" ng-if='radio.radioT==1'>
+		    	<span class='editRepairReportContentHead'>联系方式：</span><input type="text" ng-model='sendInfo.sendPhone' maxlength="40" placeholder='请输入，40字符以内'>
+			</div>
+    		<div class="fy_repairTitle m-t">故障现象</div>
+    		<textarea class="fy_repairTextarea" ng-model='$parent.faultDesc' maxlength="300" cols="30" rows="10"></textarea>
+    		<div class="assets2InfoOneErr" ng-if='faultDescErr'>请填写故障现象</div>
+			<div class="fy_repairErrDes"><span>常见故障现象：</span><div class="fy_repairErrDesCon"><a href="javascript:;" ng-click='repairDesAdd("故障停机；")'>故障停机</a><a href="javascript:;" ng-click='repairDesAdd("部分功能失效；")'>部分功能失效</a><a href="javascript:;" ng-click='repairDesAdd("附件损坏；")'>附件损坏</a><a href="javascript:;" ng-click='repairDesAdd("不规则或偶发事件；")'>不规则或偶发事件</a><a href="javascript:;" ng-click='repairDesAdd("性能偏离指标；")'>性能偏离指标</a><a href="javascript:;" ng-click='repairDesAdd("开机后死机；")'>开机后死机</a><a href="javascript:;" ng-click='repairDesAdd("其他；")'>其他</a></div></div>
+			<div class="fy_repairTitle">故障图片</div>
+			<div class="hd_msgImg">
+	            <input  type="file" multiple class="muchinput" ng-disabled="!delactInput">
+	            <input  type="file" multiple class="muchinput" ng-disabled="delactInput">
+	            <input  type="file" onchange="angular.element(this).scope().replaceImg()" class="oneinput">
+	            <span ng-repeat="l in url" class="hd_images" ng-mouseenter="change=!change" ng-mouseleave="change=!change"><img src="{{l}}"><div ng-show="change" class="hd_imgDelet"><i ng-click="replace($index)">更换</i><i ng-click="delect($index)">删除</i></div></span>
+	            <span class="hd_upload" ng-click="upload()" ng-show="clickAdd" ></span><span class="hd_alert">图片仅支持png、jpg、jpeg格式，<br>单张大小不超过2M，最多可添加5张图片。</span>
+	        </div>
+	        <div class="fy_repairTitle">附件</div>
+	        <div class="m-b">
+	        	<tre-upload-file file-list='repairFiles' state='0' input-id='repairFiles'></tre-upload-file>
+	        </div>
+	        <div class="fy_repairTitle">选择接单人：</div>
+	        <div class="fy_repairOrderTaker">
+				<span>{{orderTaker.realName}}</span><!-- <span class="m-l">{{orderTaker.mobile}}</span> -->
+				<a href="javascript:;" ng-click="choosePeople0()">选择人员</a>
+			</div>
+			<div class="fy_repairOrderTakerErr" ng-if='manerror'>请选择接单人</div>
+        </div>
+        <!-- 新建维修申请完成页 -->
+        <div class="repairProgress0 repairProgress6" ng-if='$stateParams.status==6'>
+        	<div class="fy_repairTitle">接单类型</div>
+        	<div class="m-l"></div>
+        	<div class="fy_repaiTypeRadios">
+				<span class='fy_repaiTypeRadioHead'>{{repairDetail.reportStatus==1?'送修':'现场维修'}}</span>
+			</div>
+        	<div class="fy_repaiTypeRadios" ng-if='repairDetail.reportStatus==1'>
+				<span class='fy_repaiTypeRadioHead'>送修人：</span>{{repairDetail.sendPerson}}
+			</div>
+			<div class="fy_repaiTypeRadios" ng-if='repairDetail.reportStatus==1'>
+				<span class='fy_repaiTypeRadioHead'>联系方式：</span>{{repairDetail.sendPhone}}
+			</div>
+			<div class="fy_repairTitle m-t">接单</div>
+			<div class="fy_repaiTypeRadios">
+				<span class='fy_repaiTypeRadioHead'>接单人：</span>{{repairDetail.takeOrderName}}
+			</div>
+    		<div class="fy_repairTitle m-t">故障现象</div>
+    		<div class="fy_repairErrDes m-l">{{repairDetail.faultDesc}}</div>
+			<div class="fy_repairTitle">故障图片</div>
+			<div class="hd_msgImg">
+	            <span class="hd_images" ng-repeat='url in urls'><img ng-src="{{url?('/api/file'+url):''}}" class="m-r-md"></span>
+	        </div>
+	        <div class="fy_repairTitle">附件</div>
+	        <div ng-repeat='item in repairDetail.assetsFile'>
+				<a href="{{'api/download?path='+item.imgUrlEn}}" class="fy_repairFilesItem">{{item.fileName}}</a>
+			</div>
+        </div>
+		<!-- 待接单 -->
+        <div class="repairProgress1" ng-if='$stateParams.status==1'>
+    		<div class="fy_repairTitle">报修</div>
+			<div class="fy_repairErrDes">
+				<div class="repairStatus1Div"><span>接单类型：</span><div class="fy_repairErrDesCon" ng-if="repairDetail.reportStatus">{{repairDetail.reportStatus ==1?'送修':'现场维修'}}</div></div>
+				<div class="repairStatus1Div" ng-if='repairDetail.reportStatus==1'>
+					<span class='fy_repaiTypeRadioHead'>送修人：</span>{{repairDetail.sendPerson}}
+				</div>
+				<div class="repairStatus1Div" ng-if='repairDetail.reportStatus==1'>
+					<span class='fy_repaiTypeRadioHead'>联系方式：</span>{{repairDetail.sendPhone}}
+				</div>
+				<div class="repairStatus1Div"><span>内容：</span><div class="fy_repairErrDesCon">{{repairDetail.faultDesc}}</div></div>
+				<div class="repairStatus1Div">
+					<span >附件：</span><div style="padding-left: 90px">
+					<div ng-repeat="l in newFiles">
+						<!--api/download?path=/2017/12/27/1706512065083/GH_hangzhou.jpg-->
+						<a href="{{l?('api/download?path='+ l.imgUrlEn) :''}}" class="m-r-md" target="_blank">{{l.fileName}}</a><br></div>
+					</div>
+				</div>
+			</div>
+			<div class="fy_repairTitle">接单</div>
+			<div class="fy_repairAddDes">
+				<span class='fy_repairSpan'>接单人：</span>
+				<div class="fy_repairProgress1DesCon"><span>{{repairDetail.takeOrderName}}</span><!-- <span class='m-l'>手机号</span> --></div>
+			</div>
+			<div style="height: 30px;margin-bottom: 20px"><span class='fy_repairSpan'>选择维修人：</span>
+				<div class="fy_repairTypeRadio1">
+					<span style="color: #f7931e;float: left">{{_repairName}}</span>
+				<span class="fy_repairTypeRadio1PartDiv "><a href="javascript:;"  class='fy_repairTypeRadio1Part m-b-md' ng-click="choosePeople()">选择人员</a></span>
+					<span class="error" ng-if="manerror">请选择人员</span>
+				</div>
+			</div>
+
+			<div class="fy_repairArriveTime"><span class='fy_repairSpan'>预计到达科室时间：</span><div class="fy_repairProgress1DesCon"><a ng-class='{fy_repairArriveTimeNow: preTimeTypeNum==0.5}' ng-click='preTimeType(0.5)' href="javascript:;">30分钟后</a><a ng-class='{fy_repairArriveTimeNow: preTimeTypeNum==1}' ng-click='preTimeType(1)' href="javascript:;">1小时后</a><a ng-class='{fy_repairArriveTimeNow: preTimeTypeNum==3}' ng-click='preTimeType(3)' href="javascript:;">3小时后</a><a ng-click='preTimeType(12)' ng-class='{fy_repairArriveTimeNow: preTimeTypeNum==12}' href="javascript:;">12小时后</a><input ng-value="$parent.predictReachDate | date : 'yyyy-MM-dd HH:mm'" attrVar='predictReachDate' type="text" id='predictReachDateInput' class='input-datepicker date-preTimeDate' readonly></div></div>
+			<div class="fy_repairAddDes"><span class='fy_repairSpan'>备注：</span><div class="fy_repairProgress1DesCon"><textarea placeholder='请输入备注' ng-model='$parent.remarks' cols="30" rows="10" class="fy_repairTextarea" ng-change="jiedansum()"  ng-paste="jiedansum()" ng-keyup="jiedansum()"></textarea><span class='fy_repairAddDesLen'>{{$parent.remarks.length||0}}/300字</span></div></div>
+        </div>
+		<!-- 维修中 -->
+		<div class="repairProgress2 fy_repairTypeRadio1" ng-if='$stateParams.status==2'>
+			<div class="fy_repairTitle">接单类型</div>
+			<span class='fy_repaiTypeRadioHead'> </span><div class="fy_repairTypeRadio">
+			<div class="box1" ng-click="radioNew(1)">
+				<input type="radio" id="radioSnew-0" name="repairtypenew" class="input" ng-model='reportStatus' ng-value='1' /><span></span>
+			</div><label for="radioSnew-0">送修</label>
+			</div><div class="fy_repairTypeRadio">
+				<div class="box1" ng-click="radioNew(2)">
+					<input type="radio" id="radioSnew-1" name="repairtypenew" class="input" ng-model='reportStatus' ng-value='2' /><span></span>
+				</div><label for="radioSnew-1">现场维修</label>
+			</div>
+			<div class="editRepairReportContentOne repairType3ContentOne m-t-sm" ng-if='reportStatus==1'>
+		    	<span class='editRepairReportContentHead'>送修人：</span><input type="text" ng-model='repairObj.sendPerson' maxlength="40" placeholder='请输入，40字符以内'>
+			</div>
+			<div class="editRepairReportContentOne repairType3ContentOne m-t-sm" ng-if='reportStatus==1'>
+		    	<span class='editRepairReportContentHead'>送修电话：</span><input type="text" ng-model='repairObj.sendPhone' maxlength="40" placeholder='请输入，40字符以内'>
+			</div>
+			<div class="fy_repairTitle" style="margin-top: 30px">维修内容<a href="javascript:;" ng-click='lookRepairReportMenuShow("lookRepairReportConShow")' ng-class='{"lookRepairReportConShow":lookRepairReportConShow}'></a></div>
+			<div class="fy_repaiTypeRadios" ng-if='!lookRepairReportConShow'>
+				<span class='fy_repaiTypeRadioHead'>维修方式：</span>
+				<div class="fy_repairTypeRadio" ng-click='radioC(0)'>
+					<div class="box1">
+						<input type="radio" id="check-0" name="evaluation" class="input" ng-model='radio.radioV' ng-value='1' /><span></span>
+					</div><label for="check-0">自主维修</label>
+				</div>
+				<div class="fy_repairTypeRadio" ng-click='radioC(1)'>
+					<div class="box1">
+						<input type="radio" id="check-1" name="evaluation" class="input" ng-model='radio.radioV' ng-value='2' /><span></span>
+					</div><label for="check-1">外修</label>
+				</div><div class="fy_repairTypeRadio" ng-click='radioC(2)'>
+					<div class="box1">
+						<input type="radio" id="check-2" name="evaluation" checked class="input" ng-model='radio.radioV' ng-value='3' /><span></span>
+					</div><label for="check-2">现场解决</label>
+				</div>
+			</div>
+
+			<div class="fy_repairTypeRadio2" ng-if='radio.radioV==3'>
+				<div class="fy_repaiTypeRadioHead">备注：</div>
+				<div class="fy_repairTypeRadioAdd" style="width: 680px;">
+					<textarea placeholder='请输入备注说明(非必填)' ng-model="repairObj.remark" ng-change="writesum()"  ng-paste="writesum()" ng-keyup="writesum()"></textarea>
+					<span style="bottom: 7px;"><i>{{repairObj.remark.length?repairObj.remark.length:0}}</i>/300</span>
+				</div>
+				<div class="editRepairResultOne editRepairResultOneRemark m-t"><span class="editRepairResultOneHead">附件：</span><div class="editRepairResultOneRemarkCon">
+					<tre-upload-file file-list='attachment' state='0' input-id='repairFiles'></tre-upload-file>
+					</div>
+				</div>
+			</div>
+
+			<div class="fy_repairTypeRadio1" ng-if='radio.radioV!=3'>
+				<div ng-if='!lookRepairReportConShow'>
+				<div class="fy_repaiTypeRadios" ng-if='radio.radioV==1'>
+					<span class='fy_repaiTypeRadioHead'><i>*</i>故障类型：</span><div class="fy_repairTypeRadio">
+						<div class="box1">
+							<input type="radio" id="radioS-0" name="repairtype" class="input" ng-model='radio.radioS' ng-value='1' /><span></span>
+						</div><label for="radioS-0">故障维修</label>
+					</div><div class="fy_repairTypeRadio">
+						<div class="box1">
+							<input type="radio" id="radioS-1" name="repairtype" class="input" ng-model='radio.radioS' ng-value='2' /><span></span>
+						</div><label for="radioS-1">预防性维修</label>
+					</div><div class="fy_repairTypeRadio">
+						<div class="box1">
+							<input type="radio" id="radioS-2" name="repairtype" class="input" ng-model='radio.radioS' ng-value='3' /><span></span>
+						</div><label for="radioS-2">计量、检测后维修</label>
+					</div>
+				</div>
+				<div class="fy_repaiTypeRadios" ng-if='radio.radioV==2'>
+					<span class='fy_repaiTypeRadioHead'><i>*</i>故障类型：</span><div class="fy_repairTypeRadio">
+						<div class="box1">
+							<input type="radio" id="radioS-4" name="repairtype" class="input" ng-model='radio.radioS' ng-value='4' /><span></span>
+						</div><label for="radioS-4">质保期内维修</label>
+					</div><div class="fy_repairTypeRadio">
+						<div class="box1">
+							<input type="radio" id="radioS-5" name="repairtype" class="input" ng-model='radio.radioS' ng-value='5' /><span></span>
+						</div><label for="radioS-5">厂家合同维修</label>
+					</div><div class="fy_repairTypeRadio">
+						<div class="box1">
+							<input type="radio" id="radioS-6" name="repairtype" class="input" ng-model='radio.radioS' ng-value='6' /><span></span>
+						</div><label for="radioS-6">第三方合同维修</label>
+					</div><div class="fy_repairTypeRadio">
+						<div class="box1">
+							<input type="radio" id="radioS-7" name="repairtype" class="input" ng-model='radio.radioS' ng-value='7' /><span></span>
+						</div><label for="radioS-7">临时叫修</label>
+					</div>
+				</div>
+				<div class="editRepairReportContentOne repairType3ContentOne m-t-sm"  ng-if='radio.radioV==2'>
+					<span class='editRepairReportContentHead'><i>*</i>外修单位：</span>
+					<div class="fy_repairDbContentOne">
+						<input type="text" ng-model='repairObj.outsideCompany' ng-change='repairErrChange("outsideCompanyErr","outsideCompany")'  placeholder='请输入外修单位名称，40字符以内'>
+					</div>
+					<div ng-show='outsideCompanyErr' class="repairReportInfoErr">请填写外修单位</div>
+			    </div>
+			    <div class="editRepairReportContentOne repairType3ContentOne m-t-sm"  ng-if='radio.radioV==2'>
+			    	<span class='editRepairReportContentHead'><i>*</i>联系电话：</span><input ng-change='repairErrChange("outsidePhoneErr")' type="text" ng-model='repairObj.outsidePhone' onkeyup="this.value=this.value.replace(/[-]+/g,'-')" oninput="this.value=this.value.match(/^[0-9-]+/)" placeholder='请输入正确的联系电话'>
+			    	<div ng-show='outsidePhoneErr' class="repairReportInfoErr">请填写联系电话</div>
+			    </div>
+			    <div class="editRepairReportContentOne repairType3ContentOne m-t-sm"  ng-if='radio.radioV==2'>
+					<span class='editRepairReportContentHead'><i>*</i>工程师姓名：</span>
+					<div class="fy_repairDbContentOne">
+						<input type="text" ng-change='repairErrChange("engineerNameErr","engineerName")' ng-model='repairObj.engineerName'  placeholder='请输入'>
+					</div>
+					<div ng-show='engineerNameErr' class="repairReportInfoErr">请填写工程师姓名</div>
+			    </div>
+			    <div class="editRepairReportContentOne repairType3ContentOne m-t-sm"  ng-if='radio.radioV==2'>
+					<span class='editRepairReportContentHead'><i>*</i>工程师工号：</span>
+					<div class="fy_repairDbContentOne">
+						<input type="text" ng-change='repairErrChange("engineerNumErr","engineerNum")' ng-model='repairObj.engineerNum'  placeholder='请输入'>
+					</div>
+					<div ng-show='engineerNumErr' class="repairReportInfoErr">请填写工程师工号</div>
+			    </div>
+			    <div class="editRepairReportContentOne m-t-sm">
+					<span class='editRepairReportContentHead'><i>*</i>故障现象：</span>
+					<div class="fy_repairDbContentOne">
+						<span class='editRepairReportContentOneBody' ng-repeat="l in addphenom">
+		                <a class='spanButton' ><span>{{l.name}}</span><em ng-click="delectpart($index,'addphenom')"></em></a>
+						</span>
+						<span class='editRepairReportContentOneAdd' ng-click="phenomenon()"></span>
+						<span class='fy_repairDbContentOne32'></span>
+					</div>
+				</div>
+				<div ng-show='repairPhenomErr' class="repairReportInfoErr">请填写故障现象</div>
+				<div class="editRepairReportContentOne repairType3ContentOne m-b">
+					<span class='editRepairReportContentHead'>故障代码：</span>
+					<div class="fy_repairDbContentOne">
+						<input type="text" maxlength="40" ng-model='repairObj.troubleCode'  placeholder='请输入，40字符以内'>
+					</div>
+			    </div>
+				<div class="editRepairReportContentOne">
+					<span class='editRepairReportContentHead'><i>*</i>故障原因：</span>
+					<div class="fy_repairDbContentOne">
+						<span class='editRepairReportContentOneBody' ng-repeat="l in addReason track by $index">
+		                <a class='spanButton'><span>{{l.name}}</span><em ng-click="delectpart($index,'addReason')"></em></a>
+						</span>
+						<span class='editRepairReportContentOneAdd' ng-click="troubleReason()"></span>
+						<span class='fy_repairDbContentOne32'></span>
+					</div>
+				</div>
+				<div ng-show='repairReasonErr' class="repairReportInfoErr">请填写故障原因</div>
+				<div class="editRepairReportContentOne">
+					<span class='editRepairReportContentHead'><i>*</i>工作内容：</span>
+					<div class="fy_repairDbContentOne">
+						<span class='editRepairReportContentOneBody' ng-repeat="l in addWork">
+		                <a class='spanButton'><span>{{l.name}}</span><em ng-click="delectpart($index,'addWork')"></em></a>
+						</span>
+						<span class='editRepairReportContentOneAdd' ng-click="addJob()"></span>
+						<span class='fy_repairDbContentOne32'></span>
+					</div>
+				</div>
+				<div ng-show='repairWorkErr' class="repairReportInfoErr">请填写工作内容</div>
+				</div>
+				<div class="lookRepairReportCon lookRepairReportConTitle editRepairPartsTitle"><span>配件信息</span>
+					<a href="javascript:;" ng-click='lookRepairReportMenuShow("lookRepairReportPartsShow")' ng-class='{"lookRepairReportConShow":lookRepairReportPartsShow}'></a>
+				</div>
+				<div class="lookRepairReportParts" ng-show='!lookRepairReportPartsShow'>
+					<div class="fy_repairTypeRadio1PartDiv"><a href="javascript:;"  class='fy_repairTypeRadio1Part m-b-md' ng-click="addPart()">添加配件</a></div>
+					<table border="0" cellspacing="0" cellpadding="0" ng-show="partListHad">
+						<tr>
+							<th class='b-l-dcdcdc'>配件名称</th>
+							<th>规格型号</th>
+							<th class="textOverEllipsis">生产商</th>
+							<th>来源</th>
+							<th>单价</th>
+							<th>单位</th>
+							<th>数量</th>
+							<th>合计</th>
+							<th class='b-r-dcdcdc'>操作</th>
+						</tr>
+						<tr ng-repeat="l in partList track by $index" ng-if='!l.delFlag'>
+							<td style="border-left: 1px solid #dcdcdc">{{l.partName}}</td>
+							<td>{{l.partSpec}}</td>
+							<td>{{l.partProduce}}</td>
+							<td>{{l.status==1?'领用':'购买'}}</td>
+							<td>￥{{l.partPrice?(l.partPrice*1).toFixed(2):'0.00'}}</td>
+							<td>{{l.unitName}}</td>
+							<td>{{l.num}}</td>
+							<td>￥{{(l.num*l.partPrice).toFixed(2)}}</td>
+							<td style="cursor: pointer;color: #4baaf6;border-right: 1px solid #dcdcdc;" ng-click="deldectPart($index)">删除</td>
+						</tr>
+					</table>
+				</div>
+				<div class="lookRepairResultTitle lookRepairReportConTitle"><span>维修结果</span>
+					<a href="javascript:;" ng-click='lookRepairReportMenuShow("lookRepairReportResultShow")' ng-class='{"lookRepairReportConShow":lookRepairReportResultShow}'></a>
+				</div>
+				<div class="editRepairResult" ng-if='!lookRepairReportResultShow'>
+					<div class="editRepairResultOne"><span class="editRepairResultOneHead"><i>*</i>维修后状态：</span>
+						<div class="fy_repairTypeRadio">
+							<div class="box1">
+								<input type="radio" id="repairResultR-0" name="repairResultRadio" class="input" ng-model='radio.repairResultR' ng-value='1' /><span></span>
+							</div><label for="repairResultR-0">正常工作</label>
+						</div><div class="fy_repairTypeRadio">
+							<div class="box1">
+								<input type="radio" id="repairResultR-1" name="repairResultRadio" class="input" ng-model='radio.repairResultR' ng-value='2' /><span></span>
+							</div><label for="repairResultR-1">基本功能正常</label>
+						</div><div class="fy_repairTypeRadio">
+							<div class="box1">
+								<input type="radio" id="repairResultR-2" name="repairResultRadio" class="input" ng-model='radio.repairResultR' ng-value='3' /><span></span>
+							</div><label for="repairResultR-2">需进一步修理</label>
+						</div><div class="fy_repairTypeRadio">
+							<div class="box1">
+								<input type="radio" id="repairResultR-3" name="repairResultRadio" class="input" ng-model='radio.repairResultR' ng-value='4' /><span></span>
+							</div><label for="repairResultR-3">需外送修理</label>
+						</div><div class="fy_repairTypeRadio">
+							<div class="box1">
+								<input type="radio" id="repairResultR-4" name="repairResultRadio" class="input" ng-model='radio.repairResultR' ng-value='5' /><span></span>
+							</div><label for="repairResultR-4">无法修复</label>
+						</div><div class="fy_repairTypeRadio">
+							<div class="box1">
+								<input type="radio" id="repairResultR-5" name="repairResultRadio" class="input" ng-model='radio.repairResultR' ng-value='6' /><span></span>
+							</div><label for="repairResultR-5">其他</label>
+						</div>
+					</div>
+					<div ng-if='radio.radioV==1'>
+						<div class="editRepairResultOne"><span class="editRepairResultOneHead"><i>*</i>申请时间：</span><!-- <input ng-value="repairDate1 | date : 'yyyy-MM-dd HH:mm'" attrVar='repairDate1' type="text" class='input-datepicker date-startDate editRepairResultInputLong' readonly> -->{{repairDate1 | date : 'yyyy-MM-dd HH:mm'}}
+							<!-- <div class="worn" ng-show="seven">请填写申请时间</div> -->
+						</div>
+						<div ng-if='radio.radioV==1' class="editRepairResultOne"><span class="editRepairResultOneHead"><i>*</i>接单时间：</span><!-- <input ng-value="repairTrue1 | date : 'yyyy-MM-dd HH:mm'" attrVar='repairTrue1' type="text" class='true-startDate input-datepicker editRepairResultInputLong' ng-focus="trueTime()" readonly> -->{{repairTrue1 | date : 'yyyy-MM-dd HH:mm'}}
+						</div>
+						<div ng-if='radio.radioV==1' class="editRepairResultOne"><span class="editRepairResultOneHead"><i>*</i>维修时间：</span><input attrVar='repairTrue2' ng-value="repairTrue2 | date : 'yyyy-MM-dd HH:mm'" type="text" class='m-r-sm editRepairResultInputLong true-endDate input-datepicker' ng-focus="trueTime()" readonly="true">
+						</div>
+						<div ng-if='radio.radioV==1' class="editRepairResultOne"><span class="editRepairResultOneHead"><i>*</i>完修时间：</span><input attrVar='repairDate2' ng-value="repairDate2 | date : 'yyyy-MM-dd HH:mm'" type="text" class='m-r-sm editRepairResultInputLong date-endDate input-datepicker' ng-focus="changeTime()" readonly>
+						</div>
+					</div>
+					
+					<div ng-if='radio.radioV==2' class="editRepairResultOne"><span class="editRepairResultOneHead"><i>*</i>叫修时间：</span><input ng-value="outsideRepairTime.callRepairDate1" attrVar='callRepairDate' type="text" placeholder="选择叫修时间" class='input-datepicker date-callRepairDate editRepairResultInputLong' readonly><div class="repairReportInfoErr" ng-show="outsideCall">请填写叫修时间</div>
+					</div>
+					<div ng-if='radio.radioV==2' class="editRepairResultOne"><span class="editRepairResultOneHead"><i>*</i>到达时间：</span><input ng-value="outsideRepairTime.arrivalDate1" attrVar='arrivalDate' type="text" placeholder="选择到达时间" class='input-datepicker date-arrivalDate editRepairResultInputLong' readonly><div class="repairReportInfoErr" ng-show="outsideArrival">请填写到达时间</div>
+					</div>
+					<div ng-if='radio.radioV==2' class="editRepairResultOne"><span class="editRepairResultOneHead"><i>*</i>离开时间：</span><input ng-value="outsideRepairTime.leaveDate1" attrVar='leaveDate' type="text" placeholder="选择离开时间" placeholder="￥" class='input-datepicker date-leaveDate editRepairResultInputLong' readonly><div class="repairReportInfoErr" ng-show="outsideLeave">请填写离开时间</div>
+					</div>
+					<div ng-if='radio.radioV==2' class="editRepairResultOne"><span class="editRepairResultOneHead"><i>*</i>维修工时：</span><input oninput="this.value=this.value.match(/^[1-9]\d{0,8}(?:\.\d{0,1})?/)" ng-change='repairErrChangeHour("outsideHours")' ng-blur='outsideHoursBlur()' placeholder="请填写实际维修工时" ng-model='outsideRepairTime.repairHours' type="text" class='editRepairResultInputLong'><span class='m-l outsideHoursErr' ng-show='outsideHoursErr'>维修工时小于离开减去到达时间之差</span><div class="repairReportInfoErr" ng-show="outsideHours">请填写维修工时</div>
+					</div>
+					<div class="editRepairResultOne fy_repairTypeRadio1Input"><span class="editRepairResultOneHead">维修费：</span><input oninput="this.value=this.value.match(/^[1-9]\d{0,8}(?:\.\d{0,2})?/)" type="text" placeholder="￥" ng-blur='repairNumFix()' ng-model='repairObj.repairCost' ng-change='totalCostChange(1)'>
+						<div class="worn" ng-show="eleven">请填写维修费</div>
+					</div>
+					<div class="editRepairResultOne fy_repairTypeRadio1Input"><span class="editRepairResultOneHead">材料费：</span><input oninput="this.value=this.value.match(/^[1-9]\d{0,8}(?:\.\d{0,2})?/)" type="text" placeholder="￥" ng-blur='repairNumFix()' ng-model='repairObj.materiaCost' ng-change='totalCostChange(2)'>
+						<div class="worn" ng-show="twolve">请填写材料费</div>
+					</div>
+					<div class="editRepairResultOne fy_repairTypeRadio1Input"><span class="editRepairResultOneHead">合计：</span><input type="text" readonly="true" placeholder="￥" ng-model='repairObj.totalCost'></div>
+					<div class="editRepairResultOne fy_repairTypeRadio1Input"><span class="editRepairResultOneHead">发票编码：</span><input onkeyup="this.value=this.value.replace(/[;]+/g,';')" oninput="this.value=this.value.match(/^[0-9;]+/)"  type="text" placeholder="不同发票号用分号隔开" ng-model='repairObj.repairInvoice'></div>
+					<div class="editRepairResultOne editRepairResultOneRemark"><span class="editRepairResultOneHead">备注：</span><div class="editRepairResultOneRemarkCon">
+							<div></div><textarea placeholder='请输入备注说明(非必填)' ng-model="repairObj.remark" ng-change="writesum()"  ng-paste="writesum()" ng-keyup="writesum()" style="color: #999"></textarea><span><i style="color: #999;margin-right: 0">{{repairObj.remark.length?repairObj.remark.length:0}}</i>/300</span></div>
+					</div>
+					<div class="editRepairResultOne editRepairResultOneRemark"><span class="editRepairResultOneHead">附件：</span><div class="editRepairResultOneRemarkCon">
+						<tre-upload-file file-list='attachment' state='0' input-id='repairFiles'></tre-upload-file>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 提交完修 -->
+		<div class="repairProgress2 repairProgress5" ng-if='$stateParams.status==5'>
+			<div class="fy_repairTitle">维修内容<a href="javascript:;" ng-click='lookRepairReportMenuShow("lookRepairReportConShow")' ng-class='{"lookRepairReportConShow":lookRepairReportConShow}'></a></div>
+            <div class="fy_repaiTypeRadios" ng-if='!lookRepairReportConShow'>
+                <span class='fy_repaiTypeRadioHead'>接单类型：</span>{{reportStatus==2?'现场维修':'送修'}}
+            </div>
+            <div class="fy_repaiTypeRadios" ng-if='!lookRepairReportConShow'>
+				<span class='fy_repaiTypeRadioHead'>送修人：</span>{{repairObj.sendPerson}}
+			</div>
+			<div class="fy_repaiTypeRadios" ng-if='!lookRepairReportConShow'>
+				<span class='fy_repaiTypeRadioHead'>送修电话：</span>{{repairObj.sendPhone}}
+			</div>
+            <div class="fy_repaiTypeRadios" ng-if='!lookRepairReportConShow'>
+				<span class='fy_repaiTypeRadioHead'>维修方式：</span>{{radio.radioV==1?'自主维修':(radio.radioV==2?'外修':'现场解决')}}
+			</div>
+			<div class="fy_repairTypeRadio2" ng-if='radio.radioV==3'>
+				<div class="fy_repaiTypeRadioHead">备注：</div><div class="fy_repairTypeRadioAdd" style="word-break:break-all;min-height:32px;">
+					{{repairObj.remark}}
+				</div>
+			</div>
+			<div class="fy_repairTypeRadio2" ng-if='radio.radioV==3'>
+				<div class="fy_repaiTypeRadioHead">附件：</div><div class="fy_repairTypeRadioAdd">
+					<tre-upload-file file-list='repairObj.attachment' state='1' input-id='repairFiles'></tre-upload-file>
+				</div>
+			</div>
+
+			<div class="fy_repairTypeRadio1" ng-if='radio.radioV!=3'>
+				<div ng-if='!lookRepairReportConShow'>
+				<div class="fy_repaiTypeRadios" ng-if='radio.radioV==1'>
+					<span class='fy_repaiTypeRadioHead'><i>*</i>故障类型：</span>{{radio.radioS==1?'故障维修':(radio.radioS==2?'预防性维修':'计量、检测后维修')}}
+				</div>
+				<div class="fy_repaiTypeRadios" ng-if='radio.radioV==2'>
+					<span class='fy_repaiTypeRadioHead'><i>*</i>故障类型：</span>{{radio.radioS==4?'质保期内维修':(radio.radioS==5?'厂家合同维修':(radio.radioS==6?'第三方合同维修':'临时叫修'))}}
+				</div>
+				<div class="editRepairReportContentOne repairType3ContentOne m-t-sm"  ng-if='radio.radioV==2'>
+					<span class='editRepairReportContentHead'><i>*</i>外修单位：</span>
+					<div class="fy_repairDbContentOne">
+						{{repairObj.outsideCompany}}
+					</div>
+			    </div>
+			    <div class="editRepairReportContentOne repairType3ContentOne m-t-sm"  ng-if='radio.radioV==2'>
+			    	<span class='editRepairReportContentHead'><i>*</i>联系电话：</span>{{repairObj.outsidePhone}}
+			    </div>
+			    <div class="editRepairReportContentOne repairType3ContentOne m-t-sm"  ng-if='radio.radioV==2'>
+					<span class='editRepairReportContentHead'><i>*</i>工程师姓名：</span>
+					<div class="fy_repairDbContentOne">
+						{{repairObj.engineerName}}
+					</div>
+			    </div>
+			    <div class="editRepairReportContentOne repairType3ContentOne m-t-sm"  ng-if='radio.radioV==2'>
+					<span class='editRepairReportContentHead'><i>*</i>工程师工号：</span>
+					<div class="fy_repairDbContentOne">
+						{{repairObj.engineerNum}}
+					</div>
+			    </div>
+			    <div class="editRepairReportContentOne m-t-sm" style="overflow: hidden;">
+					<span class='editRepairReportContentHead'><i>*</i>故障现象：</span>
+					<div class="fy_repairDbContentOne">
+						{{arrToString1('addphenom')}}
+					</div>
+				</div>
+				<div class="editRepairReportContentOne" style="overflow: hidden;">
+					<span class='editRepairReportContentHead'>故障代码：</span>
+					<div class="fy_repairDbContentOne">
+						{{repairObj.troubleCode}}
+					</div>
+				</div>
+				<div class="editRepairReportContentOne" style="overflow: hidden;">
+					<span class='editRepairReportContentHead'><i>*</i>故障原因：</span>
+					<div class="fy_repairDbContentOne">
+						{{arrToString1('addReason')}}
+					</div>
+				</div>
+				<div class="editRepairReportContentOne" style="overflow: hidden;">
+					<span class='editRepairReportContentHead'><i>*</i>工作内容：</span>
+					<div class="fy_repairDbContentOne">
+						{{arrToString1('addWork')}}
+					</div>
+				</div>
+				</div>
+				<div class="lookRepairReportCon lookRepairReportConTitle editRepairPartsTitle"><span>配件信息</span>
+					<a href="javascript:;" ng-click='lookRepairReportMenuShow("lookRepairReportPartsShow")' ng-class='{"lookRepairReportConShow":lookRepairReportPartsShow}'></a>
+				</div>
+				<div class="lookRepairReportParts" ng-show='!lookRepairReportPartsShow'>
+					<table border="0" cellspacing="0" cellpadding="0" ng-show="partListHad">
+						<tr>
+							<th class='b-l-dcdcdc'>配件名称</th>
+							<th>规格型号</th>
+							<th class="textOverEllipsis">生产商</th>
+							<th>来源</th>
+							<th>单价</th>
+							<th>单位</th>
+							<th>数量</th>
+							<th class='b-r-dcdcdc'>合计</th>
+						</tr>
+						<tr ng-repeat="l in partList track by $index" ng-if='!l.delFlag'>
+							<td style="border-left: 1px solid #dcdcdc">{{l.partName}}</td>
+							<td>{{l.partSpec}}</td>
+							<td>{{l.partProduce}}</td>
+							<td>{{l.status==1?'领用':'购买'}}</td>
+							<td>{{l.partPrice?(l.partPrice*1).toFixed(2):'0.00'}}</td>
+							<td>{{l.unitName}}</td>
+							<td>{{l.num}}</td>
+							<td style="color: #4baaf6;border-right: 1px solid #dcdcdc;" >{{(l.num*l.partPrice).toFixed(2)}}</td>
+						</tr>
+					</table>
+				</div>
+				<div class="lookRepairResultTitle lookRepairReportConTitle"><span>维修结果</span>
+					<a href="javascript:;" ng-click='lookRepairReportMenuShow("lookRepairReportResultShow")' ng-class='{"lookRepairReportConShow":lookRepairReportResultShow}'></a>
+				</div>
+				<div class="editRepairResult" ng-if='!lookRepairReportResultShow'>
+					<div class="editRepairResultOne"><span class="editRepairResultOneHead"><i>*</i>维修后状态：</span>
+						{{repairResultSwitch()}}
+					</div>
+					<div ng-if='radio.radioV==1' class="editRepairResultOne">
+						<span class="editRepairResultOneHead"><i>*</i>申请时间：</span>{{repairDate1 | date : 'yyyy-MM-dd HH:mm'}}
+						<!-- <span class='m-l-sm m-r-sm'>到</span>{{repairDate2 | date : 'yyyy-MM-dd HH:mm'}}<span><span class='m-l-sm m-r-sm'>共</span>{{repairTime.day}}<span class='m-l-sm m-r-sm'>天</span>{{repairTime.hour}}<span class='m-l-sm m-r-sm'>小时</span></span> -->
+						<!-- <div class="worn" ng-show="seven">请填写维修时间</div> -->
+					</div>
+					<div ng-if='radio.radioV==1' class="editRepairResultOne">
+						<span class="editRepairResultOneHead"><i>*</i>接单时间：</span>{{repairTrue1 | date : 'yyyy-MM-dd HH:mm'}}
+						<!-- <span class='m-l-sm m-r-sm'>到</span>{{repairTrue2 | date : 'yyyy-MM-dd HH:mm'}}<span><span class='m-l-sm m-r-sm'>共</span>{{repairTrue.day}}<span class='m-l-sm m-r-sm'>天</span>{{repairTrue.hour}}<span class='m-l-sm m-r-sm'>小时</span></span> -->
+					</div>
+					<div ng-if='radio.radioV==1' class="editRepairResultOne">
+						<span class="editRepairResultOneHead"><i>*</i>维修时间：</span>{{repairTrue2 | date : 'yyyy-MM-dd HH:mm'}}
+						<!-- <span class='m-l-sm m-r-sm'>到</span>{{repairTrue2 | date : 'yyyy-MM-dd HH:mm'}}<span><span class='m-l-sm m-r-sm'>共</span>{{repairTrue.day}}<span class='m-l-sm m-r-sm'>天</span>{{repairTrue.hour}}<span class='m-l-sm m-r-sm'>小时</span></span> -->
+					</div>
+					<div ng-if='radio.radioV==1' class="editRepairResultOne">
+						<span class="editRepairResultOneHead"><i>*</i>完修时间：</span>{{repairDate2 | date : 'yyyy-MM-dd HH:mm'}}
+						<!-- <span class='m-l-sm m-r-sm'>到</span>{{repairTrue2 | date : 'yyyy-MM-dd HH:mm'}}<span><span class='m-l-sm m-r-sm'>共</span>{{repairTrue.day}}<span class='m-l-sm m-r-sm'>天</span>{{repairTrue.hour}}<span class='m-l-sm m-r-sm'>小时</span></span> -->
+					</div>
+					<div ng-if='radio.radioV==2' class="editRepairResultOne"><span class="editRepairResultOneHead"><i>*</i>叫修时间：</span>{{outsideRepairTime.callRepairDate1}}
+					</div>
+					<div ng-if='radio.radioV==2' class="editRepairResultOne"><span class="editRepairResultOneHead"><i>*</i>到达时间：</span>{{outsideRepairTime.arrivalDate1}}
+					</div>
+					<div ng-if='radio.radioV==2' class="editRepairResultOne"><span class="editRepairResultOneHead"><i>*</i>离开时间：</span>{{outsideRepairTime.leaveDate1}}
+					</div>
+					<div ng-if='radio.radioV==2' class="editRepairResultOne"><span class="editRepairResultOneHead"><i>*</i>维修工时：</span>{{outsideRepairTime.repairHours}}
+					</div>
+					<div class="editRepairResultOne fy_repairTypeRadio1Input"><span class="editRepairResultOneHead">维修费：</span>{{repairObj.repairCost?(repairObj.repairCost*1).toFixed(2):'0.00'}}
+					</div>
+					<div class="editRepairResultOne fy_repairTypeRadio1Input"><span class="editRepairResultOneHead">材料费：</span>{{repairObj.materiaCost?(repairObj.materiaCost*1).toFixed(2):'0.00'}}
+					</div>
+					<div class="editRepairResultOne fy_repairTypeRadio1Input"><span class="editRepairResultOneHead">合计：</span>{{repairObj.totalCost}}</div>
+					<div class="editRepairResultOne fy_repairTypeRadio1Input"><span class="editRepairResultOneHead">发票编码：</span>{{repairObj.repairInvoice}}</div>
+					<div class="editRepairResultOne editRepairResultOneRemark"><span class="editRepairResultOneHead">备注：</span>{{repairObj.remark}}
+					</div>
+				</div>
+				<div class="lookRepairResultTitle lookRepairReportConTitle">
+					<span>附件：</span>
+				</div>
+				<div class="editRepairResultOne editRepairResultOneRemark"><span class="editRepairResultOneHead"></span>
+					<tre-upload-file file-list='repairObj.attachment' state='1' input-id='repairFiles'></tre-upload-file>
+				</div>
+			</div>
+		</div>
+		<!-- 待验收 -->
+        <div class="repairProgress3" ng-if='$stateParams.status==3'>
+    		<div class="fy_repairTitle">服务评价</div>
+			<ul>
+				<li class="m-b-sm"><span class='repairCheckInfoConSpan m-r-sm'>服务态度：</span><span class='repairStar'>
+			<a ng-class='{"repairStarOn":repairAttitude.star1}' ng-click='repairServerStar("repairAttitude",1,"attitude")'></a>
+			<a ng-class='{"repairStarOn":repairAttitude.star2}' ng-click='repairServerStar("repairAttitude",2,"attitude")'></a>
+			<a ng-class='{"repairStarOn":repairAttitude.star3}' ng-click='repairServerStar("repairAttitude",3,"attitude")'></a>
+			<a ng-class='{"repairStarOn":repairAttitude.star4}' ng-click='repairServerStar("repairAttitude",4,"attitude")'></a>
+			<a ng-class='{"repairStarOn":repairAttitude.star5}' ng-click='repairServerStar("repairAttitude",5,"attitude")'></a>
+			</span><span class='repairTextRight'>{{repairAttitude.txt}}</span><span class='repairTextLeft m-l'>{{repairAttitude.score}}</span></li>
+				<li class="m-b-sm"><span class='repairCheckInfoConSpan m-r-sm'>响应速度：</span><span class='repairStar'>
+			<a ng-class='{"repairStarOn":repairRespond.star1}' ng-click='repairServerStar("repairRespond",1,"respond")'></a>
+			<a ng-class='{"repairStarOn":repairRespond.star2}' ng-click='repairServerStar("repairRespond",2,"respond")'></a>
+			<a ng-class='{"repairStarOn":repairRespond.star3}' ng-click='repairServerStar("repairRespond",3,"respond")'></a>
+			<a ng-class='{"repairStarOn":repairRespond.star4}' ng-click='repairServerStar("repairRespond",4,"respond")'></a>
+			<a ng-class='{"repairStarOn":repairRespond.star5}' ng-click='repairServerStar("repairRespond",5,"respond")'></a>
+			</span><span class='repairTextRight'>{{repairRespond.txt}}</span><span class='repairTextLeft m-l'>{{repairRespond.score}}</span></li>
+				<li class="m-b"><span class='repairCheckInfoConSpan m-r-sm'>维修质量：</span><span class='repairStar'>
+			<a ng-class='{"repairStarOn":repairMass.star1}' ng-click='repairServerStar("repairMass",1,"quality")'></a>
+			<a ng-class='{"repairStarOn":repairMass.star2}' ng-click='repairServerStar("repairMass",2,"quality")'></a>
+			<a ng-class='{"repairStarOn":repairMass.star3}' ng-click='repairServerStar("repairMass",3,"quality")'></a>
+			<a ng-class='{"repairStarOn":repairMass.star4}' ng-click='repairServerStar("repairMass",4,"quality")'></a>
+			<a ng-class='{"repairStarOn":repairMass.star5}' ng-click='repairServerStar("repairMass",5,"quality")'></a>
+			</span><span class='repairTextRight'>{{repairMass.txt}}</span><span class='repairTextLeft m-l'>{{repairMass.score}}</span></li>
+				<li class="repairCheckRemark"><span class='repairCheckInfoConSpan m-r-sm'>备注：</span>
+					<div class="repairCheckRemarkCon">
+						<div ng-show='repairCheckAccpetType'></div><textarea placeholder='请输入备注说明(非必填)' ng-model="repairAttitude.assessComent" style="color: #999" ng-change="sumAccept()" ng-paste="sumAccept()" ng-keyup="sumAccept()"></textarea><span><i>{{repairAttitude.assessComent.length?repairAttitude.assessComent.length:0}}</i>/300</span></div>
+				</li>
+			</ul>
+        </div>
+		<!-- 已完成 -->
+        <div class="repairProgress4" ng-if='$stateParams.status==4'>
+        	<div class="repairSuccessedCon">
+        		<div class="repairSuccessedTitle">
+	        		<div class="repairSuccessedBody">
+	        			<img src="../../res/img/argee.png" alt="">
+	        			<div class="repairSuccessedBodyTitle">已完成</div>
+	        			<div class="repairSuccessedBodyCon">{{repairResultSwitch()}}</div>
+	        		</div>
+	        		<div><a href="javascript:;" class="repairSuccessBtn" ng-click='preLookRepairReport(1)'>查看维修报告</a></div>
+        		</div>
+        	</div>
+			<ul>
+				<li class="m-b-sm"><span class='repairCheckInfoConSpan m-r-sm'>服务态度：</span><span class='repairStar'>
+			<a ng-class='{"repairStarOn":repairAttitude.star1}'></a>
+			<a ng-class='{"repairStarOn":repairAttitude.star2}'></a>
+			<a ng-class='{"repairStarOn":repairAttitude.star3}'></a>
+			<a ng-class='{"repairStarOn":repairAttitude.star4}'></a>
+			<a ng-class='{"repairStarOn":repairAttitude.star5}'></a>
+			</span><span class='repairTextRight'>{{repairAttitude.txt}}</span><span class='repairTextLeft m-l'>{{repairAttitude.score}}</span></li>
+				<li class="m-b-sm"><span class='repairCheckInfoConSpan m-r-sm'>响应速度：</span><span class='repairStar'>
+			<a ng-class='{"repairStarOn":repairRespond.star1}'></a>
+			<a ng-class='{"repairStarOn":repairRespond.star2}'></a>
+			<a ng-class='{"repairStarOn":repairRespond.star3}'></a>
+			<a ng-class='{"repairStarOn":repairRespond.star4}'></a>
+			<a ng-class='{"repairStarOn":repairRespond.star5}'></a>
+			</span><span class='repairTextRight'>{{repairRespond.txt}}</span><span class='repairTextLeft m-l'>{{repairRespond.score}}</span></li>
+				<li class="m-b"><span class='repairCheckInfoConSpan m-r-sm'>维修质量：</span><span class='repairStar'>
+			<a ng-class='{"repairStarOn":repairMass.star1}'></a>
+			<a ng-class='{"repairStarOn":repairMass.star2}'></a>
+			<a ng-class='{"repairStarOn":repairMass.star3}'></a>
+			<a ng-class='{"repairStarOn":repairMass.star4}'></a>
+			<a ng-class='{"repairStarOn":repairMass.star5}'></a>
+			</span><span class='repairTextRight'>{{repairMass.txt}}</span><span class='repairTextLeft m-l'>{{repairMass.score}}</span></li>
+				<li class="repairCheckRemark"><span class='repairCheckInfoConSpan m-r-sm'>备注：</span>
+					<div class="repairCheckRemarkCon">
+						{{repairAttitude.assessComent}}
+					</div>
+				</li>
+			</ul>
+        </div>
+			
+		</div>
+	</div>
+<!-- 添加故障的弹窗（第一个+号） -->
+<div class="workCont workTwo" ng-show="trouble">
+			<div style="padding: 25px 0">
+				<input type="text" placeholder="添加新故障现象，300个字符以内" maxlength="300" ng-model="newError" ng-change="errorChange()">
+				<button ng-click="errorAddp()" ng-disabled="!newError">添加</button>
+				<div class="worn" ng-show="errorSame" style="margin-left: 0">您输入的内容已经存在，请直接勾选</div>
+			</div>
+			<div>
+				<ul>
+					<li ng-repeat="l in troubleList">
+						<div class="checkboxFive hd_checkboxFive">
+							<input type="checkbox" value="1" class="child-checkbox" ng-checked="l.checked" ng-disabled="l.choose" ng-click="errorClick()" />
+							<label class="checked"></label>
+						</div>
+						<span class="troubleLi">{{l.name}}</span>
+					</li>
+				</ul>
+			</div>
+		</div>
+<!-- 添加故障的弹窗（第一个+号）END -->
+<!-- 添加故障原因的弹窗start -->
+    <div class="reason workCont" ng-show="errorRea">
+			<div class="reasonSearch">
+				<!-- <input type="text" placeholder="选择故障因素" ng-click="errList=!errList" readonly="true" ng-model="troubleErr"> -->
+				<!-- <img src="../../../res/img/6.png" alt="" ng-click="errList=!errList"></li> -->
+				<input type="text" style="width:320px;" placeholder="添加新故障原因" ng-model="error" ng-change="errormChange()"><button ng-click="errorAdd()" ng-disabled="!error">添加</button>
+				<div class="worn" ng-show="errormSame" style="margin-left: 0">您输入的内容已经存在，请直接勾选</div>
+			</div>
+			<!-- <div class="depetList hd_errorLabel" ng-show="errList">
+				<label ng-repeat="l in reasonChoose" ng-click="troubleClick($event,$index)" class="hd_label" ng-click="troubleLabel($event)">{{l}}</label>
+			</div> -->
+			<div>
+				<p>人为因素</p>
+				<ul>
+					<li ng-repeat="l in peopleList" class="peopleReason">
+						<div class="checkboxFive hd_checkboxFive errorReason">
+							<input type="checkbox" class="child-checkbox" ng-checked="l.checked" ng-click="errormClick(l)" />
+							<label class="checked"></label>
+						</div>
+						<span class="troubleLi">{{l.name}}</span>
+					</li>
+				</ul>
+				<p>设备故障</p>
+				<ul>
+					<li ng-repeat="l in machineList">
+						<div class="checkboxFive hd_checkboxFive errorReason">
+							<input type="checkbox" class="child-checkbox" ng-checked="l.checked" ng-click="errormClick(l)" />
+							<label class="checked"></label>
+						</div>
+						<span class="troubleLi">{{l.name}}</span>
+					</li>
+				</ul>
+				<p>环境因素</p>
+				<ul>
+					<li ng-repeat="l in environList">
+						<div class="checkboxFive hd_checkboxFive errorReason">
+							<input type="checkbox" class="child-checkbox" ng-checked="l.checked" ng-click="errormClick(l)" />
+							<label class="checked"></label>
+						</div>
+						<span class="troubleLi">{{l.name}}</span>
+					</li>
+				</ul>
+				<p>其他</p>
+				<ul>
+					<li ng-repeat="l in otherList">
+						<div class="checkboxFive hd_checkboxFive errorReason">
+							<input type="checkbox" class="child-checkbox" ng-checked="l.checked" ng-click="errormClick(l)" />
+							<label class="checked"></label>
+						</div>
+						<span class="troubleLi">{{l.name}}</span>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+<!-- 添加故障的弹窗end -->
+<!-- 添加工作内容的弹窗start -->
+		<div class="workCont workOne" ng-show="work">
+			<div style="padding: 25px 0"><input type="text" placeholder="添加工作内容" ng-model="workcontent" ng-change="workChange()"><button ng-click="workAdd()" ng-disabled="!workcontent">添加</button>
+				<div class="worn" ng-show="workSame" style="margin-left: 0">您输入的内容已经存在，请直接勾选</div>
+			</div>
+			<div>
+				<ul>
+					<li ng-repeat="l in workList" class="workLi">
+						<div class="checkboxFive hd_checkboxFive" ng-click="workCheck($index)">
+							<input type="checkbox" value="1" class="child-checkbox" ng-checked="l.checked" ng-disabled="l.choose" ng-click="workClick()" />
+							<label class="checked"></label>
+						</div>
+						<span class="chooseLi">{{l.name}}</span>
+					</li>
+				</ul>
+			</div>
+		</div>
+<!-- 添加工作内容的弹窗end -->
+<!-- 添加配件的弹窗start -->
+     <div class="hd_addParts" ng-show="addParts">
+			<ul>
+				<!-- <li style="margin-top: 20px"><span><i>*</i>配件分类：</span><div class="fy_searchAccessroty">
+					<input type="text" ng-click='accessoryClick()' ng-model="part.classify" readonly="true"  placeholder="请输入配件分类"/>
+					<div class="fy_searchAccessoryCon" ng-show='accessorySearch'>
+						<div class="fy_searchAccessoryWrap">
+							<div class="fy_searchAccessoryInput"><input type="text" ng-model='accessoryKeyWord' ng-change='getAccessroyResult()'></div>
+							<div class="fy_searchAccessoryResult">
+								<ul>
+									<li ng-repeat='li in accessoryResult track by $index' ng-click='changeAccessoryKindName(li)'>{{li.kindName}}</li>
+								</ul>
+								<div class="fy_searchAccessoryNone" ng-show='accessoryResultNone'>
+									没有合适的配件分类，去<a ng-click='hrefAccessory()'>配件库添加</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+						<div class="hd_partworn" ng-show="partsone">请输入配件分类</div>
+				</li> -->
+				<li style="margin-top: 20px"><span><i>*</i>配件名称：</span><input type="text" ng-model="part.partName"  placeholder="请输入配件名称"  ng-change="partsone=false"/>
+						<div class="hd_partworn" ng-show="partsone">请输入配件名称</div>
+				</li>
+				<li><span><i></i>规格型号：</span><input type="text" placeholder="请输入配件规格型号" ng-model="part.partSpec" ng-change="partstwo=false">
+					<div class="hd_partworn" ng-show="partstwo">请输入配件规格型号</div>
+				</li>
+				<li><span><i></i>生产商：</span><input type="text" placeholder="请输入配件生产商" ng-model="part.partProduce" ng-change="partsthree=false">
+					<div class="hd_partworn" ng-show="partsthree">请输入配件生产商</div>
+				</li>
+				<li style="position: relative"><span><i>*</i>来源：</span><input placeholder="请选择" type="text" ng-focus="partstatus=true" readonly="readonly" ng-model="part.statusTxt">
+					<div class="depetList hd_unit" ng-show="partstatus">
+						<label ng-click="statusList(1)" class="hd_label">领用</label>
+						<label ng-click="statusList(2)" class="hd_label">购买</label>
+					</div>
+					<img src="../../../res/img/6.png" alt="" ng-click="partstatus=!partstatus">
+					<div class="hd_partworn" ng-show="partsSource">请选择来源</div>
+				</li>
+				<li><span><i></i>单价：</span><input  oninput="this.value=this.value.match(/^[1-9]\d{0,8}(?:\.\d{0,2})?/)" type="text" placeholder="￥" ng-model="part.partPrice" ng-change="partssix=false">
+					<div class="hd_partworn" ng-show="partssix">请填写单价</div>
+				</li>
+				<li><span><i>*</i>数量：</span><input oninput="this.value=this.value.match(/^\d*(?:\.\d{0,2})?/)" type="text" placeholder="请输入数量" ng-model="part.num" ng-change="partsfour=fasle">
+					<div class="hd_partworn" ng-show="partsfour">请输入数量</div>
+				</li>
+				<li style="position: relative"><span><i>*</i>单位：</span><input type="text" ng-focus="unit=!unit" readonly="readonly" ng-model="part.unitName">
+					<div class="depetList hd_unit" ng-show="unit">
+						<label ng-repeat="l in unitArr" ng-click="unitList($event,l)" class="hd_label">{{l.name}}</label>
+					</div>
+					<img src="../../../res/img/6.png" alt="" ng-click="unit=!unit">
+					<div class="hd_partworn" ng-show="partsUnit">请选择单位</div>
+				</li>
+			</ul>
+		</div>
+<!-- 添加配件的弹窗end -->
+</div>
+<!-- 查看大图 -->
+<div class="fy_repairPicsWrap" ng-if='repairPicsShow' ng-cloak>
+	<div class="fy_repairPicWrap">
+		<img src="{{currentImg.src}}">
+		<a href="javascript:;" class='fy_repairPicsClose' ng-click='$parent.repairPicsShow=!$parent.repairPicsShow'></a>
+		<a href="javascript:;" class='fy_repairPicsleft' ng-click='repairPicChange(-1)'></a>
+		<a href="javascript:;" class='fy_repairPicsRight' ng-click='repairPicChange(1)'></a>
+		<div class="fy_repairPics">
+			<div class="fy_repairPic" ng-repeat='ele in imgArr' ng-class='{"fy_repairPicSelect":currentImg.index==$index}'><a ng-click='repairPicChange(2,$index)'><img ng-src="{{ele.src}}"></a></div>
+		</div>
+	</div>
+</div>
+<!-- 维修流程弹框 -->
+<!-- 申请信息 -->
+<div class="fy_repairDetail" id='repairProgress1'>
+	<div class="fy_repairDetailTitle">设备信息</div>
+	<div class="fy_repairDetailContent">
+		<table border="0" cellspacing="0" cellpadding="0" ng-if='assetsInfo.assetsDesc==1'>
+			<tr>
+				<th class="fy_repairDetailContentBL">设备编号</th>
+				<th>设备名称</th>
+				<th>规格型号</th>
+				<th>院内编码</th>
+				<th>生产商</th>
+				<th>所在部门</th>
+				<th>启用日期</th>
+				<th class="fy_repairDetailContentBR">保修期至</th>
+			</tr>
+			<tr>
+				<td>{{assetsInfo.assetsNum}}</td>
+				<td>{{assetsInfo.assetsName}}</td>
+				<td>{{assetsInfo.assetsSpec}}</td>
+				<td>{{assetsInfo.serialNum}}</td>
+				<td>{{assetsInfo.factoryName}}</td>
+				<td>{{assetsInfo.assetsDeptName}}</td>
+				<td>{{assetsInfo.startUseDate | date:'yyyy-MM-dd'}}</td>
+				<td>{{assetsInfo.warrantyDate | date:'yyyy-MM-dd'}}</td>
+			</tr>
+		</table>
+		<table border="0" cellspacing="0" cellpadding="0" ng-if='assetsInfo.assetsDesc==2'>
+			<tr>
+				<th class="fy_repairDetailContentBL">设备编号</th>
+				<th>设备名称</th>
+				<th>规格型号</th>
+				<th>所在部门</th>
+				<th class="fy_repairDetailContentBR">所在位置</th>
+			</tr>
+			<tr>
+				<td>{{assetsInfo.assetsNum}}</td>
+				<td>{{assetsInfo.assetsName}}</td>
+				<td>{{assetsInfo.assetsSpec}}</td>
+				<td>{{assetsInfo.assetsDeptName}}</td>
+				<td>{{assetsInfo.assetsLocal}}</td>
+			</tr>
+		</table>
+	</div>
+	<div class="fy_repairDetailTitle">接单类型</div>
+	<div class="fy_repairDetailContent">
+		<div class="fy_repairDetailContentDes" >{{repairDetail.reportStatus ==2?'现场维修':'送修'}}</div>
+		<div class="fy_repairDetailContentDes" ng-if='repairDetail.reportStatus==1'>
+			<span>{{repairDetail.sendPerson}}</span>
+			<span>{{repairDetail.sendPhone}}</span>
+		</div>
+	</div>
+	<div class="fy_repairDetailTitle">故障描述</div>
+	<div class="fy_repairDetailContent">
+		<div class="fy_repairDetailContentDes">{{repairDetail.faultDesc}}</div>
+	</div>
+	<div class="fy_repairDetailTitle">故障图片</div>
+	<div class="fy_repairDetailContent">
+		<img ng-src="{{url?('/api/file'+url):''}}" class="m-r-md" ng-repeat='url in urls'>
+	</div>
+	<div class="fy_repairDetailTitle">附件</div>
+	<div ng-repeat='l in repairDetail.assetsFile'>
+		<a href="{{l?('api/download?path='+l.imgUrlEn):''}}" class="m-r-md" target="_blank">{{l.fileName}}</a>
+	</div>
+	<div class="fy_repairDetailBtn">
+		<a href="javascript:;" class="m-r" style='vertical-align: top;' ng-click='usualRepairPrint(1)' ng-if="userInfo.authoritiesStr.indexOf('REP_APPLY_PRINT_NEW') != -1">打印申请单</a><a href="javascript:;" ng-click='usualLayerClose()'>关闭</a>
+	</div>
+</div>
+<!-- 接单信息 -->
+<div class="fy_repairTakeOrderDetail" id='repairProgress2'>
+	<div class="fy_repairTakeOrderDetailLi"><span>选择接单人：</span><div class="fy_repairTakeOrderDetailBody">{{repairDetail.repairName}}</div></div>
+	<div class="fy_repairTakeOrderDetailLi"><span>预计维修时间：</span><div class="fy_repairTakeOrderDetailBody">{{repairDetail.predictReachDate | date:'yyyy-MM-dd HH:mm'}}</div></div>
+	<div class="fy_repairTakeOrderDetailLi"><span>备注：</span><div class="fy_repairTakeOrderDetailBody" style="word-break:break-all;">{{remarks}}</div></div>
+	<div class="fy_repairTakeOrderDetailBtn fy_repairDetailBtn"><a href="javascript:;" ng-click='usualLayerClose()'>关闭</a></div>
+</div>
+<!-- 验收信息 -->
+<div class="repairProgress4" id='repairProgress4'>
+	<div class="fy_repairTitle">服务评价</div>
+	<ul>
+		<li class="m-b-sm"><span class='repairCheckInfoConSpan m-r-sm'>服务态度：</span><span class='repairStar'>
+	<a ng-class='{"repairStarOn":repairAttitude.star1}'></a>
+	<a ng-class='{"repairStarOn":repairAttitude.star2}'></a>
+	<a ng-class='{"repairStarOn":repairAttitude.star3}'></a>
+	<a ng-class='{"repairStarOn":repairAttitude.star4}'></a>
+	<a ng-class='{"repairStarOn":repairAttitude.star5}'></a>
+	</span><span class='repairTextRight'>{{repairAttitude.txt}}</span><span class='repairTextLeft m-l'>{{repairAttitude.score}}</span></li>
+		<li class="m-b-sm"><span class='repairCheckInfoConSpan m-r-sm'>响应速度：</span><span class='repairStar'>
+	<a ng-class='{"repairStarOn":repairRespond.star1}'></a>
+	<a ng-class='{"repairStarOn":repairRespond.star2}'></a>
+	<a ng-class='{"repairStarOn":repairRespond.star3}'></a>
+	<a ng-class='{"repairStarOn":repairRespond.star4}'></a>
+	<a ng-class='{"repairStarOn":repairRespond.star5}'></a>
+	</span><span class='repairTextRight'>{{repairRespond.txt}}</span><span class='repairTextLeft m-l'>{{repairRespond.score}}</span></li>
+		<li class="m-b"><span class='repairCheckInfoConSpan m-r-sm'>维修质量：</span><span class='repairStar'>
+	<a ng-class='{"repairStarOn":repairMass.star1}'></a>
+	<a ng-class='{"repairStarOn":repairMass.star2}'></a>
+	<a ng-class='{"repairStarOn":repairMass.star3}'></a>
+	<a ng-class='{"repairStarOn":repairMass.star4}'></a>
+	<a ng-class='{"repairStarOn":repairMass.star5}'></a>
+	</span><span class='repairTextRight'>{{repairMass.txt}}</span><span class='repairTextLeft m-l'>{{repairMass.score}}</span></li>
+		<li class="repairCheckRemark"><span class='repairCheckInfoConSpan m-r-sm'>备注：</span>
+			<div class="repairCheckRemarkCon">
+				{{repairAttitude.assessComent}}
+			</div>
+		</li>
+	</ul>
+	<div class="fy_repairDetailBtn">
+		<a href="javascript:;" ng-click='usualLayerClose()'>关闭</a>
+	</div>
+</div>
+<!-- print repair report bill 打印维修报告单 -->
+<repair-report-bill assets-info='assetsInfo' radio='radio' user-info='userInfo' repair-obj='repairReportInfo' repair-result-switch='repairResultSwitch()' usual-repair-print='usualRepairPrint' usual-layer-close='usualLayerClose'>
+</repair-report-bill>
+<!-- repair print new 打印维修申请单 -->
+<div class="fy_repairReportBill" id='repairRequestPrint'>
+	<div id='repairRequestPrintCon'>
+	<div class="fy_repairReportHead">{{userInfo.nowOrgName||userInfo.tenantName}}医疗器械维修申请单</div>
+	<div class="fy_repairReportBillHead">
+		<div class="fy_repairReportBillHeadLeft">维修工作单号：{{repairInfo.num}}</div>
+		<div class="fy_repairReportBillHeadRight">日期：{{repairInfo.time | date:'yyyy-MM-dd HH:mm'}}</div>
+	</div>
+	<div class="fy_repairReportPortHead">一、设备基本信息</div>
+	<table border="0" cellspacing="0" cellpadding="0" class="fy_repairReportPortTable">
+		<tr>
+			<td class="fy_repairReportPortTableHead fy_repairReportPortTableBL">设备名称</td>
+			<td>{{assetsInfo.assetsName}}</td>
+			<td class="fy_repairReportPortTableHead">设备编号</td>
+			<td class="fy_repairReportPortTableBR">{{assetsInfo.assetsNum}}</td>
+		</tr>
+		<tr ng-if='assetsInfo.assetsDesc==1'>
+			<td class="fy_repairReportPortTableHead fy_repairReportPortTableBL">规格型号</td>
+			<td>{{assetsInfo.assetsSpec}}</td>
+			<td class="fy_repairReportPortTableHead">院内编码</td>
+			<td class="fy_repairReportPortTableBR">{{assetsInfo.serialNum}}</td>
+		</tr>
+		<tr ng-if='assetsInfo.assetsDesc==2'>
+			<td class="fy_repairReportPortTableHead fy_repairReportPortTableBL">规格型号</td>
+			<td>{{assetsInfo.assetsSpec}}</td>
+			<td class="fy_repairReportPortTableHead">所在部门</td>
+			<td class="fy_repairReportPortTableBR">{{assetsInfo.assetsDeptName}}</td>
+		</tr>
+		<tr ng-if='assetsInfo.assetsDesc==1'>
+			<td class="fy_repairReportPortTableHead fy_repairReportPortTableBL">品牌</td>
+			<td>{{assetsInfo.assetsBrand}}</td>
+			<td class="fy_repairReportPortTableHead">生产商</td>
+			<td class="fy_repairReportPortTableBR">{{assetsInfo.factoryName}}</td>
+		</tr>
+		<tr ng-if='assetsInfo.assetsDesc==1'>
+			<td class="fy_repairReportPortTableHead fy_repairReportPortTableBL">使用科室</td>
+			<td>{{assetsInfo.assetsDeptName}}</td>
+			<td class="fy_repairReportPortTableHead fy_repairReportPortTableBL">启用日期</td>
+			<td class="fy_repairReportPortTableBR">{{assetsInfo.startUseDate | date:'yyyy-MM-dd'}}</td>
+		</tr>
+		<tr ng-if='assetsInfo.assetsDesc==1'>
+			<td class="fy_repairReportPortTableHead fy_repairReportPortTableBL">保修期至</td>
+			<td class="fy_repairReportPortTableBR" colspan="3">{{assetsInfo.warrantyDate | date:'yyyy-MM-dd'}}</td>
+		</tr>
+		<tr ng-if='assetsInfo.assetsDesc==2'>
+			<td class="fy_repairReportPortTableHead fy_repairReportPortTableBL">所在位置</td>
+			<td class="fy_repairReportPortTableBR" colspan="3">{{assetsInfo.assetsLocal}}</td>
+		</tr>
+	</table>
+	<div class="fy_repairReportPortHead">二、故障描述</div>
+	<table border="0" cellspacing="0" cellpadding="0" class="fy_repairReportPortTable">
+		<tr>
+			<td class="fy_repairReportPortTableHead fy_repairReportPortTableBL">接单类型</td>
+			<td colspan="3" class="fy_repairReportPortTableBR">{{repairDetail.reportStatus==1?'送修':'现场维修'}}</td>
+		</tr>
+		<tr>
+			<td class="fy_repairReportPortTableHead fy_repairReportPortTableBL">故障现象</td>
+			<td colspan="3" class="fy_repairReportPortTableBR">{{repairDetail.faultDesc}}</td>
+		</tr>
+		<tr>
+			<td class="fy_repairReportPortTableHead fy_repairReportPortTableBL">申请人姓名</td>
+			<td>{{repairInfo.name}}</td>
+			<td class="fy_repairReportPortTableHead fy_repairReportPortTableBL">联系电话</td>
+			<td class="fy_repairReportPortTableBR">{{repairInfo.tel}}</td>
+		</tr>
+	</table>
+	</div>
+	<div class="fy_repairReportBillBtn">
+		<a href="javascript:;" class="m-r" ng-click='usualRepairPrint(1)' ng-if="userInfo.authoritiesStr.indexOf('REP_APPLY_PRINT_NEW') != -1">打印维修申请单</a><a href="javascript:;" ng-click='usualLayerClose()'>关闭</a>
+	</div>
+</div>
+<!-- alert 确认框  -->
+<div class='repairAlertConfirm' id='repairAlertConfirm'>
+	<div class="repairAlertConfirmCon">
+		<div class="repairAlertConfirmImg"><img src="../../res/img/wh.png" alt=""></div>
+		<div class="repairAlertConfirmTxt">{{repairAlertTxt}}</div>
+		<div class="repairAlertConfirmBtn">
+			<a href="javascript:;" ng-click='repairAlertYes()' class="repairAlertConfirmBtnY">确定</a><a href="javascript:;" ng-click='usualLayerClose()'>取消</a>
+		</div>
+	</div>
+</div>
+<!--转单的时候选择维修人的弹窗-->
+<div class='repairAlertConfirm' style="display: none" id="nameAlert">
+	<div class="repairAlertConfirmCon ">
+		<div ng-if="assetsInfo.turnNum <5" style="margin-top: 30px">
+			<div style="height: 300px;overflow-y: auto">
+			<div class="hd_newTlt" >
+				<span>姓名</span>
+				<span>手机号</span>
+			</div>
+			<ul class="hd_newTltul"  style="margin-bottom: 0">
+				<li ng-click="choosePeopleturn(l,$index)" ng-repeat="l in peopleList2 track by $index">
+					<span>{{l.realName}}</span>
+					<span>{{l.mobile}}</span>
+					<span >
+					<img src="../../res/img/pass1.png" alt="" ng-if="_index == $index">
+				</span>
+				</li>
+			</ul>
+
+			</div>
+		</div>
+		<div ng-if="assetsInfo.turnNum >= 5" style="height: 330px;overflow-y: auto;line-height: 100px">
+			转单已经超过五次，不能再转单了！
+		</div>
+
+		<div class="repairAlertConfirmBtn" style="margin-top: 25px">
+			<div style="color: red;text-align: left;padding-left: 30px" ng-if="newError">请选择维修人</div>
+			<a href="javascript:;" ng-click='repairPeopleYes()' class="repairAlertConfirmBtnY">确定</a><a href="javascript:;" ng-click='turnCancle()'>取消</a>
+		</div>
+	</div>
+</div>
+<!--转单记录弹窗-->
+<div class='repairAlertConfirm' style="display: none" id="recodeAlert">
+	<div class="repairAlertConfirmCon ">
+		<div  style="margin-top: 30px;height: 200px">
+
+			<div >
+				<div class="hd_newTlt" >
+					<span>转单时间</span>
+					<span>操作</span>
+				</div>
+				<div ng-if="!recodeList.length" style="float: left;margin-left: 187px" >无数据！</div>
+				<ul  ng-if="recodeList.length" class="hd_newTltul" style="padding-left: 10px">
+					<li ng-click="choosePeopleturn(l,$index)" ng-repeat="l in recodeList track by $index" >
+						<span style="width: 35%">{{l.turnTime | date:'yyyy-MM-dd HH:mm' }}</span>
+						<span><span style="color: #ffac4a" class="overflownew">{{l.fromName}}  </span><i style="color:#000;float: left">转给</i> <span style="color: #ffac4a" class="overflownew">{{l.toName }}</span></span>
+					</li>
+				</ul>
+			</div>
+
+		</div>
+
+
+		<div class="repairAlertConfirmBtn">
+			<a href="javascript:;" ng-click='usualLayerClose()' class="repairAlertConfirmBtnY">确定</a><a href="javascript:;" ng-click='usualLayerClose()'>取消</a>
+		</div>
+	</div>
+</div>
+<!--选择维修人-->
+<div class='repairAlertConfirm' style="display: none" id="namemanAlert">
+	<div class="repairAlertConfirmCon ">
+		<div  style="margin-top: 30px">
+			<div style="height: 300px;overflow-y: auto">
+				<div class="hd_newTlt" >
+					<span>姓名</span>
+					<span>手机号</span>
+				</div>
+				<ul class="hd_newTltul" style="margin-bottom: 0;">
+					<li ng-click="choosemanPeople(l,$index)" ng-repeat="l in peopleListman track by $index">
+						<span>{{l.realName}}</span>
+						<span>{{l.mobile}}</span>
+						<span >
+					<img src="../../res/img/pass1.png" alt="" ng-if="_indexId == l.id">
+				</span>
+					</li>
+				</ul>
+
+			</div>
+		</div>
+		<div class="repairAlertConfirmBtn" style="margin-top: 25px">
+			<div style="color: red;text-align: left;padding-left: 30px" ng-if="newmanError">{{$stateParams.status==0?'请选择接单人':'请选择维修人'}}</div>
+			<a href="javascript:;" ng-click='choosePeopleYesman()' class="repairAlertConfirmBtnY">确定</a><a href="javascript:;" ng-click='peopleCancle()'>取消</a>
+		</div>
+	</div>
+</div>
+</div>

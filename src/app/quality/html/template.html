@@ -1,0 +1,62 @@
+<div class="quality-nav">
+    <span>质控模板</span>
+    <span class="quality-btn quality-btn-add" ng-click="methods.addOpen()" ng-if="data.limit.isAek">新增模板</span>
+</div>
+<div class="quality-swrap">
+    <div class="quality-search">
+        <aek-select list="data.local.typeOptions" change="methods.changeType" item="data.local.currentType" style="width: 120px;" ng-if="data.limit.isAek"></aek-select>
+        <input class="quality-search-keyword" type="text" placeholder="模板名称" ng-model="data.local.keyword">
+        <span class="quality-btn" ng-click="methods.search()">搜索</span>
+    </div>
+    <table class="quality-list-table">
+        <thead>
+            <tr>
+                <td>序号</td>
+                <td>模板名称</td>
+                <td ng-if="data.limit.isAek">状态</td>
+                <td>备注</td>               
+                <td>操作</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="v in data.server.list">
+                <td>{{(pageInfo.current - 1) * pageInfo.size + $index + 1}}</td>
+                <td>{{v.name}}</td>
+                <td style="white-space: nowrap;"ng-if="data.limit.isAek">{{v.releaseFlag ? '已发布' : '待发布'}}</td>
+                <td>{{v.remarks}}</td>
+                <td style="white-space: nowrap;" ng-if="!data.limit.isAek">
+                    <a ui-sref="quality.menu.templateinfo({id: v.id, type:1})">查看</a>
+                </td>
+                <td style="white-space: nowrap;" ng-if="data.limit.isAek">
+                    <a ui-sref="quality.menu.templateinfo({id: v.id, type:2})" ng-if="v.releaseFlag">查看</a>
+                    <a ui-sref="quality.menu.templateinfo({id: v.id, type:3})" ng-if="!v.releaseFlag">管理</a>&nbsp;&nbsp;
+                    <a ng-click="methods.editOpen(v)" ng-if="!v.releaseFlag">编辑</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <!-- 分页 -->
+    <span ng-if="!data.loading && !data.empty" data-ng-include=" 'src/tpl/newPageInfo.html' "></span>
+    <!-- empty -->
+    <div class="empty" ng-if="data.empty && !data.loading"><img src="../../../res/img/nocontent.png">暂无数据</div>
+    <!-- loading -->
+    <div class="loading" ng-if="data.loading"><img src="../../../res/img/loading2.gif"></div>
+    <!-- 新建/编辑对话框 -->
+    <div id="template_add_quality" style="display: none;">
+        <dl class="modal-add">
+            <dt>
+                <span class="require">*</span>模板名称：</dt>
+            <dd>
+                <input id="templateName" type="text" placeholder="40个字符以内" maxlength="40" ng-model="data.form.name" ng-change="methods.removeErr()">
+                <div class="err">{{data.form.err}}&nbsp;</div>
+            </dd>
+            <dt>备注：</dt>
+            <dd>
+                <div class="absc">
+                    <textarea ng-model="data.form.remarks" maxlength="300" ng-trim="false" placeholder="请输入，300个字符以内"></textarea>
+                    <div style="margin-right: 65px;font-size: 12px;text-align: right;color: #999;">{{data.form.remarks.length}}/300</div>
+                </div>
+            </dd>
+        </dl>
+    </div>
+</div>

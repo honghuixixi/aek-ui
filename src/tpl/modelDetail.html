@@ -1,0 +1,29 @@
+<div>
+    <div class="fy_accessoryWrap fy_newModelWrap">
+        <div class="modelDetailInfoName"><span>{{modelSelect.name}}</span><span class='modelDetailInfoNameUsed' ng-if='(modelSelect.status=="启用")&&isEditModel'>启用</span><span class='modelDetailInfoNameStoped' ng-if='modelSelect.type!=1&&(modelSelect.status=="停用")&&isEditModel'>停用</span></div>
+        <div class="modelDetailInfoRemark">备注：{{modelSelect.remarks}}</div>
+        <div class="modelDetailInfoBtn" ng-if='isEditModel'><a class="newInspectionBtn" href="javascript:;" ng-if="modelSelect.type!=1&&userInfo.authoritiesStr.indexOf('QC_TEMPLATE_EDIT') != -1" ng-click='editProject()'>新建项目</a><span class='modelDetailInfoAlert'>*建议项目数最多为3个，项目内容尽量精简，以免影响打印效果。</span></div>
+        <div class="inspectionModelDetailInfo">
+            <table>
+                <tr>
+                    <th>序号</th>
+                    <th class="inspectionModelInfoLeft">项目名称</th>
+                    <th class="inspectionModelInfoLeft">巡检结果</th>
+                    <th ng-if='isEditModel'>操作</th>
+                </tr>
+                <tr ng-repeat="item in modelSelect.projects">
+                    <td>{{$index+1}}</td>
+                    <td class="inspectionModelInfoLeft">{{item.name}}</td>
+                    <td class='inspectionModelInfoLeft'><div class="inspectionModelProject" ng-repeat="one in item.results"><div class="projectRadioWrap m-r-sm"><div class="projectRadio" ><div class="projectRadioSel" ng-if='one.isDefault'></div></div></div>{{one.name}}</div></td>
+                    <td ng-if='isEditModel'><a href="javascript:;" ng-if="modelSelect.type!=1&&userInfo.authoritiesStr.indexOf('QC_TEMPLATE_EDIT') != -1" ng-click='editProject(item,$index)'>编辑</a><a href="javascript:;" class="m-l-lg" ng-if="modelSelect.type!=1&&userInfo.authoritiesStr.indexOf('QC_TEMPLATE_EDIT') != -1" ng-click='editProject(item,$index,1)'>删除</a></td>
+                </tr>
+                <tr ng-if='!modelSelect.projects.length'>
+                    <td colspan="4">暂无数据</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div id="theProjectWrap" ng-show='projectCon'>
+        <project-operate model-select='modelSelect' project='project' project-err='projectErr' project-con='projectCon'></project-operate>
+    </div>
+</div>

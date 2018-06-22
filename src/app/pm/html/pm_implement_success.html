@@ -1,0 +1,116 @@
+<div class="pm-implement-execute">
+	<div class="pm-top">
+		<a ui-sref="pm.menu.implement" style="color: #999;">PM实施</a>&gt;
+		<span>实施详情</span>
+		<span class="pm-btn" ng-click="print()">打印实施报告单</span>
+	</div>
+	<div class="pm-info">
+		<div class="pm-info-name">
+			设备名称：{{data.implement.name}}
+			<span class="tag" style="background-color: #4ab29b;">已结束</span>
+			<span style="float: right;">报告编号：{{data.implement.reportNo}}</span>
+		</div>
+		<table class="pm-info-table">
+			<tbody>
+				<tr>
+					<td style="width: 100px; color: #666;">设备编号</td>
+					<td style="color: #999;">{{data.implement.no}}</td>
+					<td style="width: 120px; color: #666;">PM等级</td>
+					<td style="color: #999;">{{data.implement.level | pmlevel}}</td>
+				</tr>
+				<tr>
+					<td style="width: 100px; color: #666;">规格型号</td>
+					<td style="color: #999;">{{data.implement.model}}</td>
+					<td style="width: 120px; color: #666;">上次实施日期</td>
+					<td style="color: #999;">{{data.implement.prevDate ? (data.implement.prevDate | date:'yyyy-MM-dd') : '无'}}</td>
+				</tr>
+				<tr>
+					<td style="width: 100px; color: #666;">所在部门</td>
+					<td style="color: #999;">{{data.implement.departmentName}}</td>
+					<td style="width: 120px; color: #666;">下次实施日期</td>
+					<td style="color: #999;">{{data.implement.nextDate | date:'yyyy-MM-dd'}}
+						<span class="{{data.implement.attention.length > 0 && data.implement.attention === '已过期' ? 'tag tag-err' : 'tag'}}"
+						 ng-if="data.implement.attention.length > 0">{{data.implement.attention}}</span>
+					</td>
+				</tr>
+				<tr>
+					<td style="width: 100px; color: #666;">设备状态</td>
+					<td style="color: #999;">{{data.implement.equipmentStatus}}</td>
+					<td style="width: 120px; color: #666;">负责人</td>
+					<td style="color: #999;">{{data.implement.directorName}}</td>
+				</tr>
+				<tr>
+					<td style="width: 100px; color: #666;">PM周期</td>
+					<td style="color: #999;">{{data.implement.cycle}}个月</td>
+					<td style="width: 120px; color: #666;">创建时间</td>
+					<td style="color: #999;">{{data.implement.createTime | date:'yyyy-MM-dd HH:mm'}}</td>
+				</tr>
+				<tr>
+					<td style="width: 100px; color: #666;">报告验收人</td>
+					<td style="color: #999;">{{data.implement.checkName}}</td>
+					<td style="width: 120px; color: #666;">&nbsp;</td>
+					<td style="color: #999;">&nbsp;</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="pm-info-main">
+		<div class="pm-info-main-tab">
+			<span class="pm-btn">实施内容</span>
+		</div>
+		<div class="pm-info-main-dt">
+			<span>实际开始日期：</span>{{data.implement.actualStartDate | date:'yyyy-MM-dd'}}
+			<span style="margin-left: 50px;">实际结束日期：</span>{{data.implement.actualEndDate | date:'yyyy-MM-dd'}}
+		</div>
+		<table class="pm-info-main-table">
+			<thead>
+				<tr>
+					<td rowspan="2" style="width: 80px;background-color: #f5f5f5;text-align: center;">序号</td>
+					<td rowspan="2" style="background-color: #f5f5f5;">项目名称</td>
+					<td rowspan="2" style="background-color: #f5f5f5;">项目内容及说明</td>
+					<td colspan="4" style="background-color: #f5f5f5;text-align: center;">检查维护结果</td>
+				</tr>
+				<tr>
+					<td style="width: 80px; text-align: center;">检查结果</td>
+					<td style="text-align: center;">设定值</td>
+					<td style="text-align: center;">实测值</td>
+					<td style="text-align: center;">备注</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="v in data.implement.table">
+					<td ng-if="v.hasRowSpan" rowspan="{{v.rowSpan}}" style="width: 80px;text-align: center;">{{v.index}}</td>
+					<td ng-if="v.hasRowSpan" rowspan="{{v.rowSpan}}">{{v.itemName}}</td>
+					<td>{{v.name}}</td>
+					<td style="width: 80px; text-align: center;">{{v.answer | pmplanresult}}</span>
+					</td>
+					<td style="width:320px;">{{v.setnum}}</td>
+					<td style="width:320px;">{{v.measure}}</td>
+					<td style="width:320px;">{{v.remarks}}</td>
+				</tr>
+			</tbody>
+		</table>
+		<dl class="pm-implement-success-dl">
+			<dt>设备现状：</dt>
+			<dd style="margin-left: 90px;">{{data.implement.live | pmplanlive}}</dd>
+			<dt>工时：</dt>
+			<dd style="margin-left: 90px;">
+				{{data.implement.workTime}} 小时
+			</dd>
+			<dt>附件：</dt>
+			<dd style="margin-left: 90px;">
+				<div ng-repeat="v in data.implement.files">
+					<a target="_blank" href="{{v.url}}">{{v.name}}</a>
+				</div>
+				<span ng-if="data.implement.files.length < 1">&nbsp;</span>
+			</dd>
+			<dt>备注：</dt>
+			<dd style="margin-left: 90px;">
+				{{data.implement.remarks}}
+			</dd>
+		</dl>
+	</div>
+</div>
+
+<!-- 查看实施报告 -->
+<div data-ng-include="'src/app/pm/html/template_report.html'" class="pm-report-dialog" id="template_report" style="display: none;"></div>

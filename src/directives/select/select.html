@@ -1,0 +1,11 @@
+<div class="aek-select">
+    <div class="selectWrap" style="position: relative;width: 100%;">
+        <div class="selector" ng-click='displayOption()'>
+            <input class="aek-select-input" style="width: 100%; padding-right: 33px; color: {{item.id > 0 ? '#333;' : '#999;'}}" type="text" ng-model='item.name' readonly="true">
+        </div>
+        <ul class="aek-select-options" ng-show='showOptions'>
+            <li ng-repeat='item in list' ng-click='chooseItem(item)'>{{item.name}}</li>
+        </ul>
+    </div>
+    <div class="fixWrap" ng-show='showOptions' ng-click='menuHide()'></div>
+</div>

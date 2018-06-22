@@ -1,0 +1,82 @@
+<!-- list -->
+<style>
+		.repairNavList .apply {
+			background-image: url(../res/img/apply.png);
+		}
+		.repairNavList .active .apply {
+			background-image: url(../res/img/apply_checked.png);
+			color: #f7931e;
+		}
+		.repairNavList .audit {
+			background-image: url(../res/img/audit.png);
+		}
+		.repairNavList .active .audit {
+			background-image: url(../res/img/audit_checked.png);
+			color: #f7931e;
+		}
+		.repairNavList .repairconfig {
+			background-image: url(../res/img/repairconfig.png);
+		}
+		.repairNavList .active .repairconfig {
+			background-image: url(../res/img/repairconfig_checked.png);
+			color: #f7931e;
+		}
+		.repairNavList .flowconfig {
+			background-image: url(../res/img/flowconfig.png);
+		}
+		.repairNavList .active .flowconfig {
+			background-image: url(../res/img/flowconfig_checked.png);
+			color: #f7931e;
+		}
+	</style>
+	<ul class="nav"  ng-controller="navCtrl" >
+		<li ng-class="{active: $state.includes('**.repair.**')}" class="ng-scope parent-nav">
+		    <ul class="nav nav-sub dk ng-scope repairNavList">	    	
+				<li ng-class="{active: $state.includes('**.repair.dashbord.**')}" class="ng-scope">
+				<a ui-sref="repair.dashbord" ui-sref-opts="{reload:true}">
+					<span class="spanLeftImg repairDashbord">维修概览</span>
+				</a>
+				</li>
+				<li ng-class="{active: $state.includes('**.repair.scroll.**')}" class="ng-scope">
+				<a ui-sref="repair.scroll" ui-sref-opts="{reload:true}">
+					<span class="spanLeftImg repairDashbord2">维修大屏</span>
+				</a>
+				</li>
+				<!-- <li ng-class="{active: $state.includes('**.repair.index.**')}" class="ng-scope">
+				<a ui-sref="repair.index.calendar({tenantId:$stateParams.tenantId||$localStorage.userInfo.tenantId})" ui-sref-opts="{reload:true}">
+					<span class="spanLeftImg repairHome">首页</span>
+				</a>
+				</li> -->
+				<li ng-class="{active: !$state.includes('**.repair.scroll.**')&&!$state.includes('**.repair.dashbord.**')&&!$state.includes('**.repair.accessory.**')&&!$state.includes('**.repair.apply.**')&&!$state.includes('**.repair.audit.**')&&!$state.includes('**.repair.repairconfig.**')&&!$state.includes('**.repair.flowconfig.**')}" class="ng-scope">
+				<a ui-sref="repair.manage({tenantId:($stateParams.tenantId||$localStorage.userInfo.tenantId)})" ui-sref-opts="{reload:true}">
+					<span class="spanLeftImg repairSection">维修管理</span>
+				</a>
+				</li>
+				<li ng-class="{active: $state.includes('**.repair.accessory.**')}" class="ng-scope">
+				<a ui-sref="repair.accessory.records({tenantId:$stateParams.tenantId||$localStorage.userInfo.tenantId})" ui-sref-opts="{reload:true}">
+					<span class="spanLeftImg repairAccessoryManage">配件管理</span>
+				</a>
+				</li>
+				<li ng-class="{active: $state.includes('**.repair.apply.**')}" class="ng-scope" ng-if="userInfo.authoritiesStr.indexOf('REP_REPAIR_PRICE_APPLY') >= 0">
+				<a ui-sref="repair.apply.list({tenantId:$stateParams.tenantId||$localStorage.userInfo.tenantId})" ui-sref-opts="{reload:true}">
+					<span class="spanLeftImg apply">单据申请</span>
+				</a>
+				</li>
+				<li ng-class="{active: $state.includes('**.repair.audit.**')}" class="ng-scope" ng-if="userInfo.authoritiesStr.indexOf('REP_REPAIR_PRICE_CHECK') >= 0">
+				<a ui-sref="repair.audit.list({tenantId:$stateParams.tenantId||$localStorage.userInfo.tenantId})" ui-sref-opts="{reload:true}">
+					<span class="spanLeftImg audit">单据审批</span>
+				</a>
+				</li>
+				<li ng-class="{active: $state.includes('**.repair.repairconfig.**')}" class="ng-scope" ng-if="userInfo.authoritiesStr.indexOf('REP_REPAIR_CONFIG') >= 0">
+				<a ui-sref="repair.repairconfig.config({tenantId:$stateParams.tenantId||$localStorage.userInfo.tenantId})" ui-sref-opts="{reload:true}">
+					<span class="spanLeftImg repairconfig">维修配置</span>
+				</a>
+				</li>
+				<li ng-class="{active: $state.includes('**.repair.flowconfig.**')}" class="ng-scope" ng-if="userInfo.authoritiesStr.indexOf('REP_REPAIR_CONFIG') >= 0">
+				<a ui-sref="repair.flowconfig.config({tenantId:$stateParams.tenantId||$localStorage.userInfo.tenantId})" ui-sref-opts="{reload:true}">
+					<span class="spanLeftImg flowconfig">工作流配置</span>
+				</a>
+				</li>
+		    </ul>
+		</li>
+	</ul>

@@ -1,0 +1,799 @@
+.tabelConList {
+	width: 100%;
+	text-align: center;
+}
+.ztree li ul.line {
+	height: auto;
+}
+.ztreeLayerHidden {
+	display: none;
+}
+.ztree li ul {
+	padding:0 0 0 18px;
+}
+.ztree li span.button.chk.checkbox_false_part {
+    background-position: 0 -28px;
+}
+.sectionConHead .scopeSelfDept {
+	height: 64px;
+}
+.scopeSelfDept .scopeSelfDeptWrap {
+	font-style: italic;
+	max-width: 360px;
+	display: inline-block;
+	white-space: nowrap;
+	vertical-align: middle;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.scopeSelfDept i {
+	height: 100%;
+	display: inline-block;
+	vertical-align: middle;
+}
+.editSelfDept {
+	width: 16px;
+	height: 16px;
+	vertical-align: middle;
+	display: inline-block;
+	background-image: url(../../res/img/bianji.png);
+	background-repeat: no-repeat;
+}
+.editSelfDept:hover {
+	background-image: url(../../res/img/bj.png);
+}
+/*Բ��*/
+.role-content input, .role-content a {
+	border-radius: 2px;
+}
+/*��ɫ*/
+.ahoverblue:hover {
+	color: #4baaf6;
+}
+.ahoverred:hover {
+	color: #ff2a2a;
+}
+.ahoverBTN:hover {
+	background-color: #ffac4a;
+}
+.alertBtn .ahoverBTN:hover {
+	background-color: #ffac4a;
+}
+.ahoveryellow:hover {
+	color: #f7931e;
+}
+.acolorblue {
+	color: #4baaf6;
+}
+.acolorfff {
+	color: #fff;
+}
+.acolorbe {
+	color: #bebebe;
+}
+.acolor666 {
+	color: #666;
+}
+.acolor999 {
+	color: #999;
+}
+.acolorred {
+	color: #ff2a2a;
+}
+/*����*/
+.font12px {
+	font-size: 12px;
+}
+.font13px {
+	font-size: 13px;
+}
+.font14px {
+	font-size: 14px;
+}
+.font15px {
+	font-size: 15px;
+}
+/*menuList*/
+.noPowerSee {
+	padding-top: 140px;
+	text-align: center;
+}
+.noPowerSee span {
+	margin-left: 15px;
+}
+.sortCon {
+	height: 64px;
+}
+.sortCon .selectWrap {
+	margin-right: 10px;
+}
+.sortCon .selectWrap input {
+	width: 120px;
+}
+.selectWrap, .searchWrap {
+	position: relative;
+	display: inline-block;
+}
+.roleIndexCon .selectWrap {
+	z-index: auto;
+	font-size: 12px;
+}
+.height18px {
+	height: 18px;
+}
+.searchWrap a {
+	background-color: #f7931e;
+	display: inline-block;
+	width: 48px;
+	color: #fff;
+	height: 32px;
+	line-height: 32px;
+	text-align: center;
+	margin-left: 10px;
+}
+.searchWrap input {
+	width: 250px;
+}
+.searchWrap input:focus {
+	border-color: #f7931e;
+}
+.selectors {
+	position: relative;
+	z-index: 1;
+}
+.selector {
+	position: relative;
+}
+.selector a {
+	position: absolute;
+	right: 0px;
+	top: 0px;
+	width: 30px;
+	height: 32px;
+	background-image: url(../img/down.png);
+	background-repeat: no-repeat;
+	background-position: 10px 12px;
+}
+.sortCon input {
+	height: 32px;
+	text-indent: 10px;
+	border: none;
+	border: 1px solid #d6d6d6;
+	color: #999;
+}
+.options li {
+	text-indent: 7px;
+	color: #666;
+}
+.roleIndexCon .options, .setDataScope .options {
+	position: absolute;
+	width: 100%;
+	z-index: 2;
+	box-shadow: -3px 0px 3px #dfdfdf;
+	background-color: #fff;
+}
+.setDataScope .options li:hover {
+	background-color: #f7931e;
+	color: #fff;
+}
+.options ul {
+	padding: 0px;
+	margin: 0px;
+	box-shadow: 3px 3px 3px #dfdfdf;
+	line-height: 26px;
+	list-style: none;
+	padding-top: 2px;
+}
+.roleIndexCon .selectWrap li:hover {
+	background-color: #f7931e;
+	color: #fff;
+}
+.roleIndexCon .selectWrap li:hover a {
+	color: #fff;
+}
+.options li a{
+	-webkit-transition: 0s;
+	-moz-transition: 0s;
+	-ms-transition: 0s;
+	-o-transition: 0s;
+	transition: 0s;
+	padding-left: 6px;
+}
+.options li:hover a {
+	color: #fff;
+}
+.roleIndexCon .sortCon .selectWrap .options {
+	top: 32px;
+}
+.roleIndexCon .sortCon .selectWrap .options li {
+	text-align: left;
+	text-indent: 10px;
+}
+/*������*/
+.roleIndexCon .selectWrap .options {
+	top: 28px;
+	right: 0px;
+	left: auto;
+}
+.roleIndexCon .selectWrap .options li {
+	text-align: center;
+	text-indent: 0px;
+}
+.roleIndexCon .selectWrap .options a {
+	color: #666;
+}
+.zIndex0 {
+	z-index: auto;
+}
+.width64 {
+	width: 64px;
+}
+.roleIndexCon .width120 {
+	width: 120px;
+}
+/*�ڸǲ�*/
+.roleFixWrap, .fixdWrap {
+	position: fixed;
+	top: 0px;
+	bottom: 0px;
+	right: 0px;
+	left: 0px;
+}
+.fixdWrap {
+	z-index: 1;
+}
+/*padding*/
+.m-l-15 {
+	margin-left: 15px;
+}
+.m-b-57 {
+	margin-bottom: 57px;
+}
+.p-top-20{
+	padding-top:20px;
+}
+.p-l-15 {
+	padding-left: 15px;
+}
+.p-t-15 {
+	padding-left: 15px;
+	padding-right: 15px;
+}
+.p-t-20 {
+	padding-left: 20px;
+	padding-right: 20px;
+}
+.p-t-10 {
+	padding-left: 10px;
+	padding-right: 10px;
+}
+.p-v-15 {
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+.p-v-20 {
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+.p-v-10 {
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+/*text*/
+.textLeft {
+	text-align: left;
+}
+/*btn*/
+.btnYellow {
+	background-color: #f7931e;
+	color: #fff;
+	font-size: 13px;
+	text-align: center;
+	display: inline-block;
+	line-height: 32px;
+	height: 32px;
+	width: 90px;
+}
+.btnYellow:hover {
+	background-color: #ffac4a;
+	color: #fff;
+}
+.roleOperateBtn {
+	padding-left: 24px;
+	background-repeat: no-repeat;
+	background-position: 0px 2px;
+}
+.roleEditBtn {
+	background-image: url(../img/bianji.png);
+}
+.roleRecoverBtn {
+	background-image: url(../img/hfjg.png);
+}
+.roleRecoverBtn:hover{
+	background-image: url(../img/hfjgdj.png);
+}
+.roleEditBtn:hover {
+	background-image: url(../img/bjdj.png);
+}
+.roleStopBtn {
+	background-image: url(../img/stop.png);
+}
+.roleStopBtn:hover {
+	background-image: url(../img/tydj.png);
+}
+.roleDelBtn {
+	background-image: url(../img/sc.png);
+}
+.roleDelBtn:hover {
+	background-image: url(../img/scdj.png);
+}
+.verticalAlignMiddle {
+	vertical-align: middle;
+	display: inline-block;
+	height: 100%;
+}
+/*role index*/
+.roleIndexWrap {
+	padding-bottom: 15px;
+	background-color: #eff3f6;
+}
+/*title*/
+.roleTitle {
+	line-height: 56px;
+	height: 56px;
+}
+.roleTitleBtn .newRole {
+	padding-left: 25px;
+	background-image: url(../img/add.png);
+	background-repeat: no-repeat;
+	background-position: 10px 10px;
+	text-align: left;
+}
+.roleTitleBtn {
+	float: right;
+	height: 100%;
+}
+.roleTitleBtn a {
+	color: #666;
+}
+.roleTitleBtn .acolorhoveryellow:hover {
+	color: #f7931e;
+}
+.roleTitleBtn .acolorfff {
+	color: #fff;
+}
+.minwidth1306 {
+	min-width: 1306px;
+}
+@media (max-width: 1365px) {
+	.overScroll {
+		overflow-x: scroll;
+	}
+}
+/*con*/
+/*.roleIndexCon {
+	overflow-y: scroll;
+}*/
+.indexCon {
+	background-color: #fff;
+	padding-bottom: 15px;
+	min-height: calc(100% - 72px);
+}
+.indexCon table {
+	width: 100%;
+	border-top: 1px solid #dcdcdc;
+	text-align: center;
+}
+.indexCon table th {
+	background-color: #f5f5f5;
+	border-right: 1px solid #dcdcdc;
+	line-height: 40px;
+}
+.indexCon table .hideTr td {
+	border: none;
+}
+.indexCon table tr:hover .h-b-c-f {
+	border-color: #f7931e;
+}
+.indexCon table .copyBorder:hover td {
+	border-color: #dcdcdc;
+}
+.indexCon table td {
+	border-right: 1px solid #dcdcdc;
+	border-top: 1px solid #dcdcdc;
+	line-height: 40px;
+}
+.indexCon table td .roleMoreLine {
+	line-height: 27px;
+	word-break: break-all;
+}
+.roleNameTd {
+	position: relative;
+}
+.xy-roleTable {
+	padding-right: 75px;
+}
+.roleNameTd .hadStatus {
+	position: absolute;
+	right: 0px;
+	top: 50%;
+	margin-top: -8px;
+}
+.indexCon tr:hover .firstTd {
+	border-left-color: #f7931e;
+}
+.indexCon tr:hover .lastTd {
+	border-right-color: #f7931e;
+}
+.indexCon tr:hover td {
+	border-top-color: #f7931e;
+}
+.indexCon tr:hover+tr td {
+	border-top-color: #f7931e;
+}
+/*����*/
+.detailCon {
+	background-color: #fff;
+	padding-bottom: 15px;
+	/*height: calc(100% - 255px);*/
+}
+.detailCon .indexCon {
+	height: auto;
+}
+.sectionHead {
+	height: 50px;
+	position: relative;
+	padding-top: 18px;
+}
+.sectionBtn {
+	float: right;
+	height: 100%;
+}
+.sectionBtn a {
+	color: #4baaf6;
+	font-size: 14px;
+	background-image: url(../img/editP.png);
+	background-repeat: no-repeat;
+	padding-left: 25px;
+	background-position: 0px 3px;
+}
+.sectionSelect a {
+	width: 116px;
+	height: 32px;
+	line-height: 32px;
+	border: 1px solid #d5d5d5;
+	border-radius: 0px;
+	color: #666;
+	font-size: 14px;
+	text-align: center;
+	float: left;
+}
+.sectionLine {
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	width: 100%;
+	border-bottom: 1px solid #d5d5d5;
+}
+.sectionSelect .sectionActive {
+	background-color: #f7931e;
+	color: #fff;
+	position: relative;
+	border-color: #f7931e;
+}
+/*��ɫsection*/
+.sectionConHead {
+	height: 43px;
+	line-height: 43px;
+}
+.height64 {
+	height: 64px;
+	line-height: 64px;
+}
+.height60 {
+	height: 60px;
+	line-height: 60px;
+}
+.sectionConHead input {
+	height: 32px;
+	width: 278px;
+	border: none;
+	border: 1px solid #d6d6d6;
+	text-indent: 6px;
+	color:#666;
+}
+.sectionConHead input:focus {
+	border-color: #f7931e;
+}
+.sectionConHead>div {
+	float: left;
+	margin-right: 15px;
+}
+.newRoleNameWrap {
+	display: inline-block;
+	position: relative;
+}
+.newRoleNameWrap .newRoleNameInput {
+	color: #f3756f;
+	border-color: #f3756f;
+	position: absolute;
+}
+.vetically {
+	vertical-align: middle;
+	display: inline-block;
+}
+.roleDetailSectionContent .nocontent {
+	padding-top: 30px;
+	text-align: center;
+}
+/*Ȩ��*/
+.roleDetailSectionContent ul {
+	list-style: none;
+	padding: 0px;
+	margin: 0px;
+	/*line-height: 30px;*/
+	color: #666;
+}
+.b-l-d5 {
+	border-left: 1px solid #d5d5d5;
+}
+.b-t-d5 {
+	border-top: 1px solid #d5d5d5;
+}
+.b-b-d5 {
+	border-bottom: 1px solid #d5d5d5;
+}
+.b-r-d5 {
+	border-right: 1px solid #d5d5d5;
+}
+.b-l-dcdcdc {
+	border-left: 1px solid #dcdcdc;
+}
+.clearFloat {
+	clear: both;
+}
+.powerChild {
+	float: left;
+	width: 14%;
+	margin-bottom: 8px;
+}
+.menuList {
+	display: inline-block;
+	margin-bottom: 8px;
+}
+.powerListHead {
+	width: 9%;
+	padding-left: 12px;
+	font-weight: bold;
+}
+.fontItalic {
+	font-style: italic;
+}
+.infoInstructionWrap {
+	position: relative;
+	margin-left: 6px;
+}
+.instrcutCon {
+	left: -152px;
+	width: 320px;
+	bottom: 16px;
+	position: absolute;
+	line-height: 30px;
+	color: #fff;
+	background-color: #4c4c4c;
+}
+.instrcutCon p {
+	font-size: 13px;
+	margin: 0px;
+	padding: 15px;
+}
+.instrcutCon .popBot {
+	height: 5px;
+	background-image: url(../img/popBot.png);
+	background-repeat: no-repeat;
+	background-position: 0px;
+}
+.infoInstructions {
+	background-image: url(../img/infoInstrction.png);
+	background-repeat: no-repeat;
+	width: 13px;
+	height: 13px;
+	display: inline-block;
+}
+.powerListRight {
+	width: 90%;
+}
+/*��ɫ��Ϣ*/
+.roleInfo {
+	background-color: #fff;
+	margin-bottom: 6px;
+	padding-bottom: 2px;
+}
+.roleStatus {
+	line-height: 53px;
+	margin-bottom: 2px;
+	border-bottom: 1px solid #d5d5d5;
+}
+.hadStatus {
+	color: #fff;
+	display: inline-block;
+	width: 48px;
+	line-height: 16px;
+	height: 16px;
+	font-size: 12px;
+	text-align: center;
+	border-radius: 8px;
+}
+.hadStop {
+	background-color: #f3756f;
+}
+.hadUse {
+	background-color: #f7931e;
+}
+.roleInfo table {
+	line-height: 30px;
+	font-size: 13px;
+	width: 100%;
+}
+/*�Զ���title*/
+.positionRelative {
+	position: relative;
+}
+.positionRelative:hover .selfDefineTitle {
+	display: block;
+}
+.selfDefineTitle {
+	display: none;
+	position: absolute;
+	bottom: 23px;
+	width: 320px;
+	left: -153px;
+	height: 62px;
+	background-color: rgba(0,0,0,.7);
+	font-size: 13px;
+	line-height: 20px;
+	padding-top: 12px;
+	color: #fff;
+	padding-bottom: 12px;
+	padding-left: 15px;
+	padding-right: 15px;
+	border-radius: 2px;
+}
+.theTitleTail {
+	position: absolute;
+	top: 100%;
+	left: 0px;
+	height: 5px;
+	width: 100%;
+	background-image: url(../img/tail.png);
+	background-repeat: no-repeat;
+	background-position: center;
+}
+/*ģ��checkbox*/
+.powerChild input[type="checkbox"], .menuList input[type="checkbox"] {
+	display: none;
+}
+.powerChild label, .menuList label {
+	margin-bottom: 0px;
+	margin-top: 0px;
+	line-height: 14px;
+}
+.powerChild .check-label, .menuList .check-label {
+	cursor: pointer;
+	position: relative;
+	display: inline-block;
+	width: 14px;
+	height: 14px;
+	padding-left: 0px;
+	border: 1px solid #b5b5b5;
+	background: #fff;
+	font-size: 12pt;
+}
+
+.powerChild .check-label .fa, .menuList .check-label .fa {
+	position: absolute;
+	display: block;
+	width: 14px;
+	height: 14px;
+	top: -1px;
+	left: -1px;
+	right: 0px;
+	bottom: 0px;
+	opacity: 0;
+	background-color: #FFAC4A;
+	text-align: center;
+}
+
+.powerChild input:checked+ label .fa, .menuList input:checked+ label .fa {
+	opacity: 1;
+}
+
+.powerChild .fa-check:before, .menuList .fa-check:before {
+	content: url("../img/icon14.png");
+}
+
+.powerChild .check-label:hover, .menuList .check-label:hover {
+	border-color: #f7931e;
+}
+/*alert*/
+.alertContent {
+	text-align: center;
+}
+.alertImg {
+	padding-top: 29px;
+	padding-bottom: 25px;
+}
+.alertContent p {
+	line-height: 14px;
+	padding-left: 30px;
+	padding-right: 30px;
+	margin-bottom: 19px;
+}
+.alertContent .m-b-57 {
+	margin-bottom: 57px;
+}
+.alertTip span {
+	width: 390px;
+	display: inline-block;
+	text-align: center;
+}
+.alertTip {
+	line-height: 25px;
+	height: 50px;
+	margin-bottom: 28px;
+}
+.alertTip .textCenter {
+	text-align: center;
+}
+.alertBtn a {
+	line-height: 30px;
+	border: 1px solid #fff;
+	font-size: 13px;
+	width: 90px;
+	text-align: center;
+	display: inline-block;
+}
+.alertBtn {
+	text-align: right;
+	padding-right: 24px;
+}
+.alertBtn .btncancel {
+	color: #666;
+	margin-left: 15px;
+	border-color: #c5c5c5;
+}
+.alertBtn .btnyes {
+	color: #fff;
+	border-color: #f7931e;
+	background-color: #f7931e;
+}
+.alertEditCon {
+	margin-top: 43px;
+	text-align: center;
+	margin-bottom: 57px;
+}
+.alertEditCon span {
+	display: inline-block;
+	width: 70px;
+}
+.alertEditCon input {
+	width: 386px;
+	height: 32px;
+	color: #666;
+	text-indent: 6px;
+	font-size: 13px;
+	border: none;
+	border: 1px solid #bebebe;
+}
+.alertEditCon input:focus {
+	border-color: #f7931e;
+}
+.disabled{
+	color:#999;
+}
+.ay-linkActive:hover{
+	color:#f7931e;
+}
+.ay-linkActive:hover span{
+	color:#f7931e;
+}

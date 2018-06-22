@@ -1,0 +1,81 @@
+<div class="billDetail">
+	<div class="billInfo">
+		<div class="billOperateListBtn" ng-class='{billOperateListBtnShow: billListShow}'><a href="javascript:void(0);" ng-click='billListChange()'></a></div>
+		<div class="billInfoHead"><span class='m-r'>{{billObj.billInfo.txt}}{{billObj.billInfo.num}}</span><span>状态：{{billObj.billInfo.status?billObj.billInfo.status:'待审核'}}</span></div>
+		<ul class="billOperateList" ng-class='{billOperateListShow: billListShow}'>
+			<li ng-repeat='li in billObj.billInfo.results track by $index'><span class='billOperateMan m-r-md'>{{li.name}}</span><span class='billOperateName m-r-md'>{{li.operate}}</span><span class='billOperateTime'>{{li.time | date : 'yyyy-MM-dd HH:mm'}}</span></li>
+		</ul>
+	</div>
+	<div class="applyInfo">
+		<div class="applyInfoTitle">申请信息</div>
+		<div class="applyInfoBody">
+			<div class="applyInfoItem">
+				<div class="applyInfoItemHead">设备明细：</div>
+				<div class="applyInfoItembody applyInfoItembodyTable">
+					<table class="table">
+				        <thead>
+				            <tr>
+				                <th>设备编号</th>
+				                <th>设备名称</th>
+				                <th>规格型号</th>
+				                <th>生产商</th>
+				                <th>所在部门</th>
+				                <th ng-if='type==1'>启用日期</th>
+				                <th>数量</th>
+				                <th>{{billObj.billInfo.status=='待审核'? '操作':'备注'}}</th>
+				            </tr>
+				        </thead>
+				        <tbody>
+				            <tr ng-repeat='tr in billObj.applyInfo.assetList track by $index' ng-class='{fontColor999: tr.status==2}'>
+				                <td>{{tr.assetsNum}}</td>
+				                <td>{{tr.assetsName}}</td>
+				                <td>{{tr.assetsSpec}}</td>
+				                <td>{{tr.factoryName}}</td>
+				                <td>{{tr.deptName}}</td>
+				                <td ng-if='type==1'>{{tr.startUseDate | date : 'yyyy-MM-dd'}}</td>
+				                <td>{{tr.assetsUnit?('1'+tr.assetsUnit):1}}</td>
+				                <td ng-if="billObj.billInfo.status=='待审核'"><span class='fontColor999' ng-if='tr.status==2'>已撤销</span><a ng-if='tr.status!=2&&power' ng-click='assetCancle(tr)'><span ng-if="billObj.applyInfo.assetCancle">{{type==1?'撤销报损':'撤销转科'}}</span></a><span ng-if='tr.status!=2&&!power'>-</span></td>
+				                <td ng-if="billObj.billInfo.status!='待审核'"><span class='fontColor999' ng-if='tr.status==2'>已撤销</span></td>
+				            </tr>
+				        </tbody>
+				    </table>
+				</div>
+			</div>
+			<div class="applyInfoItem" ng-if='!billObj.applyInfo.type'>
+				<div ng-class='{applyInfoItemOf:true}' class="applyInfoItemOf">
+					<div class="applyInfoItemHead">转入部门：</div>
+					<div class="applyInfoItembody">{{billObj.applyInfo.deptName}}</div>
+				</div>
+				<div ng-class='{applyInfoItemOf:true}' class="applyInfoItemOf">
+					<div class="applyInfoItemHead">部门负责人：</div>
+					<div class="applyInfoItembody" style="word-break: break-all;">{{billObj.applyInfo.director}}</div>
+				</div>
+			</div>
+			<div class="applyInfoItem" ng-if='billObj.applyInfo.type'>
+				<div class="applyInfoItemHead">报损类型：</div>
+				<div class="applyInfoItembody">{{billObj.applyInfo.type}}</div>
+			</div>
+			<div class="applyInfoItem">
+				<div class="applyInfoItemHead">申请说明：</div>
+				<div class="applyInfoItembody" style="word-break: break-all;">{{billObj.applyInfo.illustration}}</div>
+			</div>
+			<div class="applyInfoItem">
+				<div class="applyInfoItemHead" ng-if='billObj.applyInfo.edit&&power||!billObj.applyInfo.edit'>审核意见：</div>
+				<div class="applyInfoItembody">
+					<textarea ng-if='billObj.applyInfo.edit&&power' placeholder='请输入，300个字符以内' maxlength='300' ng-model='billObj.applyInfo.suggestion'></textarea>
+					<div ng-if='!billObj.applyInfo.edit' style="word-break: break-all;">{{billObj.applyInfo.suggestion}}</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="inspectionLayer" class="inspectionLayer" style="display: none;">
+	    <div class="inspectionLayerCon">
+	        <div>
+	            <div class="inspectionLayerImg m-t-lg m-b-md"><img src='../../res/img/icon20.png'></div>
+	            <div>
+	                <span>{{billObj.applyInfo.assetCancleTxt}}</span>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+</div>

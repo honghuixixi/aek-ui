@@ -1,0 +1,62 @@
+        <div class="fy_accessoryHead">
+            <div class="fy_accessorySearch">
+                <div class="selectWrap">
+                    <div class="selector" ng-click='listShow("typeList")'><input type="text" ng-model='typeModel.name' readonly="true"><a href='javascript:;'></a></div>
+                    <div class="options" ng-show='typeList'>
+                        <ul>
+                            <li ng-repeat='item in optionType' ng-click='option("typeList","typeModel",item,1)'>{{item.name}}</li>
+                         </ul>
+                    </div>
+                </div>
+                <input type="text" class="searchInput" placeholder='请输入配件名称查找' ng-model='kindName'><a class="search" ng-click='getAccessoryList(1)'>搜索</a><i class="verticalAdjust"></i>
+            </div>
+        </div>
+        <div class="fy_accessoryContent">
+        	<table>
+        		<tr>
+        			<th>配件名称</th>
+        			<th>规格型号</th>
+                    <th>生产商</th>
+                    <th>来源</th>
+        			<th>单价</th>
+                    <th>数量</th>
+                    <th>单位</th>
+        			<th class="b-r-dcdcdc">操作时间</th>
+        		</tr>
+        		<tr ng-repeat="td in accessoryContent  track by $index">
+        			<td>{{td.partName}}</td>
+        			<td>{{td.partSpec}}</td>
+                    <td>{{td.partProduce}}</td>
+                    <td>{{td.status==1?'领用':(td.status==2?'购买':'')}}</td>
+        			<td>{{td.partPrice}}</td>
+        			<td>{{td.num}}</td>
+                    <td>{{td.unitName}}</td>
+                    <td class="b-r-dcdcdc">{{td.operationTime | date:'yyyy-MM-dd HH:mm'}}</td>
+        		</tr>
+                <tr ng-hide='nocontent||onloading'>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr ng-show='nocontent'>
+                    <td colspan="8" class="repairTextCenter b-r-dcdcdc b-b-dcdcdc">
+                        <img src="../../res/img/nocontent.png" alt=""><span class='m-l-lg'>暂无数据</span>
+                    </td>
+                </tr>
+                <tr ng-show='onloading'>
+                    <td colspan="8" class="repairTextCenter b-r-dcdcdc b-b-dcdcdc">
+                        <img src="../../res/img/loading2.gif" alt=""><span class='verticalAlignMiddle'></span>
+                    </td>
+                </tr>
+        	</table>
+        </div>
+        <div class="fy_accessoryFoot">
+            <span ng-hide='onloading||nocontent' data-ng-include=" 'src/tpl/newPageInfo.html' "></span>
+        </div>
+    <!-- fix wrap -->
+    <div class="fixWrap" ng-show='fixWrapShow' ng-click='menuHide()'></div>

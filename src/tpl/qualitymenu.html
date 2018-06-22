@@ -1,0 +1,8 @@
+<div class="quality">
+    <div class="quality-menu">
+        <div class="quality-menu-item" ng-class="{'active': data.menu == item.cls}" ng-repeat="item in data.menus" ng-if="item.right">
+            <a class="{{item.cls}}" ui-sref="quality.menu.{{item.cls}}({status: 0})" ui-sref-opts="{reload:true}">{{item.name}}</a>
+        </div>
+    </div>
+    <div class="quality-content" ui-view></div>
+</div>

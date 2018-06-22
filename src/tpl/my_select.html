@@ -1,0 +1,6 @@
+<div class="my-select" ng-mouseout="closeOption()">
+    <input type="text" readonly="readonly" ng-model="name" ng-click="displayOption()" style="width: 100%;border-color: {{showOptions ? '#f7931e' : '#ccc'}};">
+    <div class="options" ng-show="showOptions" ng-mouseover="displayOption()" ng-mouseout="closeOption()">
+        <div ng-repeat="v in options" ng-click="chooseOption(v)">{{v.name}}</div>
+    </div>
+</div>

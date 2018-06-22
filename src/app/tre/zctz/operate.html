@@ -1,0 +1,130 @@
+<toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container>
+<!--遮蔽层-->
+<div class="assets-overlay" ng-show="needOverlay" ng-click="closeAll()"></div>
+<div class="bg-white ytz-con bread-crumb2 zctzDetailTop">
+    <ul class="breadcrumb b-1 b-a m-b-n-xs lter b-b wrapper-md" >
+        <li><a class="acolor999" ui-sref="main.tre.zctz.list({id:$stateParams.id})">资产台账</a></li>
+        <li><a ui-sref="main.tre.zctz.assets({state: 1,assetId:$stateParams.assetId})">资产台账详情</a></li>
+    </ul>
+    <div class="detail-top" >
+        <span class='detailAssetsImgWrap'><img id='assetDetailImg' ng-src='{{res.assetsImg?("/api/file"+res.assetsImg):("../res/img/11.png")}}'/></span>
+        <span>
+                <div><span>设备名称：<span class='layerTipTopClass'><span >{{res.assetsName}}</span></span></span><span class='assetsStatusName' ng-class='{assetsStatusNameE:assetsNameEdit&&(state==0)}'><span ng-if="res.repairStatusName=='维修中'" class="assetsStatusStoped m-l-none m-r-sm">维修中</span>状态：{{res.statusName}}</span><span class='font13' style="position: absolute;right: 20px">{{res.createByName}}&nbsp&nbsp&nbsp&nbsp {{res.assetsSourceName}}于&nbsp&nbsp&nbsp&nbsp {{res.createTime | date:'yyyy-MM-dd'}}</span></div>
+                <div><span>设备编号：{{res.assetsNum}}</span></div>
+                <div><span>生产商：<span>{{res.factoryName}}</span></span></div>
+            </span>
+    </div>
+    <div class="treSection">
+        <ul class="b-2">
+            <li><a ui-sref="main.tre.zctz.assets({state:1,assetId:$stateParams.assetId,id:$stateParams.id})">设备信息</a></li>
+            <!-- <li><a ui-sref="main.tre.zctz.purchase({state:1,assetId:$stateParams.assetId,id:$stateParams.id})">采购信息</a></li>
+            <li><a ui-sref="main.tre.zctz.contract({state:1,assetId:$stateParams.assetId,id:$stateParams.id})">合同信息</a></li>
+            <li><a ui-sref="main.tre.zctz.credentials({state:1,assetId:$stateParams.assetId,id:$stateParams.id})">证件信息</a></li>
+            <li ><a ui-sref="main.tre.zctz.repair({assetId:$stateParams.assetId,id:$stateParams.id})">维修记录</a></li> -->
+            <li class="active"><a ui-sref="main.tre.zctz.operate({assetId:$stateParams.assetId,id:$stateParams.id})">操作记录</a></li>
+            <hr class="bottomline topbig" />
+        </ul>
+    </div>
+</div>
+<!-- 加载提醒 -->
+<div class="assets-overlay" ng-click='hideAll()' ng-show='devshow'></div>
+<div ng-show="loading" class="text-center m-t-md text-lg"><i class="fa fa-spin fa-spinner"></i> 数据加载中...</div>
+<!-- 内容区域 -->
+<div ng-hide="loading" class="wrapper-md zctz-con treContent content content-m " id='tre_repair'>
+    <div class="minHeightAuto">
+        <!-- 数据显示 -->
+        <div class="wrapper-data">
+            <div ng-if="userInfo.authoritiesStr.indexOf('ASS_ASSETS_LIST_VIEW') == -1" class="no-limits">
+                <img src="../../../../res/img/myqx.png" alt="没有权限">您没有该页面的权限
+            </div>
+            <div ng-if="userInfo.authoritiesStr.indexOf('ASS_ASSETS_LIST_VIEW') != -1" class="panel panel-default ay-ytzpanel">
+                <!-- 头部 -->
+                <div class="wrap-head">
+                    <div class="i-info">
+                        <div class="input-wrap cur-ponit">
+                            <input type="text" class="depetName" readonly="true" ng-model="searchOne.txt" ng-click="focus1()" />
+                            <div class="depetList" ng-show="devshow1">
+                                <label ng-repeat="l in searchOnel track by $index" ng-click="click1(l)">{{l.txt}}</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="margin-left: 50px">
+                        <span>日期：</span>
+                        <input class="dt input-datepicker el-acceptanceDate" id="startDt" readonly="readonly" type="text" ng-value="startTime | date:'yyyy-MM-dd'" placeholder="开始时间">
+                        <span>&nbsp;&nbsp;至&nbsp;&nbsp;</span>
+                        <input class="dt input-datepicker el-acceptanceDate" id="endDt" readonly="readonly" type="text" ng-value="endTime | date:'yyyy-MM-dd'" placeholder="结束时间">&nbsp;
+                    </div>
+                    <div class="t-search">
+                        <a href="javascript:;" ng-click="search()">搜索</a>
+                    </div>
+                </div>
+                <!-- 数据表格 -->
+                <div class="table-responsive">
+                    <table class="table table-striped b-t b-light text-center min-width">
+                        <thead>
+                        <tr class="tr-th">
+                            <th class="b-l-dcdcdc textIndent36">操作时间</th>
+                            <th>模块</th>
+                            <th>操作类型</th>
+                            <th>操作记录</th>
+                            <th class="b-r-dcdcdc">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat='l in list' ng-class='{"b-b-tr": $index==list.length-1}'>
+                            <td class="b-l-dcdcdc" style="width:180px;">
+                                <div>{{l.operateTime | date:'yyyy-MM-dd  HH:mm'}}</div>
+                            </td>
+                            <td style="width: 100px;">
+                                <div ng-if="l.modelType==1">设备信息</div>
+                                <div ng-if="l.modelType==2">采购信息</div>
+                                <div ng-if="l.modelType==3">合同信息</div>
+                                <div ng-if="l.modelType==4">证件管理</div>
+                            </td>
+                            <td style="width: 155px;">
+                                <div>{{l.operateTypeStr}}</div>
+                            </td>
+                            <td class="">
+                                <div>{{l.operateDetail}}</div>
+                            </td>
+                            <td class="b-r-dcdcdc" style="width: 140px;cursor: pointer">
+                                <div  ng-click="lookOperate(l.id)" style="color:#1c95f5;">查看</div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div ng-if="!list.length" class="center ay-data-null">
+                        <div class="noContent">
+                            <img src="../../../res/img/nocontent.png" alt="">
+                            <span class="m-l-lg">暂无数据</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <span data-ng-include=" 'src/tpl/newPageInfo.html' "></span>
+    </div>
+    <div id="alert" style="display: none">
+        <div class="operate" style="padding: 30px">
+            <div class="hd_operatetit" style="border-bottom: 1px solid #dedede">
+                <span style="display: inline-block;width: 32%;font-size: 16px">{{operateDetail.operateTime | date:'yyyy-MM-dd HH:mm'}}</span>
+                <span style="display: inline-block;width: 33%;font-size: 16px" ng-if="operateDetail.modelType">{{operateDetail.modelType==1?'设备信息':operateDetail.modelType==2?'采购信息':operateDetail.modelType==3?'合同信息':'证件管理'}}</span>
+                <span style="display: inline-block;width: 33%;font-size: 16px">{{operateDetail.operateName}}</span>
+            </div>
+            <div class="hd_operateDetail" style="margin-top: 20px">
+                <ul style="margin-left: 0;padding: 0;">
+                    <li ng-repeat="l in operateDetail.operateList" style="list-style: none;line-height: 26px;font-size: 14px;word-break: break-all;">
+                        <span ng-if="l.model==1">{{l.fieldName}} : 将<del style="color: #2e8ded">{{l.oldValue?l.oldValue:'无'}}</del>修改为<span style="color: #f7931e">{{l.newValue?l.newValue:'无'}}</span></span>
+                        <span  ng-if="l.model==2">{{l.fieldName}} :
+                        <span ng-if="l.operateType==1">上传了</span>
+                        <span ng-if="l.operateType==2">删除了</span>
+                        <span ng-if="l.operateType==1" style="color: #f7931e"> {{l.addValue}}</span>
+                        <del ng-if="l.operateType==2" style="color: #2e8ded"> {{l.addValue}}</del>
+                    </span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </div>
+

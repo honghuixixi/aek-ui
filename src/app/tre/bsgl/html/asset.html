@@ -1,0 +1,91 @@
+<toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container>
+<!-- 导航条 -->
+<div class="assets-overlay" ng-click='hideAll()' ng-show='devshow'></div>
+<div class="bg-white bread-crumb">
+    <ul class="breadcrumb b-a m-b-n-xs lter b-b wrapper-md">
+        <li><a ui-sref="main.tre.bsgl.browse">报损管理</a></li>
+        <!-- <li><a ui-sref="main.tre.bsgl.asset" ui-sref-opts="{reload:true}">报损申请</a></li> -->
+        <li>报损申请</li>
+    </ul>
+    <div class="fix-btn">
+        <a ng-click="dataForm()" class="fix-btn-sub pos-fix-btn" ng-if="userInfo.authoritiesStr.indexOf('ASS_ASSETS_DISCARD_APPLY') != -1">提交报损申请</a>
+    </div>
+</div>
+<!-- 加载提醒 -->
+<!--<div ng-show="loading" class="text-center m-t-md text-lg"><i class="fa fa-spin fa-spinner"></i> 数据加载中...</div>-->
+<!-- 内容区域 -->
+<div ng-hide="loading" class="wrapper-md zctz-con treContent content content-m">
+    <div class="minHeightAuto minWidth1195">
+        <!-- 头部 -->
+        <div class="wrap-head" style="position: relative;z-index: 110;">
+            <div class="i-info">
+                <div class="input-wrap cur-ponit">
+                    <input type="text" class="depetName" readonly="true" ng-model="searchOne" ng-click="focus1()" />
+                    <div class="depetList" ng-show="devshow1">
+                        <label ng-repeat="l in searchOnel track by $index" data-para="{{l.status}}" ng-click="click1($event)">{{l.statusName}}</label>
+                    </div>
+                </div>
+            </div>
+            <div class="i-info">
+                <div class="input-wrap cur-ponit">
+                    <input type="text" class="depetName" readonly="true" ng-model="searchTwo" ng-click="focus2()" />
+                    <div class="depetList" ng-show="devshow2">
+                        <label ng-repeat="l in searchTwol track by $index" data-para="{{l.id}}" ng-click="click2($event)">{{l.name}}</label>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <input type="text" ng-model='$parent.searchCon' ng-trim='false' maxlength="40" style="width: 200px" placeholder="设备名称/编号/院内编码/出厂编号" />
+            </div>
+            <div class="t-search">
+                <a href="javascript:;" ng-click="getList(1,16)">搜索</a>
+            </div>
+        </div>
+        <!-- 数据显示 -->
+        <div class="wrapper-data">
+            <div ng-if="userInfo.authoritiesStr.indexOf('ASS_ASSETS_DISCARD_APPLY') == -1" class="no-limits">
+                <img src="../../../../res/img/myqx.png" alt="没有权限">您没有该页面的权限
+            </div>
+            <div ng-if="userInfo.authoritiesStr.indexOf('ASS_ASSETS_DISCARD_APPLY') != -1">
+                <div class="panel panel-default ay-ytzpanel">
+                    <asset-list tr-data='assetslist' type='1' check-all='checkAll' all='all' checked='checked'></asset-list>
+                    <span data-ng-include=" 'src/tpl/newPageInfo.html' "></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 审核 -->
+    <div class="adjustWrap" style="display: none;">
+        <div class="adjustCon">
+            <div class="alertBatchPosition" ng-show='batchSetDeptWrapShow' ng-click='hideAll()'></div>
+            <div class="adjustConOne">
+                <div class="adjustConHead">选中设备数：</div>
+                <div class="adjustConBody">{{printData.length}}</div>
+            </div>
+            <div class="adjustConOne">
+                <div class="adjustConHead"><em>*</em>报损类型：</div>
+                <div class="adjustConBody">
+                    <div class="batchSelecters">
+                        <input type="text" class="batchSelectInput" placeholder='请选择' readonly="true" ng-model="searchThree" ng-click="batchSelectInputClick('batchSetStateListShow')" />
+                        <div class="batchSelectResWrap" ng-show='batchSetStateListShow'>
+                            <div class="batchSelectRes">
+                                <ul class="batchSelectList">
+                                    <li ng-repeat="l in searchThreel track by $index" ng-click="batchSelectLiClick('searchThree','batchSetStateListShow',l)"><a>{{l.name}}</a></li>
+                                </ul>
+                            </div>
+                        </div>  
+                    </div>
+                </div>
+            </div>
+            <div class="adjustConOne confirmErrMsg">
+                <div class="adjustConBody" ng-show='deptErr'>请选择</div>
+            </div>
+            <div class="adjustConOne">
+                <div class="adjustConHead">申请说明：</div>
+                <div class="adjustConBody">
+                    <textarea class='illustrationTextarea' ng-model='billData.illustration' maxlength='300' placeholder='请输入，300字符以内'></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

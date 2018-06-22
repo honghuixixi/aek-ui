@@ -1,0 +1,88 @@
+<div class="tab-file" ng-show="isshow">
+    <div class="tab-file-item tab-file-edit" ng-repeat="v in data.catalogs">
+        <dl>
+            <dt>文件名称：</dt>
+            <dd>
+                <div class="tab-file-row">{{v.folderName}}</div>
+            </dd>
+            <dt>文件个数：</dt>
+            <dd>{{v.fileNum}}个</dd>
+            <dt>文件日期：</dt>
+            <dd>{{v.folderDate | date:'yyyy-MM-dd'}}</dd>
+            <dt>编辑日期：</dt>
+            <dd>{{v.updateTime | date:'yyyy-MM-dd HH:mm'}}</dd>
+        </dl>
+        <div class="tab-file-edit-div">
+            <span style="width: 33.33%;" ng-click="methods.browseCatalog(v)">查看</span>
+            <span style="width: 33.33%;outline:1px solid #fff;" ng-click="methods.editCatalog(v)">编辑</span>
+            <span style="width: 33.34%;" ng-click="methods.removeCatalog(v)">删除</span>
+        </div>
+    </div>
+    <div class="tab-file-item" style="cursor: pointer;" ng-show="data.catalogs.length < 20" ng-click="methods.addCatalog()">
+        <div style="margin-top: 30px;text-align: center;">
+            <span style="display:inline-block;font-size: 24px;vertical-align: bottom;color: #999">+</span>
+            <span style="display: inline-block;line-height: 30px;">新增文件</span>
+        </div>
+    </div>
+    <!-- 新增或编辑文件 -->
+    <dl id="tab6_modal_content_form" class="modal_content_form" style="display: none;">
+        <dt>
+            <i>*</i>
+            <span>文件名称：</span>
+        </dt>
+        <dd>
+            <input type="text" maxlength="40" placeholder="请输入" ng-model="data.currentCatalog.name" ng-change="methods.removeErr('name')">
+            <span style="margin-left: 10px;color: #f00;">{{data.err.name}}</span>
+        </dd>
+        <dt>
+            <i>*</i>
+            <span>文件日期：</span>
+        </dt>
+        <dd>
+            <input class="modal_content_form_date" id="tab6-file-date" type="text" maxlength="40" placeholder="请选择" readonly value="{{data.currentCatalog.createTime | date:'yyyy-MM-dd'}}">
+            <span style="margin-left: 10px;color: #f00;">{{data.err.time}}</span>
+        </dd>
+        <dt>
+            <i>*</i>
+            <span>文件附件：</span>
+        </dt>
+        <dd>
+            <div style="line-height: 32px;">
+                <span class="archives-btn archives-cancle" ng-show="data.currentCatalog.files.length < 5" ng-click="methods.uploadFile()">上传附件</span>&nbsp;&nbsp;
+                <label style="font-size: 13px;color: #999;">*单个文件5M以内，最多上传5个</label>
+                <input id="tab6-uploadId" type="file" style="display: none;">
+                <span style="margin-left: 10px;color: #f00;">{{data.err.file}}</span>
+            </div>
+            <div ng-repeat="v in data.currentCatalog.files">
+                <a>{{v.fileName}}；</a>
+                <span class="modal_content_form_remove" ng-click="methods.removeFile($index)">删除</span>
+            </div>
+        </dd>
+    </dl>
+    <!-- 查看文件 -->
+    <dl id="tab6_modal_content_browse" class="modal_content_form" style="display: none;">
+        <dt>文件名称：</dt>
+        <dd>{{data.currentCatalog.folderName}}</dd>
+        <dt>文件日期：</dt>
+        <dd>{{data.currentCatalog.folderDate | date:'yyyy-MM-dd'}}</dd>
+        <dt>文件附件：</dt>
+        <dd>
+            <div ng-repeat="v in data.currentCatalog.attachment">
+                <a target="_blank" href="{{v.fileUrl | archivesDownloadURL}}">{{v.fileName}};</a>
+            </div>
+        </dd>
+    </dl>
+    <!-- 删除文件 -->
+    <div id="template_delete_file" class="inspectionLayer" style="display: none;">
+        <div style="text-align: center; color: #666;">
+            <div>
+                <div class="inspectionLayerImg m-t-lg m-b-md">
+                    <img src='../../res/img/icon20.png'>
+                </div>
+                <div>
+                    <span>删除后，文件信息将不可恢复，确定删除吗？</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

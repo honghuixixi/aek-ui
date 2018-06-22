@@ -1,0 +1,180 @@
+<!-- toaster directive -->
+<toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container>
+<!-- / toaster directive -->
+
+<!-- 导航条 -->
+<div class="bg-white bread-crumb2">
+        <ul class="breadcrumb b-1 b-a m-b-n-xs lter b-b wrapper-md">
+            <li><a ui-sref="main.lcks.kstz.list">预台账</a></li>
+            <li><a ui-sref="main.lcks.kstz.assets">预台账详情</a></li>
+        </ul>
+        <div ng-click="btnFn($event)" class="btn-list">
+            <!--<a class="btn-submit" name="submit">提交验收</a>-->
+            <!--<a class="btn-save" name="save">保存</a>-->
+            <!--<a class="btn-delete" name="delete">删除</a>-->
+        </div>
+<!--<div class="pro-status">-->
+            <!--<div class="pro-tit">-->
+                <!--<span>验收单编号：<i>201703093712</i></span><span>状态：<em>验收未通过</em></span>-->
+                <!--<div ng-click="proUl($event,5)">-->
+                    <!--<a href="javascript:;" ng-show='isClick' name="down" class="ul-operate"><i><img src="" alt=""></i></a>-->
+                    <!--<a href="javascript:;" ng-hide='isClick' name="up" class="ul-operate ul-operate-up"><i><img src="" alt=""></i></a>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<ul class="pro-ul">-->
+                <!--<li class="row"><span class="col-md-2">刘夏</span><span class="col-md-2">提交申请</span><span class="col-md-2">2017-03-09    17:21</span><span class="col-md-2"><a href="javascript:;">查看详情</a></span></li>-->
+                <!--<li class="row"><span class="col-md-2">刘夏</span><span class="col-md-2">提交申请</span><span class="col-md-2">2017-03-09    17:21</span><span class="col-md-2"><a href="javascript:;">查看详情</a></span></li>-->
+                <!--<li class="row"><span class="col-md-2">刘夏</span><span class="col-md-2">提交申请</span><span class="col-md-2">2017-03-09    17:21</span><span class="col-md-2"><a href="javascript:;">查看详情</a></span></li>-->
+                <!--<li class="row"><span class="col-md-2">刘夏</span><span class="col-md-2">提交申请</span><span class="col-md-2">2017-03-09    17:21</span><span class="col-md-2"><a href="javascript:;">查看详情</a></span></li>-->
+                <!--<li class="row"><span class="col-md-2">刘夏</span><span class="col-md-2">提交申请</span><span class="col-md-2">2017-03-09    17:21</span><span class="col-md-2"><a href="javascript:;">查看详情</a></span></li>-->
+            <!--</ul>-->
+        <!--</div>-->
+        <ul class="bg-white b-2 b-a m-b-n-xs b-b">
+            <li><a ui-sref="main.lcks.kstz.assets">设备信息</a></li>
+            <li class="active"><a ui-sref="main.lcks.kstz.purchase">采购信息</a></li>
+            <li><a ui-sref="main.lcks.kstz.null">档案信息</a></li>
+            <li><a ui-sref="main.lcks.kstz.assets">设备日志</a></li>
+            <li><a ui-sref="main.lcks.kstz.assets">更多<i class="arrows"></i></a></li>
+        </ul>
+</div>
+
+<!-- 加载提醒 -->
+<div ng-show="loading" class="text-center m-t-md text-lg"><i class="fa fa-spin fa-spinner"></i> 数据加载中...</div>
+
+<!-- 内容区域 -->
+<div class="wrapper-md ytz-detail content">
+    <div class="panel panel-default">
+        <!-- 头部 -->
+        <div class="add-title">合同信息</div>
+        <!--表单-->
+        <div class="panel-body">
+            <form class="form-horizontal"  name="user_form">
+                <div class="form-group">
+                    <label class="col-lg-2 col-sm-2 control-label" for="assetNum">合同编号：</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" name="account" id="assetNum">
+                    </div>
+                    <label class="col-lg-2 col-sm-2 control-label" for="assetName">合同名称：</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" name="account" id="assetName">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 col-sm-2 control-label">乙方单位：</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" name="account">
+                    </div>
+                    <label class="col-lg-2 col-sm-2 control-label">签订日期：</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" name="account">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 col-sm-2 control-label">合同金额：</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" name="account">
+                    </div>
+                    <label class="col-lg-2 col-sm-2 control-label">合同截止日期：</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" name="account">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 col-sm-2 control-label">乙方联系人：</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" name="account">
+                    </div>
+                    <label class="col-lg-2 col-sm-2 control-label">联系电话：</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" name="account">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 col-sm-2 control-label">档案编号：</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" name="account">
+                    </div>
+                    <label class="col-lg-2 col-sm-2 control-label">档案管理员：</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" name="account">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 col-sm-2 control-label">合同内容：</label>
+                    <div class="col-sm-10">
+                        <textarea width="100%"></textarea>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="add-title">验收信息 <span class="alert-span">请验收人员在验收完成后填写</span></div>
+        <div class="panel-body">
+            <form class="form-horizontal"  name="user_form">
+                <div class="form-group">
+                    <label class="col-lg-2 col-sm-2 control-label">到货期止日期：</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" name="account">
+                    </div>
+                    <label class="col-lg-2 col-sm-2 control-label"><span class="text-danger wrapper-sm">*</span>到货日期：</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" name="account">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 col-sm-2 control-label"><span class="text-danger wrapper-sm">*</span>安装日期：</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" name="account">
+                    </div>
+                    <label class="col-lg-2 col-sm-2 control-label"><span class="text-danger wrapper-sm">*</span>验收合格日期：</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" name="account">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 col-sm-2 control-label">附属资料：</label>
+                    <div class="col-sm-10" style="height: 30px;line-height:30px;">
+                        <div class="check-list">
+                            <input id="check_1" name="use" type="checkbox">
+                            <label class="check check-label" for="check_1">
+                                <i class="fa fa-check"></i>
+                            </label>
+                            说明书
+                            <span></span>
+                            <input id="check_2" name="use" type="checkbox">
+                            <label class="check check-label" for="check_2">
+                                <i class="fa fa-check"></i>
+                            </label>
+                            合格证
+                            <span></span>
+                            <input id="check_3" name="use" type="checkbox">
+                            <label class="check check-label" for="check_3">
+                                <i class="fa fa-check"></i>
+                            </label>
+                            保修卡
+                            <span></span>
+                            <input id="check_4" name="use" type="checkbox">
+                            <label class="check check-label" for="check_4">
+                                <i class="fa fa-check"></i>
+                            </label>
+                            检验报告单
+                            <span></span>
+                            <input id="check_5" name="use" type="checkbox">
+                            <label class="check check-label" for="check_5">
+                                <i class="fa fa-check"></i>
+                            </label>
+                            进出口报关单
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 col-sm-2 control-label"><span class="text-danger wrapper-sm">*</span>验收情况：</label>
+                    <div class="col-sm-10">
+                        <textarea width="100%"></textarea>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

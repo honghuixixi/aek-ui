@@ -1,0 +1,66 @@
+<!-- section-sort -->
+			<!--<div class="sortCon">-->
+				<!--<div class="selectWrap">-->
+					<!--<div class="selector" ng-click='listShow("optionList")'><input type="text" ng-model='model' readonly="true"><a href='javascript:;'></a></div>-->
+					<!--<div class="options" ng-show='optionList'>-->
+						<!--<ul class="acolor666">-->
+							<!--<li data-id="" ng-click='option()'>模块分类</li>-->
+							<!--<li data-id="{{item.id}}" ng-repeat='item in optionBar' ng-click='option(item)'>{{item.name}}</li>-->
+						<!--</ul>-->
+					<!--</div>-->
+				<!--</div>-->
+				<!--<i class="verticalAlign"></i>-->
+			<!--</div>-->
+			<!-- content -->
+			<table ng-class="!tdData.length && 'no-con'" border="0" cellspacing="0" cellpadding="0" class="font13px">
+				<thead>
+					<th style="width:35px">ID</th>
+					<th style="">模块名称</th>
+					<th style="width:176px">版本号</th>
+					<th style="width:176px">最后发布时间</th>
+					<th style="width:210px">模块分类</th>
+					<th style="width:176px">模块来源</th>
+					<th style="width:176px">添加时间</th>
+					<th style="width:9.25%">操作</th>
+				</thead>
+
+				<tr ng-if="loading2">
+					<td colspan="12" class="noContent">
+						<img src="../../../res/img/loading2.gif" alt="">
+					</td>
+				</tr>
+				<tr ng-if="!tdData.length">
+					<td colspan="12" class="noContent">
+						<img src="../../../res/img/nocontent.png" alt="">
+						<span class="m-l-lg">暂无数据</span>
+					</td>
+				</tr>
+				<tr ng-if="tdData.length" ng-repeat='td in tdData'>
+					<td class="fir-td">{{td.moduleId}}</td>
+					<td>{{td.name}}</td>
+					<td>{{td.versionNumber}}</td>
+					<td>{{td.releaseTime}}</td>
+					<td>{{td.moduleType}}</td>
+					<td>{{td.moduleSource}}</td>
+					<td>{{td.createTime}}</td>
+					<td class="last-td">
+						<a ng-if="td.defaultExist" href="javascript:;" class="ahoverblue acolorblue">--</a>
+						<a ng-if="!td.defaultExist" href="javascript:;" ng-click="removeModel(td)" class="ahoverblue acolorblue">移除</a>
+					</td>
+				</tr>
+				<tr ng-if="tdData.length" class="no-p">
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+			</table>
+			<div class="fixWrap" ng-show='fixWrapShow' ng-click='menuHide()'></div>
+			<!-- /content -->
+
+			<!--弹框-->
+			<div data-ng-include=" 'src/tpl/alert.html' "></div>

@@ -1,0 +1,577 @@
+<toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container>
+<!-- 导航条 -->
+<div class="assets-overlay" ng-click='hideAll()' ng-show='devshow'></div>
+<div class="bg-white bread-crumb">
+	<ul class="breadcrumb lter b-b wrapper-md" style="width: 100%">
+		<li>
+			<a ui-sref="main.tre.zctz.list({id:$stateParams.id})">资产台账</a>
+		</li>
+		<span  style="color: #999;float: right;margin-right: 180px" class="import-export">
+			<a class='newTreObj m-r import-export-span' ng-click='newTre()' ng-if="userInfo.authoritiesStr.indexOf('ASS_ASSETS_NEW') != -1">新建资产台账</a>
+			<span ng-if="userInfo.authoritiesStr.indexOf('ASS_ASSETS_IMPORT') != -1" class="import m-r import-export-span import-exportBtn" ng-click="import()">
+				<!--<img src="../res/img/icon29.png"/>-->
+				导入
+			</span>
+			<span ng-if="userInfo.authoritiesStr.indexOf('ASS_ASSETS_EXPORT') != -1" class="export import-export-span import-exportBtn" ng-click="export()">
+				<!--<img src="../res/img/icon27.png"/>-->
+				导出
+			</span>
+		</span>
+	</ul>
+</div>
+<!-- 加载提醒 -->
+<!--<div ng-show="loading" class="text-center m-t-md text-lg"><i class="fa fa-spin fa-spinner"></i> 数据加载中...</div>-->
+<!-- 内容区域 -->
+<div ng-hide="loading" class="wrapper-md zctz-con treContent content content-m">
+	<div class="minHeightAuto">
+		<!-- 数据显示 -->
+		<div class="wrapper-data">
+			<div ng-if="userInfo.authoritiesStr.indexOf('ASS_ASSETS_LIST_VIEW') == -1" class="no-limits">
+				<img src="../../../../res/img/myqx.png" alt="没有权限">您没有该页面的权限
+			</div>
+			<div ng-if="userInfo.authoritiesStr.indexOf('ASS_ASSETS_LIST_VIEW') != -1" class="panel panel-default ay-ytzpanel">
+				<!-- 头部 -->
+				<div class="wrap-head" style="position: relative;z-index: 110;">
+					<div class="i-info">
+						<div class="input-wrap cur-ponit">
+							<input type="text" class="depetName" readonly="true" ng-model="searchOne" ng-click="focus1()" />
+							<div class="depetList" ng-show="devshow1">
+								<label ng-repeat="l in allStatus track by $index" data-para="{{l.status}}" ng-click="click1($event)">{{l.statusName}}</label>
+							</div>
+						</div>
+					</div>
+					<div class="i-info">
+						<div class="input-wrap cur-ponit">
+							<input type="text" class="depetName" readonly="true" ng-model="searchTwo" ng-click="focus2()" />
+							<div class="depetList" ng-show="devshow2">
+								<label ng-repeat="l in searchTwol track by $index" data-para="{{l.status}}" ng-click="click2($event)">{{l.name}}</label>
+							</div>
+						</div>
+					</div>
+					<div class="">
+						<div class="inputDiv cur-ponit">
+							<input type="text" class="depetName deptName" readonly="true" ng-model="searchThree" ng-click="focus3()" />
+							<input type="hidden" ng-model="deptId">
+							<div class="deptList" ng-show="devshow3">
+								<!-- <label ng-repeat="l in searchThreel track by $index" ng-click="click3($event)">{{l}}</label> -->
+								<div class="searchWrap">
+									<a href="javascript:;"></a><input type="text" ng-trim="false" ng-change="searchChange()" ng-model='$parent.deptSearch'>
+								</div>
+								<div class="resultWrap" ng-show='searchResult.length'>
+									<ul>
+										<li ng-repeat='item in searchResult' ng-click="setDeptVal(item)" data-id="">{{item.name}}</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div>
+						<input type="text" ng-model='$parent.searchCon' ng-trim='false' ng-keyup='limitLengths("searchCon",40)' style="width: 200px" placeholder="设备名称/编号/院内编码/出厂编号" />
+					</div>
+					<div class="t-search">
+						<a href="javascript:;" ng-click="search()">搜索</a>
+					</div>
+					<!-- <div class="select-m">
+                        <div class="i-info">
+                            <div class="sort-wrap">
+                                <input type="text" class="depetName" readonly="true" ng-model="searchFour" ng-click="focus4()" />
+                                <div class="depetList" ng-show="devshow4" >
+                                    <label ng-repeat="l in searchFourl track by $index" data-para="{{$index+1}}" ng-click="click4($event)">{{l}}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+				</div>
+				<!-- 数据表格 -->
+				<div class="table-responsive">
+					<table class="table table-striped b-t b-light text-center min-width">
+						<thead>
+						<tr class="tr-th">
+							<th class="b-l-dcdcdc textIndent36" style="white-space:nowrap;">设备信息</th>
+							<th style="width: 9.8%;white-space:nowrap;">规格型号</th>
+							<th style="width: 14.58%;white-space:nowrap;">供应商</th>
+							<th style="white-space:nowrap;">来源</th>
+							<th style="width: 9.4%;white-space:nowrap;">所在部门</th>
+							<th style="width: 12%;white-space:nowrap;">状态</th>
+							<th class="b-r-dcdcdc" style="width: 6.7%;white-space:nowrap;">操作</th>
+						</tr>
+						</thead>
+						<tbody>
+						<!--<tr class="b-b-tr" ng-show='nocontent'>
+                            <td colspan="7" class="b-l-dcdcdc b-r-dcdcdc height100">
+                                <img src="../../../../res/img/nocontent.png" alt=""><span class='m-l-lg'>暂无数据</span>
+                            </td>
+                        </tr>-->
+						<tr ng-repeat='tr in trData' ng-class='{"b-b-tr": $index==trData.length-1}'>
+							<td class="b-l-dcdcdc">
+								<dl>
+									<dt>
+									<div class="checkboxFive">
+										<input type="checkbox" value="1" class="child-checkbox" ng-click="checked($event,tr)" data-id='{{tr.json}}' data-json='{{tr.json}}' id="checkboxFiveInput{{$index}}" />
+										<label for="checkboxFiveInput{{$index}}" class="checked"  ></label>
+									</div>
+									<a ng-click='hrefTo($event,tr)'><img src="../res/img/11.png" ng-src="{{tr.assetsImg?('/api/file'+tr.assetsImg):''}}" /></a></dt>
+									<dd>
+										<a class="assetNameA" ng-click='hrefTo($event,tr)'>设备名称：{{tr.assetsName}}</a><span ng-if="tr.repairStatusName=='维修中'" class="assetsStatusStoped">维修中</span>
+									</dd>
+									<dd>设备编号：{{tr.assetsNum}}</dd>
+									<dd>生产商：{{tr.factoryName}}</dd>
+								</dl>
+							</td>
+							<td class="">
+								<div>{{tr.assetsSpec}}</div>
+							</td>
+							<td class="" style="line-height: 20px;">
+								<div>{{tr.splName}}</div>
+							</td>
+							<td>{{tr.assetsSourceName}}</td>
+							<td class="">
+								<div>{{tr.deptName}}</div>
+							</td>
+							<td class="">
+								<div>{{tr.statusName}}</div>
+							</td>
+							<td class="b-r-dcdcdc">
+								<a ng-if="userInfo.authoritiesStr.indexOf('ASS_PREASSETS_DETAILED_VIEW') != -1" href="javascript:;" ng-click='hrefTo($event,tr)'>{{stateN | stateFilter}}</a>
+							</td>
+						</tr>
+						</tbody>
+					</table>
+					<div ng-if="nocontent" class="center ay-data-null">
+						<td colspan="12" class="noContent">
+							<img src="../../../res/img/nocontent.png" alt="">
+							<span class="m-l-lg">暂无数据</span>
+						</td>
+					</div>
+				</div>
+			</div>
+		</div>
+		<span ng-if="userInfo.authoritiesStr.indexOf('ASS_ASSETS_LIST_VIEW') != -1" class="allcheck"  ng-show='!nocontent' style="position: relative;z-index: 105;">
+				<div class="checkboxFive all">
+					<input type="checkbox" value="1"   ng-click="checkAll($event)" id="checkboxFiveInput" name="" ng-checked="all"/>
+					<label for="checkboxFiveInput"></label>
+				</div>
+        <div class="middle"></div>
+				<div id="batch" class="batch">
+					<div class="i-info">
+						<div class="input-wrap select-wrap cur-ponit">
+							<input type="text" class="depetName" readonly="true" ng-model="searchFive" ng-click="focus5()" style="width: 165px;" disabled/>
+							<div class="depetList zctz-print" ng-class="{'print-down':printDirection}" ng-show="devshow5">
+								<label ng-hide="$index&&(userInfo.authoritiesStr.indexOf('ASS_ASSETS_EDIT') == -1)" ng-repeat="l in searchFivel track by $index" ng-click="click5(l)" style="width: 165px">{{l.name}}</label>
+							</div>
+						</div>
+					</div>
+				</div>
+	</span>
+		<span ng-if="userInfo.authoritiesStr.indexOf('ASS_ASSETS_LIST_VIEW') != -1" data-ng-include=" 'src/tpl/newPageInfo.html' "></span>
+	</div>
+	<!-- 批量设置部门 -->
+	<!-- <div id="alertSetDept" ng-show='batchSetDeptShow'>
+		<div class="alertBatchPosition" ng-show='batchSetDeptWrapShow' ng-click='hideAll()'></div>
+		<div class="batchSetTilte"><span class="batchSetHead">选中设备数：</span><span class="batchSetBody">{{printData.length}}</span></div>
+		<div class="batchSetDeptOne"><span class="batchSetHead">所在部门：</span><span class="batchSetBody">
+				<div class="batchSelecters">
+					<input type="text" class="batchSelectInput" readonly="true" ng-model="batchSetDeptInIt.name" ng-click="batchSelectInputClick('batchSetDeptInShow')" />
+					<div class="batchSelectResWrap" ng-show='batchSetDeptInShow'>
+					<div class="batchSelectRes">
+						<div class="batchSelectSearch"><input type="text" ng-change="batchSearchChange()" ng-model='batchSelectSearchWord'></div>
+						<ul class="batchSelectList" ng-class='{batchSelectListScroll: searchResult.length>5}'>
+							<li ng-repeat="l in searchResult track by $index" ng-click="batchSelectLiClick('batchSetDeptInIt','batchSetDeptInShow',l)"><a>{{l.name}}</a></li>
+						</ul>
+					</div>
+					</div>	
+				</div>
+			</span>
+			<div class="batchSetErr"><span ng-show='batchSetDeptIn'>请选择部门</span></div>
+		</div>
+		<div class="batchSetDeptOne"><span class="batchSetHead">申购部门：</span><span class="batchSetBody">
+				<div class="batchSelecters">
+					<input type="text" class="batchSelectInput" readonly="true" ng-model="batchSetDeptByIt.name" ng-click="batchSelectInputClick('batchSetDeptByShow')" />
+					<div class="batchSelectResWrap" ng-show='batchSetDeptByShow'>
+					<div class="batchSelectRes">
+						<div class="batchSelectSearch"><input type="text" ng-change="batchSearchChange()" ng-model='batchSelectSearchWord'></div>
+						<ul class="batchSelectList" ng-class='{batchSelectListScroll: searchResult.length>5}'>
+							<li ng-repeat="l in searchResult track by $index" ng-click="batchSelectLiClick('batchSetDeptByIt','batchSetDeptByShow',l)"><a>{{l.name}}</a></li>
+						</ul>
+					</div>
+					</div>
+				</div>
+			</span>
+			<div class="batchSetErr"><span ng-show='batchSetDeptBy'>请选择部门</span></div>
+		</div>
+		<div class="batchSetDeptOne"><span class="batchSetHead">管理部门：</span><span class="batchSetBody">
+				<div class="batchSelecters">
+					<input type="text" class="batchSelectInput" readonly="true" ng-model="batchSetDeptMgIt.name" ng-click="batchSelectInputClick('batchSetDeptMgShow')" />
+					<div class="batchSelectResWrap" ng-show='batchSetDeptMgShow'>
+					<div class="batchSelectRes">
+						<div class="batchSelectSearch"><input type="text" ng-change="batchSearchChange()" ng-model='batchSelectSearchWord'></div>
+						<ul class="batchSelectList" ng-class='{batchSelectListScroll: searchResult.length>5}'>
+							<li ng-repeat="l in searchResult track by $index" ng-click="batchSelectLiClick('batchSetDeptMgIt','batchSetDeptMgShow',l)"><a>{{l.name}}</a></li>
+						</ul>
+					</div>
+					</div>	
+				</div>
+			</span>
+			<div class="batchSetErr"><span ng-show='batchSetDeptMg'>请选择部门</span></div>
+		</div>
+		<div class="batchSetDeptBtn">
+			<a ng-click='batchSetDeptYes()' class="batchSetDeptBtnYes">确定</a><a class="batchSetDeptBtnNo" ng-click='batchSetCancel()'>取消</a>
+		</div>
+	</div> -->
+
+	<!-- 批量设置设备状态 -->
+	<div id="alertSetState" ng-show='batchSetStateShow'>
+		<div class="alertBatchPosition" ng-show='batchSetDeptWrapShow' ng-click='hideAll()'></div>
+		<div class="batchSetTilte"><span class="batchSetHead">选中设备数：</span><span class="batchSetBody">{{printData.length}}</span></div>
+		<div class="batchSetDeptOne"><span class="batchSetHead">设备状态：</span><span class="batchSetBody">
+				<div class="batchSelecters">
+					<input type="text" class="batchSelectInput" placeholder='请选择' readonly="true" ng-model="batchSetState.status" ng-click="batchSelectInputClick('batchSetStateListShow')" />
+					<div class="batchSelectResWrap" ng-show='batchSetStateListShow'>
+					<div class="batchSelectRes">
+						<ul class="batchSelectList" ng-class='{batchSelectListScroll: batchSetStateList.length>5}'>
+							<li ng-repeat="l in batchSetStateList | muiltyStatus track by $index" ng-click="batchSelectLiClick('batchSetState','batchSetStateListShow',l)"><a>{{l.status}}</a></li>
+						</ul>
+					</div>
+					</div>	
+				</div>
+			</span>
+			<div class="batchSetErr"><span ng-show='batchSetStateErr'>请选择状态</span></div>
+		</div>
+		<div class="batchSetDeptBtn">
+			<a ng-click='batchSetStateYes()' class="batchSetDeptBtnYes">确定</a><a class="batchSetDeptBtnNo" ng-click='batchSetCancel()'>取消</a>
+		</div>
+	</div>
+	<!-- 打印 -->
+	<!--<div id="printIn" ng-show='printOut'>
+		<div ng-repeat='item in printData' ng-class='{printMoreTable: printData.length>1}'>
+	        <div class="printDiv">
+            	<div class="printcenter">{{userInfo.tenantName}}-固定资产标签</div>
+	            <div class="bordertop">
+	                <div class=" printinlinehead">设备编号</div><div class="printinline">{{item.assetsNum}}</div>
+	            </div>
+	            <div class="bordertop">
+	                <div class=" printinlinehead">设备名称</div><div class="printinline printscale1" ng-class='{printlineheight: printscale1}'>{{item.assetsName}}</div>
+	            </div>
+	            <div class="bordertop">
+	                <div class=" printinlinehead">生产商</div><div class="printinline printscale2" ng-class='{printlineheight: printscale2}'>{{item.factoryName}}</div>
+	            </div>
+	            <div class="bordertop">
+	                <div class=" printinlinehead">规格/品牌</div><div class="printinline">{{item.assetsSpec}}{{item.assetsBrand?'（'+item.assetsBrand+'）':''}}</div>
+	            </div>
+	            <div class="bordertop">
+	                <div class=" printinlinehead">启用日期</div><div class="printinline">{{item.startUseDate}}</div>
+	            </div>
+	            <div class="printthreedivimg">
+	                <img ng-src="/api/assets/assetsInfo/getQRCode/{{item.assetsId}}" alt="">
+	            </div>
+	        </div>
+		</div>
+	</div>-->
+	<div style="position: fixed;">
+		<div id="print-table" style="display:none;">
+			<!--startprint-->
+			<!-- <div class="table-b-print" style="page-break-after: always;" ng-repeat='assetsDetailInfo in printData'>
+				<table style="width:100%;height:100%;">
+					<tr><td colspan="3" style="text-align:center;"><font style="width:1px;height:1px">{{userInfo.tenantName}}-固定资产标签</font></td></tr>
+					<tr>
+						<td width="55px" style="border-top: 1px hidden black;border-bottom: 1px hidden black;border-right: 1px hidden black;">设备编号</td>
+						<td colspan="2" style="border-top: 1px hidden black;border-bottom: 1px hidden black;padding:2px;">{{assetsDetailInfo.assetsNum}}</td>
+					</tr>
+					<tr ng-if="assetsDetailInfo.serialNum">
+						<td width="55px" style="border-top: 1px hidden black;border-bottom: 1px hidden black;border-right: 1px hidden black;">院内编码</td>
+						<td colspan="2" style="border-top: 1px hidden black;border-bottom: 1px hidden black;padding:2px;">{{assetsDetailInfo.serialNum}}</td>
+					</tr>
+					<tr>
+						<td style="border-right: 1px hidden black;border-bottom: 1px hidden black;">设备名称</td>
+						<td colspan="2" style="border-bottom: 1px hidden black;padding:2px;">{{assetsDetailInfo.assetsName}}</td>
+					</tr>
+					<tr>
+						<td style="border-right: 1px hidden black;border-bottom: 1px hidden black;">规格/品牌</td>
+						<td colspan="2" style="border-bottom: 1px hidden black;border-right: 1px hidden black;padding:2px;">{{assetsDetailInfo.assetsSpec}}{{assetsDetailInfo.assetsBrand?'（'+assetsDetailInfo.assetsBrand+'）':''}}</td>
+					</tr>
+					<tr>
+						<td style="border-right: 1px hidden black;border-bottom: 1px hidden black;">出厂编号</td>
+						<td style="border-bottom: 1px hidden black;border-right: 1px hidden black;padding:2px;word-break: break-all;">{{assetsDetailInfo.factoryNum}}</td>
+						<td rowspan="3" align=center style="width:75px;">
+							<img style="margin-top:0px;" width="75px" height="75px" ng-src="/api/assets/assetsInfo/getQRCode/{{assetsDetailInfo.id}}" alt=""/>
+						</td>
+					</tr>
+					<tr>
+						<td style="border-right: 1px hidden black;">所在部门</td>
+						<td style="border-right: 1px hidden black;padding:2px;word-break: break-all;">{{assetsDetailInfo.deptName}}</td>
+					</tr>
+					<tr>
+						<td style="border-right: 1px hidden black;">启用日期</td>
+						<td style="border-right: 1px hidden black;padding:2px;word-break: break-all;">{{assetsDetailInfo.startUseDate}}</td>
+					</tr>
+				</table>
+			</div> -->
+		</div>
+	</div>
+	<div class="printthis printWrap"  id='printIt' style="display: none;">
+		<div class="batchPrint">
+			<div><span>选中设备数量：</span><em>{{printData.length}}</em></div>
+			<div><span>模板预览：</span></div>
+		</div>
+		<div class="table-b-show" id="printFirst">
+			<!-- <table style="width:100%;height:100%;">
+				<tr><td colspan="3" style="text-align:center;"><font style="width:1px;height:1px">{{userInfo.tenantName}}-固定资产标签</font></td></tr>
+				<tr>
+					<td width="55px" style="border-top: 1px hidden black;border-bottom: 1px hidden black;border-right: 1px hidden black;">设备编号</td>
+					<td colspan="2" style="border-top: 1px hidden black;border-bottom: 1px hidden black;padding:2px;">{{printData[0].assetsNum}}</td>
+				</tr>
+				<tr ng-if="printData[0].serialNum">
+					<td width="55px" style="border-top: 1px hidden black;border-bottom: 1px hidden black;border-right: 1px hidden black;">院内编码</td>
+					<td colspan="2" style="border-top: 1px hidden black;border-bottom: 1px hidden black;padding:2px;">{{printData[0].serialNum}}</td>
+				</tr>
+				<tr>
+					<td style="border-right: 1px hidden black;border-bottom: 1px hidden black;">设备名称</td>
+					<td colspan="2" style="border-bottom: 1px hidden black;padding:2px;">{{printData[0].assetsName}}</td>
+				</tr>
+				<tr>
+					<td style="border-right: 1px hidden black;border-bottom: 1px hidden black;">规格/品牌</td>
+					<td colspan="2" style="border-bottom: 1px hidden black;border-right: 1px hidden black;padding:2px;">{{printData[0].assetsSpec}}{{printData[0].assetsBrand?'（'+printData[0].assetsBrand+'）':''}}</td>
+				</tr>
+				<tr>
+					<td style="border-right: 1px hidden black;border-bottom: 1px hidden black;">出厂编号</td>
+					<td style="border-bottom: 1px hidden black;border-right: 1px hidden black;padding:2px;word-break: break-all;">{{printData[0].factoryNum}}</td>
+					<td rowspan="3" align=center style="width:75px;">
+						<img style="margin-top:0px;" width="75px" height="75px" ng-src="/api/assets/assetsInfo/getQRCode/{{printData[0].id}}" alt=""/>
+					</td>
+				</tr>
+				<tr>
+					<td style="border-right: 1px hidden black;">所在部门</td>
+					<td style="border-right: 1px hidden black;padding:2px;">{{printData[0].deptName}}</td>
+				</tr>
+				<tr>
+					<td style="border-right: 1px hidden black;">启用日期</td>
+					<td style="border-right: 1px hidden black;padding:2px;">{{printData[0].startUseDate}}</td>
+				</tr>
+			</table> -->
+		</div>
+		<div class="printBtn"><span class="print" ng-click='doPrint()' ng-hide='printOneTable'>打印</span></div>
+	</div>
+	<!-- 导出 -->
+	<div id="outputAlert" ng-show='outputShow'>
+		<div class="paddingbottom57">
+			<div class="export-alert">
+				<div>导出哪些数据</div>
+				<div class="form1">
+					<form action="#" class="form1">
+						<div ng-click='radioC(0)'>
+							<div class="box1">
+								<input type="radio" id="check-1" name="evaluation" class="input" ng-model='radioV' ng-value='2' /><span></span>
+							</div><label for="check-1">当前选中的数据（{{checkNum}}条）</label>
+						</div>
+						<!--<div ng-click='radioC(0)'>-->
+						<!--<div class="box1">-->
+						<!--<input type="radio" id="best-1" name="evaluation" class="input" ng-model='radioV' ng-value='1' /><span></span>-->
+						<!--</div><label for="best-1">当前筛选的数据（{{pageInfo.total}}条）</label>-->
+						<!--</div>-->
+						<div ng-click='radioC(1)'>
+							<div class="box1">
+								<input type="radio" id="fine-1" name="evaluation" class="input" ng-model='radioV' ng-value='0' /><span></span>
+							</div><label for="fine-1">全部数据（{{allInfo}}条）</label>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div>导出哪些字段</div>
+			<div class="box">
+				<span class='spanDel' ng-class="{'baseSpan':i.required}" ng-click='selectI(i)' ng-repeat='i in substr track by $index' ng-show='i.select'><i><img src="../res/img/icon24.png" alt="" ng-if='!i.required'><img src="../res/img/jdhs.png" class="spanHover" ng-if='!i.required'></i><span>{{i.name}}</span>
+				</span>
+			</div>
+			<div class="canSelectSpan">
+				<div>可选字段</div>
+				<div style="color: #999;margin:10px 0 0 30px">设备信息</div>
+				<div class="box">
+					<span class='spanAdd' ng-repeat='i in arrList1 track by $index' ng-click='selectI(i)' ng-show='!i.select' ng-class='{"boxSpan":i.select}'><i><img src="../res/img/icon25.png" alt=""><img src="../res/img/tjhs.png" class="spanHover"></i><span>{{i.name}}</span></span>
+				</div>
+				<!-- <div style="color: #999;margin:0px 0 0 30px">采购信息</div> -->
+				<div class="box">
+					<span class='spanAdd' ng-repeat='i in arrList2 track by $index' ng-click='selectI(i)' ng-show='!i.select' ng-class='{"boxSpan":i.select}'><i><img src="../res/img/icon25.png" alt=""><img src="../res/img/tjhs.png" class="spanHover"></i><span>{{i.name}}</span></span>
+				</div>
+				<!-- <div style="color: #999;margin:0px 0 0 30px">合同信息</div> -->
+				<div class="box">
+					<span class='spanAdd' ng-repeat='i in arrList3 track by $index' ng-click='selectI(i)' ng-show='!i.select' ng-class='{"boxSpan":i.select}'><i><img src="../res/img/icon25.png" alt=""><img src="../res/img/tjhs.png" class="spanHover"></i><span>{{i.name}}</span></span>
+				</div>
+			</div>
+		</div>
+		<div class="begin" ng-click='startOutput()'>开始导出</div>
+		<div class="clearFloat"></div>
+	</div>
+	<!-- 导入 -->
+	<div class="import-alert" id="inputWrap" ng-show="inputShow">
+		<div><img src="../res/img/icon21.png" /><span style="margin-left: 10px">下载模板</span></div>
+		<div><span style="margin-left: 28px;color: #999">为提高导入的成功率，请下载并使用系统提供的模板</span>
+			<a href="/api/assets/assetsInfo/getTemplate" style="margin-left: 40px;color: #6db7f7;cursor: pointer">下载模板</a>
+		</div>
+		<div><img src="../res/img/icon22.png" /><span style="margin-left: 10px">上传文件</span></div>
+		<div style="margin-left: 28px;display:inline-block;" class='animated color999' ng-class='{shake: canntImport1,wranColor: canntImport}'>仅支持xlsx，xls，csv，文件大小≤4M</div>
+		<div class="formDiv">
+			<form><input type="text" placeholder="上传文件" readonly="true" class="inputName"><span class="choose" ng-class='{inputInfoBtning: progressing}'>选择文件<input type="file"  ng-click="clearItems()"  ng-hide='progressing' ng-disabled="progressing"  class="filebtn"></span></form>
+		</div>
+		<div class="height57">
+			<div class="warn" style="color:#ff2a2a;font-size:12px;margin-top: 0"><span ng-show='importNone'>请上传文件</span></div>
+		</div>
+		<div>
+			<div class="progressDiv" ng-show='progressing'>
+				<div class="progressModel">
+					<div class="progressWrap"></div>
+					<div id="progress"></div>
+				</div>
+				<div>正在导入：<span id='progressNum'>0</span>%</div>
+			</div>
+			<div class="begin" ng-click='startInput()' ng-class='{inputInfoBtning: progressing}'>{{progressing?'正在导入':'开始导入'}}</div>
+			<!-- <div class="begin"  ng-click="UploadFile()">开始导入</div> -->
+		</div>
+	</div>
+	<div id="alertInput" ng-show='inputState1'>
+		<div class="alertContent">
+			<div class="alertImg"><img src='{{layerImg}}'></div>
+			<p class="font14px acolor666">{{inputRes}}</p>
+			<div class="alertDes" ng-class="{'mb-80':!downloadState}">{{inputDes}}</div>
+			<div ng-show="downloadState" class="failDownload">
+				<a href="{{errorDataUrls}}" id='errorDataUrls'>{{inputFailTip}}</a>
+			</div>
+			<div class="alertBtn">
+				<a href="javascript:;" ng-click='closeIndex(btnyes.key)' style="width: 118px;" class="btnyes">{{btnyes.value}}</a>
+				<a href="javascript:;" ng-click='closeIndex(btnno.key)' class="btncancel">{{btnno.value}}</a>
+			</div>
+		</div>
+	</div>
+	<!-- <span data-ng-include=" 'src/tpl/newPageInfo.html' "></span> -->
+	<!-- </div> -->
+
+	<div data-ng-include='src/app/tre/ytz/iframe.html' ng-hide=true id="addDev"></div>
+	<!-- 弹框 -->
+	<div   data-ng-include=" 'src/tpl/alert.html' "></div>
+	<div class="newTreList" ng-show='newTreListShow'>
+		<div class="alertBatchPosition" ng-show='batchSetDeptWrapShow' ng-click='hideAll()'></div>
+		<div class="newTreListInfo"><span class="newTreListInfoHead"><em>*</em>所在部门：</span><span class='newTreListInfoBody'>
+			<div class="batchSelecters">
+				<input type="text" class="batchSelectInput newTreListInfoInput newTreListInfoInput1" readonly="true" ng-model="newTreListOffice.name" ng-click="newTreList('newTreListDept')" />
+				<div class="batchSelectResWrap" ng-show='newTreListDept'>
+					<div class="batchSelectRes">
+						<div class="batchSelectSearch">
+							<input type="text" ng-change="batchSearchChange()" ng-model='batchSelectSearchWord'>
+						</div>
+						<ul class="batchSelectList hd_sad" ng-class='{batchSelectListScroll: searchResult.length>5}'>
+							<li ng-repeat="l in searchResult track by $index" ng-click="batchSelectLiClick('newTreListOffice','newTreListDept',l)"><a>{{l.name}}</a></li>
+						</ul>
+					</div>
+				</div>	
+			</div>
+		</span>
+
+			<div class="newTreListInfoErr">
+				<span ng-show='assetsOfficeNameErr'>请输入部门</span>
+			</div>
+		</div>
+		<div class="newTreListInfo"><span class="newTreListInfoHead">状态：</span><span class='newTreListInfoBody'>
+			<div class="batchSelecters">
+				<input type="text" class="batchSelectInput newTreListInfoInput newTreListInfoInput1" placeholder='请选择' readonly="true" ng-model="newTreListState.status" ng-click="newTreList('newTreListStateShow')" />
+				<div class="batchSelectResWrap" ng-show='newTreListStateShow'>
+					<div class="batchSelectRes">
+						<ul class="batchSelectList" ng-class='{batchSelectListScroll: batchSetStateList.length>5}'>
+							<li ng-repeat="l in batchSetStateList track by $index" ng-click="newTreListStates('newTreListState','newTreListStateShow',l)"><a>{{l.status}}</a></li>
+						</ul>
+					</div>
+				</div>	
+			</div>
+		</span>
+			<div class="newTreListInfoErr"><span></span></div>
+		</div>
+		<div class="newTreListInfo"><span class="newTreListInfoHead">来源：</span><span class='newTreListInfoBody'>
+			<div class="batchSelecters">
+				<input type="text" class="batchSelectInput newTreListInfoInput newTreListInfoInput1" placeholder='请选择' readonly="true" ng-model="newTreListSource2.status" ng-click="newTreList('newTreListSourceShow2')" />
+				<div class="batchSelectResWrap" ng-show='newTreListSourceShow2'>
+					<div class="batchSelectRes">
+						<ul class="batchSelectList" ng-class='{batchSelectListScroll: batchSetStateList.length>2}' style="overflow-y:auto">
+							<li ng-repeat="l in assestSourceList2 track by $index" ng-click="newTreListStates('newTreListSource2','newTreListSourceShow2',l)"><a>{{l.status}}</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</span>
+			<div class="newTreListInfoErr"><span></span></div>
+		</div>
+		<div class="newTreListInfo"><span class="newTreListInfoHead"><em>*</em>设备名称：</span><span><input ng-trim='false' ng-keyup='limitLength("assetsName",40,"newTreObj")' ng-model='newTreObj.assetsName' type="text" class="newTreListInfoInput"></span>
+			<div class="newTreListInfoErr"><span ng-show='assetsNameErr'>请输入</span></div>
+		</div>
+		<div class="newTreListInfo"><span class="newTreListInfoHead"><em>*</em>生产商：</span><span><input ng-trim='false' ng-keyup='limitLength("factoryName",40,"newTreObj")' ng-model='newTreObj.factoryName' type="text" class="newTreListInfoInput"></span>
+			<div class="newTreListInfoErr"><span ng-show='factoryNameErr'>请输入</span></div>
+		</div>
+		<div class="newTreListInfo"><span class="newTreListInfoHead"><em></em>规格型号：</span><span><input ng-trim='false' ng-keyup='limitLength("assetsSpec",40,"newTreObj")' ng-model='newTreObj.assetsSpec' type="text" class="newTreListInfoInput"></span>
+			<div class="newTreListInfoErr"><span ng-show='1'></span></div>
+		</div>
+		<div class="newTreListInfo"><span class="newTreListInfoHead">院内编码：</span><span><input ng-trim='false' ng-keyup='limitLength("serialNum",40,"newTreObj")' ng-model='newTreObj.serialNum' type="text" class="newTreListInfoInput"></span>
+			<div class="newTreListInfoErr"></div>
+		</div>
+		<div class="newTreListInfo"><span class="newTreListInfoHead"><em></em>出厂编号(SN)：</span><span><input ng-trim='false' ng-keyup='limitLength("factoryNum",40,"newTreObj")' ng-model='newTreObj.factoryNum' type="text" class="newTreListInfoInput"></span>
+			<div class="newTreListInfoErr"><span></span></div>
+		</div>
+		<div class="newTreListInfo"><span class="newTreListInfoHead"><em></em>启用日期：</span><span><input readonly="true" ng-model='newTreObj.startUseDate' type="text" class="newTreListInfoInput newTrelistDate"></span>
+			<div class="newTreListInfoErr"><span></span></div>
+		</div>
+		<div class="newTreListInfo"><span class="newTreListInfoHead"><em></em>供应商：</span><span><input ng-trim='false' ng-keyup='limitLength("splName",40,"newTreObj")' ng-model='newTreObj.splName' type="text" class="newTreListInfoInput"></span>
+			<div class="newTreListInfoErr"><span></span></div>
+		</div>
+		<!--<div class="newTreListMoreWrap" ng-show='newTreListMore'>-->
+			<!--<div class="newTreListInfo"><span class="newTreListInfoHead"><em></em>注册证号：</span><span><input ng-trim='false' ng-keyup='limitLength("regNo",40,"newTreObj")' ng-model='newTreObj.regNo' type="text" class="newTreListInfoInput"></span>-->
+				<!--<div class="newTreListInfoErr"><span></span></div>-->
+			<!--</div>-->
+
+			<!--<div class="newTreListInfo"><span class="newTreListInfoHead"><em></em>三级分类代码：</span><span><input ng-trim='false' onkeyup="this.value=this.value.match(/^6[0-9]*/)" ng-model='newTreObj.threeLevelCode' ng-change='threetypecode()' type="text" class="newTreListInfoInput"></span>-->
+				<!--<div class="newTreListInfoErr"><span></span></div>-->
+			<!--</div>-->
+			<!--<div class="newTreListInfo"><span class="newTreListInfoHead"><em></em>核算类别：</span><span class='newTreListInfoBody'>-->
+			<!--<div class="batchSelecters">-->
+				<!--<input type="text" class="batchSelectInput newTreListInfoInput newTreListInfoInput1" placeholder='请选择' readonly="true" ng-model="newTreListAccount.codeText" ng-click="newTreList('newTreListAccountShow')" />-->
+				<!--<div class="batchSelectResWrap" ng-show='newTreListAccountShow'>-->
+					<!--<div class="batchSelectRes">-->
+						<!--<ul class="batchSelectList" ng-class='{batchSelectListScroll: searchResult.length>5}'>-->
+							<!--<li ng-repeat="l in ACCOUNT_CATEGORY track by $index" ng-click="newTreListStates('newTreListAccount','newTreListAccountShow',l)"><a>{{l.codeText}}</a></li>-->
+						<!--</ul>-->
+					<!--</div>-->
+				<!--</div>-->
+			<!--</div>-->
+			<!--</span>-->
+				<!--<div class="newTreListInfoErr"><span></span></div>-->
+			<!--</div>-->
+			<!--<div class="newTreListInfo"><span class="newTreListInfoHead"><em></em>管理级别：</span><span class='newTreListInfoBody'>-->
+			<!--<div class="batchSelecters">-->
+				<!--<input type="text" class="batchSelectInput newTreListInfoInput newTreListInfoInput1" placeholder='请选择' readonly="true" ng-model="newTreListManage.codeText" ng-click="newTreList('newTreListManageShow')" />-->
+				<!--<div class="batchSelectResWrap" ng-show='newTreListManageShow'>-->
+					<!--<div class="batchSelectRes">-->
+						<!--<ul class="batchSelectList" ng-class='{batchSelectListScroll: searchResult.length>5}'>-->
+							<!--<li ng-repeat="l in MANAGE_LEVEL track by $index" ng-click="newTreListStates('newTreListManage','newTreListManageShow',l)"><a>{{l.codeText}}</a></li></ul>-->
+					<!--</div>-->
+				<!--</div>-->
+			<!--</div>-->
+			<!--</span>-->
+				<!--<div class="newTreListInfoErr"><span></span></div>-->
+			<!--</div>-->
+
+			<!---->
+			<!--<div class="newTreListInfo"><span class="newTreListInfoHead"><em></em>资金来源：</span><span class='newTreListInfoBody'>-->
+			<!--<div class="batchSelecters">-->
+				<!--<input type="text" class="batchSelectInput newTreListInfoInput newTreListInfoInput1" placeholder='请选择' readonly="true" ng-model="newTreListSource.codeText" ng-click="newTreList('newTreListSourceShow')" />-->
+				<!--<div class="batchSelectResWrap m-b-sm" ng-show='newTreListSourceShow'>-->
+					<!--<div class="batchSelectRes">-->
+						<!--<ul class="batchSelectList" ng-class='{batchSelectListScroll: searchResult.length>5}'>-->
+							<!--<li ng-repeat="l in FUND_SOURCES track by $index" ng-click="newTreListStates('newTreListSource','newTreListSourceShow',l)"><a>{{l.codeText}}</a></li>-->
+						<!--</ul>-->
+					<!--</div>-->
+				<!--</div>-->
+			<!--</div>-->
+			<!--</span>-->
+				<!--<div class="newTreListInfoErr"><span></span></div>-->
+			<!--</div>-->
+		<!--</div>-->
+		<!--<div class="newTreListMore"><a ng-click='newTreListChange()' class='newTreListUp' ng-class='{newTreListDown: newTreListMore}'>{{newTreListChangeTxt}}</a></div>-->
+		<div class="batchSetDeptBtn">
+			<a ng-click='newTreListYes()' class="batchSetDeptBtnYes">确定</a><a class="batchSetDeptBtnNo" ng-click='newTreListNo()'>取消</a>
+		</div>
+	</div>
+	<!-- 弹框 END -->

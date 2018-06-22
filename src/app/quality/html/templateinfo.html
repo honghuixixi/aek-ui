@@ -1,0 +1,167 @@
+<div class="quality-nav">
+    <span>质控模板</span> &gt;
+    <span>查看详情</span>
+    <span class="quality-btn quality-detail-btn" style="width:100px;" ng-click="methods.del()" ng-if="data.limit.isAek">删除模板</span>
+    <span class="quality-btn quality-detail-btn" style="width:100px;" ng-click="methods.publish()" ng-if="data.limit.isAek && !data.server.template.releaseFlag">发布模板</span>
+    <span class="quality-btn quality-detail-btn" style="width:100px;" ng-click="methods.disable()" ng-if="data.limit.isAek && data.server.template.releaseFlag && data.server.template.enable">停用模板</span>
+    <span class="quality-btn quality-detail-btn" style="width:100px;" ng-click="methods.enable()" ng-if="data.limit.isAek && data.server.template.releaseFlag && !data.server.template.enable">启用模板</span>
+    <span class="quality-btn quality-detail-btn" style="width:100px;" ng-click="methods.print()" ng-if="data.server.template.releaseFlag">打印模板</span>
+</div>
+<div class="quality-swrap">
+    <dl class="quality-info">
+        <dt>模板名称</dt>
+        <dd>
+            <span>{{data.server.template.name}}</span>
+            <span class="tip" ng-if="data.server.template.releaseFlag">已发布</span>
+            <span class="tip" ng-if="!data.server.template.releaseFlag">未发布</span>
+            <span class="tip" ng-if="data.server.template.releaseFlag && data.server.template.enable">启用</span>
+            <span class="tip tip2" ng-if="data.server.template.releaseFlag && !data.server.template.enable">停用</span>
+        </dd>
+        <dt>备注</dt>
+        <dd>{{data.server.template.remarks}}&nbsp;</dd>
+    </dl>
+    <div class="row">
+        <span>模板内容</span>
+        <span class="quality-btn quality-detail-btn" ng-click="methods.openAdd()" ng-if="data.limit.isAek && !data.server.template.releaseFlag && data.server.template.items.length < 12">新增项目</span>
+    </div>
+    <table class="tpl-table">
+        <thead>
+            <tr>
+                <td style="width: 60px;text-align:center;">序号</td>
+                <td>项目</td>
+                <td style="width: 60px;text-align:center;">类型</td>
+                <td>子项目</td>
+                <td colspan="{{data.server.col}}">项目内容</td>
+                <td ng-if="data.limit.isAek && !data.server.template.releaseFlag">操作</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="v in data.server.items">
+                <td ng-repeat="td in v" rowspan="{{td.row}}" colspan="{{td.col}}" ng-if="td.type != 6">
+                    <div style="text-align: center;" ng-if="td.type == 1">{{td.txt}}</div>
+                    <div ng-if="td.type == 2">{{td.txt}}</div>
+                    <div ng-if="td.type == 3">{{td.txt}}</div>
+                    <div ng-if="td.type == 4">
+                        <div class="tpl-option" ng-repeat="op in td.data.options">
+                            <input type="radio" disabled>
+                            <span>{{op.name}}</span>
+                        </div>
+                    </div>
+                    <div ng-if="td.type == 5">
+                        <div class="tpl-option" ng-repeat="op in td.data.options">
+                            <input type="checkbox" disabled>
+                            <span>{{op.name}}</span>
+                        </div>
+                    </div>
+                    <div ng-if="td.type == 7">{{td.txt}}</div>
+                    <div ng-if="td.type == 8">{{td.txt}}</div>
+                </td>
+                <td style="width:100px;text-align:center;" ng-repeat="td in v" rowspan="{{td.row}}" colspan="{{td.col}}" ng-if="td.type == 6 && data.limit.isAek && !data.server.template.releaseFlag">
+                    <a ng-click="methods.openEdit(td)">编辑</a>&nbsp;&nbsp;
+                    <a ng-click="methods.removeItem(td)">删除</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <br><br>
+</div>
+
+<!-- 新建/编辑模板项目对话框 -->
+<div id="template_item_quality" style="display: none;">
+    <dl class="modal-add">
+        <dt>
+            <span class="require">*</span>项目名称：</dt>
+        <dd>
+            <input id="templateName" type="text" placeholder="请输入，12个字符以内" maxlength="12" ng-model="data.local.form.name" ng-change="methods.removeErr('name')">
+            <div class="err">{{data.local.err.name}}&nbsp;</div>
+        </dd>
+        <dt>项目备注：</dt>
+        <dd>
+            <input type="text" placeholder="请输入，12个字符以内" maxlength="12" ng-model="data.local.form.remarks">
+            <div class="err">&nbsp;</div>
+        </dd>
+        <dt ng-if="!data.local.form.isEdit"><span class="require">*</span>项目类型</dt>
+        <dd>
+            <span class="quality-modal-dl-option" ng-click="methods.chengeInputType(1)" ng-if="!data.local.form.isEdit">
+                <input type="radio" name="tpl-item-type" value="1" ng-model="data.local.form.inputType">文本</span>
+            <span class="quality-modal-dl-option" ng-click="methods.chengeInputType(2)" ng-if="!data.local.form.isEdit">
+                <input type="radio" name="tpl-item-type" value="2" ng-model="data.local.form.inputType">选择</span>
+            <div style="height: 5px;">&nbsp;</div>
+            <div style="margin-left: -110px;" ng-if="data.local.form.inputType == 1">
+                <dl>
+                    <dt><span class="require">*</span>选择列数</dt>
+                    <dd>
+                        <aek-select list="data.local.columnOptions" change="methods.changeCol" item="data.local.form.currentCol"></aek-select>
+                    </dd>
+                </dl>
+                <dl class="quality-modal-dl" ng-repeat="v in data.local.form.rows">
+                    <dt><span class="require">*</span>子项目{{$index + 1}}</dt>
+                    <dd>
+                        <input type="text" placeholder="请输入，12字符以内" maxlength="12" ng-model="v.name" ng-change="methods.removeErr('rows')">
+                        <a ng-click="methods.delRow($index)" ng-if="$index > 0">&nbsp;删除</a>
+                    </dd>
+                </dl>
+                <dl class="quality-modal-dl">
+                    <dt ng-if="data.local.form.rows.length < 6">&nbsp;</dt>
+                    <dd style="line-height: 32px;" ng-if="data.local.form.rows.length < 6">
+                        <span class="quality-btn" ng-click="methods.addRow()">新增子项目</span>
+                    </dd>
+                    <dt>&nbsp;</dt>
+                    <dd>
+                        <div class="err">{{data.local.err.rows}}&nbsp;</div>
+                    </dd>
+                </dl>
+                <dl class="quality-modal-dl" ng-repeat="v in data.local.form.cols">
+                    <dt>子项目备注{{$index + 1}}</dt>
+                    <dd>
+                        <input type="text" placeholder="请输入，12字符以内" maxlength="12" ng-model="v.name" ng-change="methods.removeErr('cols')">
+                        <span class="quality-modal-dl-option" style="margin-bottom: -5px;margin-left:5px;">
+                            <input type="checkbox" ng-model="v.crossRow">&nbsp;跨行显示</span>
+                        <a ng-click="methods.delCols($index)">&nbsp;删除</a>
+                    </dd>
+                </dl>
+                <dl class="quality-modal-dl">
+                    <dt ng-if="data.local.form.cols.length < 4">&nbsp;</dt>
+                    <dd style="line-height: 32px;" ng-if="data.local.form.cols.length < 4">
+                        <span class="quality-btn" ng-click="methods.addCols()">新增子项目备注</span>
+                    </dd>
+                    <dt>&nbsp;</dt>
+                    <dd>
+                        <div class="err">{{data.local.err.cols}}&nbsp;</div>
+                    </dd>
+                </dl>
+            </div>
+
+            <div style="margin-left: -110px;" ng-if="data.local.form.inputType == 2">
+                <dl class="quality-modal-dl">
+                    <dt><span class="require">*</span>选项类型</dt>
+                    <dd>
+                        <span class="quality-modal-dl-option" ng-click="methods.changeSelectType(1)">
+                            <input type="radio" name="tpl-item-option" value="1" ng-model="data.local.form.selectType">单选</span>
+                        <span class="quality-modal-dl-option" ng-click="methods.changeSelectType(2)">
+                            <input type="radio" name="tpl-item-option" value="2" ng-model="data.local.form.selectType">多选</span>
+                    </dd>
+                </dl>
+                <dl class="quality-modal-dl" ng-repeat="v in data.local.form.childItemOptions">
+                    <dt><span class="require">*</span>选项{{$index + 1}}</dt>
+                    <dd>
+                        <input type="text" placeholder="请输入，12字符以内" maxlength="12" ng-model="v.name" ng-change="methods.removeErr('option')">
+                        <a ng-click="methods.delOption($index)" ng-if="$index > 0">&nbsp;删除</a>
+                    </dd>
+                </dl>
+                <dl class="quality-modal-dl">
+                    <dt ng-if="data.local.form.childItemOptions.length < 6">&nbsp;</dt>
+                    <dd style="line-height: 32px;" ng-if="data.local.form.childItemOptions.length < 6">
+                        <span class="quality-btn" ng-click="methods.addOption()">添加选项</span>
+                    </dd>
+                    <dt>&nbsp;</dt>
+                    <dd>
+                        <div class="err">{{data.local.err.option}}&nbsp;</div>
+                    </dd>
+                </dl>
+            </div>
+        </dd>
+    </dl>
+</div>
+<!-- 打印质检报告 -->
+<div data-ng-include="'src/app/quality/html/print-tpl.html'" id="template_quality_report" style="display: none;"></div>

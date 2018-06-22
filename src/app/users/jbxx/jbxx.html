@@ -1,0 +1,102 @@
+<div class="baseInfoWrap">
+	<div class="baseInfoCon">
+		<form id="saveForm">
+		<div class="baseInfoDiv">
+			<a class="editCon" ng-click='toEdit()' ng-show='!editName'>编辑</a>
+			<h4>基本信息</h4>
+			<div class="toastComplete">请完善以下信息，方便我们更好的为您服务</div>
+			<ul class="baseData">
+				<li>
+					<div class="listHead"><span><i></i><em>头像：</em></span></div>
+					<input ng-hide="true" type="file" id="headFile" onchange="angular.element(this).scope().setImagePreview(this.files)">
+					<div class="listCon headChange" ng-click="headClick()">
+						<img src="{{imgSrc}}" alt="">
+						<a href="javascript:;"  ng-show='editName'>修改头像</a>
+					</div>
+				</li><li class="linheight24px"></li>
+				<li><div class="listHead"><span><i ng-show='editName'>*</i><em>真实姓名：</em></span></div><div class="listCon"><input ng-model='user.realName' type="text" ng-show='editName' class="editName" name='realName' required><span ng-show='!editName'>{{user.realName}}</span></div></li><li class="linheight24px"></li>
+				<li>
+					<div class="listHead"><span><i></i><em>工号：</em></span></div><div class="listCon"><span>{{user.jobNumber}}</span></div>
+				</li>
+				<li class="linheight24px"></li>
+				<li>
+					<div class="listHead"><span><i></i><em>注册时间：</em></span></div><div class="listCon"><span>{{createTime}}</span></div>
+				</li><li class="linheight24px"></li>
+				<li>
+					<div class="listHead"><span><i></i><em>更新时间：</em></span></div><div class="listCon"><span>{{updateTime}}</span></div>
+				</li><li class="linheight24px"></li>
+				<li>
+					<div class="listHead"><span><i></i><em>注册ID：</em></span></div><div class="listCon"><span>{{user.registId}}</span></div>
+				</li><li class="linheight24px"></li>
+				<li>
+					<div class="listHead"><span><i></i><em>所属机构：</em></span></div><div class="listCon"><span>{{user.deptName}}</span></div>
+				</li><li class="linheight24px"></li>
+				<li>
+					<div class="listHead"><span><i></i><em>角色类型：</em></span></div><div class="listCon"><span>{{user.userType}}</span></div>
+				</li>
+			</ul>
+		</div>
+		<div class="baseInfoDiv">
+			<h4>通信信息</h4>
+			<ul class="baseData" ng-show='!super'>
+				<li>
+					<div class="listHead"><span><i></i><em>所在地区：</em></span></div><div class="listCon">{{user.province}}/{{user.city}}/{{user.region}}</div>
+				</li><li class="linheight24px"></li>
+				<li>
+					<div class="listHead"><span><i></i><em>街道地址：</em></span></div><div class="listCon">{{user.address}}</div>
+				</li><li class="linheight24px"></li>
+				<li>
+					<div class="listHead"><span><i></i><em>联系人：</em></span></div><div class="listCon">{{user.linkName}}</div>
+				</li><li class="linheight24px"></li>
+				<li>
+					<div class="listHead"><span><i></i><em>联系电话：</em></span></div><div class="listCon">{{user.mobile}}</div>
+				</li><li class="linheight24px"></li>
+				<li>
+					<div class="listHead"><span><i></i><em>传真：</em></span></div><div class="listCon">{{user.fax}}</div>
+				</li>
+			</ul>
+			<ul class="baseData" ng-show='super'>
+				<li>
+					<div class="listHead"><span><i>*</i><em>所在地区：</em></span></div><div class="threeState">
+						<select ng-change="provChange(user.proSel)" ng-model='user.proSel' ng-options='item for item in province'></select>
+						<!-- <select ng-change="provChange(proSel)" ng-model="proSel" ng-value='selectProvince'>
+							<option value="{{item.id}}" ng-repeat="item in province">{{item.name}}</option>
+						</select> -->
+						<!--<input type="text" placeholder='浙江省'>-->
+						<span>-</span>
+						<select ng-change="cityChange(user.citySel)" ng-model='user.citySel' ng-options='item for item in city'></select>
+						<!-- <select ng-change="cityChange(citySel)" ng-model='citySel' ng-value="selectCity">
+							<option value="{{item.id}}" ng-repeat="item in city">{{item.name}}</option>
+						</select> -->
+						<!--<input type="text" placeholder='杭州市'>-->
+						<span>-</span>
+						<select ng-model='user.regionSel' ng-options='item for item in region'></select>
+						<!-- <select ng-model='selectRegion'>
+							<option value="{{item.id}}" ng-repeat="item in area">{{item.name}}</option>
+						</select> -->
+						<!--<input type="text" placeholder='萧山区'>-->
+					</div>
+				</li><li class="linheight24px"></li>
+				<li>
+					<div class="listHead"><span><i>*</i><em>街道地址：</em></span></div><div class="listCon"><input name='address' type="text" class="editName" ng-model='user.address' required></div>
+				</li><li class="linheight24px"></li>
+				<li>
+					<div class="listHead"><span><i>*</i><em>联系人：</em></span></div><div class="listCon"><input name='linkName' type="text" ng-model='user.linkName' class="editName" required></div>
+				</li><li class="linheight24px"></li>
+				<li>
+					<div class="listHead"><span><i>*</i><em>联系电话：</em></span></div><div class="listCon"><input name='mobile' type="text" ng-model='user.mobile' class="editName" minlength='11' required><span class='example'>例如：0571-88888888</span></div>
+				</li><li class="linheight24px"></li>
+				<li>
+					<div class="listHead"><span><i></i><em>传真：</em></span></div><div class="listCon"><input type="text" ng-model='user.fax' class="editName"><span class='example'>例如：86057188888888</span></div>
+				</li>
+				<!-- <li ng-repeat="list in commonListEdit "><div class="listHead"><span><i>{{list.required}}</i><em>{{list.head}}</em></span></div><div class="listCon"><input type="text" class="editName"><span class='example'>{{list.example}}</span></div></li> -->
+			</ul>
+		</div>
+		<div class="baseBtn" ng-show='editName'>
+			<input type="submit" class="baseBtnSave" value="保存" />
+			<!--<input class="baseBtnSave" ng-click='layerWinOpen("save","",toEdit,"保存成功")' value="保存" />-->
+			<a class="baseBtnCancel" ng-click='cancel()'>取消</a>
+		</div>
+		</form>
+	</div>
+</div>

@@ -1,0 +1,83 @@
+
+        <div class="fy_accessoryHead">
+            <div class="fy_accessoryNew"><a ng-click='newAccessoryBtn()'>新建配件分类</a></div>
+            <div class="selectWrap">
+                <div class="selector" ng-click='listShow("typeList")'><input type="text" ng-model='typeModel.name' readonly="true"><a href='javascript:;'></a></div>
+                <div class="options" ng-show='typeList'>
+                    <ul>
+                        <li ng-repeat='item in optionType' ng-click='option("typeList","typeModel",item,1)'>{{item.name}}</li>
+                     </ul>
+                </div>
+            </div><div class="fy_accessorySearch">
+                <input type="text" placeholder='请输入分类名称查找' ng-model='kindName'><a ng-click='accessoryListChange()'>搜索</a><i class="verticalAdjust"></i>
+            </div>
+        </div>
+        <div class="fy_accessoryContent">
+        	<table>
+        		<tr>
+        			<th>分类编号</th>
+        			<th>分类名称</th>
+        			<th>更新人</th>
+        			<th>更新时间</th>
+        			<th>启用状态</th>
+        			<th class="b-r-dcdcdc">操作</th>
+        		</tr>
+        		<tr class="fy_accessoryConTd" ng-repeat="td in accessoryContent  track by $index" ng-class='{accessoryContentOff: !td.status}'>
+        			<td class="fy_accessoryConFirstTd">{{td.kindCode}}</td>
+        			<td>{{td.kindName}}</td>
+        			<td>{{td.updateMan}}</td>
+        			<td>{{td.updateTime | date:'yyyy-MM-dd HH:mm'}}</td>
+        			<td>{{td.status?'启用':'禁用'}}</td>
+        			<td class="b-r-dcdcdc fy_accessoryConLastTd"><a ng-click='newAccessoryBtn(td)'>编辑</a></td>
+        		</tr>
+                <tr ng-hide='nocontent||onloading'>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr ng-show='nocontent'>
+                    <td colspan="6" class="repairTextCenter b-r-dcdcdc b-b-dcdcdc">
+                        <img src="../../res/img/nocontent.png" alt=""><span class='m-l-lg'>暂无数据</span>
+                    </td>
+                </tr>
+                <tr ng-show='onloading'>
+                    <td colspan="6" class="repairTextCenter b-r-dcdcdc b-b-dcdcdc">
+                        <img src="../../res/img/loading2.gif" alt=""><span class='verticalAlignMiddle'></span>
+                    </td>
+                </tr>
+        	</table>
+        </div>
+        <div class="fy_accessoryFoot">
+            <span ng-hide='onloading||nocontent' data-ng-include=" 'src/tpl/newPageInfo.html' "></span>
+        </div>
+        <div class="fy_oneAccessoryClassify" ng-show='accessoryClassify'>
+            <div class="fy_oneAccessoryInfo">
+                <span class='fy_oneAccessoryInfoHead'>编号：</span><input class="oneAccessoryCode" type="text" readonly="true" ng-model='kindCode'>
+                <div class="fy_oneAccessoryInfoErr"><span class='fy_oneAccessoryInfoHead'></span></div>
+            </div>
+            <div class="fy_oneAccessoryInfo">
+                <span class='fy_oneAccessoryInfoHead'><em class='m-r-xs'>*</em>分类名称：</span><input class="checkClassifyName oneAccessoryInput" ng-class="{color999: oneAccessoryKindName}" ng-change='accessoryLimitCheck("oneAccessoryKindName",40)' type="text" placeholder='请输入分类名称，40个字符以内' ng-model='oneAccessoryKindName'>
+                <div class="fy_oneAccessoryInfoErr"><span class='fy_oneAccessoryInfoHead'></span><span ng-show='kindNameErr' class="fy_oneAccessoryInfoErrCon">{{kindNameErrTxt}}</span></div>
+            </div>
+            <div class="fy_oneAccessoryInfo">
+                <span class='fy_oneAccessoryInfoHead'><em class='m-r-xs'>*</em>启用状态：</span><div class="selectWrap">
+                <div class="selector" ng-click='listShow("statusList")'><input class="oneAccessoryInput" ng-class="{color999: statusModel.id==0||statusModel.id==1}" type="text" placeholder='请选择状态' ng-model='statusModel.name' readonly="true"><a href='javascript:;'></a></div>
+                <div class="options" ng-show='statusList'>
+                    <ul>
+                        <li ng-repeat='item in optionStatus' ng-click='option("statusList","statusModel",item)'>{{item.name}}</li>
+                     </ul>
+                </div>
+            </div><div class="fy_oneAccessoryInfoErr"><span class='fy_oneAccessoryInfoHead'></span><span ng-show='statusErr' class="fy_oneAccessoryInfoErrCon">请选择状态</span></div>
+            </div>
+            <div class="fy_oneAccessoryInfo">
+                <span class='fy_oneAccessoryInfoHead'>备注：</span><textarea class="oneAccessoryInput" ng-class="{color999: oneAccessoryRemarks}" ng-change='accessoryLimit("oneAccessoryRemarks",300)' placeholder='请输入备注说明,300个字符以内(非必填)' ng-model='oneAccessoryRemarks'></textarea>
+            </div>
+            <div class="fy_oneAccessoryBtn">
+                <a class="fy_oneAccessoryBtn1" ng-click='newAccessory()'>保存</a><a class="fy_oneAccessoryBtn0 m-l" ng-click='newAccessory(1)'>取消</a>
+            </div>
+        </div>
+    <!-- fix wrap -->
+    <div class="fixWrap" ng-show='fixWrapShow' ng-click='menuHide()'></div>

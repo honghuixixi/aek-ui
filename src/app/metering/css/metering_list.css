@@ -1,0 +1,243 @@
+.metering {
+    min-width: 1360px;
+}
+
+/* menu */
+.metering-menu {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    bottom: 0;
+    width: 160px;
+    padding-top: 20px;
+    background-color: #fff;
+}
+
+.metering-menu-item {
+    padding-left: 30px;
+    font-size: 14px;
+    line-height: 36px;
+}
+
+.metering-menu-item a {
+    padding-left: 22px;
+    text-decoration: none;
+    color: #333;
+    background-repeat: no-repeat;
+    background-position-y: 4px;
+}
+
+.metering-menu .active {
+    background-color: #e1ece8;
+}
+
+.metering-menu .active a {
+    color: #f7931e;
+}
+
+.metering-menu .assets {
+    background-image: url('../../../../res/img/metering_tz_default.png');
+}
+
+.metering-menu .testing {
+    background-image: url('../../../../res/img/metering_jc_default.png');
+}
+
+.metering-menu .archives {
+    background-image: url('../../../../res/img/metering_da.default.png');
+}
+
+.metering-menu .active .assets {
+    background-image: url('../../../../res/img/metering_tz_check.png');
+}
+
+.metering-menu .active .testing {
+    background-image: url('../../../../res/img/metering_jc_check.png');
+}
+
+.metering-menu .active .archives {
+    background-image: url('../../../../res/img/metering_da_check.png');
+}
+
+.metering-content {
+    margin-left: 170px;
+}
+
+/* common */
+.metering-content .metering-btn {
+    display: inline-block;
+    font-size: 13px;
+    height: 32px;
+    padding: 0 15px;
+    color: #fff;
+    background-color: #f7931e;
+    cursor: pointer;
+}
+.metering-content .loading {
+    margin: 30px 0;
+    text-align: center;
+}
+
+.metering-content .empty {
+    margin: 30px 0;
+    text-align: center;
+}
+
+.metering-content .empty img {
+    margin-right: 10px;
+    vertical-align: middle;
+}
+/* nav */
+.metering-nav {
+    margin: 10px 10px 10px 0;
+    line-height: 32px;
+    overflow: hidden;
+}
+.metering-nav .metering-btn-add {
+    float: right;
+    padding-left: 30px;
+    background-position: 10px 9px;
+    background-image: url('../../../../res/img/add.png');
+    background-repeat: no-repeat;
+}
+
+/* swrap */
+.metering-swrap {
+    margin-right: 10px;
+    padding: 10px;
+    background-color: #fff;
+}
+/* list-search */
+.metering-search {
+    margin-bottom: 10px;
+    line-height: 32px;
+}
+
+.metering-search input[type="text"] {
+    height: 32px;
+    padding: 0 10px;
+    border: 1px solid #ccc;
+    outline: 0;
+}
+
+.metering-search-keyword {
+    width: 200px;
+}
+
+.metering-search-date {
+    width: 120px;
+    background-image: url(../../../../res/img/date-icon.png);
+    background-position: 96px 6px;
+    background-repeat: no-repeat;
+}
+
+/* list-table */
+.metering-list-table {
+    width: 100%;
+    border: 1px solid #dcdcdc;
+    border-collapse: collapse;
+}
+.metering-list-table td {
+    padding: 10px;
+    font-size: 13px;
+    border-bottom: 1px solid #dcdcdc;
+    color: #666;
+    vertical-align: middle;
+}
+.metering-list-table thead td {
+    background-color: #e5e5e5;
+    white-space: nowrap;
+}
+.metering-list-table tbody td {
+    word-break: break-all;
+}
+.metering-list-table .metering-img {
+    width: 70px;
+    height: 70px;
+}
+.metering-list-table .metering-dl {
+    margin: 0;
+    padding: 0;    
+    overflow: hidden;
+}
+.metering-list-table .metering-dl dt {
+    float: left;
+    width: 70px;
+    font-weight: 300;
+    color: #000;
+    text-align: right;
+}
+.metering-list-table .metering-dl dd {
+    margin-left: 70px;
+}
+.metering-list-table .tip-type {
+    display: inline-block;
+    width: 50px;
+    height: 20px;
+    font-size: 12px;
+    line-height: 20px;
+    background-color: #F3756F;
+    color: #fff;
+    border-radius: 10px;
+    text-align: center;
+}
+.metering-list-table .tip-type + .tip-type {
+    margin-top: 5px;
+}
+.metering-list-table .tip-date {
+    display: inline-block;
+    font-size: 12px;
+    background-color: #F3756F;
+    text-align: center;
+    color: #fff;
+    padding: 2px 6px;
+    border-radius: 15px;
+}
+.metering-list-table .edit {
+    color: #4baaf6;
+    cursor: pointer;
+}
+
+/* 计量报告单 */
+.metering-report {
+    padding: 10px;    
+}
+.metering-report-title {
+    font-size: 14px;
+    line-height: 40px;
+    font-weight: 700;
+    text-align: center;
+}
+.metering-report table {
+    width: 100%;
+}
+.metering-report-dl dl {
+    margin: 0;
+    padding: 0;
+    font-size: 13px;
+    overflow: hidden;
+}
+.metering-report-dl dt {
+    float: left;
+    width: 100px;
+    font-weight: 300;
+    text-align: right;
+}
+.metering-report-dl dd {
+    margin-left: 100px;
+    margin-bottom: 5px;
+}
+.metering-report-table {
+    margin-top: 10px;
+    border-collapse: collapse;
+}
+.metering-report-table td {
+    padding: 10px;
+    font-size: 13px;
+    border: 1px solid #dcdcdc;
+    word-break: break-all;
+}
+.metering-report-table td a {
+    display: block;
+    line-height: 24px;
+}

@@ -1,0 +1,39 @@
+.metering-modal-table {
+    width: 100%;
+}
+.metering-modal-table .metering-row {
+    margin-top: 10px;
+    font-size: 14px;
+}
+.metering-modal-table .metering-row .require {
+    color: #f00;
+}
+.metering-modal-table .metering-row span {
+    display: inline-block;
+    width: 100px;
+    text-align: right;
+}
+.metering-modal-table .metering-row input[type="text"] {
+    width: 260px;
+    height: 34px;
+    padding: 0 10px;
+    margin-left: 5px;
+    line-height: 34px;
+    border: 1px solid #dcdcdc;
+    outline: 0;
+}
+.metering-modal-table .metering-row-date {
+    background-image: url(../../../../res/img/date-icon.png);
+    background-position: 230px 6px;
+    background-repeat: no-repeat;
+}
+.metering-modal-table .textarea {    
+    width: 658px;
+    height: 150px;   
+    padding: 10px;
+    margin-left: 10px;
+    line-height: 20px;    
+    font-size: 14px;
+    border: 1px solid #dcdcdc;
+    resize: none;
+}

@@ -1,0 +1,19 @@
+<div class="training-swrap">
+    <div class="training-search">
+        <span>培训类型</span>
+        <aek-select list="data.local.typeOptions" change="methods.changeType" item="data.local.currentType"></aek-select>
+        <span>&nbsp;&nbsp;&nbsp;&nbsp;培训时间</span>
+        <input class="training-search-date" id="nextDateStart" type="text" readonly placeholder="请选择" ng-value="data.local.nextDateStart | date:'yyyy-MM-dd'">
+        <span>至</span>
+        <input class="training-search-date" id="nextDateEnd" type="text" readonly placeholder="请选择" ng-value="data.local.nextDateEnd | date:'yyyy-MM-dd'">
+        <input class="training-search-keyword" type="text" placeholder="培训编号/培训主题/讲师/地点" ng-model="data.local.keyword" maxlength="40">
+        <span class="training-btn" ng-click="methods.search()">搜索</span>
+    </div>
+    <div ng-transclude></div>
+    <!-- 分页 -->
+    <span ng-if="!data.loading && !data.empty" data-ng-include=" 'src/tpl/newPageInfo.html' "></span>
+    <!-- empty -->
+    <div class="empty" ng-if="data.empty && !data.loading"><img src="../../../res/img/nocontent.png">暂无数据</div>
+    <!-- loading -->
+    <div class="loading" ng-if="data.loading"><img src="../../../res/img/loading2.gif"></div>
+</div>

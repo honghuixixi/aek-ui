@@ -1,0 +1,20 @@
+<div class="quality-swrap">
+    <div class="quality-search">
+        <aek-select list="statusOptions" change="methods.changeType" item="data.local.currentType" style="width: 120px;" ng-show="statusOptions.length > 0"></aek-select>
+        <span ng-show="statusOptions.length > 0">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        <span>填报日期</span>
+        <input class="quality-search-date" id="nextDateStart" type="text" readonly placeholder="请选择" ng-value="data.local.nextDateStart | date:'yyyy-MM-dd'">
+        <span>至</span>
+        <input class="quality-search-date" id="nextDateEnd" type="text" readonly placeholder="请选择" ng-value="data.local.nextDateEnd | date:'yyyy-MM-dd'">
+        <aek-select list="data.local.departOptions" change="methods.changeDepart" item="data.local.currentDepart"></aek-select>
+        <input class="quality-search-keyword" type="text" placeholder="{{placeholder}}" ng-model="data.local.keyword" maxlength="40">
+        <span class="quality-btn" ng-click="methods.search()">搜索</span>
+    </div>
+    <div ng-transclude></div>
+    <!-- 分页 -->
+    <span ng-if="!data.loading && !data.empty" data-ng-include=" 'src/tpl/newPageInfo.html' "></span>
+    <!-- empty -->
+    <div class="empty" ng-if="data.empty && !data.loading"><img src="../../../res/img/nocontent.png">暂无数据</div>
+    <!-- loading -->
+    <div class="loading" ng-if="data.loading"><img src="../../../res/img/loading2.gif"></div>
+</div>

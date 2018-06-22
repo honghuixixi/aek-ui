@@ -1,0 +1,20 @@
+<div class="quality-nav">
+    <span>质控填报</span> &gt;
+    <span ng-if="data.local.applyId <= 0">新增填报</span>
+    <span ng-if="data.local.applyId > 0">查看详情</span>
+    <span class="quality-btn quality-detail-btn" ng-click="methods.submit()" ng-if="(data.local.currentTemplate.id > 0 && data.local.currentType.id > 0) || data.local.applyId > 0">提交</span>
+    <span class="quality-btn quality-detail-btn" ng-click="methods.saveTemp()" ng-if="(data.local.currentTemplate.id > 0 && data.local.currentType.id > 0) || data.local.applyId > 0">暂存</span>
+    <span class="quality-btn quality-detail-btn" ng-click="methods.print()" ng-if="data.local.currentTemplate.id > 0">打印</span>
+    <span class="quality-btn quality-detail-btn" ng-click="methods.drop()" ng-if="data.local.applyId > 0">作废</span>
+</div>
+<div class="quality-swrap">
+    <div ng-if="data.local.applyId < 1">
+        <span>选择质控模板</span>
+        <aek-select list="data.local.templateList" change="methods.changeTemplate" item="data.local.currentTemplate"></aek-select>&nbsp;&nbsp;&nbsp;&nbsp;
+        <span>选择质控类型</span>
+        <aek-select list="data.local.typeOptions" change="methods.changeType" item="data.local.currentType"></aek-select>
+    </div>
+    <div data-ng-include="'src/app/quality/html/add-tpl.html'" ng-if="data.local.currentTemplate.id > 0 || data.local.applyId > 0"></div>
+</div>
+<!-- 打印质检报告 -->
+<div data-ng-include="'src/app/quality/html/print-tpl.html'" id="template_quality_report" style="display: none;"></div>

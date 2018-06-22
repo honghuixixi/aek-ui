@@ -1,0 +1,111 @@
+<div class="meeting-nav">
+    <span>{{data.local.type == 1 ? '记录管理' : '记录档案'}}</span> &gt;
+    <span>查看详情</span>
+    <span class="meeting-btn meeting-detail-btn" ng-click="methods.disPrint()">打印记录单</span>
+    <span class="meeting-btn meeting-detail-btn" ng-click="methods.del()" ng-if="data.local.type == 1">删除</span>
+    <span class="meeting-btn meeting-detail-btn" ng-click="methods.edit()" ng-if="data.local.type == 1">编辑</span>
+</div>
+<div class="meeting-swrap">
+    <dl class="meeting-info">
+        <dt>记录编号</dt>
+        <dd>
+            <span>{{data.server.num}}</span>
+            <div style="display: inline;margin-left: 400px;" ng-if="data.local.type == 1">
+                <span style="margin-right:10px;color: #333;">新增时间</span>
+                <span>{{data.server.updateTime | date:'yyyy-MM-dd HH:mm'}}</span>
+            </div>
+        </dd>
+        <dt ng-if="data.local.type == 2">新增时间</dt>
+        <dd ng-if="data.local.type == 2">
+            <span>{{data.server.updateTime | date:'yyyy-MM-dd HH:mm'}}</span>
+            <div style="display: inline;margin-left: 400px;">
+                <span style="margin-right:10px;color: #333;">新增人</span>
+                <span>{{data.server.createName}}</span>
+            </div>
+        </dd>
+        <dt>会议主题</dt>
+        <dd>{{data.server.subject}}&nbsp;</dd>
+        <dt>发起人</dt>
+        <dd>{{data.server.originator}}&nbsp;</dd>
+        <dt>会议时间</dt>
+        <dd>{{data.server.meetingTime | date:'yyyy-MM-dd HH:mm'}}&nbsp;</dd>
+        <dt>会议地点</dt>
+        <dd>{{data.server.locale}}&nbsp;</dd>
+        <dt>参会人</dt>
+        <dd>{{data.server.attendee}}&nbsp;</dd>
+        <dt>会议内容</dt>
+        <dd>{{data.server.content}}&nbsp;</dd>
+        <dt>附件</dt>
+        <dd>
+            <div ng-repeat="v in data.server.files">
+                <a href="{{v.fileUrl | downloadUrlFilter}}">{{v.fileName}}；</a>
+            </div>
+        </dd>
+    </dl>
+</div>
+
+<!-- 培训单  -->
+<div class="meeting-report" id="meeting-plan-print" style="display: none;">
+    <div class="meeting-report-title">{{data.server.teantName}}-医疗管理委员会会议记录单</div>
+    <div class="meeting-report-no">
+        <span style="color: #333;">记录编号：</span>
+        <span>{{data.server.num}}</span>
+    </div>
+    <div class="meeting-report-no">
+        <span style="color: #333;">新增时间：</span>
+        <span>{{data.server.createTime | date:'yyyy-MM-dd HH:mm'}}</span>
+        <div style="display: inline;float: right;">
+            <span style="color: #333;">新增人：</span>
+            <span>{{data.server.createName}}</span>
+        </div>
+    </div>
+    <table class="meeting-report-table">
+        <tr>
+            <td style="width: 100px;text-align: center;">会议主题</td>
+            <td>{{data.server.subject}}</td>
+        </tr>
+        <tr>
+            <td style="width: 100px;text-align: center;">发起人</td>
+            <td>{{data.server.originator}}</td>
+        </tr>
+        <tr>
+            <td style="width: 100px;text-align: center;">会议时间</td>
+            <td>{{data.server.meetingTime | date:'yyyy-MM-dd HH:mm'}}</td>
+        </tr>
+        <tr>
+            <td style="width: 100px;text-align: center;">会议地点</td>
+            <td>{{data.server.locale}}</td>
+        </tr>
+        <tr>
+            <td style="width: 100px;text-align: center;">参会人</td>
+            <td>{{data.server.attendee}}</td>
+        </tr>
+        <tr>
+            <td style="width: 100px;text-align: center;">会议内容</td>
+            <td>{{data.server.content}}</td>
+        </tr>
+        <tr>
+            <td style="width: 100px;text-align: center;">附件</td>
+            <td>
+                <div ng-repeat="v in data.server.files">
+                    <a href="{{v.fileUrl | downloadUrlFilter}}" ng-if="data.server.showDownload">{{v.fileName}}；</a>
+                    <a ng-if="!data.server.showDownload">{{v.fileName}}；</a>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<!-- 删除模板 -->
+<div id="meetDelTpl" class="inspectionLayer" style="display: none;">
+    <div style="text-align: center; color: #666;">
+        <div>
+            <div class="inspectionLayerImg m-t-lg m-b-md">
+                <img src='../../res/img/icon20.png'>
+            </div>
+            <div>
+                <span>删除记录后不可恢复，确定要删除吗？</span>
+            </div>
+        </div>
+    </div>
+</div>

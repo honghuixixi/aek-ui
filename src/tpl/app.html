@@ -1,0 +1,26 @@
+  <!-- navbar -->
+  <div data-ng-include=" 'src/tpl/header.html' " class="app-header navbar b-b-3x-orange">
+  </div>
+  <!-- / navbar -->
+
+  <!-- menu -->
+  <div data-ng-include=" 'src/tpl/aside.html'" class="users-aside app-aside hidden-xs {{app.settings.asideColor}}" ng-class='{"member-asid-nav":membernav }'  ng-class='{"users-aside-role": !userOr}'></div>
+  <!-- / menu -->
+
+  <!-- content -->
+  <div class="app-content" ng-class='{"app-member-content":membernav }'>
+	<div class="body-bg"></div>
+    <div ui-butterbar></div>
+    <a href class="off-screen-toggle hide" ui-toggle-class="off-screen" data-target=".app-aside" ></a>
+    <div class="app-content-body app-content-body-tre" ui-view></div> <!-- -->
+  </div>
+  <!-- /content -->
+
+  <!-- footer -->
+  <!--<footer class="footer" data-ng-include=" 'src/tpl/footer.html' "></footer>-->
+  <!-- / footer -->
+
+  <!-- disabled setting, by hjw 
+  <div data-ng-include=" 'src/tpl/blocks/settings.html' " class="settings panel panel-default">
+  </div>
+  -->

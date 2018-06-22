@@ -1,0 +1,19 @@
+<div class="fy_head_wrapfull">
+	<div class="fy_head_content">
+		<div class="fy_head_content_left">
+			<!-- <a ui-sref='website.home'><img src="../../res/img/logo.png" alt=""></a> -->
+			<span class='m-l-sm fontsize21px' style="font-weight: 700;">设备管理服务平台</span>
+		</div>
+		<div class="fy_head_content_right">
+			<ul ng-class='{width1024pxul: width1024px}'>
+				<li><a ng-click='scrollTO()'>平台功能</a></li>
+				<li class="dropDownCodeLi"><a>公众号</a><div class="dropDownCodeMenu"><img src="../../res/img/wxpicture.png" alt=""></div></li>
+				<li><a>关于我们</a></li>
+				<li><a>加入我们</a></li>
+				<li class="fy_head_phone" ng-class='{width1024pxli: width1024px}'><a><img src="../../res/img/homephone.png"><span>400-052-5256</span></a></li>
+			</ul>
+			<a ng-if='!logined' ng-class='{width1024pxa: width1024px}' class="loginBtn" ui-sref='access.login'>登录</a>
+			<a ng-if='logined' ng-class='{width1024pxa: width1024px}' class="enterBtn" ng-click='enterback()'>进入后台</a>
+		</div>
+	</div>
+</div>

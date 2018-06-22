@@ -1,0 +1,31 @@
+<table class="implement-template">
+	<thead>
+		<tr>
+			<th>序号</th>
+			<th>设备编号</th>
+			<th>设备名称</th>
+			<th>型号</th>
+			<th>所在部门</th>
+			<th ng-repeat="v in templates">{{v.name}}</th>
+			<th ng-if="+type2 > 1">备注</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="obj in equipments">
+			<td style="text-align: center;">{{(page - 1) * pageSize + $index + 1}}</td>
+			<td>{{obj.equipmentNo}}</td>
+			<td>{{obj.name}}</td>
+			<td>{{obj.model}}</td>
+			<td>{{obj.department}}</td>
+			<td ng-repeat="v in templates" style="white-space: nowrap; min-width: {{getW(obj, v, +type1)}}px; text-align: center;}};">
+				<span ng-if="+type1 !== 3" class="span" ng-repeat="o in v.projects"><i ng-if="+type1 === 2" class="{{obj.answers[v.id] && obj.answers[v.id]['id'] === o.id ? 'checked' : ''}}" ng-click="chooseAnswer(obj, v, o)"></i>{{o.name}}</span>
+				<span ng-if="+type1 === 3">{{obj.answers[v.id]['name']}}</span>
+			</td>
+			<td ng-if="+type2 > 1">
+				<input ng-if="+type2 === 2" type="text" placeholder="请输入" ng-model="obj.remarks" maxlength="40">
+				<span ng-if="+type2 === 3">{{obj.remarks}}</span>
+				<div ng-if="+type2 === 4" style="width:100px;"></div>
+			</td>
+		</tr>
+	</tbody>
+</table>

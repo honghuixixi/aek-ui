@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>爱医康</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            height: 360px;
+            width: 650px;
+            text-align: center;
+            margin:200px auto;
+            font-size: 20px;
+            color: #666;
+            line-height: 40px;
+        }
+        p{
+            font-size: 25px;
+        }
+        .login{
+            width: 260px;
+            height: 45px;
+            background: #f7931e;
+            color: #fff;
+            border: 3px;
+            line-height: 45px;
+            margin: 30px auto;
+            border-radius: 3px;
+            display: block;
+            text-decoration: none;
+        }
+        .content{
+            margin-top:100px;  
+        }
+         .overdata{
+            color: #999;
+        }
+    </style>
+    <script src="./src/app/login/js/jquery/jquery.min.js"></script>
+</head>
+<body>
+<div class="box success" style="display: none">
+    <p>绑定邮箱</p>
+    <div class="content">绑定邮箱成功，您的邮箱地址为</div>
+    <div id="email">783247888@aek.com</div>
+    <a class="login" href="https://ebey.aek56.com/#/access/login">现在登录</a>
+</div>
+<div class="box overdata" style="display: none">
+        <p>绑定邮箱</p>
+        <div class="content"><img src="./res/img/overemail.png" alt=""></div>
+        <div class="overdata">绑定邮箱地址已经过期，请检查您的邮箱或者</div>
+        <div class="overdata">重新设置</div>
+    </div>
+</body>
+</html>
+<script>
+    $.getUrlParam = function(name){
+        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if (r!=null) return unescape(r[2]); return null;
+    }
+        $.ajax({
+            url:'api/sys/user/'+$.getUrlParam('id')+'/modify/email',
+            data:{'id':$.getUrlParam('id')},
+            type: 'get',
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader("X-AEK56-Token", localStorage.getItem('ngStorage-X-AEK56-Token'));
+            }
+        }).done(function(data){
+            if(data.code == 200){
+                $('.success').show();
+                $('#email').html(data.data);
+            }else{
+                $('.overdata').show();
+            }
+        })
+</script>

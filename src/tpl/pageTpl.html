@@ -1,0 +1,30 @@
+<ul ng-hide="Hide" ng-class="ulClass">
+	<li title="{{Item.title}}" ng-class="Item.liClass" ng-click="Item.action(Item)" ng-repeat="Item in List">
+		<p class="page-statis" ng-if="Item.total">
+			<span>共{{Item.total}}条</span>
+		</p>
+		<p class="page-statis pageSel" ng-if="Item.statis">
+			<!--<span>每页显示</span>-->
+			<!-- 注意数据一定要是数字-->
+			<ui-select style="width: 85px;height: 24px;" on-select="Item.action($item, $model)" ng-model="pageSizeSel" theme="" append-to-body="true">
+				<ui-select-match placeholder="请选择">{{$select.selected.name}}</ui-select-match>
+				<ui-select-choices repeat="pp in pageArr | filter: $select.search">
+					<span ng-bind-html="pp.name | highlight: $select.search"></span>
+					<!--<small ng-bind-html="orgType.id | highlight: $select.search"></small>-->
+				</ui-select-choices>
+			</ui-select>
+
+			<!--<select class="page-select" ng-options="page.id as page.name for page in pageArr" ng-model="Item.pageSize" ng-change="Item.action($event,Item)"></select>-->
+			<!--<span>条</span>-->
+		</p>
+		<p class="pages-content" ng-if="Item.runpage">
+			<span><em>跳至</em><input style="font-size: 13px;" type="text" ng-model="Item.page" ng-change="Item.pageChange(Item)" ng-keyup="Item.action($event,Item)"/><em>页</em></span>
+		</p>
+
+		<a class="pages" ng-if="Item.pages" href ng-bind="Item.value"></a>
+		<!--跳转暂时不需要-->
+		<a class="pageBtn" ng-if="!Item.runpage && !Item.statis && !Item.pages" href><i class="{{Item.value}}" style="background: url('{{Item.src}}') no-repeat 0px;width:24px;height: 24px;"></i></a>
+
+
+	</li>
+</ul>

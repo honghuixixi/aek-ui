@@ -1,0 +1,69 @@
+<div class="fy_accessoryClassify">
+    <div class="fy_inspectionBtns"><a href="javascript:;" ng-if="userInfo.authoritiesStr.indexOf('QC_TEMPLATE_NEW') != -1" class="fy_inspectionBtn newInspectionBtn" ng-click='editModel()'>新建巡检模板</a></div>
+    <div class="fy_accessoryClassifyTitle">巡检模板</div>
+    <div class="fy_accessoryWrap">        
+        <div class="fy_accessoryHead">
+            <div class="fy_accessorySearch">
+                <div class="selectWrap">
+                    <div class="selector" ng-click='listShow("typeList")'><input type="text" ng-model='typeModel.name' readonly="true"><a href='javascript:;'></a></div>
+                    <div class="options" ng-show='typeList'>
+                        <ul>
+                            <li ng-repeat='item in optionType' ng-click='option("typeList","typeModel",item,1)'>{{item.name}}</li>
+                         </ul>
+                    </div>
+                </div>
+                <input type="text" class="searchInput" placeholder='模板名称' ng-model='kindName'><a class="search" ng-click='getAccessoryList(1)'>搜索</a><i class="verticalAdjust"></i>
+            </div>
+        </div>
+        <div class="fy_accessoryContent">
+        	<table>
+        		<tr>
+        			<th class="">ID</th>
+        			<th class="inspectionPlanHeader110">模板名称</th>
+                    <th class="inspectionPlanHeader110">类型</th>
+                    <th class="inspectionPlanHeader110">备注</th>
+        			<th class="b-r-dcdcdc inspectionPlanHeader40">操作</th>
+        		</tr>
+        		<tr ng-repeat="td in accessoryContent  track by $index" ng-class='{fy_inspectionStoped:td.status==2}'>
+        			<td class="">{{td.id}}</td>
+        			<td>{{td.name}}<span ng-if='td.status==2' class='fy_inspectionModelStoped'>停用</span></td>
+                    <td>{{td.type}}</td>
+        			<td>{{td.remarks}}</td>
+                    <td class="b-r-dcdcdc"><a href="javascript:;" ui-sref="inspection.model.detail({tenantId:$stateParams.tenantId||$localStorage.userInfo.tenantId,modelId:td.id})">管理</a><a href="javascript:;" class="m-l-lg" ng-if='td.type!="系统模板"&&userInfo.authoritiesStr.indexOf("QC_TEMPLATE_EDIT") != -1' ng-click='editModel(td,$index)'>编辑</a></td>
+        		</tr>
+                <tr ng-hide='nocontent||onloading'>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr ng-show='nocontent'>
+                    <td colspan="5" class="repairTextCenter b-r-dcdcdc b-b-dcdcdc">
+                        <img src="../../res/img/nocontent.png" alt=""><span class='m-l-lg'>暂无数据</span>
+                    </td>
+                </tr>
+                <tr ng-show='onloading'>
+                    <td colspan="5" class="repairTextCenter b-r-dcdcdc b-b-dcdcdc">
+                        <img src="../../res/img/loading2.gif" alt=""><span class='verticalAlignMiddle'></span>
+                    </td>
+                </tr>
+        	</table>
+        </div>
+        <div class="fy_accessoryFoot">
+            <span ng-hide='onloading||nocontent' data-ng-include=" 'src/tpl/newPageInfo.html' "></span>
+        </div>
+        <!-- fix wrap -->
+        <div class="fixWrap" ng-show='fixWrapShow' ng-click='menuHide()'></div>
+    </div>
+</div>
+<!-- 编辑模板 -->
+<div ng-show='editModelShow' id='ModelCon'>
+    <div class="inspectionEditModelInfo">
+        <div class="inspectionModelHeadInfo"><em>*</em>模板名称：</div><div class="inspectionModelBodyInfo"><input type="text" ng-model='model.name' ng-change='modelNameChange()' placeholder='40个字符以内'></div>
+    </div>
+    <div class="inspectionEditModelInfoErr"><span ng-show='modelNameErr'>请输入模板名称</span></div>
+    <div class="inspectionEditModelInfo">
+        <div class="inspectionModelHeadInfo">备注：</div><div class="inspectionModelBodyInfo"><textarea ng-model='model.remarks' ng-change='remarksLimit()' placeholder='备注内容，40个字符以内'></textarea>
+    </div>
+</div>

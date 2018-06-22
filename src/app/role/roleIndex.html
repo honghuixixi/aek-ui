@@ -1,0 +1,99 @@
+<div class="p-t-15 roleIndexWrap">
+	<!-- title -->
+	<div class="roleTitle">
+		<div class="roleTitleBtn">
+			<a ng-click='newRole()' ng-if="userInfo.authoritiesStr.indexOf('SYS_ROLE_NEW') != -1" class="btnYellow ahoverBTN acolorfff newRole">新建角色</a><i class='verticalAlignMiddle'></i>
+		</div>
+		<div class="roleTitleNow acolor666">
+			<span class='font15px'>{{roleTitle}}</span><span class='font12px m-l-sm'>({{userInfo.nowOrgName}})</span>
+		</div>
+	</div>
+	<!-- con -->
+		<div class="noPowerSee" ng-if="userInfo.authoritiesStr.indexOf('SYS_ROLE_LIST_VIEW') == -1">
+			<img src="../../res/img/myqx.png"><span class='acolor999 font13px'>您没有该页面的权限</span>
+		</div>
+		<div ng-if="userInfo.authoritiesStr.indexOf('SYS_ROLE_LIST_VIEW') != -1" class="indexCon roleIndexCon p-t-15">
+			<!-- section-sort -->
+			<div class="sortCon">
+				<div class="selectWrap">
+					<div class="selector" ng-click='listShow("typeList")'><input type="text" ng-model='typeModel' readonly="true"><a href='javascript:;'></a></div>
+					<div class="options" ng-show='typeList'>
+						<ul>
+							<li ng-repeat='item in optionType' ng-click='option("typeList","typeModel",item)'>{{item.name}}</li>
+						</ul>
+					</div>
+				</div><div class="selectWrap">
+					<div class="selector" ng-click='listShow("stateList")'><input type="text" ng-model='stateModel' readonly="true"><a href='javascript:;'></a></div>
+					<div class="options" ng-show='stateList'>
+						<ul>
+							<li ng-repeat='item in optionState' ng-click='option("stateList","stateModel",item)'>{{item.name}}</li>
+						</ul>
+					</div>
+				</div>
+				<i class="verticalAlignMiddle"></i>
+			</div>
+			<!-- content -->
+			<table border="0" cellspacing="0" cellpadding="0" class="font13px acolor666 tabelConList minwidth1306">
+				<tr>
+					<th class="b-l-dcdcdc" style="width:3%">ID</th>
+					<th style="width:16.98%">角色名称</th>
+					<th style="width:7.41%">角色类型</th>
+					<th style="width:56.72%">包含权限</th>
+					<th style="width:6.23%">用户数</th>
+					<th style="width:9.4%">操作</th>
+				</tr>
+				<tr class="hideTr">
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr ng-repeat='td in tdData' ng-class='{"acolorbe": !td.enable}'>
+					<td class="b-l-dcdcdc firstTd">{{td.id}}</td>
+					<td class="p-l-15 textLeft roleNameTd"><span ng-if='!td.enable' class='m-l m-r-sm hadStop hadStatus'>已停用</span><div class="roleMoreLine xy-roleTable">{{td.name}}</div></td>
+					<td>{{td.presetId?'预设角色':'自定义'}}</td>
+					<td class="textLeft p-t-15"><div class="roleMoreLine">{{td.descript}}</div></td>
+					<td>{{td.userCount}}</td>
+					<td class="aTagColor moreOpt lastTd">
+						<a ng-if="userInfo.authoritiesStr.indexOf('SYS_ROLE_DETAILED_VIEW') != -1" href="javascript:;" ng-click='lookDetail(td)'>查看</a><div class="selectWrap m-l-md" ng-show='!td.presetId'>
+							<div ng-if="userInfo.authoritiesStr.indexOf('SYS_ROLE_MANAGE') != -1" class="selectors"><a href="javascript:;" ng-click='showMoreOpt($index)'>···</a></div>
+							<div class="options width120" ng-show='operateList{{$index}}'>
+								<ul>
+									<li ng-click='alertLayer($index,td,2)' ng-if='!td.enable'><a href="javascript:;">启用角色</a></li>
+									<li ng-click='alertLayer($index,td,1)' ng-if='td.enable'><a href="javascript:;">停用角色</a></li>
+									<li ng-click='alertLayer($index,td,0)'><a href="javascript:;">删除角色</a></li>
+								</ul>
+							</div>
+						</div>
+					</td>
+				</tr>
+				<tr class="copyBorder">
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr class="hideTr" ng-show='nocontent'>
+					<td colspan="6" style="padding: 10px 0;" class="h-b-c-f b-l-dcdcdc b-r-dcdcdc height100">
+						<img src="../../res/img/nocontent.png" alt=""><span class='m-l-lg'>暂无数据</span>
+					</td>
+				</tr>
+				<tr class="b-b-tr" ng-show='onloading'>
+					<td colspan="6" style="padding: 10px 0;" class="h-b-c-f b-l-dcdcdc b-r-dcdcdc height100">
+						<img src="../../res/img/loading2.gif" alt=""><span class='verticalAlignMiddle'></span>
+					</td>
+				</tr>
+			</table>
+			<!-- 分页 -->
+			<span ng-if="!onloading && !nocontent" data-ng-include=" 'src/tpl/newPageInfo.html' "></span>
+			<!--弹框-->
+			<div data-ng-include=" 'src/tpl/alert.html' "></div>
+
+			<div class="roleFixWrap" ng-show='fixWrapShow' ng-click='menuHide()'></div>
+			<!-- /content -->
+		</div>
+</div>

@@ -1,0 +1,58 @@
+<div>
+    <div class="maintain-top">
+        保养模板
+        <span class="maintain-btn" ng-if="data.limit.add" ng-click="addTemplate()">新建保养模板</span>
+    </div>
+    <div class="maintain-main" style="min-height: {{data.height}}px;">
+        <div class="maintain-main-search">
+            <maintain-select list="data.status" change="changeStatus" item="data.selectStatus"></maintain-select>
+            <input type="text" placeholder="模板名称" ng-model="data.condition.keyword">
+            <span class="maintain-btn" ng-click="search()">搜索</span>
+        </div>
+        <table class="maintain-main-list">
+            <thead>
+                <tr>
+                    <td style="width: 50px;">ID</td>
+                    <td>模板名称</td>
+                    <td style="width: 130px;">类型</td>
+                    <td>备注</td>
+                    <td style="width: 130px;">操作</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="{{v.enable ? '' : 'disable'}}" ng-repeat=" v in data.list">
+                    <td>{{v.id}}</td>
+                    <td style="text-align: left;">{{v.name}}<span class="tag tag-err" ng-if="!v.enable">停用</span></td>
+                    <td>{{v.type > 1 ? '自定义模板' : '系统模板'}}</td>
+                    <td style="text-align: left;">{{v.remarks || ''}}</td>
+                    <td>
+                        <a ui-sref="maintain.menu.templateinfo({id: v.id})">管理</a>
+                        <a ng-if="v.type > 1 && data.limit.edit" ng-click="editTemplate(v)">编辑</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- 分页 -->
+        <span ng-if="!data.loading && !data.empty" data-ng-include=" 'src/tpl/newPageInfo.html' "></span>
+        <!-- empty -->
+        <div class="empty" ng-if="data.empty && !data.loading"><img src="../../../res/img/nocontent.png">暂无数据</div>
+        <!-- loading -->
+        <div class="loading" ng-if="data.loading"><img src="../../../res/img/loading2.gif"></div>
+        <!-- 新建/编辑对话框 -->
+        <div id="template_add_template" style="display: none;">
+            <dl class="modal-add">
+                <dt><span class="require">*</span>模板名称：</dt>
+		        <dd>
+		            <input id="templateName" type="text" placeholder="40个字符以内" maxlength="40" ng-model="data.template.name" ng-change="removeErr()" >
+		            <div class="err">{{data.err}}&nbsp;</div>
+		        </dd>
+		        <dt>备注：</dt>
+		        <dd>
+		            <div class="absc">
+		                <textarea ng-model="data.template.remarks" maxlength="40" ng-trim="false" placeholder="备注内容，40个字符以内"></textarea>
+		            </div>
+		        </dd>
+		    </dl>
+</div>
+	</div>
+</div>

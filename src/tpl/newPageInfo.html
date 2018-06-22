@@ -1,0 +1,17 @@
+<!-- 底部分页 -->
+<footer ng-show="pageInfo.total" class="panel-footer">
+	<div class="row">
+		<new-paging ng-show="pageInfo.total" class="col-sm-12 text-right text-center-xs"
+					hide-if-empty=false
+					ul-class="cw-pagination pagination-sm m-t-none m-b-none"
+					page="pageInfo.current"
+					page-size="pageInfo.size"
+					pp-size="pageInfo.pstyle"
+					total="pageInfo.total"
+					show-prev-next="true"
+					scroll-top="false" refresh="pagination(page,pageSize)" paging-action="pagination(page,pageSize)">
+		</new-paging>
+	</div>
+</footer>
+<!-- 无数据提醒 -->
+<!--<div ng-hide="pageInfo.total" class="m-md alert alert-warning text-center text-lg">暂无数据</div>-->

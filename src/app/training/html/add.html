@@ -1,0 +1,76 @@
+<div class="training-nav">
+    <span>培训记录</span> &gt;
+    <span ng-if="data.local.isEdit">编辑记录</span>
+    <span ng-if="!data.local.isEdit">新增记录</span>
+    <a class="training-btn training-btn-cancel training-edit-btn" ui-sref="training.menu.info({id: data.local.id, type:1})" ng-if="data.local.isEdit">取消</a>
+    <span class="training-btn training-edit-btn" ng-click="methods.save()">保存</span>
+</div>
+<div class="training-swrap">
+    <dl class="training-add">
+        <dt>
+            <i>*</i>
+            <span>培训主题</span>
+        </dt>
+        <dd>
+            <input type="text" maxlength="40" placeholder="请输入，40字符以内" ng-model="data.local.record.theme" ng-change="methods.removeErr('theme')">
+            <div class="err">{{data.local.err.theme}}</div>
+        </dd>
+        <dt>
+            <i>*</i>
+            <span>培训类型</span>
+        </dt>
+        <dd>
+            <aek-select list="data.local.types" change="methods.changeType" item="data.local.record.type" style="width: 400px;"></aek-select>
+            <div class="err">{{data.local.err.type}}</div>
+        </dd>
+        <dt>
+            <i>*</i>
+            <span>培训时间</span>
+        </dt>
+        <dd>
+            <input id="training-add-time" class="training-add-date" type="text" readonly placeholder="请选择">
+            <div class="err">{{data.local.err.time}}</div>
+        </dd>
+        <dt>
+            <i>*</i>
+            <span>培训讲师</span>
+        </dt>
+        <dd>
+            <input type="text" maxlength="40" placeholder="请输入，40字符以内" ng-model="data.local.record.teacher" ng-change="methods.removeErr('teacher')">
+            <div class="err">{{data.local.err.teacher}}</div>
+        </dd>
+        <dt>
+            <i>*</i>
+            <span>培训地点</span>
+        </dt>
+        <dd>
+            <input type="text" maxlength="40" placeholder="请输入，40字符以内" ng-model="data.local.record.place" ng-change="methods.removeErr('place')">
+            <div class="err">{{data.local.err.place}}</div>
+        </dd>
+        <dt>
+            <i>*</i>
+            <span>培训对象</span>
+        </dt>
+        <dd>
+            <input type="text" maxlength="40" placeholder="请输入，40字符以内" ng-model="data.local.record.obj" ng-change="methods.removeErr('obj')">
+            <div class="err">{{data.local.err.obj}}</div>
+        </dd>
+        <dt>培训内容</dt>
+        <dd>
+            <textarea maxlength="300" placeholder="请输入，300字符以内" ng-model="data.local.record.content"></textarea>
+            <div class="count">{{data.local.record.content.length}}/300</div>
+        </dd>
+        <dt>附件</dt>
+        <dd>
+            <div style="line-height: 32px;">
+                <span class="training-btn training-cancle" ng-click="methods.uploadFile()" ng-show="data.local.record.attachments.length < 5">上传附件</span>&nbsp;&nbsp;
+                <label style="color: #999;">*单个文件10M以内，最多上传5个</label>
+                <input id="training-add-upload" type="file" style="display: none;">
+            </div>
+            <div ng-repeat="v in data.local.record.attachments">
+                <a>{{v.fileName}}；</a>
+                <span style="margin-left: 10px;color: #f00;cursor: pointer;" ng-click="methods.removeFile($index)">删除</span>
+            </div>
+        </dd>
+    </dl>
+</div>

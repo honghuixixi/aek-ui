@@ -1,0 +1,119 @@
+<div ng-show="isshow">
+    <table class="tab2" style="margin-top: 15px;">
+        <tr>
+            <td colspan="2">
+                <div class="tab2-group">基本信息</div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <dl class="search-archives">
+                    <dt>设备名称：</dt>
+                    <dd>{{data.server.assetsName}}&nbsp;</dd>
+                    <dt>生产商：</dt>
+                    <dd>{{data.server.factoryName}}&nbsp;</dd>
+                    <dt>录入日期：</dt>
+                    <dd>{{data.server.createTime | date:'yyyy-MM-dd'}}&nbsp;</dd>
+                    <dt>院内编码：</dt>
+                    <dd>{{data.server.serialNum}}&nbsp;</dd>
+                    <dt>注册证号：</dt>
+                    <dd>{{data.server.regNo}}&nbsp;</dd>
+                    <dt>三级分类代码：</dt>
+                    <dd>{{data.server.threeLevelCode}}&nbsp;</dd>
+                    <dt>产地：</dt>
+                    <dd>{{data.server.prodPlace}}&nbsp;</dd>
+                    <dt>单位：</dt>
+                    <dd>{{data.server.unitName}}&nbsp;</dd>
+                    <dt>核算类别：</dt>
+                    <dd>{{data.server.assetsClassName}}&nbsp;</dd>
+                    <dt>计量设备：</dt>
+                    <dd>{{data.server.measureFlag ? '是' : '否'}}&nbsp;</dd>
+                    <dt>设备来源：</dt>
+                    <dd>{{data.server.purchaseTypeName}}&nbsp;</dd>
+                    <dt>购入日期：</dt>
+                    <dd>{{data.server.purchaseDate | date:'yyyy-MM-dd'}}&nbsp;</dd>
+                    <dt>设备单价：</dt>
+                    <dd>{{data.server.priceStr}}&nbsp;</dd>
+                </dl>
+            </td>
+            <td style="padding-left: 100px;vertical-align: top;">
+                <dl class="search-archives">
+                    <dt>设备编号：</dt>
+                    <dd>{{data.server.assetsNum}}&nbsp;</dd>
+                    <dt>状态：</dt>
+                    <dd>{{data.server.statusName}}&nbsp;</dd>
+                    <dt>录入人：</dt>
+                    <dd>{{data.server.createByName}}&nbsp;</dd>
+                    <dt>规格型号：</dt>
+                    <dd>{{data.server.assetsSpec}}&nbsp;</dd>
+                    <dt>出厂编号：</dt>
+                    <dd>{{data.server.factoryNum}}&nbsp;</dd>
+                    <dt>品牌：</dt>
+                    <dd>{{data.server.assetsBrand}}&nbsp;</dd>
+                    <dt>设备注册证名称：</dt>
+                    <dd>{{data.server.regName}}&nbsp;</dd>
+                    <dt>账簿类型：</dt>
+                    <dd>{{data.server.assetsTypeName}}&nbsp;</dd>
+                    <dt>管理级别：</dt>
+                    <dd>{{data.server.manageLevelName}}&nbsp;</dd>
+                    <dt>巡检设备：</dt>
+                    <dd>{{data.server.pollingFlag ? '是' : '否'}}&nbsp;</dd>
+                    <dt>国产/进口：</dt>
+                    <dd>{{data.server.madeIn ? data.server.madeIn == 1 ? '国产' : '进口' : ''}}&nbsp;</dd>
+                    <dt>供应商：</dt>
+                    <dd>{{data.server.splName}}&nbsp;</dd>
+                    <dt>风险程度分析：</dt>
+                    <dd>{{data.server.riskLevel}}</dd>
+                </dl>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <div class="tab2-group">使用信息</div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <dl class="search-archives">
+                    <dt>所在部门：</dt>
+                    <dd>{{data.server.deptName}}&nbsp;</dd>
+                    <dt>启用日期：</dt>
+                    <dd>{{data.server.startUseDate | date:'yyyy-MM-dd'}}&nbsp;</dd>
+                    <dt>用途：</dt>
+                    <dd>{{data.server.purposeName}}&nbsp;</dd>
+                </dl>
+            </td>
+            <td style="padding-left: 100px;vertical-align: top;">
+                <dl class="search-archives">
+                    <dt>管理部门：</dt>
+                    <dd>{{data.server.manageDeptName}}&nbsp;</dd>
+                    <dt>保修期至：</dt>
+                    <dd>{{data.server.warrantyDate | date:'yyyy-MM-dd'}}&nbsp;</dd>
+                </dl>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <div class="tab2-group">折旧信息</div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <dl class="search-archives">
+                    <dt>折旧年限：</dt>
+                    <dd>{{data.server.oldYear ? data.server.oldYear + '年' : ''}}&nbsp;</dd>
+                </dl>
+            </td>
+            <td style="padding-left: 100px;vertical-align: top;">
+                <dl class="search-archives">
+                    <dt>设备原值：</dt>
+                    <dd>{{data.server.originalValue}}&nbsp;</dd>
+                </dl>
+            </td>
+        </tr>
+    </table>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+</div>

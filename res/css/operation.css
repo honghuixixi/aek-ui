@@ -1,0 +1,31 @@
+.operation-title {
+    margin-left: 20px;
+    font-size: 14px;
+    line-height: 60px;
+    color: #999;
+}
+.operation-main {
+    margin: 0 15px 0 10px;
+    padding: 10px;
+    font-size: 14px;
+    background-color: #fff;
+}
+.operation-main div {
+    line-height: 30px;
+}
+.operation-main a {
+    margin-left: 5px;
+    color: #333;
+}
+.operation-main a:hover {
+    color: #4baaf6;
+}
+.operation-main p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 26px;
+}
+.operation-main img {
+    max-width: 80%;
+    margin: 5px 0;
+}

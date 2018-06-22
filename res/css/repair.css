@@ -1,0 +1,3243 @@
+
+.font30px {
+	font-size: 30px;
+}
+.font13px {
+	font-size: 13px;
+}
+.font14px {
+	font-size: 14px;
+}
+/*text*/
+.repairTextCenter {
+	text-align: center;
+}
+.repairTextRight {
+	text-align: right;
+}
+.repairTextLeft {
+	text-align: left;
+}
+/*color*/
+.colorYellow {
+	color: #f7931e;
+}
+.color666 {
+	color: #666;
+}
+.color999 {
+	color: #999;
+}
+.color333 {
+	color: #333;
+}
+.colorRed {
+	color: #ff2a2a;
+}
+/*margin*/
+.m-l-25 {
+	margin-left: 25px;
+}
+.m-r-25 {
+	margin-right: 25px;
+}
+.m-l-70 {
+	margin-left: 70px;
+}
+/*border*/
+.b-r-fff {
+	border-right: 1px solid #fff;
+}
+.b-l-fff {
+	border-left: 1px solid #fff;
+}
+.b-l-dcdcdc {
+	border-left: 1px solid #dcdcdc;
+}
+.b-b-dcdcdc {
+	border-bottom: 1px solid #dcdcdc;
+}
+.b-t-dcdcdc {
+	border-top: 1px solid #dcdcdc;
+}
+.b-r-dcdcdc {
+	border-right: 1px solid #dcdcdc;
+}
+.repairMsgMinWidth160 {
+	min-width: 160px;
+}
+.repairMsgMinWidth81 {
+	min-width: 81px;
+}
+.repairMsgOver {
+	overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+/* layer tip */
+.fy_layerTipWrap {
+	display: none;
+}
+.fy_layerTip {
+	padding:0px;
+	margin:0px;
+	list-style:none;
+}
+.fy_layerTipSpan {
+	overflow: hidden;
+	text-oveflow: ellipsis;
+	white-space: nowrap;
+	max-width: 96px;
+}
+/*btn*/
+.repairBTN {
+	color: #fff;
+	background-color: #f7931e;
+	line-height: 32px;
+	height: 32px;
+	border-radius: 2px;
+}
+.repairBTN:hover {
+	background-color: #ffac4a;
+}
+/*verticalAdjust*/
+.verticalAdjust {
+	vertical-align: middle;
+	display: inline-block;
+	height: 100%;
+}
+@media (max-width: 1366px) {
+	.fy_repairWrap, .fy_repairMsg {
+		overflow-x: scroll;
+	}
+}
+/*repair Nav*/
+.repairNavList a {
+	color: #666;
+	font-size: 14px;
+}
+.repairHome {
+	background-image: url(../img/sy.png);
+}
+.repairDashbord {
+	background-image: url(../img/gl.png);
+}
+.repairDashbord2 {
+	background-image: url(../img/gl2.png);
+}
+.repairNavList li:hover .repairHome {
+	background-image: url(../img/sydj.png);
+	color: #f7931e;
+}
+.myDev {
+	background-image: url(../img/wdyy.png);
+}
+.repairNavList li:hover .myDev {
+	background-image: url(../img/wdyydj.png);
+	color: #f7931e;
+}
+.repairNavList li:hover .userInfo {
+	background-image: url(../img/zhxxdj.png);
+	color: #f7931e;
+}
+.repairNavList li:hover .orgInfo {
+	background-image: url(../img/jgxxyd.png);
+	color: #f7931e;
+}
+.repairNavList li:hover .repairHome {
+	background-image: url(../img/sydj.png);
+	color: #f7931e;
+}
+.userInfo {
+	background-image: url(../img/zhxx.png);
+}
+.orgInfo {
+	background-image: url(../img/jgxxdj.png);
+}
+.sysMsg {
+	background-image: url(../img/jgxxdj.png);
+}
+.repairNavList li:hover .sysMsg {
+	background-image: url(../img/jgxxyd.png);
+	color: #f7931e;
+}
+.repairSection {
+	background-image: url(../img/wxmk.png);
+}
+.repairNavList li:hover .repairSection {
+	background-image: url(../img/wxmkdj.png);
+	color: #f7931e;
+}
+.repairAccessoryManage {
+	background-image: url(../img/pj.png);
+}
+.repairNavList li:hover .repairAccessoryManage {
+	background-image: url(../img/pjdj.png);
+	color: #f7931e;
+}
+.repairNavList li a:hover {
+	background-color: #e1ece8;
+}
+.repairNavList .active {
+	background-color: #e1ece8;
+}
+.repairNavList .active .repairHome {
+	background-image: url(../img/sydj.png);
+	color: #f7931e;
+}
+.repairNavList .active .repairDashbord {
+	background-image: url(../img/gldj.png);
+	color: #f7931e;
+}
+.repairNavList .active .repairDashbord2 {
+	background-image: url(../img/gldj2.png);
+	color: #f7931e;
+}
+.repairNavList .active .repairSection {
+	background-image: url(../img/wxmkdj.png);
+	color: #f7931e;
+}
+.repairNavList .active .repairAccessoryManage {
+	background-image: url(../img/pjdj.png);
+	color: #f7931e;
+}
+.repair-content .app-content-body {
+	overflow: inherit;
+}
+/*repair home*/
+.fy_repairWrap {
+	padding-left: 15px;
+	padding-right: 15px;
+	margin-left: 160px;
+	padding-bottom: 15px;
+	background-color: #eff3f6;
+}
+.fy_repairIndexWrap {
+	min-width: 1164px;
+}
+.fy_repairList {
+	margin-left: -15px;
+	padding-top: 15px;
+	overflow: hidden;
+	/*min-width: 1179px;*/
+}
+.fy_repairOne {
+	display: table;
+	width: 25%;
+	padding-left: 15px;
+	float: left;
+	height: 166px;
+}
+.fy_oneWrap {
+	background-color: #fff;
+	display: table-cell;
+	text-align: center;
+	vertical-align: middle;
+}
+.fy_oneWrap:hover {
+	border: 1px solid #f7931e;
+}
+/*repair title*/
+.fy_repairHomeTitle {
+	height: 56px;
+	position: relative;
+}
+.fy_repairTitleTime {
+	position: absolute;
+	top: 12px;
+	color: #999;
+	font-size: 13px;
+	text-align: center;
+	left: 50%;
+	border: 1px solid #c5c5c5;
+	line-height: 32px;
+	height: 32px;
+	margin-left:-100px;
+	border-radius: 2px;
+	width: 200px;
+}
+.fy_repairTitleTime a {
+	position: absolute;
+	top: 11px;
+	width: 6px;
+	height: 10px;
+	background-repeat: no-repeat;
+}
+.fy_repairTitleTime .fy_timeLeft {
+	left: 7px;
+	background-image: url(../img/less.png);
+}
+.fy_repairTitleTime .fy_timeLeft:hover {
+	background-image: url(../img/zh.png);
+	background-position: 0px -2px;
+}
+.fy_repairTitleTime .fy_timeRight {
+	right: 7px;
+	background-image: url(../img/more.png);
+}
+.fy_repairTitleTime .fy_timeRight:hover {
+	background-image: url(../img/yh.png);
+	right: 8px;
+}
+.fy_repairTitleRigth {
+	float: right;
+}
+.fy_repairTitleRigth .newRepairBTN:hover {
+	color: #fff;
+}
+.fy_repairTitleRigth .newRepairBTN {
+ 	padding-left: 25px;
+ 	vertical-align: middle;
+ 	width: 124px;
+ 	display: inline-block;
+    background-image: url(../img/add.png);
+    background-repeat: no-repeat;
+    background-position: 10px 10px;
+    text-align: left;
+}
+.fy_repairHomeTitle .fullSrc {
+	width: 46px;
+	height: 32px;
+	vertical-align: middle;
+	line-height: 32px;
+	display: inline-block;
+	text-align: center;
+}
+.fy_repairTitleLeft .fullSrc a {
+	height: 16px;
+	display: inline-block;
+	margin-top: 8px;
+	width: 16px;
+	background-image: url(../img/qp.png);
+	background-repeat: no-repeat;
+}
+.fy_repairTitleLeft .fullSrc a:hover {
+	background-image: url(../img/qpdj.png);
+}
+.fy_repairTitleLeft .titleA {
+	display: inline-block;
+	line-height: 32px;
+	vertical-align: middle;
+	height: 32px;
+	border: 1px solid #dcdcdc;
+	width: 90px;
+	text-align: center;
+	color: #666;
+}
+.fy_repairTitleLeft .repairTitle {
+	border-color: #f7931e;
+	background-color: #f7931e;
+	color: #fff;
+}
+/*.fy_repairTitleLeft a:hover{
+	color: #fff;
+}*/
+/* calendar big picture */
+.fy_repairCalendarFullWrap {
+	padding: 15px;
+	line-height: normal;
+	background-color: #eff3f6;
+}
+.fy_repairCalendarFullHeader {
+	line-height: 66px;
+	height: 66px;
+	font-size: 13px;
+	background-color: #4ab29b;
+	color: #fff;
+}
+.fy_repairCalendarFullHeadMonth {
+	position: absolute;
+	top: 0px;
+	left: 15px;
+}
+.fy_repairCalendarFullHeader .fy_repairTitleTime {
+	color: #fff;
+	border: none;
+}
+.fy_repairCalendarFullWrap .fy_repairCalendarFullHeadTime {
+	right: 15px;
+}
+.fy_repairCalendarFullHeader .fy_repairTitleTime .fy_timeRight {
+	background-image: url(../img/fright.png);
+}
+.fy_repairCalendarFullHeader .fy_repairTitleTime .fy_timeLeft {
+	background-image: url(../img/fleft.png);
+}
+.fy_repairCalendarFullHeadTime a {
+	font-size: 13px;
+	color: #fff;
+}
+.fy_repairCalendarFullHeadTime a span {
+	vertical-align: middle;
+	display: inline-block;
+}
+.fy_repairCalendarFullHeadTime a em {
+	display: inline-block;
+	vertical-align: middle;
+	width: 16px;
+	margin-left: 10px;
+	height: 16px;
+	background-image: url(../img/tcqp.png);
+}
+.fy_repairCalendarFullHeadTime a:hover em {
+	background-image: url(../img/tcqpdj.png);
+}
+.fy_repairCalendarTableBig {
+	min-width: 1306px;
+}
+/*repair calendar*/
+.fy_repairCalendar {
+	padding-top: 7px;
+	padding-left: 15px;
+	padding-right: 15px;
+	padding-bottom: 15px;
+	background-color: #fff;
+	min-height: calc(100% - 297px);
+}
+.fy_repairCalendarHead div {
+	float: left;
+	color: #666;
+	line-height: 37px;
+	height: 37px;
+	width: 14.28%;
+	font-size: 13px;
+	text-align: center;
+}
+.fy_repairCalendarBody {
+	color: #666;
+	overflow: hidden;
+	border-top: 1px solid #dcdcdc;
+	border-left: 1px solid #dcdcdc;
+}
+.fy_repairCalendarOne {
+	padding: 10px;
+	font-size: 13px;
+	height: 131px;
+	width: 14.28%;
+	border-right: 1px solid #dcdcdc;
+	border-bottom: 1px solid #dcdcdc;
+	float: left;
+	text-align: left;
+}
+.fy_repairCalendarOne ul {
+	margin: 0px;
+	line-height: 24px;
+	padding: 0px;
+	height: 96px;
+	overflow: hidden;
+	list-style: none;
+}
+.fy_repairCalendarOne li a {
+	color: #666;
+}
+.fy_repairCalendarOne li:hover a {
+	color: #999;
+}
+.fy_repairCalendarOne li {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow:ellipsis;
+}
+/* repair calendar full screen */
+.fy_repaircalendarFullSrc {
+	font-size: 24px;
+	line-height: 90px;
+	position: fixed;
+	left: 0px;
+	z-index: 999999999;
+	top: 0px;
+	/*min-width: 1366px;*/
+	/*min-height: 768px;*/
+	width: 100%;
+	color: #fff;
+	background-color: #000;
+}
+.fy_repaircalendarFullSrc table th {
+	background-color: #333;
+	border-top: 1px solid #2e2e2e;
+	color: #999;
+	border-bottom: 1px solid #2e2e2e;
+}
+.fy_repaircalendarFullSrc table td {
+	border-bottom: 1px solid #333;
+}
+.fy_repaircalendarFullSrc table {
+	color: #fff;
+	text-align: center;
+	font-size: 24px;
+	line-height: 90px;
+	width: 100%;
+}
+.fy_fullTable div {
+	height: 100%;
+	width: 100%;
+}
+.fy_fullTable .visibility {
+	visibility: hidden;
+}
+.fy_repairCalendarFullHead {
+	position: relative;
+}
+.fy_repairCalendarFullHeadTime {
+	position: absolute;
+	top: 0px;
+	right: 55px;
+}
+.fy_repairCalendarFullHeadTitle {
+	text-align: center;
+}
+.fy_repairCalendarFullInfo {
+	background-color: #333;
+}
+.fy_repairCalendarFullInfoRight {
+	float: right;
+}
+.fy_repairCalendarFullInfoRight a {
+	margin-right: 55px;
+}
+.fy_repairCalendarFullInfoRight a em {
+	display: inline-block;
+	width: 16px;
+	margin-left: 5px;
+	height: 16px;
+	background-image: url(../img/tcqp.png);
+}
+.fy_repairCalendarFullInfoLeft span {
+	margin-left: 55px;
+}
+.fy_repairHomeCon {
+	/*min-width: 1164px;*/
+}
+/*repair date*/
+.fy_repairDateNoContent {
+	text-align: center;
+}
+.fy_repairDateNoContent span {
+	height: 100%;
+	vertical-align: middle;
+	display: inline-block;
+}
+.fy_repairDate {
+	background-color: #fff;
+}
+.fy_repairDateTitle {
+	line-height: 58px;
+	height: 58px;
+	font-size: 25px;
+	color: #f7931e;
+	text-align: center;
+}
+.fy_repairAxisLineWrap {
+	text-align: center;
+	height: 50px;
+}
+.fy_repairAxisLine {
+	height: 60px;
+	border-left: 2px solid #dcdcdc;
+	display: inline-block;
+}
+.fy_repairDateOne {
+	position: relative;
+	margin-top: -51px;
+}
+.fy_repairDateRight {
+	margin-top: -41px;
+}
+/*repair date right*/
+.fy_repairDateRight {
+	margin-left: 50%;
+}
+.fy_repairDateRight .fy_repairDateCon {
+	width: 586px;
+	height: 126px;
+	margin-left: -8px;
+	display: inline-block;
+	background-image: url(../img/ybp.png);
+	background-repeat: no-repeat;
+}
+.fy_repairDateRight .fy_repairDateTime {
+	display: inline-block;
+	height: 100%;
+	width: 110px;
+	text-align: center;
+}
+.fy_repairOneTime {
+	padding-top: 42px;
+	min-height: 59px;
+	font-size: 12px;
+	text-align: center;
+}
+.fy_repairDateRight .fy_repairAxisLineWrap {
+	text-align: left;
+	margin-top: 12px;
+	padding-left: 7px;
+}
+.fy_repairDateRight .fy_repairOneConList {
+	display: inline-block;
+	height: 125px;
+	vertical-align: top;
+	margin-left: 56px;
+}
+.fy_repairConUl {
+	width: 410px;
+	height: 100%;
+	display: table;
+}
+.fy_repairConUl .fy_repairConUlWrap {
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+}
+.fy_repairConUl ul {
+	display: inline-block;
+	list-style: none;
+	padding-left: 0px;
+	text-align: left;
+	margin-bottom: 0px;
+	line-height: 24px;
+	color: #666;
+	font-size: 13px;
+}
+.fy_repairConLiSpan {
+	display: inline-block;
+	min-width: 180px;
+}
+/*repair date left*/
+.fy_repairDateLeft {
+	margin-right: 50%;
+	text-align: right;
+}
+.fy_repairDateLeft .fy_repairDateCon {
+	width: 586px;
+	height: 126px;
+	margin-right: -10px;
+	display: inline-block;
+	background-image: url(../img/zbq.png);
+	background-repeat: no-repeat;
+}
+.fy_repairDateLeft .fy_repairDateTime {
+	display: inline-block;
+	height: 100%;
+	width: 110px;
+	text-align: center;
+}
+.fy_repairDateLeft .fy_repairAxisLineWrap {
+	text-align: right;
+	margin-top: 17px;
+	padding-right: 9px;
+}
+.fy_repairDateLeft .fy_repairOneConList {
+	display: inline-block;
+	height: 125px;
+	vertical-align: top;
+	margin-right: 56px;
+}
+/*tail*/
+.fy_repairDateTail {
+	text-align: center;
+	padding-top: 10px;
+	padding-bottom: 20px;
+}
+.fy_repairDateTailDot {
+	width: 6px;
+	height: 6px;
+	display: inline-block;
+	border-radius: 3px;
+	background-color: #f7931e;
+}
+/*repair msg*/
+.fy_repairMsg {
+	padding: 15px;
+	background-color: #eff3f6;
+	padding-top: 0px;
+}
+.fy_repairMsgTitle {
+	line-height: 58px;
+	position: relative;
+	height: 58px;
+	text-indent: 30px;
+	background-color: #4ab29b;
+	margin-left: -15px;
+	margin-right: -15px;
+	color: #fff;
+	font-size: 13px;
+}
+.fy_repairMsgBack {
+	position: absolute;
+	right: 15px;
+	line-height: 58px;
+	top: 0px;
+}
+.fy_repairMsgBack a {
+	font-size: 13px;
+	color: #fff;
+}
+.fy_repairMsgBack span, .fy_repairMsgBack em {
+	vertical-align: middle;
+	display: inline-block;
+}
+.fy_repairMsgBack em {
+	margin-left: 10px;
+	width: 17px;
+	height: 17px;
+	background-image: url(../img/back.png);
+	background-repeat: no-repeat;
+}
+.fy_repairMsgCon {
+	min-width: 1176px;
+	background-color: #fff;
+	padding-left: 15px;
+	padding-bottom: 15px;
+	padding-right: 15px;
+	margin-top: 15px;
+	min-height: calc(100% - 90px);
+}
+.fy_repairMsgConHead {
+	height: 60px;
+}
+.fy_repairMsgScope {
+	display: inline-block;
+	vertical-align: middle;
+	margin-right: 15px;
+}
+.fy_repairMsgScope a {
+	line-height: 32px;
+	height: 32px;
+	background-color: #fff;
+	border: 1px solid #dcdcdc;
+	text-align: center;
+	display: inline-block;
+	color: #999;
+	font-size: 12px;
+	width: 90px;
+}
+.fy_repairMsgScope .fy_repairMsgScopeNow {
+	border-color: #f7931e;
+	color: #fff;
+	background-color: #f7931e;
+}
+.fy_repairMsgScope .fy_repairMsgAll {
+	border-right: none;
+}
+.fy_repairMsgScope .fy_repairMsgNot {
+	border-left: none;
+}
+/* select repair msg */
+.fy_repairMsgConHead .selectWrap {
+	float: none;
+	z-index: 2;
+	vertical-align: middle;
+	display: inline-block;
+	color: #666;
+}
+.fy_repairMsgConHead .selector span {
+	padding-left: 10px;
+}
+.fy_repairMsgConHead input {
+	border: 1px solid #dcdcdc;
+	width: 120px;
+	text-indent: 6px;
+	color: #999;
+	line-height: 32px;
+	height: 32px;
+}
+.fy_repairMsgConHead ul {
+	padding-left: 0px;
+	margin-bottom: 0px;
+}
+.selectWrap .options ul {
+	padding-top: 2px;
+	list-style: none;
+	background-color: #fff;
+}
+.options{
+	position: absolute;
+	width: 120px;
+	z-index: 10;
+	box-shadow: 0 5px 15px 0px #cfcfcf;
+}
+.options li {
+	line-height: 26px;
+	text-indent: 7px;
+}
+.title-right li {
+	padding-left: 10px;
+}
+.options li:hover {
+	background-color: #F7931E;
+	color: #ffffff;
+}
+.options li:hover a{
+	color: #ffffff;
+}
+.selector {
+	position: relative;
+}
+.selector a {
+	position: absolute;
+	right: 0px;
+	top: 0px;
+	width: 30px;
+	height: 32px;
+	background-image: url(../img/down.png);
+	background-repeat: no-repeat;
+	background-position: 10px 12px;
+}
+/*  */
+.fy_repairMsgInput:focus {
+	border-color: #f7931e;
+}
+.fy_repairMsgTime {
+	float: right;
+	padding-top: 14px;
+}
+.fy_repairMsgConHead .fy_repairMsgInput {
+	width: 250px;
+	text-indent: 6px;
+	border: none;
+	font-size: 12px;
+	color: #999;
+	line-height: 32px;
+	height: 32px;
+	border: 1px solid #dcdcdc;
+}
+.fy_repairMsgSearch {
+	display: inline-block;
+	vertical-align: middle;
+}
+.fy_repairDept {
+	margin-left: 10px;
+	display: inline-block;
+	vertical-align: middle;
+}
+.fy_repairMsgSearch a {
+	margin-left: 10px;
+	display: inline-block;
+	background-color: #f7931e;
+	color: #fff;
+	border-radius: 2px;
+	line-height: 32px;
+	height: 32px;
+	text-align: center;
+	width: 48px;
+}
+.fy_repairMsgSearch {
+	margin-left: 10px;
+}
+.fy_repairMsgCon table {
+	width: 100%;
+	border-left: 1px solid #dcdcdc;
+	border-top: 1px solid #dcdcdc;
+	border-right: 1px solid #dcdcdc;
+}
+.fy_repairMsgCon table th {
+	line-height: 40px;
+	background-color: #f5f5f5;
+	border-bottom: 1px solid #dcdcdc;
+	height: 40px;
+}
+.fy_repairMsgCon table .fy_repairMsgTableTitles {
+	width: 42.8%;
+	padding-left: 10px;
+}
+.fy_repairMsgCon table td {
+	line-height: 54px;
+	border-bottom: 1px solid #dcdcdc;
+	height: 54px;
+}
+.fy_repairMsgCon table .repairTextCenter {
+	padding-right: 20px;
+}
+.repairMsgMinWidth355 {
+	max-width: 355px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+.fy_repairMsgTableTitle {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	max-width: 490px;
+}
+.fy_repairMsgTableTitle a {
+	color: #666;
+}
+.fy_repairMsgTableTitle span {
+	text-align: center;
+	display: inline-block;
+	width: 20px;
+	vertical-align: middle;
+}
+.fy_repairMsgTableTitle em {
+	display: inline-block;
+	width: 6px;
+	height: 6px;
+	background-color: #f3756f;
+	border-radius: 3px;
+}
+.fy_repairMsgRead a, .fy_repairMsgRead, .fy_repairMsgRead span {
+	color: #999;
+}
+.fy_repairMsgRead .fy_repairMsgTableTitle em {
+	background-color: #fff;
+}
+
+/* repair loading more */
+.fy_repairMsgLoading {
+	text-align: center;
+	padding-top: 5px;
+}
+.fy_repairMsgLoading a {
+	line-height: 74px;
+}
+.fy_repairMsgLoading a:hover {
+	color: #f7931e;
+}
+/*fix*/
+.fixWrap, .repairFixWrap {
+	position: fixed;
+	top: 0px;
+	bottom: 0px;
+	right: 0px;
+	left: 0px;
+}
+/* repair manage */
+.fy_repairManageTitle {
+	line-height: 58px;
+	height: 58px;
+	color: #333;
+	font-size: 15px;
+}
+/* repair layer alert */
+/* submit */
+.alertRepairSubmitContent {
+	text-align: center;
+}
+.alertRepairSubmitImg {
+	padding-top: 30px;
+	padding-bottom: 25px;
+}
+.alertRepairSubmitContent p {
+	line-height: 14px;
+	margin-bottom: 59px;
+}
+.alertRepairBtn a {
+	line-height: 30px;
+	border: 1px solid #fff;
+	font-size: 13px;
+	width: 90px;
+	text-align: center;
+	display: inline-block;
+}
+.alertRepairBtn {
+	text-align: right;
+	margin-top: 45px;
+	padding-right: 30px;
+	padding-bottom: 15px;
+}
+.alertRepairBtn .btncancel:hover {
+	color: #f7931e;
+	border-color: #f7931e;
+}
+.alertRepairBtn .btncancel {
+	color: #666;
+	margin-left: 15px;
+	border-color: #c5c5c5;
+}
+.alertRepairBtn .btnyes:hover {
+	background-color: #ffac4a;
+}
+.alertRepairBtn .btnyes {
+	color: #fff;
+	border-color: #f7931e;
+	background-color: #f7931e;
+}
+/* add dev */
+/* search dept */
+.fy_searchOfficeCon {
+	position: absolute;
+	top: 32px;
+	left: 0px;
+	right: 0px;
+	z-index: 1;
+	background-color: #fff;
+}
+.fy_searchOfficeConWrap ul {
+	padding: 0px;
+	margin: 0px;
+	width: 100%;
+	max-height: 90px;
+	overflow-y: scroll;
+	border: 1px solid #dcdcdc;
+}
+.fy_searchOfficeConWrap li {
+	list-style: none;
+	line-height: 32px;
+	text-indent: 10px;
+	color: #666;
+}
+.fy_searchOfficeConWrap li:hover {
+	background-color: #f7931e;
+	color: #fff;
+}
+/* end search dept */
+.repairAddDev {
+	padding-left: 30px;
+	padding-right: 30px;
+}
+.repairAddDevHead {
+	height: 70px;
+}
+.repairAddDevInput {
+	display: inline-block;
+	vertical-align: middle;
+	position: relative;
+}
+.repairAddDevSearch {
+	display: inline-block;
+	vertical-align: middle;
+}
+.repairAddDevSearch a {
+	display: inline-block;
+	border-radius: 2px;
+	width: 48px;
+	text-align: center;
+}
+.repairAddDevSearch a:hover {
+	color: #fff;
+}
+.repairAddDevInput input {
+	width: 250px;
+	height: 32px;
+	padding: 0px;
+	border-radius: 2px;
+	line-height: 30px;
+	border: none;
+	border: 1px solid #d6d6d6;
+	text-indent: 6px;
+	color: #999;
+	font-size: 12px;
+}
+.repairAddDev {
+	background-color: #fff;
+}
+.repairAddDevTable {
+	width: 1266px;
+	line-height: 42px;
+	color: #666;
+	font-size: 13px;
+	text-align: center;
+	border-top: 1px solid #dcdcdc;
+}
+.repairAddDevTable th {
+	background-color: #f5f5f5;
+}
+.repairAddDevCon tr td {
+	border-top: 1px solid #dcdcdc;
+}
+.repairAddDevNoTr td {
+	border-left: 1px solid #dcdcdc;
+	border-bottom: 1px solid #dcdcdc;
+	border-right: 1px solid #dcdcdc;
+}
+.repairAddDevCon .repairAddDevTableTr:hover td {
+	border-color: #f7931e;
+}
+.repairAddDevCon .repairAddDevTableTr:hover + tr td {
+	border-top-color: #f7931e;
+}
+/* repair add dev check */
+.repairAddDevTable input[type="checkbox"] {
+	display: none;
+}
+
+.repairAddDevTable .check-label {
+	cursor: pointer;
+	position: relative;
+	display: inline-block;
+	width: 14px;
+	height: 14px;
+	margin-bottom: -3px;
+	margin-right: 3px;
+	border: 1px solid #cfdadd;
+	background: #fff;
+	border-radius: 2px;
+	font-size: 12pt;
+}
+
+.repairAddDevTable .check-label .fa {
+	position: absolute;
+	display: block;
+	width: 14px;
+	height: 14px;
+	top: -1px;
+	left: -1px;
+	right: 0px;
+	bottom: 0px;
+	opacity: 0;
+	background-color: #FFAC4A;
+	text-align: center;
+}
+
+.repairAddDevTable input:checked+ label .fa {
+	opacity: 1;
+}
+
+.repairAddDevTable .fa-check:before {
+	content: url("../img/check14.png");
+}
+
+.repairAddDevTable .check-label:hover {
+	border-color: #f7931e;
+}
+/* check accept */
+.repairCheckAccpet {
+	font-size: 13px;
+	color: #666;
+}
+.repairCheckInfoCon span {
+	line-height: 14px;
+	height: 14px;
+	display: inline-block;
+	vertical-align: middle;
+}
+.repairCheckInfoConSpan {
+	width: 125px;
+	display: inline-block;
+	text-align: right;
+	line-height: 14px;
+}
+.repairCheckTitle {
+	margin-top: 25px;
+	padding-left: 20px;
+	line-height: 15px;
+	height: 15px;
+	margin-bottom: 20px;
+}
+.repairCheckTitle span {
+	border-left: 1px solid #f7931e;
+	padding-left: 10px;
+}
+/* radio */
+.radioCopy {
+	position: relative;
+	display: inline-block;
+	vertical-align: middle;
+	width: 14px;
+	height: 14px;
+	border: 1px solid #dcdcdc;
+	border-radius: 7px;
+}
+.radioCopy input {
+	opacity: 0;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 13px;
+	height: 13px;
+	z-index: 1;
+	margin: 0px;
+}
+.radioCopy input:checked + em {
+	background-color: #f7931e;
+}
+.radioCopy em {
+	width: 6px;
+	z-index: 0;
+	height: 6px;
+	border-radius: 3px;
+	background-color: #fff;
+	display: inline-block;
+	position: absolute;
+	top: 3px;
+	left: 3px;
+}
+.repairCheckInfoCon label {
+	line-height: 14px;
+	margin: 0px;
+	margin-left: 10px;
+	vertical-align: middle;
+	font-size: 13px;
+	color: #999;
+}
+.repairCheckInfoCon .options {
+	width: 460px;
+}
+/* radio END */
+/* check select */
+.repairCheckInfoCon .selectWrap {
+	float: none;
+	z-index: 2;
+	vertical-align: middle;
+	display: inline-block;
+	color: #666;
+}
+.repairCheckInfoCon .selector span {
+	padding-left: 10px;
+}
+.repairCheckInfoCon .selectWrap input {
+	border: 1px solid #dcdcdc;
+	width: 460px;
+	text-indent: 6px;
+	color: #999;
+	line-height: 32px;
+	height: 32px;
+}
+.repairCheckInfoCon ul {
+	padding-left: 0px;
+	margin-bottom: 0px;
+}
+/* check select END */
+.repairServer ul {
+	list-style: none;
+	padding: 0px;
+	margin: 0px;
+}
+.repairServer li {
+	line-height: 14px;
+	height: 14px;
+}
+.repairServer .repairCheckRemark {
+	height: auto;
+}
+.repairServer li span {
+	height: 14px;
+	line-height: 14px;
+	display: inline-block;
+	vertical-align: top;
+}
+/* repair star */
+.repairStar a, .repairStar span {
+	display: inline-block;
+	width: 13px;
+	height: 13px;
+	background-image: url(../img/xxh.png);
+	margin-right: 28px;
+}
+.repairStar .repairStarOn {
+	background: url(../img/xxl.png) no-repeat ;
+}
+/* repair star END*/
+.repairServer .repairTextRight {
+	min-width: 52px;
+}
+.repairCheckRemarkCon {
+	display: inline-block;
+	position: relative;
+	width: 460px;
+	height: 170px;
+}
+.repairCheckRemarkCon div {
+	max-width: 460px;
+}
+.repairCheckRemarkCon textarea {
+	width: 460px;
+	height: 170px;
+	font-size: 13px;
+	border: 1px solid #dcdcdc;
+	resize: none;
+	border-radius: 2px;
+}
+.repairCheckRemarkCon span {
+	position: absolute;
+	bottom: 6px;
+	right: 6px;
+	color: #999;
+}
+.alertRepairCheckBtn {
+	padding-bottom: 20px;
+}
+.repairCheckRemarkSpan460 {
+	max-width: 460px;
+	display: inline-block;
+	height: 125px;
+	color: #999;
+	word-wrap: break-word;
+}
+/* check accept END*/
+
+/* indentify detail */
+.repairIdentifyDetail {
+	padding-top: 15px;
+}
+.repairIdentifyDetail .repairIdentifyDetailOne {
+	line-height: 32px;
+}
+.repairIdentifyDetailOne label {
+    line-height: 14px;
+    margin: 0px;
+    margin-left: 10px;
+    vertical-align: middle;
+    font-size: 13px;
+    color: #999;
+}
+.repairIdentifyDetailOne div, .repairIdentifyDetailRemark div {
+	display: inline-block;
+	color: #999;
+}
+.repairIdentifyDetailRemark div {
+	max-width: 520px;
+	position: absolute;
+}
+.repairIdentifyDetailRemark textarea {
+	color: #999;
+	resize: none;
+	width: 460px;
+	height: 170px;
+	font-size: 13px;
+}
+.repairIdentifyDetailRemark div span {
+	position: absolute;
+	bottom: 6px;
+	right: 6px;
+	color: #999;
+}
+.repairIdentifyDetailRemark span {
+	vertical-align: top;
+}
+.repairIdentifyDetail span {
+	display: inline-block;
+	min-width: 90px;
+	color: #666;
+	margin-right: 10px;
+	text-align: right;
+}
+.repairIdentifyDetailRemark {
+	line-height: 24px;
+	min-height: 144px;
+	margin-bottom: 100px;
+}
+.repairIndentifyDetailBTN {
+	padding-bottom: 20px;
+}
+/*look repair report*/
+.lookRepairReport {
+	font-size: 13px;
+	padding-top: 18px;
+}
+.lookRepairReportConTitle {
+	padding-left: 15px;
+	line-height: 14px;
+	font-size: 14px;
+	height: 14px;
+	margin-top: 24px;
+	margin-bottom: 20px;
+}
+.lookRepairReportConTitle span {
+	border-left: 2px solid #f7931e;
+	padding-left: 10px;
+	margin-right: 15px;
+	display: inline-block;
+	vertical-align: middle;
+}
+.lookRepairReportConTitle a {
+	display: inline-block;
+	vertical-align: middle;
+	width: 13px;
+	height: 7px;
+	background-image: url(../img/xsjt.png);
+}
+.lookRepairReportConTitle .lookRepairReportConShow {
+	background-image: url(../img/xxjt.png);
+}
+/*repair parts*/
+.lookRepairReportParts {
+	text-align: center;
+}
+.lookRepairReportParts table {
+	line-height: 40px;
+	text-align: center;
+	font-size: 13px;
+	display: inline-block;
+
+}
+.lookRepairReportParts table td {
+	padding: 0px 15px;
+	border-bottom: 1px solid #dcdcdc;
+}
+.lookRepairReportParts table th {
+	padding: 0px 20px;
+	background-color: #f5f5f5;
+	border-bottom: 1px solid #dcdcdc;
+	border-top: 1px solid #dcdcdc;
+}
+.lookRepairReportParts table .textOverEllipsis {
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	max-width: 165px;
+}
+/*repair accessory*/
+.fy_searchAccessroty {
+	display: inline-block;
+	position: relative;
+	font-size: 13px;
+}
+.fy_searchAccessroty input {
+	background-image: url(../img/6.png);
+	background-repeat: no-repeat;
+	background-position: 430px 12px;
+}
+.fy_searchAccessoryCon {
+	position: absolute;
+	top: 30px;
+	left: 0px;
+	box-shadow: 2px 2px 2px #bebebe;
+	background-color: #fff;
+	right: 0px;
+}
+.fy_searchAccessoryWrap {
+	box-shadow: -2px 0px 2px #bebebe;
+}
+.fy_searchAccessoryCon .fy_searchAccessoryInput {
+	padding: 10px;
+}
+.fy_searchAccessoryCon .fy_searchAccessoryInput input:focus {
+	border-color: #f7931e;
+}
+.fy_searchAccessoryCon .fy_searchAccessoryInput input {
+	width: 430px;
+	height: 26px;
+	line-height: 24px;
+	font-size: 13px;
+	color: #bebebe;
+	background: url(../img/search.png) no-repeat 97% center;
+}
+.fy_searchAccessoryNone a {
+	font-size: 13px;
+}
+.fy_searchAccessoryNone {
+	line-height: 30px;
+	text-indent: 20px;
+}
+.fy_searchAccessoryCon ul {
+	padding-left: 0px;
+	max-height: 160px;
+	overflow-y: scroll;
+}
+.fy_searchAccessoryCon ul li:hover {
+	background-color: #f7931e;
+	color: #fff;
+}
+.fy_searchAccessoryCon .fy_searchAccessoryWrap .fy_searchAccessoryResult li {
+	line-height: 32px;
+	height: 32px;
+	text-indent: 20px;
+}
+/*repair accessory END*/
+.lookRepairReportContentOne {
+	line-height: 13px;
+	height: 13px;
+	margin-bottom: 28px;
+}
+.lookRepairReportContentOne span {
+	color: #999;
+}
+.lookRepairReportContentBorder {
+	line-height: 32px;
+	height: 32px;
+	margin-bottom: 18px;
+}
+.lookRepairReportContentOne .lookRepairReportContentHead {
+	width: 140px;
+	display: inline-block;
+	text-align: right;
+	color: #666;
+}
+.lookRepairReportContentBorder .spanBorder {
+	border: 1px solid #d6d6d6;
+	display: inline-block;
+	height: 32px;
+	border-radius: 2px;
+	text-align: center;
+	min-width: 88px;
+	margin-left: 10px;
+}
+/* repair result*/
+.lookRepairResultTitle {
+	margin-top: 18px;	
+}
+.lookRepairResultOne {
+	margin-bottom: 18px;
+}
+.lookRepairResultTotal {
+	margin-bottom: 12px;
+}
+.lookRepairResultRemark {
+	margin-bottom: 0px;
+}
+.newlookRepairReportConTitle{
+	margin-top:0;
+}
+
+
+.lookRepairResultOne span {
+	color: #999;
+	font-size: 13px;
+	line-height: 13px;
+	height: 13px;
+	display: inline-block;
+}
+.lookRepairResultRemark span {
+	line-height: 24px;
+	height: 24px;
+}
+.lookRepairResultOne .lookRepairResultOneHead {
+	min-width: 200px;
+	margin-right: 10px;
+	text-align: right;
+	color: #666;
+}
+.lookRepairResultOne .spanMinWidth20 {
+	min-width: 20px;
+	text-align: right;
+	display: inline-block;
+}
+.lookRepairResultOne .spanMaxWidth635 {
+	max-width: 635px;
+	height: 110px;
+	word-wrap: break-word;
+}
+/*repair result END*/
+.lookRepairReportBTN {
+	padding-bottom: 24px;
+}
+/*look repair report END*/
+/* edti repair report */
+.editRepairReportContent .editRepairReportContentOne {
+	margin-bottom: 18px;
+	padding-left: 58px;
+}
+.editRepairReportContentOne .editRepairReportContentHead {
+	display: inline-block;
+	min-width: 80px;
+	color: #666;
+	text-align: right;
+}
+.editRepairReportContentOne .spanButton {
+	border: 1px solid #d6d6d6;
+	border-radius: 2px;
+	color: #999;
+	display: inline-block;
+	vertical-align: middle;
+	line-height: 30px;
+	/*height: 32px;*/
+	padding: 0px 7px;
+}
+.editRepairReportContentOne span {
+	display: inline-block;
+	vertical-align: middle;
+	margin-bottom: 10px;
+}
+.editRepairReportContentOneBody a {
+	margin-left: 10px;
+}
+.editRepairReportContentOneAdd:hover {
+	background-image: url(../img/xzwxdj.png);
+}
+.editRepairReportContentOneAdd {
+	width: 26px;
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 10px;
+	height: 26px;
+	background-image: url(../img/xzwx.png);
+	margin-bottom: 10px;
+}
+.editRepairReportContentOne .spanButton:hover {
+	border-color: #f7931e;
+	color: #f7931e;
+}
+.editRepairReportContentOne .spanButton:hover em {
+	background-image: url(../img/spanon.png);
+}
+.editRepairReportContentOne .spanButton em {
+	margin-left: 7px;
+	width: 12px;
+	height: 12px;
+	display: inline-block;
+	vertical-align: middle;
+	background-image: url(../img/spanoff.png);
+	margin-bottom: 10px;
+}
+.editRepairPartsTitle {
+	position: relative;
+}
+.editRepairPartsTitle .eidtRepairAddPart:hover {
+	border-color: #f7931e;
+	background-image: url(../img/add0.png);
+	color: #f7931e;
+}
+.editRepairPartsTitle .eidtRepairAddPart {
+	width: 90px;
+	position: absolute;
+	right: 20px;
+	top: -9px;
+	height: 32px;
+	line-height: 30px;
+	border: 1px solid #d6d6d6;
+	color: #666;
+	padding-left: 25px;
+	font-size: 13px;
+	background-image: url(../img/addbill.png);
+	background-repeat: no-repeat;
+	background-position: 8px 8px;
+}
+/*edit repair report result*/
+.editRepairResultOne {
+	margin-bottom: 18px;
+}
+.editRepairResultOne .repairReportInfoErr {
+	padding-left: 110px;
+}
+.editRepairResultOne .editRepairResultOneHead {
+	min-width: 140px;
+	margin-right: 10px;
+	display: inline-block;
+	vertical-align: middle;
+	text-align: right;
+	color: #666;
+	line-height: 32px;
+}
+.editRepairResultOne span {
+	color: #999;
+}
+.editRepairResultOne input:focus {
+	border-color: #f7931e;
+}
+.editRepairResultOne input {
+	width: 715px;
+	text-indent: 8px;
+	border-radius: 2px;
+	border: none;
+	line-height: 30px;
+	height: 32px;
+	border: 1px solid #d6d6d6;
+	color: #999;
+}
+.editRepairResultOne .input-datepicker {
+	background-image: url(../img/date-icon.png);
+	background-repeat: no-repeat;
+	background-position: 197px;
+}
+.editRepairResultOne .editRepairResultInputLong {
+	width: 220px;
+}
+.editRepairResultOne .editRepairResultInputShort {
+	width: 46px;
+	margin-left: 15px;
+	margin-right: 10px;
+}
+.editRepairResultOneRemark .editRepairResultOneHead {
+	vertical-align: top;
+}
+.editRepairResultOneRemark textarea {
+	width: 715px;
+    height: 125px;
+    font-size: 13px;
+    border: 1px solid #dcdcdc;
+    color: #bebebe;
+    resize: none;
+    border-radius: 2px;
+    color: #bebebe;
+}
+.editRepairResultOneRemark .editRepairResultOneRemarkCon {
+	position: relative;
+	width: 715px;
+	display: inline-block;
+	vertical-align: top;
+}
+.editRepairResultOneRemarkCon span {
+	position: absolute;
+    bottom: 6px;
+    right: 15px;
+    color: #999;
+}
+/*result END*/
+/*edit repair report select*/
+.lookRepairReport .selectWrap {
+	float: none;
+	z-index: 2;
+	vertical-align: middle;
+	display: inline-block;
+	color: #666;
+}
+.lookRepairReport .selector span {
+	padding-left: 10px;
+}
+.lookRepairReport .selectWrap input {
+	border: 1px solid #dcdcdc;
+	width: 715px;
+	text-indent: 6px;
+	color: #999;
+	line-height: 32px;
+	height: 32px;
+}
+.lookRepairReport ul {
+	padding-left: 0px;
+	margin-bottom: 0px;
+}
+.lookRepairReport .options {
+	width: 715px;
+}
+/*edit repair report select END*/
+/*edit repair report END*/
+
+/*look big picture*/
+.fy_repairPicsWrap {
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	z-index: 2000;
+	bottom: 0px;
+	background-color: rgba(0,0,0,0.6);
+}
+.fy_repairPicWrap {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-left: -250px;
+	margin-top: -270px;
+}
+.fy_repairPics {
+	overflow: hidden;
+	margin-top: 20px;
+}
+.fy_repairPics .fy_repairPic {
+	float: left;
+	border: 1px solid rgba(0,0,0,0);
+	padding: 7px;
+}
+.fy_repairPicWrap {
+	position: absolute;
+}
+.fy_repairPicWrap .fy_repairPicsRight:hover {
+	background-image: url(../img/xyydj.png);
+}
+.fy_repairPicWrap .fy_repairPicsleft:hover {
+	  background-image: url(../img/syydj.png);
+}
+.fy_repairPicWrap .fy_repairPicsRight {
+	position: absolute;
+	top: 50%;
+	right: -180px;
+	width: 56px;
+	height: 56px;
+	margin-top: -28px;
+	background-image: url(../img/xyy.png);
+}
+.fy_repairPicWrap .fy_repairPicsleft {
+	position: absolute;
+	top: 50%;
+	width: 56px;
+	height: 56px;
+	left: -180px;
+	margin-top: -28px;
+	background-image: url(../img/syy.png);
+}
+.fy_repairPicWrap .fy_repairPicsClose {
+	position: absolute;
+	top: -12px;
+	right: -12px;
+	width: 25px;
+	height: 25px;
+	background-image: url(../img/ckdtgb.png);
+}
+.fy_repairPicWrap img {
+	width: 500px;
+	height: 500px;
+}
+.fy_repairPics .fy_repairPicSelect {
+	border-color: #fff;
+}
+.fy_repairPic img {
+	width: 70px;
+	height: 70px;
+	border-radius: 2px;
+}
+/* daterangepicker */
+.daterangepicker select {
+	min-width: 50px;
+}
+/* daterangepicker END */
+
+/* accessory */
+.fy_accessoryHead {
+	line-height: 62px;
+}
+.fy_accessoryNew {
+	float: right;
+}
+.fy_accessoryNew a {
+	width: 124px;
+	background-position: 11px 9px;
+	background-repeat: no-repeat;
+	height: 32px;
+	line-height: 32px;
+	font-size: 13px;
+	color: #fff;
+	text-align: left;
+	display: inline-block;
+	margin-top: 15px;
+	padding-left: 35px;
+	background-image: url(../img/add.png);
+	background-color: #f7931e;
+}
+.fy_accessoryNew a:hover {
+	background-color: #ffac4a;
+}
+.fy_accessorySearch {
+	display: inline-block;
+	height: 62px;
+}
+.fy_accessoryClassifySections {
+	padding-top: 15px;
+}
+.fy_accessoryClassifySections .fy_accessoryClassifySectionLine {
+	height: 32px;
+	border-bottom: 1px solid #d6d6d6;
+}
+.fy_accessoryClassifySections a {
+	color: #666;
+	float: left;
+	font-size: 14px;
+	line-height: 30px;
+	width: 116px;
+	text-align: center;
+	border: 1px solid #d6d6d6;
+}
+.fy_accessoryClassifySections .aActive {
+	background-color: #f7931e;
+	color: #fff;
+	border-color: #f7931e;
+}
+.fy_accessorySearch .search {
+	font-size: 12px;
+	width: 48px;
+	height: 32px;
+	line-height: 32px;
+	background-color: #f7931e;
+	color: #fff;
+	text-align: center;
+	display: inline-block;
+	margin-left: 10px;
+	vertical-align: middle;
+}
+/* accessory END */
+/* accessoryClassify */
+.fy_accessoryClassify {
+	margin-left: 160px;
+	padding-left: 15px;
+	padding-right: 15px;
+	padding-bottom: 15px;
+}
+@media (max-width: 1365px) {
+	.fy_accessoryClassify {
+		overflow-x: scroll;
+	}
+}
+.fy_accessoryClassifyTitle {
+	line-height: 58px;
+    height: 58px;
+    color: #666;
+    font-size: 15px;
+}
+.fy_accessoryClassifySections, .fy_accessoryWrap {
+	padding-left: 15px;
+	background-color: #fff;
+	padding-right: 15px;
+	min-width: 1175px;
+}
+/* select --accessory */
+.fy_accessoryClassify .selectWrap {
+	float: none;
+	margin-right: 15px;
+	z-index: 2;
+	vertical-align: middle;
+	display: inline-block;
+	color: #666;
+}
+.fy_accessoryClassify .selector span {
+	padding-left: 10px;
+}
+.fy_accessoryHead input {
+	border: 1px solid #dcdcdc;
+	width: 150px;
+	text-indent: 10px;
+	color: #999;
+	vertical-align: middle;
+	line-height: 32px;
+	height: 32px;
+}
+.fy_accessorySearch .searchInput {
+	width: 250px;
+}
+.fy_accessoryClassify input:focus {
+	border-color: #f7931e;
+}
+.fy_accessoryClassify .options {
+	width: 150px;
+}
+.fy_accessoryClassify ul {
+	padding-left: 0px;
+	margin-bottom: 0px;
+}
+.fy_accessoryClassify .options li {
+	text-indent: 10px;
+}
+/* END select */
+.fy_accessoryContent table {
+	width: 100%;
+	line-height: 41px;
+	color: #666;
+	font-size: 13px;
+	text-align: center;
+}
+.fy_accessoryContent table th {
+	background-color: #f5f5f5;
+	border-left: 1px solid #dcdcdc;
+	border-top: 1px solid #dcdcdc;
+}
+.fy_accessoryContent table a {
+	font-size: 13px;
+}
+.fy_accessoryContent table td {
+	border-left: 1px solid #dcdcdc;
+	border-top: 1px solid #dcdcdc;
+}
+.fy_accessoryConTd:hover td {
+	border-top-color: #f7931e;
+}
+.fy_accessoryConTd:hover .fy_accessoryConFirstTd {
+	border-left-color: #f7931e;
+}
+.fy_accessoryConTd:hover .fy_accessoryConLastTd {
+	border-right-color: #f7931e;
+}
+.fy_accessoryConTd:hover + tr td {
+	border-top-color: #f7931e;
+}
+/* accessory classify alert */
+.fy_oneAccessoryClassify {
+	padding-top: 24px;
+}
+.fy_oneAccessoryInfo {
+	font-size: 13px;
+}
+.fy_oneAccessoryInfo .color999{
+	color: #999;
+}
+.fy_oneAccessoryInfoErr {
+	height: 18px;
+	line-height: 18px;
+	color: #ff2a2a;
+}
+.fy_oneAccessoryInfoErrCon {
+	text-indent: 10px;
+	display: inline-block;
+}
+.fy_oneAccessoryInfo .options {
+	width: 480px;
+}
+.fy_oneAccessoryInfo .fy_oneAccessoryInfoHead {
+	width: 112px;
+	display: inline-block;
+	color: #666;
+	text-align: right;
+}
+.fy_oneAccessoryInfo .fy_oneAccessoryInfoHead em {
+	color: #ed5a53;
+}
+.fy_oneAccessoryInfo input:focus {
+	border-color: #f7931e;
+}
+.fy_oneAccessoryInfo input {
+	width: 480px;
+	border: 1px solid #dcdcdc;
+	text-indent: 10px;
+	color: #999;
+	vertical-align: middle;
+	line-height: 32px;
+	height: 32px;
+}
+.fy_oneAccessoryInfo .oneAccessoryInput:focus {
+	color: #666;
+}
+::-moz-placeholder { color: #bebebe; }
+::-webkit-input-placeholder { color:#bebebe; }
+:-ms-input-placeholder { color:#bebebe; }
+.fy_oneAccessoryInfo .oneAccessoryCode{
+	background-color: #d6d6d6;
+	color: #999;
+}
+.fy_oneAccessoryInfo textarea:focus {
+	border-color: #f7931e;
+	color: #666;
+}
+.fy_oneAccessoryInfo textarea {
+	width: 480px;
+	border-color: #d6d6d6;
+	height: 124px;
+	color: #999;
+	resize: none;
+	font-size: 13px;
+	vertical-align: top;
+}
+.fy_oneAccessoryBtn {
+	padding-right: 24px;
+	padding-top: 45px;
+	text-align: right;
+}
+.accessoryContentOff td {
+	color: #bebebe;
+}
+.fy_oneAccessoryBtn .fy_oneAccessoryBtn1:hover {
+	background-color: #ffac4a;
+}
+.fy_oneAccessoryBtn .fy_oneAccessoryBtn1 {
+	color: #fff;
+	background-color: #f7931e;
+	line-height: 32px;
+}
+.fy_oneAccessoryBtn .fy_oneAccessoryBtn0:hover {
+	color: #f7931e;
+	border-color: #F7931E;
+}
+.fy_oneAccessoryBtn .fy_oneAccessoryBtn0 {
+	color: #666;
+	border: 1px solid #c5c5c5;
+	line-height: 30px;
+}
+.fy_oneAccessoryBtn a {
+	font-size: 13px;
+	text-align: center;
+	width: 90px;
+	height: 32px;
+	display: inline-block;
+}
+/* accessory classify alert END */
+
+/* repair report bill */
+.fy_repairReportBill {
+	color: #666;
+	display: none;
+	padding: 0px 50px;
+	text-align: center;
+}
+.fy_repairReportHead {
+	font-size: 15px;
+	padding-top: 42px;
+	line-height: 51px;
+}
+.fy_repairReportBillHead {
+	font-size: 13px;
+	line-height: 43px;
+}
+.fy_repairReportBillHeadLeft {
+	float: left;
+	text-align: left;
+}
+.fy_repairReportBillHeadRight {
+	text-align: right;
+}
+.fy_repairReportPortHead {
+	line-height: 50px;
+	text-align: left;
+}
+.fy_repairReportPortTable {
+	width: 100%;
+}
+.fy_repairReportPortTable td {
+	height: 50px;
+	/*width: 460px;*/
+	border: 1px solid #d5d5d5;
+	border-collapse: collapse;
+	padding: 0px 15px;
+	font-size: 13px;
+}
+.fy_repairReportPortTable .fy_repairReportPortTableBL {
+	border-left: none;
+}
+.fy_repairReportPortTable .fy_repairReportPortTableBR {
+	border-right: none;
+}
+.fy_repairReportPortTable .fy_repairReportPortTableHead {
+	min-width: 105px;
+	color: #999;
+}
+.fy_repairReportPortTable .fy_repairReportPortTableDb {
+	height: 100px;
+}
+.fy_repairReportBillBtn {
+	padding-top: 60px;
+	text-align: right;
+	padding-bottom: 25px;
+}
+.fy_repairReportBillBtn a {
+	width: 100px;
+	height: 32px;
+	line-height: 32px;
+	text-align: center;
+	font-size: 13px;
+	color: #fff;
+	border-radius: 3px;
+	background-color: #f7931e;
+	display: inline-block;
+	vertical-align: middle;
+}
+.fy_repairReportBillBtn a:hover {
+	background-color: #ffac4a;
+}
+/* repair report bill END */
+/* repair check detail */
+#repairProgress4 {
+	display: none;
+}
+#repairProgress4 .fy_repairTitle {
+	text-align: left;
+	margin-left: 20px;
+	margin-top: 30px;
+}
+#repairProgress4 ul {
+	margin-top: 0px;
+	display: block;
+	font-size: 13px;
+	padding-right: 30px;
+}
+#repairProgress4 .repairCheckInfoConSpan {
+	width: 97px;
+}
+#repairProgress4 .repairStar a {
+	margin-right: 20px;
+}
+#repairProgress4 .repairCheckRemarkCon {
+	width: 300px;
+	height: 120px;
+}
+#repairProgress4 .fy_repairDetailBtn {
+	padding-top: 0px;
+	padding-right: 30px;
+}
+/* repair detail */
+.fy_repairDetail {
+	display: none;
+	padding: 0px 20px;
+}
+.fy_repairDetailTitle {
+	padding-left: 10px;
+	border-left: 2px solid #f7931e;
+	height: 14px;
+	color: #666;
+	line-height: 14px;
+	margin-top: 30px;
+	margin-bottom: 20px;
+}
+.fy_repairDetailContent {
+	padding-left: 12px;
+}
+.fy_repairDetailContent table {
+	font-size: 13px;
+	line-height: 40px;
+	text-align: center;
+	color: #666;
+	width: 100%;
+}
+.fy_repairDetailContent .fy_repairDetailContentBL {
+	border-left: 1px solid #e6e6e6;
+}
+.fy_repairDetailContent .fy_repairDetailContentBR {
+	border-right: 1px solid #e6e6e6;
+}
+.fy_repairDetailContent table th {
+	color: #999;
+	background-color: #f5f5f5;
+	border-top: 1px solid #e6e6e6;
+	border-bottom: 1px solid #e6e6e6;
+}
+.fy_repairDetailContent table td {
+	border-bottom: 1px solid #dcdcdc;
+	padding-left: 10px;
+	padding-right: 10px;
+	white-space: nowrap;
+	overflow: hidden;
+	max-width: 165px;
+	text-overflow: ellipsis;
+}
+.fy_repairDetailContent .fy_repairDetailContentDes {
+	padding-bottom: 10px;
+	color: #999;
+	font-size: 13px;
+}
+.fy_repairDetailContent img {
+	width: 136px;
+	height: 136px;
+}
+.fy_repairDetailBtn {
+	padding-top: 60px;
+	text-align: right;
+	padding-bottom: 25px;
+}
+.fy_repairDetailBtn a {
+	width: 90px;
+	height: 32px;
+	line-height: 32px;
+	text-align: center;
+	font-size: 13px;
+	color: #fff;
+	border-radius: 3px;
+	background-color: #f7931e;
+	display: inline-block;
+}
+.fy_repairDetailBtn a:hover {
+	background-color: #ffac4a;
+}
+/* repair detail END */
+/* repair take order detail */
+.fy_repairTakeOrderDetail {
+	padding-right: 20px;
+	padding-top: 20px;
+	font-size: 13px;
+	display: none;
+	line-height: 24px;
+}
+.fy_repairTakeOrderDetailLi span {
+	float: left;
+	text-align: right;
+	width: 120px;
+	color: #666;
+}
+.fy_repairTakeOrderDetailLi .fy_repairTakeOrderDetailBody {
+	padding-left: 110px;
+	color: #999;
+	min-height: 24px;
+}
+.fy_repairTakeOrderDetailBtn {
+	padding-top: 30px;
+}
+.fy_repairTakeOrderDetailBtn {
+	text-align: right;
+}
+/* repair select dev */
+.fy_repairNewBill {
+	margin-left: 160px;
+	padding: 0px 15px;
+}
+.fy_repairNewBillHead {
+	height: 55px;
+}
+.fy_repairNewBillHeadBtn {
+	float: right;
+	width: 90px;
+	margin-top: 9px;
+	font-size: 13px;
+	color: #666;
+	line-height: 30px;
+	height: 32px;
+	text-align: center;
+	border: 1px solid #d5d5d5;
+}
+.fy_repairNewBillHeadBtn:hover {
+	color: #f7931e;
+	border-color: #f7931e;
+}
+.fy_repairNewBillHeadTitle {
+	font-size: 15px;
+	line-height: 55px;
+	color: #666;
+	text-align: left;
+}
+.fy_repairNewBillBody {
+	background-color: #fff;
+	padding: 15px;
+}
+.repairSelectDev {
+	font-size: 13px;
+	line-height: 15px;
+	padding-left: 10px;
+	border-left: 1px solid #f7931e;
+	color: #666;
+}
+.repairSelectTable {
+	width: 100%;
+	min-width: 1000px;
+	line-height: 42px;
+	border-top: 1px solid #d5d5d5;
+    color: #666;
+    font-size: 13px;
+    text-align: center;
+}
+.repairSelectTable td {
+	white-space: nowrap;
+    overflow: hidden;
+    padding: 0px 15px;
+    border-left: 1px solid #d5d5d5;
+    text-overflow: ellipsis;
+    border-top: 1px solid #d5d5d5;
+    border-collapse: collapse;
+}
+.repairSelectTable th {
+	white-space: nowrap;
+	padding: 0px 15px;
+	border-left: 1px solid #d5d5d5;
+	background-color: #f5f5f5;
+}
+.repairSelectTable .b-r-d5d5d5, .repairSelectTable .repairTdE {
+	border-right: 1px solid #d5d5d5;
+}
+.repairSelectTable .b-l-d5d5d5, .repairSelectTable .repairTdF {
+	border-left: 1px solid #d5d5d5;
+}
+.repairSelectTable tr:hover td {
+	border-top: 1px solid #f7931e;
+}
+.repairSelectTable .repairAddDevTableTr:hover+tr td {
+	border-top: 1px solid #f7931e;
+}
+.repairSelectTable tr:hover .repairTdF {
+	border-left: 1px solid #f7931e;
+}
+.repairSelectTable tr:hover .repairTdE {
+	border-right: 1px solid #f7931e;
+}
+/* repair title */
+.fy_repairTitleRightBtn {
+	float: right;
+	margin-right: 15px;
+}
+.fy_repairTitleRightBtn a {
+	display: inline-block;
+	width: 90px;
+	text-align: center;
+	margin-top: 12px;
+	margin-left: 15px;
+	border-radius: 3px;
+	height: 32px;
+	line-height: 30px;
+	border: 1px solid #d5d5d5;
+	font-size: 13px;
+	color: #666;
+}
+.fy_repairTitleRightBtn a:hover {
+	color: #f7931e;
+	border-color: #f7931e;
+}
+.fy_repairTitleRightBtn .fy_repairTitleRightBtn1 {
+	color: #fff;
+	background-color: #f7931e;
+	border-color: #f7931e;
+}
+.fy_repairTitleRightBtn .fy_repairTitleRightBtn1:hover {
+	background-color: #ffac4a;
+	border-color: #ffac4a;
+	color: #fff;
+}
+.fy_repairTitleLeftA {
+	color: #999;
+}
+.fy_repairTitleLeftSpan {
+	color: #666;
+}
+/* repair progress */
+.fy_repairProgressTitle {
+	margin-left: 175px;
+	height: 56px;
+    line-height: 56px;
+    font-size: 15px;
+    color: #999;
+}
+
+.fy_repairProgress {
+	width: 20%;
+	height: 272px;
+	text-align: center;
+	float: left;
+	font-size: 13px;
+	color: #666;
+}
+.fy_repairProgressImg {
+	margin-top: 40px;
+	margin-bottom: 15px;
+	height: 50px;
+	position: relative;
+}
+.fy_repairProgressLine {
+	width: 50%;
+	position: absolute;
+	left: 100%;
+	transform: translateX(-50%);
+	top: 50%;
+	border-top: 1px dashed #bebebe;
+}
+.fy_repairProgressName {
+	line-height: 20px;
+}
+.fy_repairProgressName span {
+	display: inline-block;
+	width: 40%;
+	min-width: 75px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.fy_repairProgressOperate {
+	line-height: 20px;
+	margin-bottom: 8px;
+}
+.fy_repairProgressTime {
+	margin-bottom: 15px;
+	min-height: 18px;
+}
+.fy_repairProgressBtn a {
+	color: #666;
+	border: 1px solid #d5d5d5;
+	line-height: 30px;
+	height: 32px;
+	width: 90px;
+	text-align: center;
+	display: inline-block;
+	font-size: 13px;
+}
+.fy_repairProgressBtn a:hover {
+	border-color: #f7931e;
+	color: #f7931e;
+}
+/* repair info */
+.fy_repairInfoImg {
+	text-align: center;
+}
+.fy_repairInfoImgCon {
+	display: inline-block;
+	width: 146px;
+	margin-top: 60px;
+	position: relative;
+}
+.fy_repairInfoImgCon:hover .fy_repairInfoImgBtn {
+	display: block;
+	color: #fff;
+}
+.fy_repairInfoImgBtn {
+	position: absolute;
+	bottom: 0px;
+	background-color: rgba(0,0,0,0.6);
+	color: #fff;
+	font-size: 13px;
+	line-height: 32px;
+	height: 32px;
+	left: 0px;
+	right: 10px;
+	display: none;
+}
+.fy_repairInfoImgB {
+	border: 1px solid #d5d5d5;
+	width: 136px;
+	height: 136px;
+	margin-left: 10px;
+}
+.fy_repairInfoImgCon img {
+	width: 136px;
+	height: 136px;
+	margin-top: 10px;
+	float: left;
+}
+.fy_repairInfoDevName {
+	margin-top: 50px;
+	line-height: 34px;
+	text-align: left;
+	font-size: 15px;
+	color: #666;
+}
+.fy_repairInfoDev {
+	padding-bottom: 10px;
+	border-bottom: 1px solid #e5e5e5;
+}
+.fy_repairInfoDev li, .fy_repairInfoState li {
+	min-height: 34px;
+}
+.fy_repairInfoState, .fy_repairInfoDev {
+	list-style: none;
+	line-height: 34px;
+	margin: 0px;
+	padding: 0px;
+	text-align: left;
+	color: #999;
+	font-size: 13px;
+}
+.fy_repairInfoState {
+	color: #666;
+}
+.fy_repairInfoState div, .fy_repairInfoDev div {
+	word-break: break-all;
+	line-height: 14px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 66px;
+}
+.fy_repairInfoState .fy_repairInfoHead, .fy_repairInfoDev .fy_repairInfoHead {
+	float: left;
+	min-width: 66px;
+}
+/* repair info des */
+.fy_repairTitle {
+	font-size: 13px;
+	line-height: 15px;
+	height: 15px;
+	margin-bottom: 15px;
+	border-left: 2px solid #f7931e;
+	padding-left: 10px;
+	color: #666;
+}
+.fy_repairTextarea {
+	width: 100%;
+	border-color: #d6d6d6;
+	font-size: 13px;
+	color: #666;
+	padding: 10px;
+	height: 182px;
+	resize: none;
+}
+.fy_repairErrDes {
+	margin-top: 15px;
+	margin-bottom: 40px;
+}
+.fy_repairErrDes span {
+	float: left;
+	line-height: 32px;
+}
+.fy_repairErrDesCon {
+	padding-left: 120px;
+}
+.fy_repairErrDesCon a {
+	line-height: 30px;
+	border: 1px solid #19b2bc;
+	text-align: center;
+	padding: 0px 20px;
+	margin-right: 15px;
+	color: #666;
+	font-size: 13px;
+	display: inline-block;
+}
+.fy_repairErrDesCon .fy_repairFilesItem {
+	border: none;
+}
+/* 0 */
+.repairProgress0  {
+	padding-bottom: 30px;
+}
+.fy_repairOrderTaker {
+	line-height: 30px;
+	color: #666;
+}
+.fy_repairOrderTaker span {
+	display: inline-block;
+}
+.fy_repairOrderTaker a {
+	display: inline-block;
+	color: #333;
+	border: 1px solid #dcdcdc;
+	padding: 0px 15px;
+}
+.fy_repairOrderTaker a:hover {
+	color: #fff;
+	background-color: #f7931e;
+	border-color: #f7931e;
+	border-radius: 3px;
+}
+.fy_repairOrderTakerErr {
+	color: #ff2a2a;
+	line-height: 30px;
+}
+/* 1 */
+.repairProgress1 .fy_repairErrDes span {
+	line-height: 24px;
+	padding-left: 12px;
+	text-align: right;
+	display: inline-block;
+	min-width: 90px;
+}
+.repairProgress1 .fy_repairErrDes .repairStatus1Div {
+	min-height: 30px;
+}
+.repairProgress1 .fy_repairErrDesCon {
+	padding-left: 60px;
+	color: #999;
+	line-height: 24px;
+	min-height: 24px;
+	word-break: break-all;
+}
+.fy_repairArriveTime {
+	line-height: 32px;
+	margin-bottom: 20px;
+}
+.fy_repairArriveTime a {
+	line-height: 30px;
+	height: 32px;
+	font-size: 13px;
+	color: #666;
+	text-align: center;
+	display: inline-block;
+	width: 92px;
+	margin-right: 15px;
+	border: 1px solid #d6d6d6;
+}
+.fy_repairArriveTime .fy_repairArriveTimeNow {
+	border-color: #f7931e;
+	color: #f7931e;
+}
+.fy_repairArriveTime input {
+	width: 236px;
+	border: 1px solid #d5d5d5;
+	color: #999;
+	font-size: 13px;
+	line-height: 32px;
+	height: 32px;
+	padding-left: 10px;
+	background-image: url(../img/date-icon.png);
+    background-repeat: no-repeat;
+    background-position: 205px;
+}
+.fy_repairSpan {
+	width: 139px;
+	float: left;
+	text-align: right;
+	color: #666;
+}
+.fy_repairProgress1DesCon {
+	padding-left: 139px;
+	min-height: 30px;
+	position: relative;
+}
+.fy_repairAddDesLen {
+	position: absolute;
+	bottom: 15px;
+	right: 10px;
+	color: #999;
+}
+/* 3 */
+.repairProgress3 ul {
+	list-style: none;
+	padding: 0px;
+	margin: 0px;
+	padding-top: 20px;
+}
+.repairProgress3 .repairCheckInfoConSpan {
+	font-size: 13px;
+	width: 80px;
+}
+.repairProgress3 .repairCheckRemark .repairCheckInfoConSpan {
+	vertical-align: top;
+}
+/* 4 */
+.repairProgress4 {
+	text-align: center;
+}
+.repairSuccessedTitle {
+	padding-top: 120px;
+}
+.repairSuccessedTitle img {
+	float: left;
+	width: 32px;
+	margin-top: 3px;
+}
+.repairSuccessedBody {
+	color: #757575;
+	padding-bottom: 30px;
+	display: inline-block;
+	width: 124px;
+}
+.repairSuccessedBodyTitle {
+	font-size: 15px;
+	line-height: 15px;
+	text-align: left;
+	padding-bottom: 10px;
+	padding-left: 45px;
+}
+.repairSuccessedBodyCon {
+	font-size: 13px;
+	text-align: left;
+	padding-left: 45px;
+	line-height: 13px;
+}
+.repairSuccessBtn:hover {
+	color: #fff;
+	background-color: #ffac4a;
+}
+.repairSuccessBtn {
+	display: inline-block;
+	width: 124px;
+	line-height: 32px;
+	height: 32px;
+	color: #fff;
+	background-color: #f7931e;
+	font-size: 13px;
+}
+.repairProgress4 ul {
+	display: inline-block;
+	text-align: left;
+	list-style: none;
+	padding: 0px;
+	margin: 0px;
+	margin-top: 55px;
+}
+.repairProgress4 .repairCheckInfoConSpan {
+	vertical-align: top;
+}
+.repairProgress4 .repairCheckRemarkCon {
+	width: 333px;
+	height: 136px;
+}
+/* 2 */
+.box1 {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-right: 10px;
+    position: relative;
+    background: #fff;
+    vertical-align: middle;
+    border:1px solid #d6d6d6;
+    border-radius: 100%;}
+.box1 input {
+    opacity: 0;
+    position: absolute;
+    top:-3px;
+    left:-4px;
+    width: 100%;
+    height:100%;
+    z-index:100;/*使input按钮在span的上一层，不加点击区域会出现不灵敏*/}
+.input+span {
+    display: block;
+    width: 6px;
+    height: 6px;
+    border-radius:50%;
+    position: absolute;
+    background: #f7931e;
+    top: 50%;
+    left:50%;
+    margin: -3px 0  0 -3px;
+    z-index:1;}
+input[type="radio"] + span {
+    opacity: 0;}
+input[type="radio"]:checked + span {
+    opacity: 1;}
+/**/
+.fy_repairTitle a {
+	margin-left: 15px;
+	display: inline-block;
+    vertical-align: middle;
+    width: 13px;
+    height: 7px;
+    background-image: url(../img/xsjt.png);
+}
+.fy_repairTitle .lookRepairReportConShow {
+	background-image: url(../img/xxjt.png);
+}
+.fy_repaiTypeRadios {
+	padding-top: 20px;
+}
+.fy_repaiTypeRadioHead {
+	display: inline-block;
+	width: 80px;
+	text-align: right;
+	margin-right: 10px;
+	font-size: 13px;
+	color: #666;
+}
+.fy_repairTypeRadio {
+	display: inline-block;
+	margin-right: 30px;
+}
+.fy_repairTypeRadio label {
+	line-height: 16px;
+	margin-bottom: 0px;
+	vertical-align: middle;
+	font-size: 13px;
+	color: #666;
+}
+/* radio 2 */
+.fy_repairTypeRadio2 {
+	margin-top: 20px;
+}
+.fy_repairTypeRadio2 .fy_repaiTypeRadioHead {
+	float: left;
+}
+.fy_repairTypeRadioAdd {
+	position: relative;
+	padding-left: 90px;
+}
+.fy_repairTypeRadioAdd textarea {
+	width: 100%;
+	height: 125px;
+	border: 1px solid #dcdcdc;
+	font-size: 13px;
+	resize: none;
+}
+.fy_repairTypeRadioAdd span {
+	position: absolute;
+	bottom: 15px;
+	right: 16px;
+	color: #999;
+}
+/* radio 1 */
+.fy_repairTypeRadio1 .lookRepairReportConTitle {
+	padding-left: 0px;
+}
+.fy_repairTypeRadio1 .editRepairReportContentOne {
+	font-size: 13px;
+	color: #666;
+}
+.fy_repairTypeRadio1 .editRepairReportContentOne span {
+	margin-bottom: 5px;
+}
+.fy_repairTypeRadio1 .editRepairReportContentOne .fy_repairDbContentOne {
+	padding-left: 80px;
+}
+.fy_repairTypeRadio1 .editRepairReportContentOne .editRepairReportContentHead {
+	float: left;
+	line-height: 52px;
+	height: 52px;
+}
+.fy_repairTypeRadio1 .fy_repaiTypeRadios .fy_repaiTypeRadioHead i {
+	color: #ff2a2a;
+}
+.fy_repairTypeRadio1 .editRepairReportContentOne .editRepairReportContentHead i {
+	color: #ff2a2a;
+}
+.editRepairReportContentOne .fy_repairDbContentOne32 {
+	line-height: 52px;
+	height: 52px;
+	vertical-align: middle;
+	display: inline-block;
+}
+.fy_repairTypeRadio1 .fy_repairTypeRadio1PartDiv {
+	text-align: left;
+	padding-left: 12px;
+}
+.fy_repairTypeRadio1 .fy_repairTypeRadio1Part {
+	width: 90px;
+    display: inline-block;
+    right: 20px;
+    top: -9px;
+    height: 32px;
+    line-height: 30px;
+    border: 1px solid #d6d6d6;
+    color: #666;
+    padding-left: 25px;
+    font-size: 13px;
+    background-image: url(../img/addbill.png);
+    background-repeat: no-repeat;
+    background-position: 8px 8px;
+}
+.fy_repairTypeRadio1 .fy_repairTypeRadio1Part:hover {
+	border-color: #f7931e;
+    background-image: url(../img/add0.png);
+    color: #f7931e;
+}
+.fy_repairTypeRadio1 .lookRepairReportParts {
+	text-align: left;
+}
+.lookRepairReportParts table {
+	margin-left: 12px;
+}
+.fy_repairTypeRadio1 .editRepairResultOne .editRepairResultOneHead {
+	width: 100px;
+	min-width: 100px;
+	font-size: 13px;
+}
+.fy_repairTypeRadio1 .outsideHoursErr {
+	color: #ff2a2a;
+}
+.fy_repairTypeRadio1 .editRepairResultOne .editRepairResultOneHead i {
+	color: #ff2a2a;
+}
+/* radio3 */
+.fy_repairTypeRadio1 .repairType3ContentOne input {
+	width: 500px;
+	text-indent: 8px;
+    border-radius: 2px;
+    border: none;
+    line-height: 30px;
+    height: 32px;
+    border: 1px solid #d6d6d6;
+    color: #999;
+}
+.fy_repairTypeRadio1 .repairType3ContentOne .editRepairReportContentHead {
+	line-height: 32px;
+	height: 32px;
+}
+.repairType3ContentOne .repairUploadDoc input {
+	width: 95px;
+	height: 32px;
+	position: absolute;
+	opacity: 0;
+	top: 0px;
+	left: 0px;
+	cursor: pointer;
+}
+.repairType3ContentOne .repairUploadDoc {
+	position: relative;
+	margin-top: 10px;
+}
+.fy_repairTypeRadio1 .editRepairResultOne .editRepairResultInputLong {
+	width: 160px;
+	background-position: 136px;
+}
+.fy_repairTypeRadio1 .editRepairResultOneRemark .editRepairResultOneRemarkCon {
+	width: 590px;
+}
+.fy_repairTypeRadio1 textarea {
+	width: 590px;
+}
+.fy_repairTypeRadio1Input input {
+	width: 590px;
+}
+.repairType3ContentOne .repairUploadDoc a {
+	display: inline-block;
+	width: 95px;
+	line-height: 30px;
+	height: 32px;
+	text-align: center;
+	border: 1px solid #d6d6d6;
+	font-size: 13px;
+	color: #666;
+}
+/* repair report err */
+.repairReportInfoErr {
+	padding-left: 80px;
+	color: #ff2a2a;
+	font-size: 13px;
+}
+/* repair confirm alert */
+.repairAlertConfirm {
+	display: none;
+}
+.repairAlertConfirmCon {
+	text-align: center;
+}
+.repairAlertConfirmImg {
+	margin-top: 30px;
+	margin-bottom: 24px;
+}
+.repairAlertConfirmTxt {
+	line-height: 14px;
+	font-size: 14px;
+	color: #666;
+	height: 14px;
+}
+.repairAlertConfirmBtn {
+	margin-top: 60px;
+	text-align: right;
+	padding-right: 25px;
+}
+.repairAlertConfirmBtn a {
+	color: #666;
+	border: 1px solid #d5d5d5;
+	line-height: 30px;
+	height: 32px;
+	width: 90px;
+	text-align: center;
+	display: inline-block;
+	font-size: 13px;
+}
+.repairAlertConfirmBtn a:hover {
+	border-color: #f7931e;
+	color: #f7931e;
+}
+.repairAlertConfirmBtn .repairAlertConfirmBtnY {
+	border-color: #f7931e;
+	color: #fff;
+	background-color: #f7931e;
+	margin-right: 15px;
+}
+.repairAlertConfirmBtn .repairAlertConfirmBtnY:hover {
+	color: #fff;
+	background-color: #ffac4a;
+	border-color: #ffac4a;
+}
+/* msg new repair */
+.fy_newRepairDetailTitle {
+	position: fixed;
+    right: 0px;
+    top: 60px;
+    left: 160px;
+    z-index: 2;
+    background-color: #eff3f6;
+}
+.fy_newRepairDetailTitle .fy_repairProgressTitle {
+	margin-left: 15px;
+}
+.fy_repairMsgConHead .fy_repairMsgManageHead {
+	display: block;
+	margin-right: 0px;
+	padding-top: 20px;
+	position: relative;
+	padding-bottom: 15px;
+}
+.fy_repairNewMsgConHead {
+	height: auto;
+}
+.fy_repairNewMsgConHead .selectWrap {
+	margin-bottom: 15px;
+}
+.repairMsgHeadLine {
+	height: 32px;
+	border-bottom: 1px solid #d5d5d5;
+}
+.fy_repairMsgManageHeadCon {
+	position: absolute;
+	top: 20px;
+	left: 0px;
+	bottom: 0px;
+}
+/* wait */
+.repairNewMsgWait {
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+}
+.repairNewMsgWait .msgEnterDiv {
+	right: 15px;
+}
+.repairNewMsgWait li {
+	overflow: hidden;
+}
+.minHeightAuto ul {
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+	margin-top: -1px;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+.minHeightAuto .msgManageConSession1 li {
+	padding-left: 30px;
+}
+.minHeightAuto .msgManageConSessionLi, .repairNewMsgWait .msgManageConSessionLi {
+	border-bottom: 1px solid #dcdcdc;
+}
+.minHeightAuto .msgManageConSessionLiHead, .repairNewMsgWait .msgManageConSessionLiHead {
+	color: #666;
+	padding-top: 20px;
+	font-size: 15px;
+	line-height: 15px;
+	height: 35px;
+}
+.minHeightAuto .msgManageConSessionLiHead .unreadMarkEM {
+	margin-right: 0px;
+}
+.minHeightAuto .msgManageConSessionLiHead span {
+	padding-left: 6px;
+}
+.minHeightAuto .msgManageConSessionLiCon {
+	font-size: 13px;
+	padding-left: 10px;
+	padding-top: 12px;
+	padding-bottom: 20px;
+	height: 45px;
+	color: #999;
+}
+.minHeightAuto .msgEnterImg .msgManageConSessionLiTime {
+	color: #999;
+}
+/* repair new msg */
+.repairNoticeCon {
+	text-align: center;
+	padding-top: 60px;
+}
+/* progress 5 */
+.repairProgress5 .fy_repaiTypeRadioHead {
+	display: inline-block;
+	width: 100px;
+	text-align: right;
+	margin-left: 0px;
+}
+.repairProgress5 .fy_repairTypeRadio1 .editRepairReportContentOne .editRepairReportContentHead {
+	height: 32px;
+	line-height: 32px;
+	width: 100px;
+	display: inline-block;
+	margin-right: 10px;
+	text-align: right;
+}
+.repairProgress5 .fy_repairTypeRadio1 .editRepairReportContentOne .fy_repairDbContentOne {
+	padding-left: 90px;
+	min-height: 32px;
+}
+.repairProgress5 .fy_repairTypeRadio1 .editRepairReportContentOne {
+	line-height: 32px;
+}
+.repairProgress5 .editRepairResultOneRemark {
+	line-height: 32px;
+}
+/* progress 6 */
+.repairProgress6 .hd_images {
+	border: none;
+	cursor: auto;
+}
+[ng-cloak]{
+	display: none;
+}
+/* modify new repair assetsDesc 2.9.0 add by fy */ 
+.assetsDesc {
+	border-bottom: 1px solid #dcdcdc;
+}
+.assetsDesc a {
+	color: #333;
+	font-size: 14px;
+	line-height: 14px;
+	padding: 10px;
+	display: inline-block;
+}
+.assetsDesc .assetsDescCur {
+	color: #fff;
+	background-color: #f7931e;
+}
+.assets2Info {
+	padding-top: 30px;
+}
+.assets2InfoOne .assets2InfoOneHead {
+	float: left;
+	line-height: 32px;
+	font-size: 14px;
+	padding-left: 20px;
+	width: 130px;
+}
+.assets2InfoOneErr {
+	height: 20px;
+	line-height: 20px;
+}
+.assets2InfoOneHead em, .assets2InfoOneErr {
+	color: #ff2a2a;
+}
+.assets2InfoOne .assets2InfoOneBody {
+	padding-left: 130px;
+}
+.assets2InfoOneShowList {
+	position: relative;
+}
+.assets2InfoOneBody input {
+	border: 1px solid #dcdcdc;
+	width: 500px;
+	line-height: 30px;
+	height: 32px;
+	text-indent: 10px;
+}
+.assets2InfoOneBody input:focus {
+	border-color: #f7931e;
+}
+.assets2InfoOneList {
+	width: 500px;
+	margin: 0px;
+	height: 160px;
+	overflow: auto;
+	text-indent: 10px;
+	line-height: 32px;
+	background-color: #fff;
+}
+.assets2InfoOneList li:hover {
+	background-color: #E1ECE8;
+	color: #f7931e;
+}
+.assets2InfoBtn {
+	text-align: center;
+}
+.assets2InfoBtn a {
+	display: inline-block;
+	width: 90px;
+	line-height: 32px;
+	border: 1px solid #dcdcdc;
+	border-radius: 3px;
+	color: #fff;
+	background-color: #f7931e;
+}
+.assets2InfoBtn a:hover {
+	background-color: #ffac4a;
+}
+/* modify repair aside */
+.fy_repairTransferBtn {
+	text-align: center;
+	padding: 10px;
+}
+.fy_repairTransferBtn a {
+	display: inline-block;
+	width: 90px;
+	text-align: center;
+	line-height: 32px;
+	background-color: #f7931e;
+	color: #fff;
+}
+.fy_repairTransferBtn a:hover {
+	background-color: #ffac4a;
+}
+/* hd 2.9.0 add */
+.hd_newBtn{
+	text-align: center;
+	margin-top: 10px;
+}
+.hd_newBtn div{
+	margin: 0 auto;
+	width: 150px;
+	height: 32px;
+	line-height: 32px;
+	color: #fff;
+	background: #f7931e;
+	border-radius: 3px;
+	margin-bottom: 15px;
+	cursor: pointer;
+}
+.hd_newBtn div:hover{
+	background: #ffac4a;
+}
+.hd_newTlt{
+	border-top: 1px solid #dedede;
+	border-bottom: 1px solid #dedede;
+	height: 32px;
+	line-height: 32px;
+	background: #f5f5f5;
+	color: #333;
+}
+.hd_newTlt>span,.hd_newTltul li>span{
+	float: left;
+}
+.hd_newTlt >span:first-child{
+	width: 30%;
+}
+.hd_newTlt >span:nth-child(2){
+	width: 50%;
+}
+.hd_newTltul{
+	padding-left: 0 !important;
+}
+.hd_newTltul li{
+	list-style: none;
+	height: 32px;
+	line-height: 32px;
+	border-bottom: 1px solid #dedede;
+}
+.hd_newTltul li>span:first-child{
+	width: 30%;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+.hd_newTltul li>span:nth-child(2){
+	width: 50%;
+}
+.hd_newTltul li>span:nth-child(3){
+	width:10%;
+	margin-top: 10px;
+}
+.hd_newTltul li img{
+	width: 12px;
+	height: 12px;
+}
+.overflownew{
+	display: inline-block;
+	width: 40%;
+	overflow: hidden;
+	text-overflow:ellipsis;
+	white-space:nowrap;
+	word-break: break-all;
+	float: left;
+}

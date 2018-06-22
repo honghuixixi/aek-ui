@@ -1,0 +1,58 @@
+<div class="fy_repairDate">
+	<div class="fy_repairDateNoContent" ng-show='nocontent'>
+			<img src="../../res/img/nocontent.png" alt=""><span class='m-l-lg'>暂无数据</span>
+	</div>
+	<div class="fy_repairDateTitle" ng-show='!nocontent'>{{repairDate.year}}</div>
+	<div class="fy_repairAxis" ng-show='!nocontent'>
+		<div class="fy_repairAxisLineWrap">
+			<div class="fy_repairAxisLine"></div>
+		</div>
+		<div class="fy_repairDateOne" ng-repeat='one in repairTable' ng-class='{"fy_repairDateRight":!($index%2)}'>
+			<div class="" ng-if='!($index%2)'>
+				<div class="fy_repairDateCon">
+					<div class="fy_repairDateTime">
+						<div class="fy_repairOneTime">{{one.reportRepairDate | date:'MM-dd'}}</div>
+						<div class="fy_repairAxisLineWrap">
+							<div class="fy_repairAxisLine"></div>
+						</div>
+					</div>
+					<div class="fy_repairOneConList">
+						<div class="fy_repairConUl">
+							<div class="fy_repairConUlWrap">
+							<ul>
+								<li><span class='fy_repairConLiSpan'>设备名称：{{one.assetsName}}</span><span class='m-l-lg colorYellow'>{{repairCalendarStatus(one.status)}}</span></li>
+								<li><span>设备编号：{{one.assetsNum}}</span></li>
+								<li><span>申请时间：{{one.reportRepairDate | date:'yyyy-MM-dd HH:mm'}}</span></li>
+							</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="fy_repairDateLeft" ng-if='($index%2)'>
+				<div class="fy_repairDateCon">
+					<div class="fy_repairOneConList">
+						<div class="fy_repairConUl">
+							<div class="fy_repairConUlWrap">
+							<ul>
+								<li><span class='fy_repairConLiSpan'>设备名称：{{one.assetsName}}</span><span class='m-l-lg colorYellow'>{{repairCalendarStatus(one.status)}}</span></li>
+								<li><span>设备编号：{{one.assetsNum}}</span></li>
+								<li><span>申请时间：{{one.reportRepairDate | date:'yyyy-MM-dd HH:mm'}}</span></li>
+							</ul>
+							</div>
+						</div>
+					</div>
+					<div class="fy_repairDateTime">
+						<div class="fy_repairOneTime">{{one.reportRepairDate | date:'MM-dd'}}</div>
+						<div class="fy_repairAxisLineWrap">
+							<div class="fy_repairAxisLine"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="fy_repairDateTail">
+			<div class="fy_repairDateTailDot"></div>
+		</div>
+	</div>
+</div>

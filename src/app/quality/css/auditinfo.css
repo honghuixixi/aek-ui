@@ -1,0 +1,32 @@
+.quality-content .quality-detail-btn {
+    float: right;
+    width: 100px;
+    margin-left: 10px;
+    text-align: center;
+}
+/* modal audit */
+.modal-audit {
+    margin-top: 10px;
+}
+.modal-audit td {
+    font-size: 14px;
+}
+.modal-audit span {
+    display: inline-block;
+    overflow: hidden;
+    cursor: pointer;
+}
+.modal-audit input[type="radio"] {
+    float: left;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+.modal-audit textarea {
+    width: 430px;
+    height: 125px;
+    padding: 10px;
+    font-size: 14px;
+    line-height: 20px;
+    resize: none;
+}

@@ -1,0 +1,168 @@
+<div class="fy_accessoryClassify">
+    <div class="fy_inspectionBtns"><a href="javascript:;" ng-click='savePlan()' class="fy_inspectionBtn inspectionSaveBtn">保存</a></div>
+    <div class="fy_accessoryClassifyTitle"><a ui-sref="inspection.plan.list({tenantId:$stateParams.tenantId||$localStorage.userInfo.tenantId})" class='fy_inspectionTitle999'>巡检计划</a><em class='fy_inspectionTitle999'>></em><span>新建巡检计划</span></div>
+    <div class="fy_accessoryWrap fy_newPlanWrap">        
+        <div class="fy_newPlanInfo">
+            <div class="fy_newPlanInfoHead"><em>*</em>计划名称：</div>
+            <div class="fy_newPlanInfoBody"><input type="text" class="fy_newPlanNameInput" ng-change='planNameChange()' ng-model='planName' placeholder='巡检计划名称，40个字符以内'><span class='fy_newPlanInfoErr' ng-show='planNameErr'><em>*</em>请输入巡检计划名称</span></div>
+        </div>
+        <div class="fy_newPlanInfo">
+            <div class="fy_newPlanInfoHead fy_newPlanInfoHead15"><em>*</em>巡检类型：</div>
+            <div class="fy_newPlanInfoBody fy_newPlanInfoBody15">按科室巡检</div>
+        </div>
+        <div class="fy_newPlanInfo">
+            <div class="fy_newPlanInfoHead"><em>*</em>巡检范围：</div>
+            <div class="fy_newPlanInfoBody">
+                <div class="fy_newPlanDepts">
+                    <div class="fy_newPlanDept m-r-md">
+                        <div class="fy_newPlanDeptTitle">科室列表</div>
+                        <input type="text" placeholder='科室名称搜索' ng-model='deptKeyWord' ng-change='searchDept()' class="fy_newPlanInfoInput250px">
+                        <ul class="fy_newPlanDeptResult fy_newPlanDeptResult250 m-t-sm" ng-if='searchResults.length'>
+                            <li ng-repeat="item in searchResults" ng-click='addItem(item)'><a href="javascript:;">{{item.name}}</a></li>
+                        </ul>
+                    </div>
+                    <div class="fy_newPlanDept">
+                        <a href='javascript:;' class="fy_newPlanDeptBtn" ng-click='clearSelect()'>清空</a>
+                        <div class="fy_newPlanDeptTitle">已选科室列表</div>
+                        <ul class="fy_newPlanDeptResult fy_newPlanDeptResult290" ng-if='selectResults.length'>
+                            <li ng-repeat="item in selectResults" ng-click='delItem($index)'><a href="javascript:;">{{item.name}}</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <span class='fy_newPlanInfoErr' ng-show='planScopeErr'><em>*</em>请选择巡检范围</span>
+            </div>
+        </div>
+        <div class="fy_newPlanInfo">
+            <div class="fy_newPlanInfoHead"><em>*</em>巡检模板：</div>
+            <div class="fy_newPlanInfoBody"><span class='m-r' ng-show='modelSelect.id'>{{modelSelect.name}}</span><a href="javascript:;" ng-click='selectModel()' class="fy_inspectionBtn fy_inspectionBtnNew newInspectionBtn">选择模板</a><span class='fy_newPlanInfoErr' ng-show='planModelErr'><em>*</em>请选择巡检模板</span></div>
+        </div>
+        <div class="fy_newPlanInfo">
+            <div class="fy_newPlanInfoHead"><em>*</em>巡检周期：</div>
+            <div class="fy_newPlanInfoBody"><input type="text" ng-change='planCycleChange()' ng-model='cycle' placeholder='请输入数字' class="fy_newPlanInfoInput150px"><div class="selectWrap m-l">
+                    <div class="selector" ng-click='listShow("typeList")'><input type="text" class="fy_newPlanInfoInput150px" ng-model='typeModel.name' readonly="true"><a href='javascript:;'></a></div>
+                    <div class="options" ng-show='typeList'>
+                        <ul>
+                            <li ng-repeat='item in optionType' ng-click='option("typeList","typeModel",item,1)'>{{item.name}}</li>
+                         </ul>
+                    </div>
+                </div><span class='fy_newPlanInfoErr' ng-show='planCycleErr'><em>*</em>请设置巡检周期</span>
+            </div>
+        </div>
+        <div class="fy_newPlanInfo">
+            <div class="fy_newPlanInfoHead"><em>*</em>巡检开始日期：</div>
+            <div class="fy_newPlanInfoBody"><input type="text" data-offset='istop' readonly="true" class="fy_newPlanInfoInput315px inspectionDate" placeholder='选择开始日期'><span class='fy_newPlanInfoErr' ng-show='planDateErr'><em>*</em>请选择巡检开始日期</span></div>
+        </div>
+        <div class="fy_newPlanInfo">
+            <div class="fy_newPlanInfoHead"><em>*</em>巡检负责人：</div>
+            <div class="fy_newPlanInfoBody"><span class='m-r' ng-show='directorSelect.id'>{{directorSelect.realName}}</span><a href="javascript:;" ng-click='selectDirector()' class="fy_inspectionBtn fy_inspectionBtnNew newInspectionBtn">选择人员</a><span class='fy_newPlanInfoErr' ng-show='planDirectorErr'><em>*</em>请选择负责人</span></div>
+        </div>
+        <div class="fy_newPlanInfo">
+            <div class="fy_newPlanInfoHead">报告验收人：</div>
+            <div class="fy_newPlanInfoBody">
+                <span ng-click='selectAcceptUser()' class="fy_inspectionBtn fy_inspectionBtnNew newInspectionBtn">选择人员</span>
+                <span ng-click='acceptChooseUser=[]' class="fy_inspectionBtn fy_inspectionBtnNew" style="padding: 0 20px;">删除</span>
+                <div>
+                    <span ng-repeat="v in acceptChooseUser">{{v.realName}}<em ng-if="$index < (acceptChooseUser.length - 1)">； </em></span>
+                </div>
+            </div>            
+        </div>
+        <!-- fix wrap -->
+        <div class="fixWrap" ng-show='fixWrapShow' ng-click='menuHide()'></div>
+    </div>
+</div>
+<!-- 选择人员 -->
+<div ng-show='directorCon' id='directorCon'>
+    <div class="directionConTrC">
+        <div class="directionConTd directionConTd190">姓名</div><div class="directionConTd directionConTd125">手机号</div>
+    </div>
+    <div class="directionConTable" ng-class='{directorConO: directorList.length>5}'>
+        <table>
+            <tr ng-repeat="td in directorList  track by $index" ng-click='selectItemD(td)'>
+                <td>
+                    <div>
+                        <div class="directionConTd directionConTd190 directionConTdL p-l-md">
+                            <div class="directorConRadio"><span ng-if='td.select' class='directorConRadioed'></span></div>
+                            <span class='directorConName'>{{td.realName}}</span>
+                        </div><div class="directionConTd directionConTd125 p-l-md p-r-md">{{td.mobile}}</div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <!-- <div><span ng-show='directorErr'>请选择负责人</span></div> -->
+</div>
+<!-- 选择报告验收人 -->
+<table id="acceptUserTpl" class="acceptUserTpl">
+    <thead>
+        <tr>
+            <td>&nbsp;</td>
+            <td>姓名</td>
+            <td>手机号</td>
+            <td>所在部门</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="v in acceptUserList" ng-click="chooseTempUser(v)">
+            <td>
+                <input type="checkbox" ng-if="v.checked" checked>
+                <input type="checkbox" ng-if="!v.checked">
+            </td>
+            <td>{{v.realName}}</td>
+            <td style="white-space: nowrap;">{{v.mobile}}</td>
+            <td>{{v.deptName}}</td>
+        </tr>
+    </tbody>
+</table>
+<!-- 选择模板 -->
+<div class="inspectionModelCon" id='modelCon' ng-show='modelCon'>
+    <div class="inspectionModelConL">
+        <div class="inspectionModelConLSearch m-b">
+            <input type="text" placeholder='模板名称' ng-change='searchModel()' ng-model='modelKeyWord' class="m-r-sm"><a href="javascript:;">搜索</a>
+        </div>
+        <div class="modelSearchResultHead">
+            模板名称
+        </div>
+        <div class="modelSearchResult" ng-class='{modelSearchResultO:modelList.length>10}'>
+            <div class="modelSearchResultCon" ng-repeat="item in modelList" ng-click='selectItemM(item)'>
+                <div class="modelLabel" ng-if='item.isSys'>系统模板</div>
+                <div class="box1">
+                    <input type="radio" id="Model-{{item.id}}" name="evaluationM" class="input ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="model.id" ng-value="{{item.id}}"><span></span>
+                </div><div class="modelOneName">{{item.name}}</div>
+            </div>
+            <div ng-if='!modelList.length'>
+                <div class="modelNone">暂无相应模板，请到巡检模板中<a href="javascript:;" ng-click='modelNone()'>添加&gt;&gt;</a></div>
+            </div>
+        </div>
+    </div>
+    <div class="inspectionModelConR m-t">
+        <div class="modelSelectNone" ng-if='!model||!model.id'>暂无数据</div>
+        <div ng-if='model&&model.id'>
+            <div class="inspectionModelSelect">已选模板：{{model.name}}</div>
+            <div class="inspectionModelSelectInfo">
+                <table>
+                    <tr>
+                        <th>序号</th>
+                        <th class="inspectionModelInfoLeft">项目名称</th>
+                        <th class="inspectionModelInfoLeft">巡检结果</th>
+                    </tr>
+                    <tr ng-repeat="item in model.projects">
+                        <td>{{$index+1}}</td>
+                        <td class="inspectionModelInfoLeft">{{item.name}}</td>
+                        <td class='inspectionModelInfoLeft'><div class="inspectionModelProject" ng-repeat="one in item.results"><div class="projectRadioWrap"><div class="projectRadio m-r-sm" ><div class="projectRadioSel" ng-if='one.isDefault'></div></div></div>{{one.name}}</div></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div><span ng-show='modelErr'>请选择模板</span></div>
+</div>
+<div id="inspectionLayer" class="inspectionLayer" style="display: none;">
+    <div class="inspectionLayerCon">
+        <div>
+            <div class="inspectionLayerImg m-t-lg m-b-md"><img src='../../res/img/icon20.png'></div>
+            <div>
+                <span>确认要保存吗？</span>
+            </div>
+        </div>
+    </div>
+</div>
